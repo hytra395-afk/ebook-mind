@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
     }
 
     // If order is completed, get download tokens
-    let downloadTokens = []
+    const downloadTokens: any[] = []
     if (order.status === 'completed') {
       const { data: licenses } = await supabaseAdmin
         .from('licenses')
@@ -46,19 +46,21 @@ export async function GET(request: NextRequest) {
         `)
         .eq('order_id', order.id)
 
-      if (licenses) {
-        downloadTokens = licenses.map(license => ({
-          ebook_id: license.ebook_id,
-          ebook_title: license.ebooks?.title,
-          ebook_cover: license.ebooks?.cover_url,
-          download_token: license.download_tokens?.[0]?.token,
-          download_url: license.download_tokens?.[0]?.token 
-            ? `/api/download?token=${license.download_tokens[0].token}`
-            : null,
-          expires_at: license.download_tokens?.[0]?.expires_at,
-          used_count: license.download_tokens?.[0]?.used_count || 0,
-          download_quota: license.download_quota,
-        }))
+      if (licenses && Array.isArray(licenses)) {
+        licenses.forEach((license: any) => {
+          downloadTokens.push({
+            ebook_id: license.ebook_id,
+            ebook_title: license.ebooks?.title,
+            ebook_cover: license.ebooks?.cover_url,
+            download_token: license.download_tokens?.[0]?.token,
+            download_url: license.download_tokens?.[0]?.token 
+              ? `/api/download?token=${license.download_tokens[0].token}`
+              : null,
+            expires_at: license.download_tokens?.[0]?.expires_at,
+            used_count: license.download_tokens?.[0]?.used_count || 0,
+            download_quota: license.download_quota,
+          })
+        })
       }
     }
 
