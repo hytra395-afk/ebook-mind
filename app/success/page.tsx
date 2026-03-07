@@ -1,14 +1,14 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
+export const dynamic = 'force-dynamic'
+
 export default function SuccessPage() {
-  const searchParams = useSearchParams()
-  const token = searchParams.get('token')
-  
+  const [token, setToken] = useState<string | null>(null)
+  const [mounted, setMounted] = useState(false)
   const [order, setOrder] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -16,9 +16,19 @@ export default function SuccessPage() {
   const [sendingEmail, setSendingEmail] = useState(false)
 
   useEffect(() => {
-    if (!token) {
-      setError('Token không hợp lệ')
-      setLoading(false)
+    setMounted(true)
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search)
+      setToken(params.get('token'))
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!mounted || !token) {
+      if (mounted && !token) {
+        setError('Token không hợp lệ')
+        setLoading(false)
+      }
       return
     }
 
@@ -45,7 +55,7 @@ export default function SuccessPage() {
     }
 
     fetchOrder()
-  }, [token])
+  }, [token, mounted])
 
   const handleSendEmail = async () => {
     if (!order?.email) return
@@ -62,7 +72,7 @@ export default function SuccessPage() {
     }
   }
 
-  if (loading) {
+  if (!mounted || loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">

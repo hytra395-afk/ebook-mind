@@ -1,23 +1,32 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 
+export const dynamic = 'force-dynamic'
+
 export default function PaymentProcessingPage() {
-  const searchParams = useSearchParams()
-  const token = searchParams.get('token')
-  
+  const [token, setToken] = useState<string | null>(null)
+  const [mounted, setMounted] = useState(false)
   const [order, setOrder] = useState<any>(null)
   const [loading, setLoading] = useState(true)
-  const [timeLeft, setTimeLeft] = useState(15 * 60) // 15 minutes
+  const [timeLeft, setTimeLeft] = useState(15 * 60)
   const [error, setError] = useState('')
 
-  // Poll order status
   useEffect(() => {
-    if (!token) {
-      setError('Token không hợp lệ')
-      setLoading(false)
+    setMounted(true)
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search)
+      setToken(params.get('token'))
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!mounted || !token) {
+      if (mounted && !token) {
+        setError('Token không hợp lệ')
+        setLoading(false)
+      }
       return
     }
 
@@ -52,7 +61,7 @@ export default function PaymentProcessingPage() {
     const interval = setInterval(checkOrderStatus, 5000)
 
     return () => clearInterval(interval)
-  }, [token])
+  }, [token, mounted])
 
   // Countdown timer
   useEffect(() => {
@@ -77,7 +86,7 @@ export default function PaymentProcessingPage() {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
   }
 
-  if (loading) {
+  if (!mounted || loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
