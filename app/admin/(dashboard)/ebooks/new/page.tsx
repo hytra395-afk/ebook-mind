@@ -40,15 +40,25 @@ export default function NewEbookPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    const { error } = await supabase.from('ebooks').insert({
-      ...form,
-      price: Number(form.price),
-      pages: Number(form.pages),
-      author_id: form.author_id || null,
-    })
+    try {
+      const res = await fetch('/api/admin/ebooks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...form,
+          price: Number(form.price),
+          pages: Number(form.pages),
+          author_id: form.author_id || null,
+        }),
+      })
+      const data = await res.json()
+      if (!res.ok) { alert('Lỗi: ' + data.error); setLoading(false); return }
+      router.push('/admin/ebooks')
+      router.refresh()
+    } catch (err) {
+      alert('Lỗi kết nối')
+    }
     setLoading(false)
-    if (error) { alert('Lỗi: ' + error.message); return }
-    router.push('/admin/ebooks')
   }
 
   const generateSlug = (title: string) => {

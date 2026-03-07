@@ -25,39 +25,50 @@ export default function EditEbookPage() {
   const [form, setForm] = useState<any>(null)
 
   useEffect(() => {
-    Promise.all([
-      supabase.from('ebooks').select('*').eq('id', ebookId).single(),
-      supabase.from('categories').select('*'),
-      supabase.from('levels').select('*').order('sort_order'),
-      supabase.from('authors').select('*'),
-    ]).then(([ebookRes, catRes, lvlRes, authRes]) => {
-      if (ebookRes.data) setForm(ebookRes.data)
+    const load = async () => {
+      const [ebookRes, catRes, lvlRes, authRes] = await Promise.all([
+        fetch(`/api/admin/ebooks/${ebookId}`).then(r => r.json()),
+        supabase.from('categories').select('*'),
+        supabase.from('levels').select('*').order('sort_order'),
+        supabase.from('authors').select('*'),
+      ])
+      if (ebookRes.ebook) setForm(ebookRes.ebook)
       setCategories(catRes.data || [])
       setLevels(lvlRes.data || [])
       setAuthors(authRes.data || [])
-    })
+    }
+    load()
   }, [ebookId])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    const { error } = await supabase.from('ebooks').update({
-      title: form.title, slug: form.slug, description: form.description,
-      category_id: form.category_id, level_id: form.level_id,
-      author_id: form.author_id || null,
-      price: Number(form.price), pages: Number(form.pages),
-      cover_url: form.cover_url, storage_path: form.storage_path,
-      active: form.active, featured: form.featured,
-    }).eq('id', ebookId)
+    try {
+      const res = await fetch(`/api/admin/ebooks/${ebookId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: form.title, slug: form.slug, description: form.description,
+          category_id: form.category_id, level_id: form.level_id,
+          author_id: form.author_id || null,
+          price: Number(form.price), pages: Number(form.pages),
+          cover_url: form.cover_url, storage_path: form.storage_path,
+          active: form.active, featured: form.featured,
+        }),
+      })
+      const data = await res.json()
+      if (!res.ok) { alert('Lỗi: ' + data.error); setLoading(false); return }
+      router.push('/admin/ebooks')
+      router.refresh()
+    } catch { alert('Lỗi kết nối') }
     setLoading(false)
-    if (error) { alert('Lỗi: ' + error.message); return }
-    router.push('/admin/ebooks')
   }
 
   const handleDelete = async () => {
     if (!confirm('Bạn chắc chắn muốn xóa ebook này?')) return
-    await supabase.from('ebooks').delete().eq('id', ebookId)
+    await fetch(`/api/admin/ebooks/${ebookId}`, { method: 'DELETE' })
     router.push('/admin/ebooks')
+    router.refresh()
   }
 
   if (!form) return <div className="text-center py-20 text-gray-400">Đang tải...</div>
