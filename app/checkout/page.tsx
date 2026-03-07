@@ -1,52 +1,46 @@
 'use client'
 
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
-// Mock cart items - replace with real cart data
-const MOCK_CART_ITEMS = [
-  {
-    id: "1",
-    ebook_id: "1",
-    title: "Tư Duy Kinh Doanh Hiện Đại",
-    coverUrl: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=100&h=150&fit=crop",
-    price: 79000,
-  },
-  {
-    id: "2",
-    ebook_id: "2", 
-    title: "Phát Triển Bản Thân Mỗi Ngày",
-    coverUrl: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=100&h=150&fit=crop",
-    price: 69000,
-  },
-]
+interface CartItem {
+  id: string
+  type: 'ebook' | 'combo'
+  title: string
+  cover_url?: string
+  price: number
+}
 
 export default function CheckoutPage() {
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
+  const [cartItems, setCartItems] = useState<CartItem[]>([])
+  const [mounted, setMounted] = useState(false)
 
-  const total = MOCK_CART_ITEMS.reduce((sum, item) => sum + item.price, 0)
+  useEffect(() => {
+    setMounted(true)
+    const stored = localStorage.getItem('cart')
+    if (stored) {
+      try { setCartItems(JSON.parse(stored)) } catch { setCartItems([]) }
+    }
+  }, [])
+
+  const total = cartItems.reduce((sum, item) => sum + item.price, 0)
 
   const handleCheckout = async () => {
+    if (cartItems.length === 0) return
     try {
       setLoading(true)
 
-      // Prepare order items
-      const items = MOCK_CART_ITEMS.map(item => ({
-        ebook_id: item.ebook_id,
-        quantity: 1
+      const items = cartItems.map(item => ({
+        ...(item.type === 'combo' ? { combo_id: item.id } : { ebook_id: item.id }),
+        quantity: 1,
       }))
 
       const response = await fetch('/api/orders/create', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          items,
-          email: email || undefined,
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items, email: email || undefined }),
       })
 
       const data = await response.json()
@@ -57,9 +51,8 @@ export default function CheckoutPage() {
         return
       }
 
-      // Redirect to processing page
+      localStorage.removeItem('cart')
       window.location.href = data.redirect_url
-
     } catch (error) {
       console.error('Checkout error:', error)
       alert('Có lỗi xảy ra. Vui lòng thử lại.')
@@ -67,14 +60,24 @@ export default function CheckoutPage() {
     }
   }
 
+  if (!mounted) return null
+
+  if (cartItems.length === 0) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-gray-500 mb-4">Giỏ hàng trống</p>
+          <Link href="/ebooks" className="text-purple-600 hover:underline">Khám phá Ebooks</Link>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
       <header className="bg-white border-b">
         <div className="container mx-auto px-4 py-4">
-          <Link href="/" className="text-2xl font-bold text-gray-900">
-            📚 EbookMind
-          </Link>
+          <Link href="/" className="text-2xl font-bold text-purple-600">Ebook Mind</Link>
         </div>
       </header>
 
@@ -83,87 +86,54 @@ export default function CheckoutPage() {
           <h1 className="text-3xl font-bold mb-8">Thanh toán</h1>
 
           <div className="grid lg:grid-cols-2 gap-8">
-            {/* Order Summary */}
             <div className="bg-white rounded-lg p-6 shadow-sm">
               <h2 className="text-xl font-semibold mb-4">Đơn hàng của bạn</h2>
-              
               <div className="space-y-4">
-                {MOCK_CART_ITEMS.map((item) => (
+                {cartItems.map((item) => (
                   <div key={item.id} className="flex items-center space-x-4">
-                    <img
-                      src={item.coverUrl}
-                      alt={item.title}
-                      className="w-16 h-20 object-cover rounded"
-                    />
+                    {item.cover_url && (
+                      <img src={item.cover_url} alt={item.title} className="w-16 h-20 object-cover rounded" />
+                    )}
                     <div className="flex-1">
                       <h3 className="font-medium">{item.title}</h3>
-                      <p className="text-gray-600">Ebook</p>
+                      <p className="text-gray-600 text-sm capitalize">{item.type}</p>
                     </div>
-                    <div className="text-right">
-                      <p className="font-semibold">{item.price.toLocaleString('vi-VN')}đ</p>
-                    </div>
+                    <p className="font-semibold">{item.price.toLocaleString('vi-VN')}đ</p>
                   </div>
                 ))}
               </div>
-
-              <div className="border-t mt-4 pt-4">
-                <div className="flex justify-between items-center text-lg font-semibold">
-                  <span>Tổng cộng:</span>
-                  <span className="text-blue-600">{total.toLocaleString('vi-VN')}đ</span>
-                </div>
+              <div className="border-t mt-4 pt-4 flex justify-between items-center text-lg font-semibold">
+                <span>Tổng cộng:</span>
+                <span className="text-purple-600">{total.toLocaleString('vi-VN')}đ</span>
               </div>
             </div>
 
-            {/* Payment Form */}
             <div className="bg-white rounded-lg p-6 shadow-sm">
               <h2 className="text-xl font-semibold mb-4">Thông tin thanh toán</h2>
-
               <div className="space-y-4">
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email (tùy chọn)
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email (tùy chọn)</label>
+                  <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}
                     placeholder="your@email.com"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                  <p className="text-sm text-gray-500 mt-1">
-                    Nhập email để nhận link tải về ebook
-                  </p>
+                    className="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+                  <p className="text-xs text-gray-500 mt-1">Nhập email để nhận link tải về ebook</p>
                 </div>
 
-                <div className="bg-blue-50 p-4 rounded-lg">
-                  <h3 className="font-medium text-blue-900 mb-2">Phương thức thanh toán</h3>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-4 h-4 bg-blue-600 rounded-full"></div>
-                    <span className="text-blue-800">Chuyển khoản ngân hàng (Sepay)</span>
-                  </div>
-                  <p className="text-sm text-blue-700 mt-2">
-                    Quét mã QR hoặc chuyển khoản theo thông tin được cung cấp
-                  </p>
+                <div className="bg-purple-50 p-4 rounded-lg">
+                  <h3 className="font-medium text-purple-900 mb-1">Phương thức thanh toán</h3>
+                  <p className="text-sm text-purple-700">Chuyển khoản ngân hàng (Sepay) - Quét mã QR hoặc chuyển khoản</p>
                 </div>
 
-                <Button 
-                  onClick={handleCheckout}
-                  disabled={loading}
-                  className="w-full gradient-aurora text-white border-0 py-3"
-                >
+                <button onClick={handleCheckout} disabled={loading}
+                  className="w-full gradient-purple text-white py-3 rounded-lg font-medium hover:opacity-90 transition disabled:opacity-50">
                   {loading ? 'Đang xử lý...' : `Thanh toán ${total.toLocaleString('vi-VN')}đ`}
-                </Button>
+                </button>
 
                 <div className="text-xs text-gray-500 space-y-1">
                   <p>Bằng cách thanh toán, bạn đồng ý với:</p>
                   <div className="flex space-x-4">
-                    <Link href="/terms" className="text-blue-600 hover:underline">
-                      Điều khoản sử dụng
-                    </Link>
-                    <Link href="/refund" className="text-blue-600 hover:underline">
-                      Chính sách hoàn tiền
-                    </Link>
+                    <Link href="/about" className="text-purple-600 hover:underline">Điều khoản sử dụng</Link>
+                    <Link href="/contact" className="text-purple-600 hover:underline">Chính sách hoàn tiền</Link>
                   </div>
                 </div>
               </div>

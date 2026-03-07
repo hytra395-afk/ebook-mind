@@ -5,8 +5,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'EbookMind - Tri thức không giới hạn',
-  description: 'Khám phá thư viện ebook phong phú với hàng ngàn cuốn sách về kinh doanh, phát triển bản thân, công nghệ và nhiều lĩnh vực khác.',
+  title: 'Ebook Mind - Kiến thức giá bằng một cốc trà sữa',
+  description: 'Nền tảng ebook chất lượng cao với giá phải chăng. Được yêu thích và đánh giá cao nhất từ cộng đồng.',
 }
 
 export default function RootLayout({
@@ -16,7 +16,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+      </body>
     </html>
   )
 }
