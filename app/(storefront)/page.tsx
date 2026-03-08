@@ -66,6 +66,51 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+ 
+      {/* ─── Quote Section ─── */}
+      <section className="bg-white py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+            Tập trung vào <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">điều quan trọng</span>
+          </h2>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Bất cứ ai cũng có thể kiếm được những đồng tiền đầu tiên. Chỉ cần bắt đầu với những gì bạn biết, xem cái nào hiệu quả, và kiếm tiền.
+          </p>
+        </div>
+      </section>
+
+      {/* ─── Don't Take Risks Section (Gumroad-inspired) ─── */}
+      <section className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-4xl font-bold text-white mb-6">
+                Đừng mạo hiểm. Điều đó đáng sợ!
+              </h2>
+              <div className="space-y-6">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                  <p className="text-white/90 mb-2">Thay vì chi 5 triệu cho khóa học online...</p>
+                  <p className="text-xl font-bold text-white">...hãy bắt đầu với ebook 49.000đ!</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                  <p className="text-white/90 mb-2">Thay vì mua 10 cuốn sách giấy 2 triệu...</p>
+                  <p className="text-xl font-bold text-white">...mua combo ebook chỉ 199.000đ!</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-12 text-center border border-white/20">
+              <div className="text-6xl mb-6">🎯</div>
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Đặt cược nhỏ. Điều đó thú vị!
+              </h3>
+              <p className="text-white/90 leading-relaxed">
+                Với giá chỉ bằng một cốc trà sữa, bạn có thể thử nghiệm ý tưởng mới, 
+                học kỹ năng mới mà không lo rủi ro tài chính. Đó là cách thông minh để đầu tư vào bản thân.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ─── Journey Path Diagram (Gumroad-inspired) ─── */}
       <section className="bg-white py-20">
@@ -74,7 +119,7 @@ export default async function HomePage() {
             Bạn có những ý tưởng tuyệt vời?
           </h2>
           <p className="text-lg text-gray-600 text-center mb-12 max-w-2xl mx-auto">
-            Hành trình của bạn bắt đầu từ đây
+            Từ đọc kiến thức trong ebook → áp dụng nhỏ → kiên trì mỗi ngày → đạt mục tiêu
           </p>
           
           {/* SVG Path Diagram */}
@@ -100,37 +145,37 @@ export default async function HomePage() {
                 strokeLinecap="round"
               />
               
-              {/* Step 1: Bắt đầu nhỏ */}
+              {/* Step 1: Đọc ebook */}
               <g>
                 <circle cx="150" cy="150" r="35" fill="#FCD34D" stroke="#F59E0B" strokeWidth="3"/>
-                <text x="150" y="160" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#1F2937">📚</text>
+                <text x="150" y="160" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#1F2937">�</text>
               </g>
-              <text x="150" y="220" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#1F2937">Bắt đầu nhỏ</text>
-              <text x="150" y="245" textAnchor="middle" fontSize="13" fill="#6B7280">49.000đ</text>
+              <text x="150" y="220" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#1F2937">Đọc ebook</text>
+              <text x="150" y="245" textAnchor="middle" fontSize="13" fill="#6B7280">Nền tảng</text>
               
-              {/* Step 2: Học nhanh */}
+              {/* Step 2: Áp dụng nhỏ */}
               <g>
                 <circle cx="400" cy="150" r="35" fill="#FBBF24" stroke="#F59E0B" strokeWidth="3"/>
-                <text x="400" y="160" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#1F2937">🚀</text>
+                <text x="400" y="160" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#1F2937">�️</text>
               </g>
-              <text x="400" y="220" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#1F2937">Học nhanh</text>
-              <text x="400" y="245" textAnchor="middle" fontSize="13" fill="#6B7280">Thực chiến</text>
+              <text x="400" y="220" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#1F2937">Áp dụng nhỏ</text>
+              <text x="400" y="245" textAnchor="middle" fontSize="13" fill="#6B7280">Bắt đầu nhỏ</text>
               
-              {/* Center: Light bulb */}
+              {/* Center: Kiên trì */}
               <g>
                 <circle cx="600" cy="150" r="45" fill="white" stroke="#F97316" strokeWidth="3"/>
-                <text x="600" y="165" textAnchor="middle" fontSize="40" fontWeight="bold">💡</text>
+                <text x="600" y="165" textAnchor="middle" fontSize="40" fontWeight="bold">�</text>
               </g>
-              <text x="600" y="220" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#1F2937">Cùng tiến bộ</text>
-              <text x="600" y="245" textAnchor="middle" fontSize="13" fill="#6B7280">Cộng đồng</text>
+              <text x="600" y="220" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#1F2937">Kiên trì</text>
+              <text x="600" y="245" textAnchor="middle" fontSize="13" fill="#6B7280">Mỗi ngày 1%</text>
               
-              {/* Step 3: Cùng tiến bộ */}
+              {/* Step 3: Nâng cấp kỹ năng */}
               <g>
                 <circle cx="800" cy="150" r="35" fill="#FB923C" stroke="#F97316" strokeWidth="3"/>
-                <text x="800" y="160" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#1F2937">🤝</text>
+                <text x="800" y="160" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#1F2937">📈</text>
               </g>
-              <text x="800" y="220" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#1F2937">Cùng tiến bộ</text>
-              <text x="800" y="245" textAnchor="middle" fontSize="13" fill="#6B7280">Cộng đồng</text>
+              <text x="800" y="220" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#1F2937">Nâng cấp kỹ năng</text>
+              <text x="800" y="245" textAnchor="middle" fontSize="13" fill="#6B7280">Tích lũy</text>
               
               {/* Step 4: Đạt mục tiêu */}
               <g>
@@ -256,51 +301,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ─── FAQ Section ─── */}
-      <section className="bg-gray-50 py-20">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-12">
-            Câu hỏi thường gặp
-          </h2>
-
-          <div className="space-y-4">
-            {[
-              {
-                q: "Ebook được gửi như thế nào?",
-                a: "Sau khi thanh toán, bạn sẽ nhận email chứa link tải ebook. Bạn có thể tải về máy tính, điện thoại hoặc máy tính bảng."
-              },
-              {
-                q: "Tôi có thể đọc ebook trên thiết bị nào?",
-                a: "Ebook được cung cấp dưới dạng PDF, có thể đọc trên bất kỳ thiết bị nào: điện thoại, máy tính bảng, laptop, máy tính để bàn."
-              },
-              {
-                q: "Có thể hoàn tiền không?",
-                a: "Có, nếu bạn không hài lòng trong vòng 7 ngày, chúng tôi sẽ hoàn tiền 100% không cần hỏi lý do."
-              },
-              {
-                q: "Ebook có bản quyền không?",
-                a: "Tất cả ebook trên Ebook Mind đều được phép phân phối. Chúng tôi hợp tác trực tiếp với tác giả và nhà xuất bản."
-              },
-              {
-                q: "Tôi có thể chia sẻ ebook cho bạn bè không?",
-                a: "Ebook là sản phẩm kỹ thuật số cá nhân. Vui lòng không chia sẻ link tải với người khác để tôn trọng bản quyền."
-              },
-              {
-                q: "Hỗ trợ kỹ thuật như thế nào?",
-                a: "Gặp vấn đề? Email chúng tôi tại support@ebookmind.com hoặc chat trực tiếp. Chúng tôi phản hồi trong vòng 2 giờ."
-              }
-            ].map((item, idx) => (
-              <details key={idx} className="bg-white rounded-xl border border-gray-200 p-6 cursor-pointer hover:shadow-sm transition-shadow">
-                <summary className="font-bold text-gray-900 flex items-center justify-between">
-                  {item.q}
-                  <span className="text-gray-400 ml-4">+</span>
-                </summary>
-                <p className="text-gray-700 mt-4">{item.a}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* FAQ moved to bottom */}
 
       {/* ─── Philosophy Journey (Gumroad-inspired) ─── */}
       <section className="bg-white py-20">
@@ -436,51 +437,6 @@ export default async function HomePage() {
                   <p className="text-sm text-gray-500">Giám đốc Startup, TP.HCM</p>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Quote Section ─── */}
-      <section className="bg-white py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
-            Tập trung vào <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">điều quan trọng</span>
-          </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Bất cứ ai cũng có thể kiếm được những đồng tiền đầu tiên. Chỉ cần bắt đầu với những gì bạn biết, xem cái nào hiệu quả, và kiếm tiền.
-          </p>
-        </div>
-      </section>
-
-      {/* ─── Don't Take Risks Section (Gumroad-inspired) ─── */}
-      <section className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl font-bold text-white mb-6">
-                Đừng mạo hiểm. Điều đó đáng sợ!
-              </h2>
-              <div className="space-y-6">
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                  <p className="text-white/90 mb-2">Thay vì chi 5 triệu cho khóa học online...</p>
-                  <p className="text-xl font-bold text-white">...hãy bắt đầu với ebook 49.000đ!</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                  <p className="text-white/90 mb-2">Thay vì mua 10 cuốn sách giấy 2 triệu...</p>
-                  <p className="text-xl font-bold text-white">...mua combo ebook chỉ 199.000đ!</p>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-12 text-center border border-white/20">
-              <div className="text-6xl mb-6">🎯</div>
-              <h3 className="text-2xl font-bold text-white mb-4">
-                Đặt cược nhỏ. Điều đó thú vị!
-              </h3>
-              <p className="text-white/90 leading-relaxed">
-                Với giá chỉ bằng một cốc trà sữa, bạn có thể thử nghiệm ý tưởng mới, 
-                học kỹ năng mới mà không lo rủi ro tài chính. Đó là cách thông minh để đầu tư vào bản thân.
-              </p>
             </div>
           </div>
         </div>
@@ -666,6 +622,52 @@ export default async function HomePage() {
               <h3 className="text-xl font-bold text-gray-900 mb-2">Nhận Link Tải</h3>
               <p className="text-gray-600">Nhận email với link tải ngay lập tức, đọc mọi lúc mọi nơi</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── FAQ Section ─── */}
+      <section className="bg-gray-50 py-20">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-12">
+            Câu hỏi thường gặp
+          </h2>
+
+          <div className="space-y-4">
+            {[
+              {
+                q: "Ebook được gửi như thế nào?",
+                a: "Sau khi thanh toán, bạn sẽ nhận email chứa link tải ebook. Bạn có thể tải về máy tính, điện thoại hoặc máy tính bảng."
+              },
+              {
+                q: "Tôi có thể đọc ebook trên thiết bị nào?",
+                a: "Ebook được cung cấp dưới dạng PDF, có thể đọc trên bất kỳ thiết bị nào: điện thoại, máy tính bảng, laptop, máy tính để bàn."
+              },
+              {
+                q: "Có thể hoàn tiền không?",
+                a: "Có, nếu bạn không hài lòng trong vòng 7 ngày, chúng tôi sẽ hoàn tiền 100% không cần hỏi lý do."
+              },
+              {
+                q: "Ebook có bản quyền không?",
+                a: "Tất cả ebook trên Ebook Mind đều được phép phân phối. Chúng tôi hợp tác trực tiếp với tác giả và nhà xuất bản."
+              },
+              {
+                q: "Tôi có thể chia sẻ ebook cho bạn bè không?",
+                a: "Ebook là sản phẩm kỹ thuật số cá nhân. Vui lòng không chia sẻ link tải với người khác để tôn trọng bản quyền."
+              },
+              {
+                q: "Hỗ trợ kỹ thuật như thế nào?",
+                a: "Gặp vấn đề? Email chúng tôi tại support@ebookmind.com hoặc chat trực tiếp. Chúng tôi phản hồi trong vòng 2 giờ."
+              }
+            ].map((item, idx) => (
+              <details key={idx} className="bg-white rounded-xl border border-gray-200 p-6 cursor-pointer hover:shadow-sm transition-shadow">
+                <summary className="font-bold text-gray-900 flex items-center justify-between">
+                  {item.q}
+                  <span className="text-gray-400 ml-4">+</span>
+                </summary>
+                <p className="text-gray-700 mt-4">{item.a}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>
