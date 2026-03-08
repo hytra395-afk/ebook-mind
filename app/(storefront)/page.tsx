@@ -157,8 +157,8 @@ export default async function HomePage() {
           <div className="grid md:grid-cols-3 gap-8">
             {/* Step 1 */}
             <div className="relative">
-              <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 h-full">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 flex items-center justify-center text-white font-bold text-lg mb-4">
+              <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 h-full hover:shadow-lg transition-shadow">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white font-bold text-xl mb-4 shadow-lg">
                   1
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">Chọn ebook</h3>
@@ -169,8 +169,8 @@ export default async function HomePage() {
 
             {/* Step 2 */}
             <div className="relative">
-              <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 h-full">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 flex items-center justify-center text-white font-bold text-lg mb-4">
+              <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 h-full hover:shadow-lg transition-shadow">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center text-white font-bold text-xl mb-4 shadow-lg">
                   2
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">Thanh toán</h3>
@@ -180,8 +180,8 @@ export default async function HomePage() {
             </div>
 
             {/* Step 3 */}
-            <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 h-full">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-r from-teal-400 to-cyan-400 flex items-center justify-center text-white font-bold text-lg mb-4">
+            <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 h-full hover:shadow-lg transition-shadow">
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-400 flex items-center justify-center text-white font-bold text-xl mb-4 shadow-lg">
                 3
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Nhận & đọc</h3>
@@ -203,8 +203,10 @@ export default async function HomePage() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {/* Card 1 */}
-            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 border border-purple-100">
-              <div className="text-5xl mb-4">📖</div>
+            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 border border-purple-100 hover:shadow-lg transition-shadow">
+              <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center mb-4 shadow-lg">
+                <span className="text-3xl">📖</span>
+              </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Mua một lần, dùng mãi mãi</h3>
               <p className="text-gray-700">
                 Quy trình gọn gàng để bạn nhận sách ngay, kiến thức vĩnh viễn là của bạn. Không cần đăng ký hàng tháng, không cần lo hết hạn.
@@ -212,8 +214,10 @@ export default async function HomePage() {
             </div>
 
             {/* Card 2 */}
-            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-8 border border-blue-100">
-              <div className="text-5xl mb-4">💰</div>
+            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-8 border border-blue-100 hover:shadow-lg transition-shadow">
+              <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-400 flex items-center justify-center mb-4 shadow-lg">
+                <span className="text-3xl">💰</span>
+              </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Chi phí phù hợp</h3>
               <p className="text-gray-700">
                 Kiến thức bạn sở hữu là những trải nghiệm thật, với giá chỉ từ một cốc trà sữa. Combo tiết kiệm lên đến 70%.
@@ -221,8 +225,10 @@ export default async function HomePage() {
             </div>
 
             {/* Card 3 */}
-            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 border border-green-100">
-              <div className="text-5xl mb-4">⚡</div>
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 border border-green-100 hover:shadow-lg transition-shadow">
+              <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-orange-400 to-rose-500 flex items-center justify-center mb-4 shadow-lg">
+                <span className="text-3xl">⚡</span>
+              </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Nhận ngay lập tức</h3>
               <p className="text-gray-700">
                 Thanh toán xong, email link tải tới ngay. Không phải chờ, không phải xác nhận. Bắt đầu đọc trong vòng 1 phút.
@@ -235,7 +241,9 @@ export default async function HomePage() {
       {/* ─── Money-Back Guarantee ─── */}
       <section className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <div className="text-5xl mb-4">🛡️</div>
+          <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-6 shadow-lg border border-white/30">
+            <span className="text-5xl">🛡️</span>
+          </div>
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
             Cam kết 100% hài lòng
           </h2>
@@ -433,31 +441,43 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ─── Don't Take Risks Section (Gumroad-inspired) ─── */}
+      {/* ─── Quote Section ─── */}
       <section className="bg-white py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+            Tập trung vào <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">điều quan trọng</span>
+          </h2>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Bất cứ ai cũng có thể kiếm được những đồng tiền đầu tiên. Chỉ cần bắt đầu với những gì bạn biết, xem cái nào hiệu quả, và kiếm tiền.
+          </p>
+        </div>
+      </section>
+
+      {/* ─── Don't Take Risks Section (Gumroad-inspired) ─── */}
+      <section className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              <h2 className="text-4xl font-bold text-white mb-6">
                 Đừng mạo hiểm. Điều đó đáng sợ!
               </h2>
               <div className="space-y-6">
-                <div className="bg-gray-50 rounded-2xl p-6 border-l-4 border-yellow-400">
-                  <p className="text-gray-700 mb-2">Thay vì chi 5 triệu cho khóa học online...</p>
-                  <p className="text-xl font-bold text-gray-900">...hãy bắt đầu với ebook 49.000đ!</p>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                  <p className="text-white/90 mb-2">Thay vì chi 5 triệu cho khóa học online...</p>
+                  <p className="text-xl font-bold text-white">...hãy bắt đầu với ebook 49.000đ!</p>
                 </div>
-                <div className="bg-gray-50 rounded-2xl p-6 border-l-4 border-green-400">
-                  <p className="text-gray-700 mb-2">Thay vì mua 10 cuốn sách giấy 2 triệu...</p>
-                  <p className="text-xl font-bold text-gray-900">...mua combo ebook chỉ 199.000đ!</p>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                  <p className="text-white/90 mb-2">Thay vì mua 10 cuốn sách giấy 2 triệu...</p>
+                  <p className="text-xl font-bold text-white">...mua combo ebook chỉ 199.000đ!</p>
                 </div>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-12 text-center">
+            <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-12 text-center border border-white/20">
               <div className="text-6xl mb-6">🎯</div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              <h3 className="text-2xl font-bold text-white mb-4">
                 Đặt cược nhỏ. Điều đó thú vị!
               </h3>
-              <p className="text-gray-700 leading-relaxed">
+              <p className="text-white/90 leading-relaxed">
                 Với giá chỉ bằng một cốc trà sữa, bạn có thể thử nghiệm ý tưởng mới, 
                 học kỹ năng mới mà không lo rủi ro tài chính. Đó là cách thông minh để đầu tư vào bản thân.
               </p>
