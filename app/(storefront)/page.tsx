@@ -28,9 +28,11 @@ export default async function HomePage() {
       <section className="hero-gradient pt-20 pb-24 text-center relative">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
 
-          {/* Main Heading - Đúng như ảnh mẫu */}
+          {/* Main Heading - Gradient Aurora: Indigo→Violet→Fuchsia */}
           <h1 className="text-6xl sm:text-7xl md:text-8xl font-black leading-tight tracking-tight mb-5">
-            <span className="text-purple-600">Ebook Mind</span>
+            <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
+              Ebook Mind
+            </span>
           </h1>
 
           {/* Subtitle - Không bold, màu xám đậm */}
@@ -39,17 +41,17 @@ export default async function HomePage() {
             Phát triển bản thân, Công nghệ,...v.v.
           </p>
 
-          {/* Badge pill - Đúng như ảnh */}
-          <div className="inline-flex items-center gap-2 bg-purple-100 border border-purple-300 text-purple-700 text-sm font-medium px-5 py-2 rounded-full mb-8">
+          {/* Badge pill - Glassmorphism với viền gradient nhẹ */}
+          <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-sm border border-violet-200 text-violet-700 text-sm font-medium px-5 py-2 rounded-full mb-8 shadow-sm">
             <Sparkles className="w-4 h-4" />
             Kiến thức chất lượng, giá cả phải chăng
           </div>
 
-          {/* CTAs - Đúng như ảnh */}
+          {/* CTAs - Gradient Aurora cho button chính */}
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
             <Link
               href="/ebooks"
-              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-purple-500 text-white px-7 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:from-purple-700 hover:to-purple-600 transition-all text-base"
+              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-white px-7 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all text-base"
             >
               <TrendingUp className="w-4 h-4" />
               Khám phá Ebook ngay
@@ -57,7 +59,7 @@ export default async function HomePage() {
             </Link>
             <Link
               href="/combos"
-              className="inline-flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-900 px-7 py-3 rounded-xl font-semibold hover:bg-gray-50 transition shadow-sm text-base"
+              className="inline-flex items-center justify-center gap-2 bg-white/80 backdrop-blur-sm border border-gray-300 text-gray-900 px-7 py-3 rounded-xl font-semibold hover:bg-white transition shadow-sm text-base"
             >
               Xem Combo tiết kiệm
             </Link>
