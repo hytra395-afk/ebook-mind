@@ -67,41 +67,262 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ─── Trust Badges (iOS icon style) ─── */}
-      <section className="bg-gradient-to-b from-white to-gray-50 py-16 border-b border-gray-100">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
-            {/* Badge 1 */}
-            <div className="flex flex-col items-center gap-4">
-              <div className="w-16 h-16 rounded-2xl badge-aurora flex items-center justify-center shadow-lg">
-                <TrendingUp className="w-8 h-8 text-white" />
+      {/* ─── Big Social Proof Number (Gumroad-inspired) ─── */}
+      <section className="bg-white py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          <div className="text-6xl sm:text-7xl md:text-8xl font-black text-gray-900 mb-4">
+            15,000+
+          </div>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Người Việt đã tin tưởng và đầu tư vào kiến thức với Ebook Mind tuần qua
+          </p>
+        </div>
+      </section>
+
+      {/* ─── Features Grid (Gumroad-inspired) ─── */}
+      <section className="bg-gray-50 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Feature 1: Mua dễ dàng */}
+            <div className="bg-white rounded-3xl p-10 shadow-sm border border-gray-100">
+              <h3 className="text-3xl font-bold text-gray-900 mb-6">Mua dễ dàng cho mọi người</h3>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white text-sm">✓</span>
+                  </div>
+                  <p className="text-gray-700">Giá từ 49.000đ - rẻ hơn một cốc trà sữa, ai cũng có thể học</p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white text-sm">✓</span>
+                  </div>
+                  <p className="text-gray-700">Thanh toán bằng VNĐ qua chuyển khoản ngân hàng - quen thuộc với người Việt</p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white text-sm">✓</span>
+                  </div>
+                  <p className="text-gray-700">Combo tiết kiệm - mua nhiều giảm sâu, phù hợp mọi túi tiền</p>
+                </li>
+              </ul>
+            </div>
+
+            {/* Feature 2: Đọc mọi nơi */}
+            <div className="bg-white rounded-3xl p-10 shadow-sm border border-gray-100">
+              <h3 className="text-3xl font-bold text-gray-900 mb-6">Đọc mọi lúc, mọi nơi</h3>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-r from-teal-400 to-cyan-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white text-sm">✓</span>
+                  </div>
+                  <p className="text-gray-700">Nhận link tải ngay sau khi thanh toán - không phải chờ đợi</p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-r from-teal-400 to-cyan-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white text-sm">✓</span>
+                  </div>
+                  <p className="text-gray-700">Đọc trên điện thoại, máy tính bảng, laptop - thiết bị nào cũng được</p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-r from-teal-400 to-cyan-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-white text-sm">✓</span>
+                  </div>
+                  <p className="text-gray-700">Sở hữu vĩnh viễn - tải về máy, đọc offline bất cứ lúc nào</p>
+                </li>
+              </ul>
+            </div>
+
+            {/* Feature 3: Nội dung đa dạng */}
+            <div className="bg-white rounded-3xl p-10 shadow-sm border border-gray-100">
+              <h3 className="text-3xl font-bold text-gray-900 mb-6">Nội dung cho mọi mục tiêu</h3>
+              <p className="text-gray-700 leading-relaxed">
+                Từ kinh doanh, khởi nghiệp, đầu tư đến phát triển bản thân, kỹ năng mềm, công nghệ. 
+                Ebook Mind tuyển chọn và biên tập kỹ lưỡng từng cuốn sách để phù hợp với người Việt. 
+                Dù bạn là sinh viên, nhân viên văn phòng hay chủ doanh nghiệp - chúng tôi đều có nội dung cho bạn.
+              </p>
+            </div>
+
+            {/* Feature 4: Hỗ trợ tận tâm */}
+            <div className="bg-white rounded-3xl p-10 shadow-sm border border-gray-100">
+              <h3 className="text-3xl font-bold text-gray-900 mb-6">Hỗ trợ tận tâm 24/7</h3>
+              <p className="text-gray-700 leading-relaxed">
+                Gặp vấn đề khi tải ebook? Cần tư vấn chọn sách phù hợp? Đội ngũ hỗ trợ của chúng tôi 
+                luôn sẵn sàng giúp bạn qua email, chat hoặc hotline. Chúng tôi cam kết phản hồi trong vòng 2 giờ 
+                và giải quyết mọi thắc mắc một cách nhanh chóng, thân thiện.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Philosophy Journey (Gumroad-inspired) ─── */}
+      <section className="bg-white py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-4xl sm:text-5xl font-bold text-center text-gray-900 mb-4">
+            Bạn có những ý tưởng tuyệt vời?
+          </h2>
+          <p className="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto">
+            Hành trình phát triển bản thân của bạn bắt đầu từ đây
+          </p>
+          
+          {/* Journey Path */}
+          <div className="relative">
+            <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-400 transform -translate-y-1/2 hidden md:block"></div>
+            
+            <div className="grid md:grid-cols-4 gap-8 relative">
+              <div className="text-center">
+                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-yellow-400 to-orange-400 flex items-center justify-center shadow-lg">
+                  <span className="text-3xl">📚</span>
+                </div>
+                <h3 className="font-bold text-lg text-gray-900 mb-2">Bắt đầu nhỏ</h3>
+                <p className="text-gray-600 text-sm">Chỉ 49.000đ cho một cuốn ebook - thử nghiệm ý tưởng không tốn kém</p>
               </div>
-              <div>
-                <p className="font-bold text-gray-900 text-base">Giá Cả Phải Chăng</p>
-                <p className="text-gray-500 text-sm mt-1">Chỉ từ 49.000đ, rẻ hơn một cốc trà sữa</p>
+
+              <div className="text-center">
+                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-orange-400 to-rose-400 flex items-center justify-center shadow-lg">
+                  <span className="text-3xl">🚀</span>
+                </div>
+                <h3 className="font-bold text-lg text-gray-900 mb-2">Học nhanh</h3>
+                <p className="text-gray-600 text-sm">Kiến thức cô đọng, thực chiến - áp dụng ngay được vào công việc</p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-rose-400 to-pink-400 flex items-center justify-center shadow-lg">
+                  <span className="text-3xl">💡</span>
+                </div>
+                <h3 className="font-bold text-lg text-gray-900 mb-2">Cùng tiến bộ</h3>
+                <p className="text-gray-600 text-sm">Cộng đồng 15,000+ người cùng học hỏi và chia sẻ kinh nghiệm</p>
+              </div>
+
+              <div className="text-center">
+                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-pink-400 to-purple-400 flex items-center justify-center shadow-lg">
+                  <span className="text-3xl">🎯</span>
+                </div>
+                <h3 className="font-bold text-lg text-gray-900 mb-2">Đạt mục tiêu</h3>
+                <p className="text-gray-600 text-sm">Tăng thu nhập, thăng tiến sự nghiệp, khởi nghiệp thành công</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Testimonials (Gumroad-inspired) ─── */}
+      <section className="bg-gradient-to-br from-purple-50 to-pink-50 py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="text-5xl sm:text-6xl font-black text-gray-900 mb-4">
+              2,500,000,000đ+
+            </div>
+            <p className="text-xl text-gray-700">
+              Giá trị kiến thức mà người dùng Ebook Mind đã đầu tư trong năm qua
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Testimonial 1 */}
+            <div className="bg-white rounded-2xl p-8 shadow-sm">
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                "Tôi bắt đầu với combo Marketing cơ bản giá 199k. Sau 3 tháng áp dụng, 
+                doanh thu shop online của tôi tăng gấp 3 lần. Giờ tôi đã mua thêm 10+ ebook khác 
+                và thu nhập tăng vượt mức lương văn phòng cũ."
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 flex items-center justify-center text-white font-bold">
+                  NT
+                </div>
+                <div>
+                  <p className="font-bold text-gray-900">Nguyễn Thảo</p>
+                  <p className="text-sm text-gray-500">Chủ shop thời trang online, TP.HCM</p>
+                </div>
               </div>
             </div>
 
-            {/* Badge 2 */}
-            <div className="flex flex-col items-center gap-4">
-              <div className="w-16 h-16 rounded-2xl badge-miami flex items-center justify-center shadow-lg">
-                <Sparkles className="w-8 h-8 text-white" />
-              </div>
-              <div>
-                <p className="font-bold text-gray-900 text-base">Nội Dung Chất Lượng</p>
-                <p className="text-gray-500 text-sm mt-1">Được tuyển chọn và biên tập kỹ lưỡng</p>
+            {/* Testimonial 2 */}
+            <div className="bg-white rounded-2xl p-8 shadow-sm">
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                "Là sinh viên túi tiền hạn hẹp, tôi không thể mua sách giấy đắt tiền. 
+                Ebook Mind giúp tôi tiếp cận kiến thức chất lượng với giá chỉ bằng 1/10. 
+                Nhờ combo Kỹ năng mềm, tôi đã pass phỏng vấn vào công ty mơ ước."
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-teal-400 to-cyan-400 flex items-center justify-center text-white font-bold">
+                  MH
+                </div>
+                <div>
+                  <p className="font-bold text-gray-900">Minh Hoàng</p>
+                  <p className="text-sm text-gray-500">Sinh viên IT, Hà Nội</p>
+                </div>
               </div>
             </div>
 
-            {/* Badge 3 */}
-            <div className="flex flex-col items-center gap-4">
-              <div className="w-16 h-16 rounded-2xl badge-sunset flex items-center justify-center shadow-lg">
-                <BadgeCheck className="w-8 h-8 text-white" />
+            {/* Testimonial 3 */}
+            <div className="bg-white rounded-2xl p-8 shadow-sm">
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                "Tôi đã chi hàng chục triệu cho các khóa học online nhưng ít khi áp dụng được. 
+                Ebook Mind khác - giá rẻ nên tôi dám thử nhiều chủ đề, tìm được đúng nhu cầu. 
+                Giờ tôi có passive income 15 triệu/tháng từ side hustle."
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-orange-400 to-rose-500 flex items-center justify-center text-white font-bold">
+                  LA
+                </div>
+                <div>
+                  <p className="font-bold text-gray-900">Linh Anh</p>
+                  <p className="text-sm text-gray-500">Nhân viên văn phòng, Đà Nẵng</p>
+                </div>
               </div>
-              <div>
-                <p className="font-bold text-gray-900 text-base">Thanh Toán Nhanh</p>
-                <p className="text-gray-500 text-sm mt-1">Thanh toán xong, nhận link tải ngay lập tức</p>
+            </div>
+
+            {/* Testimonial 4 */}
+            <div className="bg-white rounded-2xl p-8 shadow-sm">
+              <p className="text-gray-700 mb-6 leading-relaxed">
+                "Công ty tôi cần đào tạo 20 nhân viên về Digital Marketing. 
+                Thay vì chi 50 triệu cho khóa học, tôi mua combo ebook chỉ 2 triệu. 
+                Hiệu quả không thua kém, tiết kiệm 96% chi phí đào tạo!"
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 flex items-center justify-center text-white font-bold">
+                  DK
+                </div>
+                <div>
+                  <p className="font-bold text-gray-900">Đức Khải</p>
+                  <p className="text-sm text-gray-500">Giám đốc Startup, TP.HCM</p>
+                </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Don't Take Risks Section (Gumroad-inspired) ─── */}
+      <section className="bg-white py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                Đừng mạo hiểm. Điều đó đáng sợ!
+              </h2>
+              <div className="space-y-6">
+                <div className="bg-gray-50 rounded-2xl p-6 border-l-4 border-yellow-400">
+                  <p className="text-gray-700 mb-2">Thay vì chi 5 triệu cho khóa học online...</p>
+                  <p className="text-xl font-bold text-gray-900">...hãy bắt đầu với ebook 49.000đ!</p>
+                </div>
+                <div className="bg-gray-50 rounded-2xl p-6 border-l-4 border-green-400">
+                  <p className="text-gray-700 mb-2">Thay vì mua 10 cuốn sách giấy 2 triệu...</p>
+                  <p className="text-xl font-bold text-gray-900">...mua combo ebook chỉ 199.000đ!</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-12 text-center">
+              <div className="text-6xl mb-6">🎯</div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Đặt cược nhỏ. Điều đó thú vị!
+              </h3>
+              <p className="text-gray-700 leading-relaxed">
+                Với giá chỉ bằng một cốc trà sữa, bạn có thể thử nghiệm ý tưởng mới, 
+                học kỹ năng mới mà không lo rủi ro tài chính. Đó là cách thông minh để đầu tư vào bản thân.
+              </p>
             </div>
           </div>
         </div>
