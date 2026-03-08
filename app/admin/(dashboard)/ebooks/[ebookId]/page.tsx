@@ -52,7 +52,7 @@ export default function EditEbookPage() {
           category_id: form.category_id, level_id: form.level_id,
           author_id: form.author_id || null,
           price: Number(form.price), pages: Number(form.pages),
-          cover_url: form.cover_url, storage_path: form.storage_path,
+          cover_url: form.cover_url, external_url: form.external_url || null,
           active: form.active, featured: form.featured,
         }),
       })
@@ -152,9 +152,11 @@ export default function EditEbookPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">File PDF URL</label>
-          <input type="text" value={form.storage_path || ''} onChange={(e) => setForm({ ...form, storage_path: e.target.value })}
-            className="w-full border rounded-lg px-3 py-2 text-sm" />
+          <label className="block text-sm font-medium text-gray-700 mb-1">Link PDF (Google Drive / Dropbox) *</label>
+          <input type="url" required value={form.external_url || ''} onChange={(e) => setForm({ ...form, external_url: e.target.value })}
+            placeholder="https://drive.google.com/uc?id=..."
+            className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+          <p className="text-xs text-gray-400 mt-1">Dán link Google Drive hoặc Dropbox trực tiếp tải file PDF</p>
         </div>
 
         <div className="flex items-center gap-6">

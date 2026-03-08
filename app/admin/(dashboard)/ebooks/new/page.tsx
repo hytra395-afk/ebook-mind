@@ -22,7 +22,7 @@ export default function NewEbookPage() {
   const [authors, setAuthors] = useState<any[]>([])
   const [form, setForm] = useState({
     title: '', slug: '', description: '', category_id: '', level_id: '', author_id: '',
-    price: '', pages: '', cover_url: '', storage_path: '', active: true, featured: false,
+    price: '', pages: '', cover_url: '', external_url: '', active: true, featured: false,
   })
 
   useEffect(() => {
@@ -49,6 +49,7 @@ export default function NewEbookPage() {
           price: Number(form.price),
           pages: Number(form.pages),
           author_id: form.author_id || null,
+          storage_path: null,
         }),
       })
       const data = await res.json()
@@ -140,9 +141,11 @@ export default function NewEbookPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">File PDF URL</label>
-          <input type="text" value={form.storage_path} onChange={(e) => setForm({ ...form, storage_path: e.target.value })}
-            className="w-full border rounded-lg px-3 py-2 text-sm" />
+          <label className="block text-sm font-medium text-gray-700 mb-1">Link PDF (Google Drive / Dropbox) *</label>
+          <input type="url" required value={form.external_url} onChange={(e) => setForm({ ...form, external_url: e.target.value })}
+            placeholder="https://drive.google.com/uc?id=..."
+            className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+          <p className="text-xs text-gray-400 mt-1">Dán link Google Drive hoặc Dropbox trực tiếp tải file PDF</p>
         </div>
 
         <div className="flex items-center gap-6">

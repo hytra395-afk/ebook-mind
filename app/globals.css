@@ -25,6 +25,29 @@
     --ring: 262 83% 58%;
     --radius: 0.5rem;
   }
+  
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 262 73% 48%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 50.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 262 73% 48%;
+  }
+  
   * {
     @apply border-border;
   }
@@ -33,6 +56,168 @@
   }
 }
 
+/* ═══════════════════════════════════════════════════════════
+   MODERN GRADIENT SYSTEM - Aurora / Miami / Sunset
+   ═══════════════════════════════════════════════════════════ */
+
+/* Hero Background - Radial gradient with subtle animation */
+.hero-gradient {
+  position: relative;
+  background: linear-gradient(135deg, #f5f3ff 0%, #fdf4ff 50%, #faf5ff 100%);
+  overflow: hidden;
+}
+
+.hero-gradient::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(ellipse at top, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.1), transparent 60%);
+  animation: gradient-xy 10s ease infinite;
+  pointer-events: none;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Gradient Text Utilities */
+.gradient-text-aurora {
+  background: linear-gradient(to right, rgb(99 102 241), rgb(139 92 246), rgb(217 70 239));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-miami {
+  background: linear-gradient(to right, rgb(45 212 191), rgb(34 211 238), rgb(163 230 53));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-sunset {
+  background: linear-gradient(to right, rgb(251 146 60), rgb(244 63 94), rgb(236 72 153));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gradient Border Utility */
+.gradient-border {
+  position: relative;
+  background: white;
+  border-radius: 1rem;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  padding: 1px;
+  background: linear-gradient(135deg, rgb(99 102 241), rgb(139 92 246), rgb(217 70 239));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* CTA Button Gradients */
+.btn-aurora {
+  background: linear-gradient(135deg, rgb(99 102 241) 0%, rgb(139 92 246) 50%, rgb(217 70 239) 100%);
+  transition: all 0.3s ease;
+}
+
+.btn-aurora:hover {
+  background: linear-gradient(135deg, rgb(79 82 221) 0%, rgb(119 72 226) 50%, rgb(197 50 219) 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
+}
+
+.btn-miami {
+  background: linear-gradient(135deg, rgb(45 212 191) 0%, rgb(34 211 238) 50%, rgb(163 230 53) 100%);
+  transition: all 0.3s ease;
+}
+
+.btn-miami:hover {
+  background: linear-gradient(135deg, rgb(25 192 171) 0%, rgb(14 191 218) 50%, rgb(143 210 33) 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px -5px rgba(45, 212, 191, 0.4);
+}
+
+.btn-sunset {
+  background: linear-gradient(135deg, rgb(251 146 60) 0%, rgb(244 63 94) 50%, rgb(236 72 153) 100%);
+  transition: all 0.3s ease;
+}
+
+.btn-sunset:hover {
+  background: linear-gradient(135deg, rgb(231 126 40) 0%, rgb(224 43 74) 50%, rgb(216 52 133) 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px -5px rgba(244, 63, 94, 0.4);
+}
+
+/* Badge Gradients */
+.badge-aurora {
+  background: linear-gradient(135deg, rgb(99 102 241), rgb(139 92 246), rgb(217 70 239));
+}
+
+.badge-miami {
+  background: linear-gradient(135deg, rgb(45 212 191), rgb(34 211 238), rgb(163 230 53));
+}
+
+.badge-sunset {
+  background: linear-gradient(135deg, rgb(251 146 60), rgb(244 63 94), rgb(236 72 153));
+}
+
+/* Legacy support - map old classes to new system */
+.gradient-text-purple {
+  @apply gradient-text-aurora;
+}
+
 .gradient-purple {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  @apply btn-aurora;
+}
+
+.badge-icon-purple {
+  @apply badge-aurora;
+}
+
+.badge-icon-teal {
+  @apply badge-miami;
+}
+
+.badge-icon-orange {
+  @apply badge-sunset;
+}
+
+/* Dark mode adjustments */
+.dark .hero-gradient {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);
+}
+
+.dark .hero-gradient::before {
+  background: radial-gradient(ellipse at top, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.15), transparent 60%);
+}
+
+.dark .gradient-border {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dark .gradient-border::before {
+  background: linear-gradient(135deg, rgb(79 82 221), rgb(119 72 226), rgb(197 50 219));
 }

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, BookOpen, Layers, FileText, CreditCard, BarChart3, LogOut } from 'lucide-react'
+import { LayoutDashboard, BookOpen, Layers, FileText, CreditCard, BarChart3, LogOut, BookMarked } from 'lucide-react'
 
 const navItems = [
   { href: '/admin/dashboard', label: 'Tổng quan', icon: LayoutDashboard },
@@ -20,8 +20,8 @@ export default function AdminSidebar() {
     <aside className="w-64 bg-white border-r flex flex-col min-h-screen">
       <div className="p-6 border-b">
         <Link href="/admin/dashboard" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg gradient-purple flex items-center justify-center">
-            <span className="text-white font-bold text-sm">EM</span>
+          <div className="w-8 h-8 rounded-lg gradient-purple flex items-center justify-center shadow-sm">
+            <BookMarked className="w-4 h-4 text-white" />
           </div>
           <div>
             <span className="text-lg font-bold text-purple-600">Ebook Mind</span>

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabaseAdmin } from '@/lib/supabase'
 import { config } from '@/lib/config'
+import { sendOrderConfirmationEmail } from '@/lib/email'
 import crypto from 'crypto'
 import { nanoid } from 'nanoid'
 
@@ -122,9 +123,18 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Collect download items for email
+    const downloadItems: Array<{ title: string; downloadUrl: string }> = []
+
     // Create licenses and download tokens for ebooks
     for (const item of order.order_items) {
       if (item.ebook_id) {
+        // Get ebook info for email
+        const { data: ebookInfo } = await supabaseAdmin
+          .from('ebooks')
+          .select('title, cover_url')
+          .eq('id', item.ebook_id)
+          .single()
         // Create license
         const { data: license, error: licenseError } = await supabaseAdmin
           .from('licenses')
@@ -156,6 +166,11 @@ export async function POST(request: NextRequest) {
 
         if (tokenError) {
           console.error('Failed to create download token:', tokenError)
+        } else {
+          downloadItems.push({
+            title: ebookInfo?.title || 'Ebook',
+            downloadUrl: `${config.app.url}/api/download?token=${downloadToken}`,
+          })
         }
 
         // Increment ebook sales count
@@ -197,6 +212,12 @@ export async function POST(request: NextRequest) {
           const expiresAt = new Date()
           expiresAt.setHours(expiresAt.getHours() + config.downloadToken.ttlHours)
 
+          const { data: comboEbookInfo } = await supabaseAdmin
+            .from('ebooks')
+            .select('title')
+            .eq('id', comboItem.ebook_id)
+            .single()
+
           const { error: tokenError } = await supabaseAdmin
             .from('download_tokens')
             .insert({
@@ -207,6 +228,11 @@ export async function POST(request: NextRequest) {
 
           if (tokenError) {
             console.error('Failed to create combo download token:', tokenError)
+          } else {
+            downloadItems.push({
+              title: comboEbookInfo?.title || 'Ebook',
+              downloadUrl: `${config.app.url}/api/download?token=${downloadToken}`,
+            })
           }
 
           // Increment ebook sales count
@@ -218,10 +244,15 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // TODO: Send email with download links using Resend
-    // if (order.email) {
-    //   await sendDownloadEmail(order.email, order.id)
-    // }
+    // Send email với download links qua Brevo
+    if (order.email && downloadItems.length > 0) {
+      await sendOrderConfirmationEmail({
+        toEmail: order.email,
+        orderId: order.id,
+        items: downloadItems,
+        totalAmount: order.amount,
+      })
+    }
 
     console.log('Order processed successfully:', order.id)
 
