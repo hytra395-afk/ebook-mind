@@ -67,9 +67,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ─── Journey Diagram (Gumroad-inspired) ─── */}
+      {/* ─── Journey Path Diagram (Gumroad-inspired) ─── */}
       <section className="bg-white py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-4">
             Bạn có những ý tưởng tuyệt vời?
           </h2>
@@ -77,31 +77,69 @@ export default async function HomePage() {
             Hành trình của bạn bắt đầu từ đây
           </p>
           
-          {/* Journey Path - Gumroad style */}
-          <div className="relative bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 rounded-full p-8 md:p-12">
-            {/* Center character */}
-            <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-5xl md:text-6xl z-10">
-              💡
-            </div>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center">
-              <div>
-                <p className="font-bold text-gray-800 text-sm md:text-base">Bắt đầu nhỏ</p>
-                <p className="text-xs md:text-sm text-gray-700 mt-1">49.000đ</p>
-              </div>
-              <div>
-                <p className="font-bold text-gray-800 text-sm md:text-base">Học nhanh</p>
-                <p className="text-xs md:text-sm text-gray-700 mt-1">Thực chiến</p>
-              </div>
-              <div>
-                <p className="font-bold text-gray-800 text-sm md:text-base">Cùng tiến bộ</p>
-                <p className="text-xs md:text-sm text-gray-700 mt-1">Cộng đồng</p>
-              </div>
-              <div>
-                <p className="font-bold text-gray-800 text-sm md:text-base">Đạt mục tiêu</p>
-                <p className="text-xs md:text-sm text-gray-700 mt-1">Thành công</p>
-              </div>
-            </div>
+          {/* SVG Path Diagram */}
+          <div className="relative w-full overflow-x-auto">
+            <svg viewBox="0 0 1200 300" className="w-full h-auto min-h-[300px]" preserveAspectRatio="xMidYMid meet">
+              {/* Main curved path */}
+              <defs>
+                <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#FCD34D" />
+                  <stop offset="25%" stopColor="#FBBF24" />
+                  <stop offset="50%" stopColor="#FB923C" />
+                  <stop offset="75%" stopColor="#F97316" />
+                  <stop offset="100%" stopColor="#EC4899" />
+                </linearGradient>
+              </defs>
+              
+              {/* Curved path line */}
+              <path
+                d="M 80 150 Q 300 50, 600 150 T 1120 150"
+                stroke="url(#pathGradient)"
+                strokeWidth="40"
+                fill="none"
+                strokeLinecap="round"
+              />
+              
+              {/* Step 1: Bắt đầu nhỏ */}
+              <g>
+                <circle cx="150" cy="150" r="35" fill="#FCD34D" stroke="#F59E0B" strokeWidth="3"/>
+                <text x="150" y="160" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#1F2937">📚</text>
+              </g>
+              <text x="150" y="220" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#1F2937">Bắt đầu nhỏ</text>
+              <text x="150" y="245" textAnchor="middle" fontSize="13" fill="#6B7280">49.000đ</text>
+              
+              {/* Step 2: Học nhanh */}
+              <g>
+                <circle cx="400" cy="150" r="35" fill="#FBBF24" stroke="#F59E0B" strokeWidth="3"/>
+                <text x="400" y="160" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#1F2937">🚀</text>
+              </g>
+              <text x="400" y="220" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#1F2937">Học nhanh</text>
+              <text x="400" y="245" textAnchor="middle" fontSize="13" fill="#6B7280">Thực chiến</text>
+              
+              {/* Center: Light bulb */}
+              <g>
+                <circle cx="600" cy="150" r="45" fill="white" stroke="#F97316" strokeWidth="3"/>
+                <text x="600" y="165" textAnchor="middle" fontSize="40" fontWeight="bold">💡</text>
+              </g>
+              <text x="600" y="220" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#1F2937">Cùng tiến bộ</text>
+              <text x="600" y="245" textAnchor="middle" fontSize="13" fill="#6B7280">Cộng đồng</text>
+              
+              {/* Step 3: Cùng tiến bộ */}
+              <g>
+                <circle cx="800" cy="150" r="35" fill="#FB923C" stroke="#F97316" strokeWidth="3"/>
+                <text x="800" y="160" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#1F2937">🤝</text>
+              </g>
+              <text x="800" y="220" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#1F2937">Cùng tiến bộ</text>
+              <text x="800" y="245" textAnchor="middle" fontSize="13" fill="#6B7280">Cộng đồng</text>
+              
+              {/* Step 4: Đạt mục tiêu */}
+              <g>
+                <circle cx="1050" cy="150" r="35" fill="#EC4899" stroke="#DB2777" strokeWidth="3"/>
+                <text x="1050" y="160" textAnchor="middle" fontSize="24" fontWeight="bold" fill="white">🎯</text>
+              </g>
+              <text x="1050" y="220" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#1F2937">Đạt mục tiêu</text>
+              <text x="1050" y="245" textAnchor="middle" fontSize="13" fill="#6B7280">Thành công</text>
+            </svg>
           </div>
         </div>
       </section>
