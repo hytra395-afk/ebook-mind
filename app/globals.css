@@ -60,10 +60,10 @@
    MODERN GRADIENT SYSTEM - Aurora / Miami / Sunset
    ═══════════════════════════════════════════════════════════ */
 
-/* Hero Background - Radial gradient with subtle animation */
+/* Hero Background - Lavender pastel như ảnh mẫu */
 .hero-gradient {
   position: relative;
-  background: linear-gradient(135deg, #f5f3ff 0%, #fdf4ff 50%, #faf5ff 100%);
+  background: linear-gradient(135deg, #e9d5ff 0%, #f3e8ff 50%, #ede9fe 100%);
   overflow: hidden;
 }
 
@@ -74,7 +74,7 @@
   left: -10%;
   width: 120%;
   height: 120%;
-  background: radial-gradient(ellipse at top, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.1), transparent 60%);
+  background: radial-gradient(ellipse at top, rgba(168, 85, 247, 0.08), rgba(192, 132, 252, 0.05), transparent 60%);
   animation: gradient-xy 10s ease infinite;
   pointer-events: none;
 }

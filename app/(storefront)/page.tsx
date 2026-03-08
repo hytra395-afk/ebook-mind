@@ -25,39 +25,39 @@ export default async function HomePage() {
   return (
     <div>
       {/* ─── Hero Section ─── */}
-      <section className="hero-gradient pt-16 pb-20 text-center relative">
+      <section className="hero-gradient pt-20 pb-24 text-center relative">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
 
-          {/* Main Heading - Larger and more prominent */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-tight tracking-tight mb-6">
-            <span className="gradient-text-aurora">Ebook Mind</span>
+          {/* Main Heading - Đúng như ảnh mẫu */}
+          <h1 className="text-6xl sm:text-7xl md:text-8xl font-black leading-tight tracking-tight mb-5">
+            <span className="text-purple-600">Ebook Mind</span>
           </h1>
 
-          {/* Subtitle */}
-          <p className="text-gray-600 text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto mb-8 font-medium">
+          {/* Subtitle - Không bold, màu xám đậm */}
+          <p className="text-gray-600 text-base sm:text-lg md:text-xl max-w-3xl mx-auto mb-6 font-normal leading-relaxed">
             Đầu tư cho kiến thức mỗi ngày với hàng trăm ebook chất lượng về Kinh doanh, Kiếm thêm thu nhập,
             Phát triển bản thân, Công nghệ,...v.v.
           </p>
 
-          {/* Badge pill */}
-          <div className="inline-flex items-center gap-1.5 glass border-0 text-indigo-700 text-sm font-medium px-5 py-2 rounded-full mb-10 shadow-sm">
+          {/* Badge pill - Đúng như ảnh */}
+          <div className="inline-flex items-center gap-2 bg-purple-100 border border-purple-300 text-purple-700 text-sm font-medium px-5 py-2 rounded-full mb-8">
             <Sparkles className="w-4 h-4" />
             Kiến thức chất lượng, giá cả phải chăng
           </div>
 
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          {/* CTAs - Đúng như ảnh */}
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
             <Link
               href="/ebooks"
-              className="inline-flex items-center justify-center gap-2 btn-aurora text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg text-base"
+              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-purple-500 text-white px-7 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:from-purple-700 hover:to-purple-600 transition-all text-base"
             >
-              <TrendingUp className="w-5 h-5" />
+              <TrendingUp className="w-4 h-4" />
               Khám phá Ebook ngay
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href="/combos"
-              className="inline-flex items-center justify-center gap-2 glass border-0 text-gray-700 px-8 py-3.5 rounded-xl font-semibold hover:bg-white/90 transition shadow-md text-base"
+              className="inline-flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-900 px-7 py-3 rounded-xl font-semibold hover:bg-gray-50 transition shadow-sm text-base"
             >
               Xem Combo tiết kiệm
             </Link>
@@ -178,10 +178,62 @@ export default async function HomePage() {
         </section>
       )}
 
+      {/* ─── Stats Section (Gumroad-inspired) ─── */}
+      <section className="bg-white py-16 border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-4xl font-bold text-purple-600 mb-2">500+</div>
+              <div className="text-gray-600 text-sm">Ebook Chất Lượng</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold text-purple-600 mb-2">10,000+</div>
+              <div className="text-gray-600 text-sm">Người Dùng Hài Lòng</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold text-purple-600 mb-2">4.8★</div>
+              <div className="text-gray-600 text-sm">Đánh Giá Trung Bình</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold text-purple-600 mb-2">24/7</div>
+              <div className="text-gray-600 text-sm">Hỗ Trợ Khách Hàng</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Popular Tags (Gumroad-inspired) ─── */}
+      <section className="bg-gray-50 py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 text-center">
+            Chủ Đề <span className="text-purple-600">Phổ Biến</span>
+          </h2>
+          <p className="text-gray-600 text-center mb-8 max-w-2xl mx-auto">
+            Khám phá các chủ đề ebook được tìm kiếm nhiều nhất
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {[
+              'Marketing', 'Khởi Nghiệp', 'Đầu Tư', 'Tư Duy', 'Lãnh Đạo',
+              'Kỹ Năng Mềm', 'Tài Chính', 'Bán Hàng', 'Năng Suất', 'Thiền',
+              'Sức Khỏe Tinh Thần', 'Lập Trình', 'AI', 'Design', 'Crypto',
+              'Passive Income', 'Side Hustle', 'Personal Branding', 'SEO', 'Content Writing'
+            ].map((tag) => (
+              <Link
+                key={tag}
+                href={`/ebooks?tag=${encodeURIComponent(tag.toLowerCase())}`}
+                className="px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:border-purple-400 hover:text-purple-600 hover:shadow-md transition-all"
+              >
+                {tag}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ─── Category Banner ─── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">
-          Khám Phá Theo <span className="gradient-text-aurora">Lĩnh Vực</span>
+          Khám Phá Theo <span className="text-purple-600">Lĩnh Vực</span>
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {[
@@ -199,6 +251,41 @@ export default async function HomePage() {
               <p className="font-semibold text-sm">{cat.label}</p>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* ─── How It Works ─── */}
+      <section className="bg-gradient-to-b from-purple-50 to-white py-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-center">
+            Mua Ebook <span className="text-purple-600">Dễ Dàng</span>
+          </h2>
+          <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+            Chỉ 3 bước đơn giản để sở hữu ebook yêu thích
+          </p>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-purple-600">1</span>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Chọn Ebook</h3>
+              <p className="text-gray-600">Duyệt qua hàng trăm ebook chất lượng cao, chọn cuốn phù hợp với bạn</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-purple-600">2</span>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Thanh Toán</h3>
+              <p className="text-gray-600">Thanh toán nhanh chóng qua chuyển khoản ngân hàng, an toàn 100%</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-purple-600">3</span>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Nhận Link Tải</h3>
+              <p className="text-gray-600">Nhận email với link tải ngay lập tức, đọc mọi lúc mọi nơi</p>
+            </div>
+          </div>
         </div>
       </section>
     </div>
