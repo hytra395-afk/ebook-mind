@@ -8,10 +8,10 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg gradient-purple flex items-center justify-center shadow-sm">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center shadow-sm">
                 <BookOpen className="w-4 h-4 text-white" />
               </div>
-              <span className="text-base font-bold text-purple-600">Ebook Mind</span>
+              <span className="text-base font-bold gradient-text-aurora">Ebook Mind</span>
             </div>
             <p className="text-sm text-gray-500">Kiến thức giá bằng một cốc trà sữa</p>
           </div>
