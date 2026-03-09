@@ -1,4 +1,4 @@
-<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
@@ -6,22 +6,26 @@
       <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
     </linearGradient>
   </defs>
-  <rect width="32" height="32" rx="6" fill="url(#grad)"/>
+  <!-- Background with rounded corners -->
+  <rect width="192" height="192" rx="40" fill="url(#grad)"/>
+  
+  <!-- Book icon - Open book -->
   <!-- Left page -->
   <path
-    d="M6 5C6 4.44772 6.44772 4 7 4H14V27C14 27.5523 13.5523 28 13 28H7C6.44772 28 6 27.5523 6 27V5Z"
+    d="M48 60C48 48.954 56.954 40 68 40H96V152C96 163.046 87.046 172 76 172H68C56.954 172 48 163.046 48 152V60Z"
     fill="white"
-    opacity="0.85"
+    opacity="0.9"
   />
   <!-- Right page -->
   <path
-    d="M18 4H25C25.5523 4 26 4.44772 26 5V27C26 27.5523 25.5523 28 25 28H18V4Z"
+    d="M96 40H124C135.046 40 144 48.954 144 60V152C144 163.046 135.046 172 124 172H96V40Z"
     fill="white"
   />
-  <!-- Spine -->
+  <!-- Spine/Center line -->
   <path
-    d="M14 4H18V28H14V4Z"
-    fill="white"
+    d="M96 40V172"
+    stroke="white"
+    stroke-width="6"
     opacity="0.7"
   />
 </svg>
