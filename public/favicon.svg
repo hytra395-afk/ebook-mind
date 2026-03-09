@@ -9,23 +9,30 @@
   <!-- Circular background -->
   <circle cx="96" cy="96" r="96" fill="url(#grad)"/>
   
-  <!-- Open book icon -->
-  <!-- Left page -->
+  <!-- Open book icon - outline only (stroke, not fill) -->
+  <!-- Left page outline -->
   <path
     d="M50 70C50 60 58 52 68 52H96V140C96 150 88 158 78 158H68C58 158 50 150 50 140V70Z"
-    fill="white"
-    opacity="0.9"
+    fill="none"
+    stroke="white"
+    stroke-width="6"
+    stroke-linejoin="round"
+    stroke-linecap="round"
   />
-  <!-- Right page -->
+  <!-- Right page outline -->
   <path
     d="M96 52H124C134 52 142 60 142 70V140C142 150 134 158 124 158H96V52Z"
-    fill="white"
+    fill="none"
+    stroke="white"
+    stroke-width="6"
+    stroke-linejoin="round"
+    stroke-linecap="round"
   />
-  <!-- Spine -->
+  <!-- Spine line -->
   <path
     d="M96 52V158"
     stroke="white"
-    stroke-width="5"
-    opacity="0.7"
+    stroke-width="4"
+    stroke-linecap="round"
   />
 </svg>
