@@ -8,15 +8,15 @@ export default function UseCasesPage() {
       icon: Briefcase,
       gradient: 'from-indigo-500 to-violet-500',
       title: 'Từ văn phòng ra kinh doanh',
-      quote: '“Sau 4 tháng, công việc phụ bằng 70% lương nên tôi mới dám nghỉ việc”',
-      character: 'Nam – Nhân viên văn phòng 7 năm',
+      quote: '"Sau 4 tháng, công việc phụ bằng 70% lương nên tôi mới dám nghỉ việc"',
+      character: 'Nam – Nhân viên văn phòng',
       desc: 'Bắt đầu từ công việc phụ nhỏ, học và thử theo từng bước trước khi nghỉ việc.',
       content: [
         'Mình làm văn phòng được hơn 7 năm rồi, lương cũng ổn, nhưng cảm giác cứ dậm chân tại chỗ và biết rằng môi trường hiện nay đào thải rất nhanh khi ngày càng lớn tuổi.',
         'Muốn nghỉ ra làm riêng mà sợ không biết cái gì, chưa có một tí kiến thức nào. Sợ lỗ, sợ mất vốn, sợ không bán được hàng, nói chung là sợ đủ thứ. Cứ nghĩ đến cảnh thất nghiệp là mình lại chùn bước.',
-        'Rồi mình biết tới web này, mày mò đọc ebook mà như được khai sáng. Thay vì đùng cái nghỉ việc ngay, mình bắt đầu dành thời gian đọc, nghiên cứu và làm thử theo từng bước. Song song với đó, mình xem thêm trên YouTube, nghe chia sẻ từ người đi trước để lấy động lực.',
-        'Thế là cứ thế từng bước, mình học cách chọn ngách, định giá, marketing, tìm kênh bán phù hợp. Mình chọn ngách sản phẩm số: template báo cáo và checklist công việc cho dân văn phòng – tệp mình hiểu nhất. Test bán trong các group Facebook, đăng video TikTok, kiên trì tối ưu theo feedback.',
-        'Kết quả không đến sau một đêm, nhưng sau 4 tháng, dòng tiền từ công việc phụ này đạt khoảng 70% lương. Khi ấy mình tự tin viết đơn xin nghỉ việc. Bài học lớn: Đừng nghỉ để đi tìm đường; hãy tìm được đường rồi hãy nghỉ.'
+        'Rồi mình biết tới web này, mày mò đọc ebook mà như được khai sáng. Thay vì đùng cái nghỉ việc ngay, mình bắt đầu dành thời gian đọc, nghiên cứu và làm thử theo từng bước. Song song với đó, mình xem thêm trên youtube chỗ nào cần hiểu rõ, hay nghe chia sẻ thêm từ người đi trước để lấy động lực.',
+        'Thế là cứ thế từng bước, mình học cách chọn ngạch, định giá, marketing, tìm kênh bán phù hợp,… Mình quyết định không đánh cược tất cả vào một ván bài lớn mà đi từng bước nhỏ. Mình chọn ngạch sản phẩm số: Bán template báo cáo và checklist công việc cho chính dân văn phòng - tệp khách mình hiểu nhất. Test bán thử trong các group Facebook, đăng video Tiktok. Ban đầu chỉ lác đác vài người hỏi, nhưng mình kiên trì điều chỉnh nội dung, cải thiện theo feedback từ mọi người.',
+        'Kết quả không đến sau một đêm, nhưng sau 4 tháng, dòng tiền từ công việc phụ này bắt đầu tốt hơn, kiếm được cỡ 70% mức lương văn phòng hiện tại của mình. Khi ấy, mình muốn tập trung tối đa cho đam mê này nên tự tin viết đơn xin nghỉ việc. Bài học lớn mình rút ra: Đừng nghỉ việc để tìm được, hãy tìm đường xong rồi hẵng nghỉ.'
       ]
     },
     {
@@ -24,14 +24,17 @@ export default function UseCasesPage() {
       icon: Plane,
       gradient: 'from-violet-500 to-fuchsia-500',
       title: 'Bỏ phố về quê',
-      quote: '“Mang hàng chuẩn Nhật về quê, mình sống khỏe mà vẫn gần gia đình”',
-      character: 'Hương – Du học sinh Nhật trở về',
+      quote: '"Mang hàng chuẩn Nhật về quê, mình sống khỏe mà vẫn gần gia đình"',
+      character: 'Hương – Du học sinh về nước',
       desc: 'Tận dụng lợi thế hiểu hàng Nhật để mở ngách mẹ & bé chuẩn nội địa.',
       content: [
-        '5 năm bên Nhật tích cóp được ít vốn. Ngày xách vali về quê, ai cũng hỏi “giờ làm gì?”. Kinh nghiệm không nhiều, cạnh tranh ở phố lớn thì khốc liệt – có lẽ về quê là lựa chọn hợp lý.',
-        'Trong lúc tìm ý tưởng, mình thấy Ebook Mind, đọc dần về nghiên cứu thị trường ngách, cách làm từ vốn nhỏ, nhập hàng, quản lý tồn kho, marketing… Rồi mình nhận ra lợi thế của bản thân: hiểu đồ Nhật và thói quen dùng đồ Nhật.',
-        'Thay vì mở tạp hoá chung chung cạnh tranh giá, mình chọn ngách hẹp: Hàng tiêu dùng Nhật chuẩn nội địa cho mẹ & bé. Mình chia sẻ kiến thức kiểu Nhật trên mạng xã hội, giải thích công dụng bằng tiếng Việt dễ hiểu, quay video hướng dẫn, tư vấn có tâm.',
-        'Giờ mình sống khoẻ ở quê, thu nhập không thua gì đi làm bên kia mà còn ở gần gia đình. Kinh doanh ngách ở quê không cần quá đông khách, chỉ cần đúng tệp và phục vụ họ thật tốt – thêm kênh online là ổn.'
+        '5 năm bên Nhật tích cóp được ít vốn. Ngày xách vali về quê, ai cũng hỏi \'giờ làm gì?\'. Kinh nghiệm thì không có, cũng không còn trẻ để có thể cạnh tranh với các em hiện nay, chẳng nhẽ đi làm công nhân.',
+        'Mình thực sự không muốn quay lại cảnh đi làm công ăn lương, rất muốn tự chủ, mở cái gì đó nho nhỏ ở nhà cứ thế mà túc tắc sống. Nhưng ở quê thì biết buôn bán gì?',
+        'Cũng rất vô tình thôi, mình thấy Ebook Mind trên Google trong lúc đang tìm kiếm ý tưởng, nghĩ đọc xem có gì hay ho, thêm kiếm thức cũng vẫn hơn. Sau đó mình hiểu hơn về nghiên cứu thị trường ngách, cách làm từ vốn nhỏ, nghiên cứu thị trường, nhập hàng, quản lý tồn kho, marketing,…. Quá nhiều khái niệm mới.',
+        'Nó đã giúp mình nhận ra mình có lợi thế lớn: hiểu hàng Nhật và biết cách người Nhật dùng đồ Nhật, cũng như biết được người Việt mình đang chuộng hàng Nhật nào và bí mật nho nhỏ mà mình biết khi còn đang sống ở Nhật.',
+        'Thay vì mở cửa hàng tạp hóa chung chung cạnh tranh về giá, mình chọn ngách hẹp: Hàng tiêu dùng Nhật chuẩn nội địa cho mẹ và bé. Cụ thể thế nào thì phải dựa vào kinh nghiệm bản thân, kiến thức và có rất nhiều điều bạn cần phải bắt tay vào làm mới biết. Ebook giúp mình khai sáng ra rất rất nhiều.',
+        'Bật mí là mình không chỉ đăng bán thông thường, mình bán cả online và offline. Mình làm nội dung chuẩn chỉ kiên trì chia sẻ cách chăm con kiểu Nhật, giải thích công dụng sản phẩm bằng tiếng Việt dễ hiểu, quay video hướng dẫn,.. Khách hàng tin mình vì mình là \'người thật việc thật\', tư vấn có tâm.',
+        'Tới giờ, mình vẫn sống khỏe ở quê, thu nhập không thua gì hồi đi làm bên kia mà lại được gần nhà, tự do thởi gian. Kinh doanh ngách ở quê không cần quá đông khách như phố lớn đâu, chỉ cần đúng tệp và phục vụ họ thật tốt là đủ sống bền. Thêm kênh online nữa là sống dư.'
       ]
     },
     {
@@ -39,15 +42,16 @@ export default function UseCasesPage() {
       icon: Store,
       gradient: 'from-teal-400 to-cyan-400',
       title: 'Chủ shop online bấp bênh',
-      quote: '“Từ may rủi sang đo lường – đơn đều nhờ tối ưu theo tuần”',
+      quote: '"Từ may rủi sang đo lường – đơn đều nhờ tối ưu theo tuần"',
       character: 'Minh – Chủ shop online',
       desc: 'Ổn định đơn bằng cách tối ưu funnel, A/B test theo tuần, tập trung SKU chủ lực.',
       content: [
-        'Bán online đã có đơn nhưng phập phù. Chạy ads tốn tiền, nội dung không ra đơn – không biết lỗi ở sản phẩm hay cách bán.',
-        'Mình học lại funnel cơ bản: thu hút → tin tưởng → chốt → chăm sóc. Sửa theo thứ tự: ảnh/tiêu đề/giá trị khác biệt, bổ sung feedback xã hội, ưu đãi rõ ràng.',
-        'Kỷ luật A/B test: mỗi tuần chỉ đổi 1 biến số, đo CTR, CR, AOV. Không “đổi 10 thứ cùng lúc”.',
-        'Tập trung 1 dòng sản phẩm best-seller và vài biến thể, tránh ôm quá nhiều SKU. Tối ưu mô tả, ảnh thật và quy trình hậu mãi.',
-        'Kết quả: tỷ lệ chuyển đổi tăng dần, doanh thu ổn định hơn vì biết đo lường và tối ưu, không còn phụ thuộc may rủi.'
+        'Bán online được mấy tháng rồi, có đơn nhưng lên xuống thất thường. Chạy ads tốn tiền mà nội dung không ra đơn, không biết mình sai ở sản phẩm hay cách bán. Cứ mơ hồ là do cạnh tranh hay do khách hàng chưa hiểu giá trị sản phẩm.',
+        'Mình quyết định học lại từ đầu. Đọc ebook về funnel cơ bản: thu hút → tin tưởng → chốt → chăm sóc. Nhận ra vấn đề không phải ở một chỗ, mà cả chuỗi cần tối ưu.',
+        'Bắt tay sửa theo thứ tự: trước tiên là ảnh/tiêu đề/giá trị khác biệt (để thu hút đúng người), sau đó bổ sung feedback xã hội và review (để xây tin tưởng), cuối cùng là ưu đãi rõ ràng (để chốt).',
+        'Mình áp dụng kỷ luật A/B test: mỗi tuần chỉ đổi 1 biến số, đo CTR, CR, AOV. Không "đổi 10 thứ cùng lúc" vì vậy không biết cái nào có hiệu quả.',
+        'Đồng thởi, mình tập trung vào 1 dòng sản phẩm best-seller và vài biến thể, tránh ôm quá nhiều SKU. Tối ưu mô tả, ảnh thật, quy trình hậu mãi để khách hàng yên tâm.',
+        'Kết quả bất ngờ: tỷ lệ chuyển đổi tăng dần theo từng tuần. Doanh thu ổn định hơn vì mình biết đo lường và tối ưu, không còn phụ thuộc may rủi. Giờ mình tự tin mở rộng vì biết công thức hoạt động.'
       ]
     },
     {
@@ -55,14 +59,17 @@ export default function UseCasesPage() {
       icon: Coffee,
       gradient: 'from-rose-400 to-orange-500',
       title: 'Bứt phá cho tiệm cà phê',
-      quote: '“Quyết tâm cải tiến quán mang màu sắc mới. Từ quán ế tới doanh thu ổn định”',
-      character: 'Mai – Chủ quán cà phê',
-      desc: 'Định vị lại quán thành “trạm sạc” cho freelancer, tối ưu không gian & dịch vụ.',
+      quote: '"Quyết tâm cải tiến quán mang màu sắc mới. Từ quán ế tới doanh thu ổn định"',
+      character: 'Chị Mai – Chủ quán cà phê',
+      desc: 'Định vị lại quán thành "trạm sạc" cho freelancer, tối ưu không gian & dịch vụ.',
       content: [
-        '41 tuổi, quán vận hành 2 năm, khách thưa dần mà chi phí vẫn đều: mặt bằng, nhân sự, điện nước…',
-        'Học thêm về truyền thông, content, xây kênh. Rà lại vấn đề cốt lõi: quán “nhạt”, thiếu bản sắc, ít hiện diện trên mạng xã hội, mô hình chưa phù hợp tệp khu vực.',
-        'Định vị lại: không gian yên tĩnh cho freelancer/remote worker. Nâng cấp wifi, ổ cắm, nhạc nhẹ, thêm đồ ăn healthy cho người ngồi lâu, thông điệp rõ ràng.',
-        'Khách quay lại vì không gian giúp họ làm việc hiệu quả. Doanh thu ổn định nhờ nhóm khách trung thành. Bài học: có “chất” riêng và giải đúng nhu cầu.'
+        'Tôi năm nay cũng 41 tuổi rồi và đây là quán cà phê đầu tiên, vận hành cũng được cỡ 2 năm. Quán theo đánh giá của khách là đẹp, đồ uống ngon. Nhưng độ 6 tháng trở lại đây, khách cứ thưa thớt dần không hiểu sao.',
+        'Tiền mặt bằng, tiền nhân viên, điện nước, vận hành,... vẫn phải trả đều đều. Mỗi ngày mở quán lại đau đầu suy nghĩ hôm nay làm sao có thêm khách. Ngồi nhìn quán vắng mà nóng ruột. Chẳng lẽ gu mình lỗi thởi so với giới trẻ? Cũng tìm hiểu các nguyên nhân nhưng vẫn chưa tìm được giải pháp tốt nhất.',
+        'Tôi tranh thủ rảnh là lại tìm đọc sách, hiểu thêm về truyền thông, cách làm content, xây kênh sao cho thu hút giới trẻ và nhiều người biết tới.',
+        'Rồi tôi cũng hiểu ra được một số nguyên nhân chính, trong đó có vấn đề về việc quán mình đang \'nhạt\', không có màu sắc riêng, không cập nhật/cải tiến đồ uống theo xu hướng, thiếu xuất hiện trên mạnh xã hội và một phần cũng hiện nay sức cạnh tranh cao nên mô hình của mình không còn phù hợp với tệp khách hàng ở khu này nữa.',
+        'Tôi quyết định đổi hướng: biến quán thành \'trạm sạc\' yên tĩnh cho dân freelancer và người làm việc từ xa. Quyết tâm cải tiến quán với màu sắc mới, nâng cấp wifi mạnh hơn, bố trí thêm ổ cắm ở mọi bàn, chỉnh lại nhạc nhẹ nhàng không lời. Menu thêm mấy món ăn nhẹ healthy cho người ngồi lâu. Quán được định vị lại rõ ràng hơn, thay vì phục vụ khách rất chung chung như ngày xưa: đây là nơi để làm việc tập trung, không phải nơi check-in sống ảo ồn ào,..v.v.',
+        'Khách bắt đầu quay lại và ngồi lại. Họ đến không chỉ vì đồ uống, mà vì không gian mình tạo ra giúp họ làm việc hiệu quả. Doanh thu ổn định dần nhờ lượng khách quen trung thành này. Ở tuổi này, mình hiểu làm kinh doanh là phải có \'chất\' riêng và giải quyết đúng nhu cầu.',
+        'Còn rất nhiều điều hay ho khác mà tôi học được qua mấy ebook của Ebook Mind. Công nhận là phải không ngừng thay đổi, học thêm cái mới để không bị lỗi thởi, biết tận dụng thế mạnh làm đòn bảy thì mới có thể tồn tại ở xã hội ngày càng phát triển và cạnh tranh này.'
       ]
     },
     {
@@ -70,15 +77,16 @@ export default function UseCasesPage() {
       icon: Target,
       gradient: 'from-indigo-500 to-fuchsia-500',
       title: 'Mở tiệm bánh take‑away ngoài giờ',
-      quote: '“Bán pre‑order theo ngày để kiểm soát tồn kho, quay vòng vốn nhanh”',
+      quote: '"Bán pre‑order theo ngày để kiểm soát tồn kho, quay vòng vốn nhanh"',
       character: 'Anh – Nhân viên hành chính',
       desc: 'Nguồn thu thứ hai buổi tối/cuối tuần theo mô hình micro‑business.',
       content: [
-        'Đi làm hành chính giờ hành chính, buổi tối/cuối tuần muốn có nguồn thu thứ hai nhưng ngại chi phí mặt bằng.',
-        'Mình học về mô hình micro‑business: bắt đầu nhỏ, quay vòng vốn nhanh, ưu tiên dòng tiền.',
-        'Chọn 1–2 sản phẩm chủ lực, đóng gói combo. Bán pre‑order theo ngày để kiểm soát tồn kho và chất lượng.',
-        'Tập trung tệp “bữa sáng nhanh” cho dân đi làm: đặt trước tối hôm trước, giao đúng khung giờ sáng.',
-        'Sau vài tháng tối ưu quy trình và lịch giao, đơn đều và có lãi; đủ dữ kiện để mở rộng thay vì “hứng lên mở tiệm”.'
+        'Tôi làm hành chính, giờ hành chính từ 8-5. Muốn có nguồn thu thứ hai nhưng chỉ rảnh buổi tối và cuối tuần. Sợ mở tiệm tốn chi phí mặt bằng, sợ không bán được vì cạnh tranh quá nhiều.',
+        'Tôi quyết định tìm hiểu mô hình kinh doanh phù hợp với thởi gian hạn chế. Đọc ebook về "micro-business": bắt đầu nhỏ, quay vòng vốn nhanh, ưu tiên dòng tiền thay vì tham vọng lớn.',
+        'Ý tưởng bắt đầu hình thành: bánh take-away cho bữa sáng nhanh. Tôi chọn 1–2 sản phẩm chủ lực (bánh mì, bánh bao, bánh croissant), đóng gói combo để tăng giá trị đơn hàng.',
+        'Thay vì mở tiệm truyền thống, tôi áp dụng mô hình pre-order theo ngày: khách đặt trước tối hôm trước, tôi nướng vào sáng hôm sau, giao đúng khung giờ 6-7h sáng khi họ đi làm. Cách này giúp tôi kiểm soát tồn kho (không nướng quá), đảm bảo chất lượng (bánh tươi), và quay vòn vốn nhanh.',
+        'Tôi bắt đầu từ bếp nhà, bán qua Facebook group và Zalo. Những tháng đầu khó khăn, phải tối ưu công thức, lịch giao, quy trình đóng gói. Nhưng tôi kiên trì.',
+        'Sau vài tháng, đơn bắt đầu đều đặn. Lãi không nhiều nhưng đủ để tôi mở rộng: thuê bếp nhỏ, tuyển thêm người giúp việc. Giờ tôi có đủ dữ kiện để mở tiệm thực sự, chứ không phải "hứng lên mở tiệm" mà chắc chắn sẽ thua lỗ. Bài học: micro-business là bước đệm hoàn hảo để kiểm chứng ý tưởng trước khi đầu tư lớn.'
       ]
     },
     {
@@ -86,14 +94,14 @@ export default function UseCasesPage() {
       icon: RotateCcw,
       gradient: 'from-cyan-500 to-emerald-500',
       title: 'Bắt đầu lại từ đầu',
-      quote: '“Làm lại từ những đơn nhỏ, lời ít cũng được, miễn tiền tươi để trả từng khoản nợ”',
+      quote: '"Làm lại từ những đơn nhỏ, lời ít cũng được, miễn tiền tươi để trả từng khoản nợ"',
       character: 'Bình – Chủ tiệm từng phá sản',
       desc: 'Kỷ luật tài chính, bán thiết yếu vòng quay vốn nhanh để trả nợ dần.',
       content: [
-        'Sau lần sập tiệm, nợ lớn và tinh thần xuống dốc. Không thể vay thêm để làm lớn.',
-        'Học về quản trị dòng tiền và kinh doanh ít vốn: bắt đầu lại từ món thiết yếu, vòng quay vốn nhanh, tiền thật.',
-        'Kỷ luật: tách biệt tiền vốn – tiền tiêu; lãi trích trả nợ ngay một phần, phần còn lại quay vòng.',
-        'Không mơ “giàu qua đêm”; đi chậm nhưng chắc. Nợ nhỏ vơi dần, tâm thế vững hơn. Bài học: kỷ luật tài chính quan trọng hơn ý tưởng lớn.'
+        'Phải nói là năm ngoái sập tiệm, mình gánh một khoản nợ không nhỏ. Áp lực kinh khủng, mất ngủ triền miên. Mình cần tiền trả nợ nhưng vốn không còn, niềm tin cũng lung lay. Không thể liều mạng vay thêm để làm lớn được nữa.',
+        'Mình tìm đọc tài liệu về quản trị dòng tiền và kinh doanh ít vốn, xác định làm dần dần từ nhỏ được đồng nào hay đồng ấy. Gạt bỏ cái tôi \'ông chủ\' ngày xưa, bắt đầu lại từ việc bán những món đồ thiết yếu, vòng quay vốn nhanh. Lần này mình đặt mục tiêu: lời ít cũng được nhưng phải là tiền tươi thóc thật.',
+        'Mình chọn kỷ luật sắt đá: tách biệt tiền vốn và tiền tiêu. Lãi được đồng nào là trích một phần trả nợ ngay, một phần quay vòng vốn. Không mơ mộng làm giàu nhanh sau một đêm nữa, :)) (có được kinh nghiệm thất bại nên bớt ngây thơ).',
+        'Dần dần, những khoản nợ nhỏ vơi đi. Mình học được bài học xương máu: Kỷ luật tài chính quan trọng hơn ý tưởng triệu đô. Giờ mình vẫn đang cày, nhưng tâm thế vững vàng hơn nhiều, và mình biết mình sẽ vượt qua được.'
       ]
     },
     {
@@ -101,14 +109,15 @@ export default function UseCasesPage() {
       icon: PenTool,
       gradient: 'from-purple-500 to-pink-500',
       title: 'Nâng cao giá trị để tăng thu nhập',
-      quote: '“Đóng gói dịch vụ content, nâng cấp kỹ năng để hết cảnh bị ép giá”',
-      character: 'Lâm – Freelancer nội dung',
-      desc: 'Productized service trong ngách nội thất, định vị chuyên gia thay vì “thợ đụng”.',
+      quote: '"Đóng gói dịch vụ content, nâng cấp kỹ năng để hết cảnh bị ép giá"',
+      character: 'Lâm – Freelance tự do',
+      desc: 'Productized service trong ngách nội thất, định vị chuyên gia thay vì "thợ đụng".',
       content: [
-        'Làm freelance kiểu “ai thuê gì làm nấy”, thu nhập bấp bênh và hay bị ép giá.',
-        'Học về productized service: đóng gói dịch vụ, định nghĩa kết quả – quy trình – báo giá theo gói.',
-        'Chọn ngách nội thất, xây lại portfolio có số liệu. Chỉ nhận dự án phù hợp ngách.',
-        'Kết quả: khách tôn trọng hơn, ít kỳ kèo; thu nhập ổn định và cao hơn nhờ định vị rõ ràng.'
+        'Mang tiếng freelancer tự do, nhưng thực ra mình là \'thợ đụng\' – đụng đâu làm đó, ai thuê gì làm nấy. Thu nhập tháng cao tháng thấp, khách thì hay ép giá vì họ thấy mình cũng bình thường như bao người khác.',
+        'Mình quyết định phải thay đổi và tất nhiên, có kiến thức thì mới dễ xoay chuyển. Mình tìm tòi, học hỏi những anh chị freelancer khác. Đồng thởi đọc được về cách \'productized service\' (đóng gói dịch vụ) quá hay, đúng thứ đang cần.',
+        'Rồi mình không nhận việc vặt nữa, mình tập trung vào một kỹ năng mũi nhọn: Viết content chuẩn SEO cho ngành nội thất – lĩnh vực mình thích nhất.',
+        'Bắt tay và xây lại portfolio, không show hết mọi thứ, mình chỉ show những dự án liên quan đến ngách này, có số liệu chứng minh hiệu quả. Mình chào giá theo gói dịch vụ trọn gói chứ không tính theo bài lẻ tẻ. Tự định giá tìm được cách giúp bản thân trở nên có giá trị cao trong mắt khách hàng.',
+        'Kết quả bất ngờ: Khách hàng tôn trọng mình hơn, ít kỳ kèo hơn vì họ thấy mình là chuyên gia trong ngách của họ. Thu nhập mình tăng lên và ổn định hơn hẳn. Hóa ra, chuyên sâu mới là con đường sống khỏe cho freelancer.'
       ]
     },
     {
@@ -116,14 +125,17 @@ export default function UseCasesPage() {
       icon: BookOpen,
       gradient: 'from-indigo-500 to-violet-500',
       title: 'Tuổi 29 tìm hướng đi mới',
-      quote: '“Tìm được công việc mới, xây dựng định hướng và thoát cảm giác hoang mang”',
+      quote: '"Tìm được công việc mới, xây dựng định hướng và thoát cảm giác hoang mang"',
       character: 'Trang – 29 tuổi vừa mất việc',
       desc: 'Tự đánh giá thế mạnh, thử job nhỏ, học và thử kinh doanh dropshipping.',
       content: [
-        '29 tuổi, vừa bị cắt giảm. Hai tuần đầu dành để đọc và nhìn lại bản thân, tìm sự đồng cảm từ cộng đồng.',
-        'Nhận ra mình có thế mạnh tổ chức – thử trợ lý ảo/quản lý dự án freelance để lấy lại nhịp làm việc.',
-        'Song song, học thêm về kinh doanh, chọn mô hình dropshipping để thử sức với rủi ro thấp.',
-        'Giờ chưa giàu nhưng có ba nguồn thu nhỏ và lộ trình rõ ràng. Thất nghiệp không phải dấu chấm hết – là cơ hội sắp xếp lại cuộc đời.'
+        'Tui năm nay cũng 29 tuổi rùi, lúc ấy vừa bị cho nghỉ việc vì công ty cắt giảm nhân sự. Cầm quyết định nghỉ việc trên tay mà lòng nặng trĩu, huhu. Giờ nghĩ lại vẫn sốc, nhưng giờ thấy cũng may vì cơ hội khác tới cho tui được thử sức với thứ mà tui chưa bao giờ dám làm.',
+        'Bạn có hiểu cảm giác khi mà thấy bạn bè thì ổn định nhà xe, con cái, còn mình thì lại về vạch xuất phát. Cảm giác vừa thất bại, vừa lạc lõng. Không biết nên đi xin việc tiếp hay làm gì tiếp để có tiền đây.',
+        'Mới đầu buồn dữ lắm, nghĩ chẳng lẽ bản thân kém cỏi vậy sao? Tui dành 2 tuần chỉ để đọc và nhìn lại bản thân. Đọc các case study về chuyển nghề, xem tiktok để lấy sự đồng cảm với những bạn giống mình.',
+        'Rồi cũng nhận ra không thể như thế này mãi được. "Mình không vô dụng, chỉ là mình đang đặt sai chỗ thôi. Mình có kỹ năng tổ chức tốt, tại sao không thử làm trợ lý ảo hoặc quản lý dự án freelance?" - Tui đã nghĩ vậy đấy.',
+        'Thế là tui bắt đầu tìm hiểu về việc làm thêm tại nhà, nhận những job nhỏ trên các nền tảng để lấy lại cảm giác làm việc và có chút thu nhập. Song song đó, học thêm về kinh doanh từ nhiều nguồn, trong đó Ebook Mind là ok nhất vì chính Ebook trên này là thứ giúp cho tui có thêm rất rất nhiều kiến thức mới, giúp tui hiểu hơn về khai thác thế mạnh bản thân và từng bước kinh doanh, khởi nghiệp ra sao, nhận job và làm việc với khách hàng thế nào,… Nhiều lắm kể không hết.',
+        'Chính nhờ đọc ebook mà tôi đã chọn được ngách kinh doanh online - với mô hình dropshipping để thử sức mà không tốn vốn nhập hàng. Trộm vía cũng qua giai đoạn khó khăn rồi.',
+        'Giờ tui chưa giàu, nhưng tui thấy khá tự do và đã tìm lại được sự tự tin. Tui có 3 nguồn thu nhập nhỏ và một lộ trình rõ ràng hơn. Thất nghiệp tuổi 29 không phải là dấu chấm hết, nó là cơ hội để chúng ta sắp xếp lại cuộc đời và đi đúng hướng hơn.'
       ]
     }
   ] as const
