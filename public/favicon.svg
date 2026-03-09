@@ -6,26 +6,26 @@
       <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
     </linearGradient>
   </defs>
-  <!-- Background with rounded corners -->
-  <rect width="192" height="192" rx="40" fill="url(#grad)"/>
+  <!-- Circular background -->
+  <circle cx="96" cy="96" r="96" fill="url(#grad)"/>
   
-  <!-- Book icon - Open book -->
+  <!-- Open book icon -->
   <!-- Left page -->
   <path
-    d="M48 60C48 48.954 56.954 40 68 40H96V152C96 163.046 87.046 172 76 172H68C56.954 172 48 163.046 48 152V60Z"
+    d="M50 70C50 60 58 52 68 52H96V140C96 150 88 158 78 158H68C58 158 50 150 50 140V70Z"
     fill="white"
     opacity="0.9"
   />
   <!-- Right page -->
   <path
-    d="M96 40H124C135.046 40 144 48.954 144 60V152C144 163.046 135.046 172 124 172H96V40Z"
+    d="M96 52H124C134 52 142 60 142 70V140C142 150 134 158 124 158H96V52Z"
     fill="white"
   />
-  <!-- Spine/Center line -->
+  <!-- Spine -->
   <path
-    d="M96 40V172"
+    d="M96 52V158"
     stroke="white"
-    stroke-width="6"
+    stroke-width="5"
     opacity="0.7"
   />
 </svg>
