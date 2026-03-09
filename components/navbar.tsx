@@ -2,9 +2,8 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { Search, ShoppingCart, Menu, X } from 'lucide-react'
+import { Search, ShoppingCart, Menu, X, BookOpen } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import BookLogo from './book-logo'
 
 export default function Navbar() {
   const [search, setSearch] = useState('')
@@ -34,8 +33,8 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex items-center gap-8">
             <Link href="/" className="flex items-center gap-2 flex-shrink-0 group">
-              <div className="w-8 h-8 rounded-lg btn-aurora flex items-center justify-center shadow-sm p-1.5">
-                <BookLogo className="w-full h-full text-white" />
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center shadow-sm">
+                <BookOpen className="w-4 h-4 text-white" />
               </div>
               <span className="text-base font-bold gradient-text-aurora">Ebook Mind</span>
             </Link>
