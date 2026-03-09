@@ -20,8 +20,8 @@ export default function AdminSidebar() {
     <aside className="w-64 bg-white border-r flex flex-col min-h-screen">
       <div className="p-6 border-b">
         <Link href="/admin/dashboard" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center shadow-sm">
-            <BookOpen className="w-4 h-4 text-white" />
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 flex items-center justify-center shadow-sm">
+            <BookOpen className="w-4 h-4 bg-gradient-to-r from-indigo-400 via-violet-400 to-fuchsia-400 bg-clip-text text-transparent" />
           </div>
           <div>
             <span className="text-lg font-bold gradient-text-aurora">Ebook Mind</span>
