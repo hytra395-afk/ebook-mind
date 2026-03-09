@@ -216,7 +216,7 @@ export default async function HomePage() {
       <section className="bg-gray-50 py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-4">
-            Bắt đầu trong 3 bước
+            Bắt đầu trong <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">3 bước</span>
           </h2>
           <p className="text-lg text-gray-600 text-center mb-12 max-w-2xl mx-auto">
             Từ lúc bạn quyết định cho đến khi có ebook trong tay chỉ mất vài phút
@@ -263,7 +263,7 @@ export default async function HomePage() {
       <section className="bg-white py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-4">
-            Bạn nhận được từ Ebook Mind
+            Bạn nhận được từ <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">Ebook Mind</span>
           </h2>
           <p className="text-lg text-gray-600 text-center mb-12 max-w-2xl mx-auto">
             Mỗi lần mua ebook, bạn không chỉ nhận được một cuốn sách mà còn nhiều giá&nbsp;trị bền&nbsp;vững&nbsp;khác
@@ -642,7 +642,7 @@ export default async function HomePage() {
       <section className="bg-gray-50 py-20">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-12">
-            Câu hỏi thường gặp
+            Câu hỏi <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">thường gặp</span>
           </h2>
 
           <div className="space-y-4">
