@@ -154,7 +154,7 @@ export default function UseCasesPage() {
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">{c.title}</h3>
                 <p className="text-gray-600 leading-relaxed mb-2 italic">{c.quote}</p>
-                <p className="text-sm text-gray-500">{c.character}</p>
+                <span className="inline-block text-xs px-3 py-1 bg-purple-50 text-purple-700 rounded-full font-medium border border-purple-100">{c.character}</span>
               </div>
             </Link>
           ))}
@@ -179,7 +179,7 @@ export default function UseCasesPage() {
                 </div>
               </div>
               <p className="text-lg text-gray-700 italic mb-2">{c.quote}</p>
-              <p className="text-sm text-purple-700 font-semibold mb-4">{c.character}</p>
+              <span className="inline-block text-xs px-3 py-1 bg-purple-50 text-purple-700 rounded-full font-semibold border border-purple-100 mb-4">{c.character}</span>
               <div className="prose prose-gray max-w-none">
                 {c.content.map((p: string, i: number) => (
                   <p key={i} className="text-gray-700 leading-relaxed">{p}</p>
