@@ -9,19 +9,19 @@
   <rect width="32" height="32" rx="6" fill="url(#grad)"/>
   <!-- Left page -->
   <path
-    d="M8 6C8 5.44772 8.44772 5 9 5H15V25C15 25.5523 14.5523 26 14 26H9C8.44772 26 8 25.5523 8 25V6Z"
+    d="M6 5C6 4.44772 6.44772 4 7 4H14V27C14 27.5523 13.5523 28 13 28H7C6.44772 28 6 27.5523 6 27V5Z"
     fill="white"
-    opacity="0.8"
+    opacity="0.85"
   />
   <!-- Right page -->
   <path
-    d="M17 5H23C23.5523 5 24 5.44772 24 6V25C24 25.5523 23.5523 26 23 26H17V5Z"
+    d="M18 4H25C25.5523 4 26 4.44772 26 5V27C26 27.5523 25.5523 28 25 28H18V4Z"
     fill="white"
   />
   <!-- Spine -->
   <path
-    d="M15 5H17V26H15V5Z"
+    d="M14 4H18V28H14V4Z"
     fill="white"
-    opacity="0.6"
+    opacity="0.7"
   />
 </svg>
