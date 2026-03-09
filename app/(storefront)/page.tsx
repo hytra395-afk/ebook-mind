@@ -535,19 +535,19 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold text-purple-600 mb-2">500+</div>
+              <div className="text-4xl font-bold bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent mb-2">100+</div>
               <div className="text-gray-600 text-sm">Ebook Chất Lượng</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-purple-600 mb-2">10,000+</div>
+              <div className="text-4xl font-bold bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent mb-2">10,000+</div>
               <div className="text-gray-600 text-sm">Người Dùng Hài Lòng</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-purple-600 mb-2">4.8★</div>
+              <div className="text-4xl font-bold bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent mb-2">4.9⭐</div>
               <div className="text-gray-600 text-sm">Đánh Giá Trung Bình</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-purple-600 mb-2">24/7</div>
+              <div className="text-4xl font-bold bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent mb-2">24/7</div>
               <div className="text-gray-600 text-sm">Hỗ Trợ Khách Hàng</div>
             </div>
           </div>
@@ -558,7 +558,7 @@ export default async function HomePage() {
       <section className="bg-gray-50 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 text-center">
-            Chủ Đề <span className="text-purple-600">Phổ Biến</span>
+            Chủ Đề <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">Phổ Biến</span>
           </h2>
           <p className="text-gray-600 text-center mb-8 max-w-2xl mx-auto">
             Khám phá các chủ đề ebook được tìm kiếm nhiều nhất
@@ -585,7 +585,7 @@ export default async function HomePage() {
       {/* ─── Category Banner ─── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">
-          Khám Phá Theo <span className="text-purple-600">Lĩnh Vực</span>
+          Khám Phá Theo <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">Lĩnh Vực</span>
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {[
@@ -610,7 +610,7 @@ export default async function HomePage() {
       <section className="bg-gradient-to-b from-purple-50 to-white py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 text-center">
-            Mua Ebook <span className="text-purple-600">Dễ Dàng</span>
+            Mua Ebook <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">Dễ Dàng</span>
           </h2>
           <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
             Chỉ 3 bước đơn giản để sở hữu ebook yêu thích
