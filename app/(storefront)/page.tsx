@@ -5,6 +5,9 @@ import { TrendingUp, Sparkles, BadgeCheck, ArrowRight, Zap } from 'lucide-react'
 
 export const revalidate = 60
 
+// Enable static generation for better performance
+export const dynamic = 'force-static'
+
 export default async function HomePage() {
   const supabase = getSupabase()
   const { data: featuredEbooks } = await supabase
@@ -67,10 +70,10 @@ export default async function HomePage() {
         </div>
       {/* Animated coins overlay */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="absolute w-10 h-10 rounded-full bg-gradient-to-br from-yellow-300 via-amber-400 to-orange-500 flex items-center justify-center text-gray-900 shadow-lg animate-bounce" style={{ left: '6%', top: '18%', animationDuration: '5s' }}>₫</div>
-        <div className="absolute w-8 h-8 rounded-full bg-gradient-to-br from-yellow-200 via-amber-300 to-orange-400 flex items-center justify-center text-gray-800 shadow-md animate-bounce" style={{ right: '10%', top: '24%', animationDelay: '0.3s', animationDuration: '6s' }}>💰</div>
-        <div className="absolute w-12 h-12 rounded-full bg-gradient-to-br from-yellow-300 via-amber-400 to-orange-500 flex items-center justify-center text-gray-900 shadow-lg animate-bounce" style={{ left: '20%', bottom: '12%', animationDelay: '0.6s', animationDuration: '7s' }}>₫</div>
-        <div className="absolute w-9 h-9 rounded-full bg-gradient-to-br from-yellow-200 via-amber-300 to-orange-400 flex items-center justify-center text-gray-800 shadow-md animate-bounce" style={{ right: '24%', bottom: '10%', animationDelay: '0.9s', animationDuration: '6.5s' }}>💰</div>
+        <div className="absolute w-10 h-10 rounded-full bg-gradient-to-br from-yellow-100 via-amber-200 to-orange-200 flex items-center justify-center text-amber-700 shadow-lg" style={{ left: '6%', top: '18%', animation: 'float 4s ease-in-out infinite' }}>₫</div>
+        <div className="absolute w-8 h-8 rounded-full bg-gradient-to-br from-pink-100 via-rose-200 to-orange-200 flex items-center justify-center text-rose-600 shadow-md" style={{ right: '10%', top: '24%', animation: 'float 5s ease-in-out infinite', animationDelay: '0.5s' }}>💰</div>
+        <div className="absolute w-12 h-12 rounded-full bg-gradient-to-br from-purple-100 via-violet-200 to-pink-200 flex items-center justify-center text-purple-600 shadow-lg" style={{ left: '20%', bottom: '12%', animation: 'float 4.5s ease-in-out infinite', animationDelay: '1s' }}>₫</div>
+        <div className="absolute w-9 h-9 rounded-full bg-gradient-to-br from-cyan-100 via-blue-200 to-indigo-200 flex items-center justify-center text-blue-600 shadow-md" style={{ right: '24%', bottom: '10%', animation: 'float 5.5s ease-in-out infinite', animationDelay: '1.5s' }}>💰</div>
       </div>
       </section>
  
@@ -85,25 +88,25 @@ export default async function HomePage() {
           </p>
           <div className="mt-10 grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
             <div className="flex flex-col items-center text-center">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white shadow-lg mb-3">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M3 12h18"/><path d="M3 6h18"/><path d="M3 18h18"/></svg>
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white shadow-lg mb-3">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12h18"/><path d="M3 6h18"/><path d="M3 18h18"/></svg>
               </div>
               <div className="font-bold text-gray-900">Chi phí phù hợp</div>
-              <div className="text-gray-600 text-sm">Kiến thức bạn sở hữu là những trải nghiệm thật, với giá chỉ từ một cốc trà sữa</div>
+              <div className="text-gray-600 text-sm">Kiến thức bạn sở hữu là những trải nghiệm thật, với giá chỉ từ một&nbsp;cốc&nbsp;trà&nbsp;sữa</div>
             </div>
             <div className="flex flex-col items-center text-center">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-400 to-cyan-400 flex items-center justify-center text-white shadow-lg mb-3">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M12 20l9-16H3l9 16z"/></svg>
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-400 to-cyan-400 flex items-center justify-center text-white shadow-lg mb-3">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20l9-16H3l9 16z"/></svg>
               </div>
               <div className="font-bold text-gray-900">Nội dung chất lượng</div>
-              <div className="text-gray-600 text-sm">Được tuyển chọn và biên tập kỹ lưỡng</div>
+              <div className="text-gray-600 text-sm">Được tuyển chọn và biên&nbsp;tập kỹ&nbsp;lưỡng</div>
             </div>
             <div className="flex flex-col items-center text-center">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-rose-500 to-orange-400 flex items-center justify-center text-white shadow-lg mb-3">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v14"/></svg>
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-rose-500 to-orange-400 flex items-center justify-center text-white shadow-lg mb-3">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v14"/></svg>
               </div>
               <div className="font-bold text-gray-900">Thanh toán nhanh</div>
-              <div className="text-gray-600 text-sm">Thanh toán xong, nhận link tải ngay lập tức</div>
+              <div className="text-gray-600 text-sm">Thanh toán xong, nhận link tải ngay&nbsp;lập&nbsp;tức</div>
             </div>
           </div>
         </div>
@@ -115,16 +118,16 @@ export default async function HomePage() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl font-bold text-white mb-6">
-                Đừng mạo hiểm. Điều đó đáng sợ!
+                Đừng mạo hiểm.<br/>Điều đó đáng sợ!
               </h2>
               <div className="space-y-6">
                 <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
                   <p className="text-white/90 mb-2">Thay vì chi 5 triệu cho khóa học online...</p>
-                  <p className="text-xl font-bold text-white">...hãy bắt đầu với ebook 49.000đ!</p>
+                  <p className="text-xl font-bold text-white">...hãy bắt đầu với ebook từ&nbsp;69.000đ!</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                  <p className="text-white/90 mb-2">Thay vì mua 10 cuốn sách giấy 2 triệu...</p>
-                  <p className="text-xl font-bold text-white">...mua combo ebook chỉ 199.000đ!</p>
+                  <p className="text-white/90 mb-2">Thay vì mua 5 cuốn sách giấy 2 triệu...</p>
+                  <p className="text-xl font-bold text-white">...mua combo ebook chỉ từ&nbsp;297.000đ!</p>
                 </div>
               </div>
             </div>
@@ -134,87 +137,71 @@ export default async function HomePage() {
                 Đặt cược nhỏ. Điều đó thú vị!
               </h3>
               <p className="text-white/90 leading-relaxed">
-                Với giá chỉ bằng một cốc trà sữa, bạn có thể thử nghiệm ý tưởng mới, 
-                học kỹ năng mới mà không lo rủi ro tài chính. Đó là cách thông minh để đầu tư vào bản thân.
+                Với giá chỉ từ một cốc trà sữa, bạn có thể thử nghiệm ý tưởng mới, 
+                học kỹ năng mới, có được mindset bền vững mà không lo rủi ro tài chính. Đó là cách thông minh để đầu tư vào bản&nbsp;thân.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── Journey Path Diagram (Gumroad-inspired) ─── */}
+      {/* ─── Gumroad-inspired Features ─── */}
       <section className="bg-white py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-4">
-            Bản đồ phát triển mindset
-          </h2>
-          <p className="text-lg text-gray-600 text-center mb-12 max-w-2xl mx-auto">
-            Từ đọc kiến thức trong ebook → áp dụng nhỏ → kiên trì mỗi ngày → đạt mục tiêu
-          </p>
-          
-          {/* SVG Path Diagram */}
-          <div className="relative w-full overflow-x-auto">
-            <svg viewBox="0 0 1200 300" className="w-full h-auto min-h-[300px]" preserveAspectRatio="xMidYMid meet">
-              {/* Main curved path */}
-              <defs>
-                <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#FCD34D" />
-                  <stop offset="25%" stopColor="#FBBF24" />
-                  <stop offset="50%" stopColor="#FB923C" />
-                  <stop offset="75%" stopColor="#F97316" />
-                  <stop offset="100%" stopColor="#EC4899" />
-                </linearGradient>
-              </defs>
-              
-              {/* Curved path line */}
-              <path
-                d="M 80 150 Q 300 50, 600 150 T 1120 150"
-                stroke="url(#pathGradient)"
-                strokeWidth="40"
-                fill="none"
-                strokeLinecap="round"
-              />
-              
-              {/* Step 1: Đọc ebook */}
-              <g>
-                <circle cx="150" cy="150" r="35" fill="#FCD34D" stroke="#F59E0B" strokeWidth="3"/>
-                <text x="150" y="160" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#1F2937">📖</text>
-              </g>
-              <text x="150" y="220" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#1F2937">Đọc ebook</text>
-              <text x="150" y="245" textAnchor="middle" fontSize="13" fill="#6B7280">Nền tảng</text>
-              
-              {/* Step 2: Áp dụng nhỏ */}
-              <g>
-                <circle cx="400" cy="150" r="35" fill="#FBBF24" stroke="#F59E0B" strokeWidth="3"/>
-                <text x="400" y="160" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#1F2937">🛠️</text>
-              </g>
-              <text x="400" y="220" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#1F2937">Áp dụng nhỏ</text>
-              <text x="400" y="245" textAnchor="middle" fontSize="13" fill="#6B7280">Bắt đầu nhỏ</text>
-              
-              {/* Center: Kiên trì */}
-              <g>
-                <circle cx="600" cy="150" r="45" fill="white" stroke="#F97316" strokeWidth="3"/>
-                <text x="600" y="165" textAnchor="middle" fontSize="40" fontWeight="bold">🔁</text>
-              </g>
-              <text x="600" y="220" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#1F2937">Kiên trì</text>
-              <text x="600" y="245" textAnchor="middle" fontSize="13" fill="#6B7280">Mỗi ngày 1%</text>
-              
-              {/* Step 3: Nâng cấp kỹ năng */}
-              <g>
-                <circle cx="800" cy="150" r="35" fill="#FB923C" stroke="#F97316" strokeWidth="3"/>
-                <text x="800" y="160" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#1F2937">📈</text>
-              </g>
-              <text x="800" y="220" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#1F2937">Nâng cấp kỹ năng</text>
-              <text x="800" y="245" textAnchor="middle" fontSize="13" fill="#6B7280">Tích lũy</text>
-              
-              {/* Step 4: Đạt mục tiêu */}
-              <g>
-                <circle cx="1050" cy="150" r="35" fill="#EC4899" stroke="#DB2777" strokeWidth="3"/>
-                <text x="1050" y="160" textAnchor="middle" fontSize="24" fontWeight="bold" fill="white">🎯</text>
-              </g>
-              <text x="1050" y="220" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#1F2937">Đạt mục tiêu</text>
-              <text x="1050" y="245" textAnchor="middle" fontSize="13" fill="#6B7280">Thành công</text>
-            </svg>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Card 1: Sell anything */}
+            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl p-10 border border-purple-100">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Bán bất cứ thứ gì</h2>
+              <p className="text-gray-700 mb-8 leading-relaxed">
+                Video lessons. Monthly subscriptions. Whatever! Ebook Mind được tạo ra để giúp bạn thử nghiệm với tất cả các loại ý tưởng và định dạng.
+              </p>
+              <div className="bg-white rounded-2xl p-6 shadow-sm">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white">
+                    📚
+                  </div>
+                  <div className="font-semibold text-gray-900">Ebook chất lượng</div>
+                </div>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-400 flex items-center justify-center text-white">
+                    📦
+                  </div>
+                  <div className="font-semibold text-gray-900">Combo tiết kiệm</div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-500 to-orange-400 flex items-center justify-center text-white">
+                    ⚡
+                  </div>
+                  <div className="font-semibold text-gray-900">Nhận ngay lập tức</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2: Make your own road */}
+            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-3xl p-10 border border-blue-100">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Tạo con đường riêng</h2>
+              <p className="text-gray-700 mb-8 leading-relaxed">
+                Dù bạn cần thêm sự cân bằng, linh hoạt, hay chỉ là một công việc khác, chúng tôi giúp bạn dễ dàng vạch ra một con đường mới.
+              </p>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-white rounded-xl p-4 text-center">
+                  <div className="text-2xl font-black text-gray-900 mb-1">15,000+</div>
+                  <div className="text-sm text-gray-600">Người dùng</div>
+                </div>
+                <div className="bg-white rounded-xl p-4 text-center">
+                  <div className="text-2xl font-black text-gray-900 mb-1">500+</div>
+                  <div className="text-sm text-gray-600">Ebook</div>
+                </div>
+                <div className="bg-white rounded-xl p-4 text-center">
+                  <div className="text-2xl font-black text-gray-900 mb-1">2.5Tđ+</div>
+                  <div className="text-sm text-gray-600">Thu nhập</div>
+                </div>
+                <div className="bg-white rounded-xl p-4 text-center">
+                  <div className="text-2xl font-black text-gray-900 mb-1">4.8/5</div>
+                  <div className="text-sm text-gray-600">Đánh giá</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -270,43 +257,43 @@ export default async function HomePage() {
       <section className="bg-white py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-4">
-            Bạn sẽ nhận được gì
+            Bạn nhận được từ Ebook&nbsp;Mind:
           </h2>
           <p className="text-lg text-gray-600 text-center mb-12 max-w-2xl mx-auto">
-            Mỗi lần mua ebook, bạn không chỉ nhận được một cuốn sách mà còn nhiều giá trị khác
+            Mỗi lần mua ebook, bạn không chỉ nhận được một cuốn sách mà còn nhiều giá&nbsp;trị bền&nbsp;vững&nbsp;khác
           </p>
 
           <div className="grid md:grid-cols-3 gap-6">
             {/* Card 1 */}
             <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 border border-purple-100 hover:shadow-lg transition-shadow">
-              <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center mb-4 shadow-lg">
-                <span className="text-3xl">📖</span>
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center mb-4 shadow-lg">
+                <span className="text-2xl">📖</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Mua một lần, dùng mãi mãi</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Mua một lần, dùng mãi&nbsp;mãi</h3>
               <p className="text-gray-700">
-                Quy trình gọn gàng để bạn nhận sách ngay, kiến thức vĩnh viễn là của bạn. Không cần đăng ký hàng tháng, không cần lo hết hạn.
+                Quy trình gọn gàng để bạn nhận sách ngay, kiến thức vĩnh viễn là của bạn. Không cần đăng ký hàng tháng, không cần lo hết&nbsp;hạn.
               </p>
             </div>
 
             {/* Card 2 */}
             <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-8 border border-blue-100 hover:shadow-lg transition-shadow">
-              <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-400 flex items-center justify-center mb-4 shadow-lg">
-                <span className="text-3xl">💰</span>
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-400 flex items-center justify-center mb-4 shadow-lg">
+                <span className="text-2xl">💰</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Chi phí phù hợp</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Chi phí phù&nbsp;hợp</h3>
               <p className="text-gray-700">
-                Kiến thức bạn sở hữu là những trải nghiệm thật, với giá chỉ từ một cốc trà sữa. Combo tiết kiệm lên đến 70%.
+                Kiến thức bạn sở hữu là những trải nghiệm thật, với giá chỉ từ một cốc trà sữa. Combo tiết kiệm lên đến&nbsp;70%.
               </p>
             </div>
 
             {/* Card 3 */}
             <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 border border-green-100 hover:shadow-lg transition-shadow">
-              <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-orange-400 to-rose-500 flex items-center justify-center mb-4 shadow-lg">
-                <span className="text-3xl">⚡</span>
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-400 to-rose-500 flex items-center justify-center mb-4 shadow-lg">
+                <span className="text-2xl">⚡</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Nhận ngay lập tức</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Nhận ngay lập&nbsp;tức</h3>
               <p className="text-gray-700">
-                Thanh toán xong, email link tải tới ngay. Không phải chờ, không phải xác nhận. Bắt đầu đọc trong vòng 1 phút.
+                Thanh toán xong, email link tải tới ngay. Không phải chờ, không phải xác nhận. Bắt đầu đọc trong vòng 1&nbsp;phút.
               </p>
             </div>
           </div>
