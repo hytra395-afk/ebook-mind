@@ -5,6 +5,8 @@ import { Suspense } from 'react'
 import { BookOpen, Star, Users } from 'lucide-react'
 
 export const revalidate = 60
+export const dynamic = 'force-dynamic' // Enable dynamic rendering for filters
+export const fetchCache = 'force-no-store' // Prevent caching issues
 
 export default async function EbooksPage({
   searchParams,
@@ -14,9 +16,10 @@ export default async function EbooksPage({
   const params = await searchParams
   const supabase = getSupabase()
 
+  // Optimize query - only select needed fields
   let query = supabase
     .from('ebooks')
-    .select('*, categories(id, name), levels(name)')
+    .select('id, slug, title, description, price, cover_url, rating_avg, rating_count, sales_count, featured, categories(name)')
     .eq('active', true)
 
   if (params.category) {
@@ -38,14 +41,14 @@ export default async function EbooksPage({
 
   const { data: ebooks } = await query
 
-  const { data: categories } = await supabase
-    .from('categories')
-    .select('id, name, slug')
-    .order('name')
-
-  const { data: levels } = await supabase
-    .from('levels')
-    .select('id, name')
+  // Parallel queries for better performance
+  const [categoriesResult, levelsResult] = await Promise.all([
+    supabase.from('categories').select('id, name, slug').order('name'),
+    supabase.from('levels').select('id, name')
+  ])
+  
+  const categories = categoriesResult.data
+  const levels = levelsResult.data
 
   const totalEbooks = ebooks?.length ?? 0
 
@@ -75,12 +78,12 @@ export default async function EbooksPage({
             <span className="text-gray-300">|</span>
             <span className="flex items-center gap-1.5">
               <Star className="w-4 h-4 text-yellow-400" />
-              Đánh giá 4.8/5
+Đánh giá 4.9/5
             </span>
             <span className="text-gray-300">|</span>
             <span className="flex items-center gap-1.5">
               <Users className="w-4 h-4 text-teal-400" />
-              10,000+ độc giả
+10,000+ độc giả
             </span>
           </div>
         </div>
