@@ -9,7 +9,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 flex items-center justify-center shadow-sm">
-                <BookOpen className="w-4 h-4 bg-gradient-to-r from-indigo-400 via-violet-400 to-fuchsia-400 bg-clip-text text-transparent" />
+                <BookOpen className="w-4 h-4 text-white" />
               </div>
               <span className="text-base font-bold gradient-text-aurora">Ebook Mind</span>
             </div>
