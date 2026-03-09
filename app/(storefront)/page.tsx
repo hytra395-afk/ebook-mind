@@ -311,11 +311,14 @@ export default async function HomePage() {
       <section className="bg-gradient-to-br from-purple-50 to-pink-50 py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <div className="text-5xl sm:text-6xl font-black text-gray-900 mb-4">
+            <div className="text-5xl sm:text-6xl font-black gradient-text-aurora mb-4">
               2,530,000,000đ+
             </div>
-            <p className="text-xl text-gray-700">
+            <p className="text-xl font-semibold text-gray-900 mb-2">
               Tổng thu nhập thêm mà người dùng đã kiếm được nhờ áp dụng kiến thức trong Ebook
+            </p>
+            <p className="text-sm italic text-gray-600 max-w-2xl mx-auto">
+              (Con số này chỉ là phần nhỏ, dựa trên một số khách hàng chủ động chia sẻ lại cho chúng tôi)
             </p>
           </div>
 
@@ -651,10 +654,6 @@ export default async function HomePage() {
               {
                 q: "Tôi có thể đọc ebook trên thiết bị nào?",
                 a: "Ebook được cung cấp dưới dạng PDF, có thể đọc trên bất kỳ thiết bị nào: điện thoại, máy tính bảng, laptop, máy tính để bàn."
-              },
-              {
-                q: "Có thể hoàn tiền không?",
-                a: "Có, nếu bạn không hài lòng trong vòng 7 ngày, chúng tôi sẽ hoàn tiền 100% không cần hỏi lý do."
               },
               {
                 q: "Ebook có bản quyền không?",

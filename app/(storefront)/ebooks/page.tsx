@@ -4,9 +4,7 @@ import EbooksFilter from '@/components/ebooks-filter'
 import { Suspense } from 'react'
 import { BookOpen, Star, Users } from 'lucide-react'
 
-export const revalidate = 60
-export const dynamic = 'force-dynamic' // Enable dynamic rendering for filters
-export const fetchCache = 'force-no-store' // Prevent caching issues
+export const revalidate = 30 // ISR: revalidate every 30 seconds for better performance
 
 export default async function EbooksPage({
   searchParams,
@@ -78,12 +76,12 @@ export default async function EbooksPage({
             <span className="text-gray-300">|</span>
             <span className="flex items-center gap-1.5">
               <Star className="w-4 h-4 text-yellow-400" />
-Đánh giá 4.9/5
+              Đánh giá 4.9⭐
             </span>
             <span className="text-gray-300">|</span>
             <span className="flex items-center gap-1.5">
               <Users className="w-4 h-4 text-teal-400" />
-10,000+ độc giả
+              10,000+ độc giả
             </span>
           </div>
         </div>
