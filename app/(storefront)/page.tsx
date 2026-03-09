@@ -10,9 +10,10 @@ export const dynamic = 'force-static'
 
 export default async function HomePage() {
   const supabase = getSupabase()
+  // Optimize queries - only select needed fields
   const { data: featuredEbooks } = await supabase
     .from('ebooks')
-    .select('*, categories(name)')
+    .select('id, slug, title, description, price, cover_url, rating_avg, rating_count, sales_count, featured, categories(name)')
     .eq('active', true)
     .eq('featured', true)
     .order('sales_count', { ascending: false })
@@ -20,7 +21,7 @@ export default async function HomePage() {
 
   const { data: allEbooks } = await supabase
     .from('ebooks')
-    .select('*, categories(name)')
+    .select('id, slug, title, description, price, cover_url, rating_avg, rating_count, sales_count, featured, categories(name)')
     .eq('active', true)
     .order('created_at', { ascending: false })
     .limit(8)
@@ -468,7 +469,7 @@ export default async function HomePage() {
           </Link>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          {featuredEbooks?.map((ebook: any) => (
+          {featuredEbooks?.map((ebook: any, idx: number) => (
             <EbookCard
               key={ebook.id}
               id={ebook.id}
@@ -482,6 +483,7 @@ export default async function HomePage() {
               sales_count={ebook.sales_count}
               featured={ebook.featured}
               category={ebook.categories?.name}
+              priority={idx < 4}
             />
           ))}
         </div>
@@ -506,7 +508,7 @@ export default async function HomePage() {
               </Link>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-              {allEbooks.map((ebook: any) => (
+              {allEbooks.map((ebook: any, idx: number) => (
                 <EbookCard
                   key={ebook.id}
                   id={ebook.id}
@@ -520,6 +522,7 @@ export default async function HomePage() {
                   sales_count={ebook.sales_count}
                   featured={ebook.featured}
                   category={ebook.categories?.name}
+                  priority={idx < 2}
                 />
               ))}
             </div>

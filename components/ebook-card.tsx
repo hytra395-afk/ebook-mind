@@ -13,11 +13,12 @@ interface EbookCardProps {
   sales_count: number
   featured?: boolean
   category?: string
+  priority?: boolean
 }
 
 export default function EbookCard({
   slug, title, description, price, cover_url,
-  rating_avg, rating_count, sales_count, featured, category
+  rating_avg, rating_count, sales_count, featured, category, priority = false
 }: EbookCardProps) {
   return (
     <div className="group relative">
@@ -33,6 +34,8 @@ export default function EbookCard({
               alt={title}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
+              priority={priority}
+              sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
             />
             {/* Badges */}
             {featured && (
