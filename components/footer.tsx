@@ -23,22 +23,26 @@ export default function Footer() {
             </div>
           </div>
           <div>
-            <h3 className="font-semibold text-gray-900 mb-3">Về chúng tôi</h3>
+            <h3 className="font-semibold text-gray-900 mb-3">Danh Mục</h3>
             <div className="space-y-2">
-              <Link href="/about" className="block text-sm text-gray-500 hover:text-purple-600">Giới thiệu</Link>
-              <Link href="/contact" className="block text-sm text-gray-500 hover:text-purple-600">Liên hệ</Link>
-              <Link href="/use-cases" className="block text-sm text-gray-500 hover:text-purple-600">Use Cases</Link>
+              <Link href="/ebooks?category=Kinh Doanh" className="block text-sm text-gray-500 hover:text-purple-600">Kinh Doanh</Link>
+              <Link href="/ebooks?category=Phát Triển Bản Thân" className="block text-sm text-gray-500 hover:text-purple-600">Phát Triển Bản Thân</Link>
+              <Link href="/ebooks?category=Công Nghệ" className="block text-sm text-gray-500 hover:text-purple-600">Công Nghệ</Link>
+              <Link href="/ebooks?category=Sức Khỏe" className="block text-sm text-gray-500 hover:text-purple-600">Sức Khỏe</Link>
             </div>
           </div>
           <div>
-            <h3 className="font-semibold text-gray-900 mb-3">Hỗ trợ</h3>
+            <h3 className="font-semibold text-gray-900 mb-3">Hỗ Trợ</h3>
             <div className="space-y-2">
-              <p className="text-sm text-gray-500">Email: support@ebookmind.com</p>
+              <Link href="/about" className="block text-sm text-gray-500 hover:text-purple-600">Về Chúng Tôi</Link>
+              <Link href="/terms" className="block text-sm text-gray-500 hover:text-purple-600">Điều Khoản Sử Dụng</Link>
+              <Link href="/refund-policy" className="block text-sm text-gray-500 hover:text-purple-600">Chính Sách Hoàn Tiền</Link>
+              <a href="mailto:ebookmind0@gmail.com" className="block text-sm text-gray-500 hover:text-purple-600">Liên Hệ</a>
             </div>
           </div>
         </div>
         <div className="mt-8 pt-8 border-t text-center text-sm text-gray-400">
-          © {new Date().getFullYear()} Ebook Mind. All rights reserved.
+          © 2025 Ebook Mind. All rights reserved.
         </div>
       </div>
     </footer>

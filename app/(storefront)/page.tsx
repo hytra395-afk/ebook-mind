@@ -44,7 +44,7 @@ export default async function HomePage() {
           {/* Badge pill - Glassmorphism với viền gradient nhẹ */}
           <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-sm border border-violet-200 text-violet-700 text-sm font-medium px-5 py-2 rounded-full mb-8 shadow-sm">
             <Sparkles className="w-4 h-4" />
-            Kiến thức chất lượng, giá cả phải chăng
+            Kiến thức chất lượng, Chi phí phù hợp
           </div>
 
           {/* CTAs - Gradient Aurora cho button chính */}
@@ -65,6 +65,13 @@ export default async function HomePage() {
             </Link>
           </div>
         </div>
+      {/* Animated coins overlay */}
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <div className="absolute w-10 h-10 rounded-full bg-gradient-to-br from-yellow-300 via-amber-400 to-orange-500 flex items-center justify-center text-gray-900 shadow-lg animate-bounce" style={{ left: '6%', top: '18%', animationDuration: '5s' }}>₫</div>
+        <div className="absolute w-8 h-8 rounded-full bg-gradient-to-br from-yellow-200 via-amber-300 to-orange-400 flex items-center justify-center text-gray-800 shadow-md animate-bounce" style={{ right: '10%', top: '24%', animationDelay: '0.3s', animationDuration: '6s' }}>💰</div>
+        <div className="absolute w-12 h-12 rounded-full bg-gradient-to-br from-yellow-300 via-amber-400 to-orange-500 flex items-center justify-center text-gray-900 shadow-lg animate-bounce" style={{ left: '20%', bottom: '12%', animationDelay: '0.6s', animationDuration: '7s' }}>₫</div>
+        <div className="absolute w-9 h-9 rounded-full bg-gradient-to-br from-yellow-200 via-amber-300 to-orange-400 flex items-center justify-center text-gray-800 shadow-md animate-bounce" style={{ right: '24%', bottom: '10%', animationDelay: '0.9s', animationDuration: '6.5s' }}>💰</div>
+      </div>
       </section>
  
       {/* ─── Quote Section ─── */}
@@ -76,6 +83,29 @@ export default async function HomePage() {
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Bất cứ ai cũng có thể kiếm được những đồng tiền đầu tiên. Chỉ cần bắt đầu với những gì bạn biết, xem cái nào hiệu quả, và kiếm tiền.
           </p>
+          <div className="mt-10 grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div className="flex flex-col items-center text-center">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white shadow-lg mb-3">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M3 12h18"/><path d="M3 6h18"/><path d="M3 18h18"/></svg>
+              </div>
+              <div className="font-bold text-gray-900">Chi phí phù hợp</div>
+              <div className="text-gray-600 text-sm">Kiến thức bạn sở hữu là những trải nghiệm thật, với giá chỉ từ một cốc trà sữa</div>
+            </div>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-400 to-cyan-400 flex items-center justify-center text-white shadow-lg mb-3">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M12 20l9-16H3l9 16z"/></svg>
+              </div>
+              <div className="font-bold text-gray-900">Nội dung chất lượng</div>
+              <div className="text-gray-600 text-sm">Được tuyển chọn và biên tập kỹ lưỡng</div>
+            </div>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-rose-500 to-orange-400 flex items-center justify-center text-white shadow-lg mb-3">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v14"/></svg>
+              </div>
+              <div className="font-bold text-gray-900">Thanh toán nhanh</div>
+              <div className="text-gray-600 text-sm">Thanh toán xong, nhận link tải ngay lập tức</div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -116,7 +146,7 @@ export default async function HomePage() {
       <section className="bg-white py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-4">
-            Bạn có những ý tưởng tuyệt vời?
+            Bản đồ phát triển mindset
           </h2>
           <p className="text-lg text-gray-600 text-center mb-12 max-w-2xl mx-auto">
             Từ đọc kiến thức trong ebook → áp dụng nhỏ → kiên trì mỗi ngày → đạt mục tiêu
@@ -148,7 +178,7 @@ export default async function HomePage() {
               {/* Step 1: Đọc ebook */}
               <g>
                 <circle cx="150" cy="150" r="35" fill="#FCD34D" stroke="#F59E0B" strokeWidth="3"/>
-                <text x="150" y="160" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#1F2937">�</text>
+                <text x="150" y="160" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#1F2937">📖</text>
               </g>
               <text x="150" y="220" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#1F2937">Đọc ebook</text>
               <text x="150" y="245" textAnchor="middle" fontSize="13" fill="#6B7280">Nền tảng</text>
@@ -156,7 +186,7 @@ export default async function HomePage() {
               {/* Step 2: Áp dụng nhỏ */}
               <g>
                 <circle cx="400" cy="150" r="35" fill="#FBBF24" stroke="#F59E0B" strokeWidth="3"/>
-                <text x="400" y="160" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#1F2937">�️</text>
+                <text x="400" y="160" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#1F2937">🛠️</text>
               </g>
               <text x="400" y="220" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#1F2937">Áp dụng nhỏ</text>
               <text x="400" y="245" textAnchor="middle" fontSize="13" fill="#6B7280">Bắt đầu nhỏ</text>
@@ -164,7 +194,7 @@ export default async function HomePage() {
               {/* Center: Kiên trì */}
               <g>
                 <circle cx="600" cy="150" r="45" fill="white" stroke="#F97316" strokeWidth="3"/>
-                <text x="600" y="165" textAnchor="middle" fontSize="40" fontWeight="bold">�</text>
+                <text x="600" y="165" textAnchor="middle" fontSize="40" fontWeight="bold">🔁</text>
               </g>
               <text x="600" y="220" textAnchor="middle" fontSize="16" fontWeight="bold" fill="#1F2937">Kiên trì</text>
               <text x="600" y="245" textAnchor="middle" fontSize="13" fill="#6B7280">Mỗi ngày 1%</text>
@@ -283,86 +313,34 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ─── Money-Back Guarantee ─── */}
-      <section className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 py-16">
+      {/* ─── CTA Banner ─── */}
+      <section className="py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mx-auto mb-6 shadow-lg border border-white/30">
-            <span className="text-5xl">🛡️</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            Cam kết 100% hài lòng
-          </h2>
-          <p className="text-white/90 text-lg mb-6 max-w-2xl mx-auto">
-            Nếu bạn không hài lòng với ebook trong vòng 7 ngày, chúng tôi sẽ hoàn tiền 100% - không cần hỏi lý do.
-          </p>
-          <p className="text-white/80 text-sm">
-            Chúng tôi tự tin vào chất lượng ebook của mình. Sự hài lòng của bạn là ưu tiên hàng đầu.
-          </p>
-        </div>
-      </section>
-
-      {/* FAQ moved to bottom */}
-
-      {/* ─── Philosophy Journey (Gumroad-inspired) ─── */}
-      <section className="bg-white py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl sm:text-5xl font-bold text-center text-gray-900 mb-4">
-            Bạn có những ý tưởng tuyệt vời?
-          </h2>
-          <p className="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto">
-            Hành trình phát triển bản thân của bạn bắt đầu từ đây
-          </p>
-          
-          {/* Journey Path */}
-          <div className="relative">
-            <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-400 transform -translate-y-1/2 hidden md:block"></div>
-            
-            <div className="grid md:grid-cols-4 gap-8 relative">
-              <div className="text-center">
-                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-yellow-400 to-orange-400 flex items-center justify-center shadow-lg">
-                  <span className="text-3xl">📚</span>
-                </div>
-                <h3 className="font-bold text-lg text-gray-900 mb-2">Bắt đầu nhỏ</h3>
-                <p className="text-gray-600 text-sm">Chỉ 49.000đ cho một cuốn ebook - thử nghiệm ý tưởng không tốn kém</p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-orange-400 to-rose-400 flex items-center justify-center shadow-lg">
-                  <span className="text-3xl">🚀</span>
-                </div>
-                <h3 className="font-bold text-lg text-gray-900 mb-2">Học nhanh</h3>
-                <p className="text-gray-600 text-sm">Kiến thức cô đọng, thực chiến - áp dụng ngay được vào công việc</p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-rose-400 to-pink-400 flex items-center justify-center shadow-lg">
-                  <span className="text-3xl">💡</span>
-                </div>
-                <h3 className="font-bold text-lg text-gray-900 mb-2">Cùng tiến bộ</h3>
-                <p className="text-gray-600 text-sm">Cộng đồng 15,000+ người cùng học hỏi và chia sẻ kinh nghiệm</p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-pink-400 to-purple-400 flex items-center justify-center shadow-lg">
-                  <span className="text-3xl">🎯</span>
-                </div>
-                <h3 className="font-bold text-lg text-gray-900 mb-2">Đạt mục tiêu</h3>
-                <p className="text-gray-600 text-sm">Tăng thu nhập, thăng tiến sự nghiệp, khởi nghiệp thành công</p>
+          <div className="inline-flex p-1 rounded-2xl bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500">
+            <div className="rounded-2xl bg-white px-6 py-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Sẵn sàng bắt đầu?</h3>
+              <p className="text-gray-600 mb-5">Khám phá hàng trăm ebook chất lượng và bắt đầu ngay hôm nay.</p>
+              <div className="flex items-center justify-center gap-3">
+                <Link href="/ebooks" className="btn-aurora text-white px-6 py-3 rounded-xl font-semibold shadow-lg">Khám phá ebook ngay</Link>
+                <Link href="/combos" className="bg-white border border-gray-300 text-gray-900 px-6 py-3 rounded-xl font-semibold">Xem combo tiết kiệm</Link>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* FAQ moved to bottom */}
+
 
       {/* ─── Testimonials (Gumroad-inspired) ─── */}
       <section className="bg-gradient-to-br from-purple-50 to-pink-50 py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <div className="text-5xl sm:text-6xl font-black text-gray-900 mb-4">
-              2,500,000,000đ+
+              2,530,000,000đ+
             </div>
             <p className="text-xl text-gray-700">
-              Giá trị kiến thức mà người dùng Ebook Mind đã đầu tư trong năm qua
+              Tổng thu nhập thêm mà người dùng đã kiếm được nhờ áp dụng kiến thức trong Ebook
             </p>
           </div>
 
