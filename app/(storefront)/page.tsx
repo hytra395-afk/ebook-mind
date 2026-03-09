@@ -159,19 +159,19 @@ export default async function HomePage() {
               <div className="bg-white rounded-2xl p-6 shadow-sm">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white">
-                    📚
+                    �
                   </div>
                   <div className="font-semibold text-gray-900">Nội dung thực tế</div>
                 </div>
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-400 flex items-center justify-center text-white">
-                    📦
+                    �️
                   </div>
                   <div className="font-semibold text-gray-900">Chia sẻ A -&gt; Z</div>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-500 to-orange-400 flex items-center justify-center text-white">
-                    ⚡
+                    🚀
                   </div>
                   <div className="font-semibold text-gray-900">Hành động được ngay</div>
                 </div>
@@ -202,7 +202,7 @@ export default async function HomePage() {
                   <div className="text-sm text-gray-600">Đánh giá</div>
                 </div>
               </div>
-              <div className="mt-8">
+              <div className="mt-8 text-center">
                 <Link href="/ebooks?category=kinh-doanh" className="btn-aurora text-white px-5 py-3 rounded-xl font-semibold shadow-lg inline-flex items-center">
                   Đọc ebook kinh doanh ngay
                 </Link>
