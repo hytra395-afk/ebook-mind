@@ -151,7 +151,7 @@ export default async function HomePage() {
           <div className="grid md:grid-cols-2 gap-8">
             {/* Card 1: Sell anything */}
             <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl p-10 border border-purple-100">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Ebook kinh doanh ngách</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Kinh doanh ngách</h2>
               <p className="text-gray-700 mb-8 leading-relaxed">
                 Ebook về các ngách kinh doanh sẽ giúp bạn xây dựng mô hình bền vững. Từ solo business (làm một mình) cho tới mở rộng quy mô, thuê nhân viên.<br/><br/>
                 Nội dung được thu thập từ kinh nghiệm thật của hàng trăm người kinh doanh. Từ những thất bại, tới thành công và giờ đây họ đang có cuộc sống theo ý muốn. Tất cả là những chia sẻ được đóng gói thành ebook để dễ tiếp cận tới tất cả mọi người.
@@ -161,19 +161,19 @@ export default async function HomePage() {
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white">
                     📚
                   </div>
-                  <div className="font-semibold text-gray-900">Ebook chất lượng</div>
+                  <div className="font-semibold text-gray-900">Nội dung thực tế</div>
                 </div>
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-400 flex items-center justify-center text-white">
                     📦
                   </div>
-                  <div className="font-semibold text-gray-900">Combo tiết kiệm</div>
+                  <div className="font-semibold text-gray-900">Chia sẻ A -&gt; Z</div>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-500 to-orange-400 flex items-center justify-center text-white">
                     ⚡
                   </div>
-                  <div className="font-semibold text-gray-900">Nhận ngay lập tức</div>
+                  <div className="font-semibold text-gray-900">Hành động được ngay</div>
                 </div>
               </div>
             </div>
@@ -201,6 +201,11 @@ export default async function HomePage() {
                   <div className="text-2xl font-black text-gray-900 mb-1">4.9/5</div>
                   <div className="text-sm text-gray-600">Đánh giá</div>
                 </div>
+              </div>
+              <div className="mt-8">
+                <Link href="/ebooks?category=kinh-doanh" className="btn-aurora text-white px-5 py-3 rounded-xl font-semibold shadow-lg inline-flex items-center">
+                  Đọc ebook kinh doanh ngay
+                </Link>
               </div>
             </div>
           </div>
@@ -258,7 +263,7 @@ export default async function HomePage() {
       <section className="bg-white py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl sm:text-4xl font-bold text-center text-gray-900 mb-4">
-            Bạn nhận được từ Ebook&nbsp;Mind:
+            Bạn nhận được từ Ebook Mind
           </h2>
           <p className="text-lg text-gray-600 text-center mb-12 max-w-2xl mx-auto">
             Mỗi lần mua ebook, bạn không chỉ nhận được một cuốn sách mà còn nhiều giá&nbsp;trị bền&nbsp;vững&nbsp;khác
@@ -318,7 +323,7 @@ export default async function HomePage() {
             {/* Testimonial 1 */}
             <div className="bg-white rounded-2xl p-8 shadow-sm">
               <p className="text-gray-700 mb-6 leading-relaxed">
-                "Ebook 'Kinh doanh Dropshipping' giúp tôi kiếm thêm 12 triệu/tháng chỉ sau 2 tháng. Tôi làm theo từng bước trong sách, từ chọn sản phẩm đến chạy quảng cáo. Giờ tôi có nguồn thu nhập ổn định bên cạnh công việc chính."
+                Tôi bắt đầu làm thêm online bằng kiến thức trong ebook kinh doanh ngách. Làm nhỏ mỗi ngày, đo lường rồi tối ưu. Sau khoảng hai tháng, mình có thêm nguồn thu nhập đều đặn bên cạnh công việc chính và hiểu rõ cách vận hành một mô hình gọn nhẹ.
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 flex items-center justify-center text-white font-bold">
@@ -334,7 +339,7 @@ export default async function HomePage() {
             {/* Testimonial 2 */}
             <div className="bg-white rounded-2xl p-8 shadow-sm">
               <p className="text-gray-700 mb-6 leading-relaxed">
-                "Giai đoạn tâm lý bất ổn sau khi thất nghiệp, tôi tìm đến ebook 'Mindset Người Thành Công'. Nội dung giúp tôi hiểu rõ bản thân hơn, vượt qua giai đoạn khó khăn. 3 tháng sau tôi mở được cửa hàng riêng và đang kinh doanh rất tốt."
+                Em từng rơi vào giai đoạn bất ổn tâm lý. Những bài học về mindset và kinh doanh nhỏ trong ebook giúp em bình tĩnh lại, đặt mục tiêu rõ ràng và hành động theo lộ trình. Vài tháng sau, em mở được một quầy nhỏ và tự tin hơn rất nhiều.
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-r from-teal-400 to-cyan-400 flex items-center justify-center text-white font-bold">
@@ -350,7 +355,7 @@ export default async function HomePage() {
             {/* Testimonial 3 */}
             <div className="bg-white rounded-2xl p-8 shadow-sm">
               <p className="text-gray-700 mb-6 leading-relaxed">
-                "Tôi học được nhiều kiến thức thực tế từ ebook 'Affiliate Marketing từ Zero'. Không chỉ lý thuyết mà còn có case study chi tiết. Sau 4 tháng, tôi kiếm được 8 triệu/tháng từ việc giới thiệu sản phẩm. Đây là nguồn thu nhập thụ động tuyệt vời."
+                Mình tự học tiếp thị liên kết qua ebook. Không màu mè, mọi thứ là quy trình thực tế: chọn ngách, tạo nội dung trung thực, theo dõi dữ liệu. Sau bốn tháng, mình có nguồn thu nhập thụ động nho nhỏ và biết cách mở rộng theo cách bền vững.
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-r from-orange-400 to-rose-500 flex items-center justify-center text-white font-bold">
@@ -366,7 +371,7 @@ export default async function HomePage() {
             {/* Testimonial 4 */}
             <div className="bg-white rounded-2xl p-8 shadow-sm">
               <p className="text-gray-700 mb-6 leading-relaxed">
-                "Ebook 'Xây Dựng Thương Hiệu Cá Nhân' thay đổi cách tôi nhìn về bản thân. Tôi học cách tạo nội dung giá trị, kết nối với khách hàng. Giờ tôi có hơn 50k followers và kiếm 20 triệu/tháng từ việc bán khóa học online."
+                Tôi học được cách kể câu chuyện của chính mình, viết nội dung có ích và kết nối chân thành với khách hàng. Tài khoản mạng xã hội tăng trưởng tự nhiên, đơn hàng và lời mời hợp tác đến đều hơn. Điều quý nhất là tôi có hướng đi rõ ràng cho thương hiệu cá nhân.
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 flex items-center justify-center text-white font-bold">
@@ -382,7 +387,7 @@ export default async function HomePage() {
             {/* Testimonial 5 */}
             <div className="bg-white rounded-2xl p-8 shadow-sm">
               <p className="text-gray-700 mb-6 leading-relaxed">
-                "Sau khi đọc ebook 'Kinh Doanh Handmade', tôi biết cách định giá sản phẩm và tiếp cận khách hàng. Từ sở thích làm đồ handmade, giờ tôi có cửa hàng nhỏ và kiếm 15 triệu/tháng. Điều quan trọng là tôi đang làm điều mình yêu thích."
+                Từ sở thích làm đồ thủ công, mình học được trong ebook cách định giá, chụp ảnh, chăm sóc khách hàng và vận hành đơn giản. Hiện mình duy trì doanh số ổn định mỗi tháng và vẫn giữ được niềm vui với công việc yêu thích.
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-r from-pink-500 to-rose-500 flex items-center justify-center text-white font-bold">
@@ -398,7 +403,7 @@ export default async function HomePage() {
             {/* Testimonial 6 */}
             <div className="bg-white rounded-2xl p-8 shadow-sm">
               <p className="text-gray-700 mb-6 leading-relaxed">
-                "Lúc mới ra trường, tôi rất bối rối không biết bắt đầu từ đâu. Ebook 'Sự Nghiệp Từ Con Số 0' giúp tôi có lộ trình rõ ràng. Tôi học được cách quản lý tài chính, xây dựng kế hoạch kinh doanh. Giờ tôi đang chạy quảng cáo cho 5 khách hàng và kiếm 18 triệu/tháng."
+                Em mới ra trường và khá bối rối. Nhờ ebook, em biết cách lập kế hoạch sự nghiệp, quản lý tài chính cá nhân và tìm dự án phù hợp. Em bắt đầu nhận quảng cáo freelance và có nguồn thu ổn định để tiếp tục đầu tư học tập.
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold">
@@ -414,7 +419,7 @@ export default async function HomePage() {
             {/* Testimonial 7 */}
             <div className="bg-white rounded-2xl p-8 shadow-sm">
               <p className="text-gray-700 mb-6 leading-relaxed">
-                "Giai đoạn stress vì công việc, tôi đọc ebook 'Quản Lý Cảm Xúc' và 'Tư Duy Tích Cực'. Những kiến thức trong sách giúp tôi hiểu rõ hơn về bản thân, biết cách đối mặt với áp lực. Tôi cảm thấy tự tin hơn và có mindset bền vững để phát triển sự nghiệp."
+                Tôi từng stress kéo dài. Các bài tập thực hành trong ebook giúp tôi hít thở đúng, ghi chép cảm xúc và đặt ranh giới công việc. Ngủ ngon hơn, giao tiếp tốt hơn và quan trọng nhất là có một mindset bền vững để tiếp tục phát triển.
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 flex items-center justify-center text-white font-bold">
@@ -430,7 +435,7 @@ export default async function HomePage() {
             {/* Testimonial 8 */}
             <div className="bg-white rounded-2xl p-8 shadow-sm">
               <p className="text-gray-700 mb-6 leading-relaxed">
-                "Ebook 'Bán Hàng Trên Facebook' dạy tôi cách viết content hấp dẫn và chăm sóc khách hàng. Từ việc bán lẻ 2-3 đơn/ngày, giờ tôi bán được 20-30 đơn/ngày. Doanh thu tăng gấp 10 lần, tôi kiếm được 25 triệu/tháng. Giờ tôi đang thuê thêm 2 nhân viên để mở rộng."
+                Mình học bán hàng online qua ebook: viết nội dung rõ ràng, trả lời khách nhanh, đóng gói chỉn chu. Đơn đều mỗi ngày, tỉ lệ quay lại tăng. Hiện mình đang tuyển thêm một bạn phụ việc để mở rộng quy trình cho hiệu quả hơn.
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 flex items-center justify-center text-white font-bold">
