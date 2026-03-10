@@ -41,7 +41,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-2 pt-1 border-t flex items-center justify-between">
+        <div className="mt-6 pt-2 border-t flex items-center justify-between">
           <div className="text-sm text-gray-400">
             © Ebook Mind. All rights reserved. Bản quyền thuộc về Ebook Mind, ghiêm cấm sao chép và khai thác thương mại dưới mọi hình thức.
           </div>
