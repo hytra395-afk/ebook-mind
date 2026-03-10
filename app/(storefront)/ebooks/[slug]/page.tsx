@@ -211,7 +211,7 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
                   <div className="text-4xl font-extrabold text-purple-600 mb-1">
                     {new Intl.NumberFormat('vi-VN').format(ebook.price)}đ
                   </div>
-                  <p className="text-xs text-gray-500 mb-4">Rẻ hơn một cốc trà sữa</p>
+                  <p className="text-xs text-gray-500 mb-4">Rẻ hơn cả một chiếc áo</p>
                 </div>
                 <AddToCartButton ebook={ebook} />
 
