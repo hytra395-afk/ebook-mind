@@ -652,7 +652,7 @@ export default async function HomePage() {
             {[
               {
                 q: "Ebook được gửi như thế nào?",
-                a: "Sau khi thanh toán, bạn sẽ nhận email chứa link tải ebook. Bạn có thể tải về máy tính, điện thoại hoặc máy tính bảng."
+                a: "Sau khi thanh toán, bạn sẽ nhận link tải ebook. Bạn có thể tải về máy tính, điện thoại hoặc máy tính bảng."
               },
               {
                 q: "Tôi có thể đọc ebook trên thiết bị nào?",
@@ -660,7 +660,7 @@ export default async function HomePage() {
               },
               {
                 q: "Ebook có bản quyền không?",
-                a: "Tất cả ebook trên Ebook Mind đều được phép phân phối. Chúng tôi hợp tác trực tiếp với tác giả và nhà xuất bản."
+                a: "Tất cả ebook trên đều được chúng tôi hợp tác trực tiếp với tác giả và được phép phân phối. Bản quyền thuộc về Ebook Mind, nghiêm cấm sao chép dưới mọi hình thức. Các cá nhân hay tổ chức cố tình lấy thông tin mà không được sự cho phép của chúng tôi để khai thác thương mại sẽ phải chịu trách nhiệm trước pháp luật."
               },
               {
                 q: "Tôi có thể chia sẻ ebook cho bạn bè không?",
@@ -669,6 +669,22 @@ export default async function HomePage() {
               {
                 q: "Hỗ trợ kỹ thuật như thế nào?",
                 a: "Gặp vấn đề? Email chúng tôi tại support@ebookmind.com hoặc chat trực tiếp. Chúng tôi phản hồi trong vòng 2 giờ."
+              },
+              {
+                q: "Tôi có thể yêu cầu hoàn tiền không?",
+                a: "Có. Chúng tôi hoàn tiền 100% nếu file lỗi hoặc nội dung sai lệch nghiêm trọng. Thời gian xử lý 3-5 ngày làm việc. Không hoàn tiền nếu đã đọc nội dung hoặc vi phạm bản quyền."
+              },
+              {
+                q: "Link tải có hết hạn không?",
+                a: "Link tải có hiệu lực trong 30 ngày kể từ ngày mua. Sau 30 ngày, link sẽ hết hạn nhưng bạn có thể liên hệ hỗ trợ để được cấp lại miễn phí."
+              },
+              {
+                q: "Tại sao nên chọn Ebook Mind?",
+                a: "Chúng tôi cung cấp kiến thức thực tế từ những người đã trải nghiệm, giá cả phù hợp, dễ tiếp cận. Tất cả ebook đều được hợp tác trực tiếp với tác giả và có bản quyền rõ ràng."
+              },
+              {
+                q: "Thanh toán có an toàn không?",
+                a: "Hoàn toàn an toàn. Chúng tôi sử dụng cổng thanh toán Sepay uy tín tại Việt Nam. Ebook Mind không lưu trữ thông tin thẻ ngân hàng của bạn."
               }
             ].map((item, idx) => (
               <details key={idx} className="bg-white rounded-xl border border-gray-200 p-6 cursor-pointer hover:shadow-sm transition-shadow">
