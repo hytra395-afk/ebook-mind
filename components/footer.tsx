@@ -3,9 +3,9 @@ import { BookOpen } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-50 border-t mt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="bg-gray-50 border-t mt-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 via-violet-500 to-fuchsia-500 flex items-center justify-center shadow-sm">
@@ -41,7 +41,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-8 pt-8 border-t flex items-center justify-between">
+        <div className="mt-6 pt-4 border-t flex items-center justify-between">
           <div className="text-sm text-gray-400">
             © Ebook Mind. All rights reserved.
           </div>
