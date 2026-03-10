@@ -312,7 +312,7 @@ export default async function HomePage() {
       <section className="bg-gradient-to-br from-purple-50 to-pink-50 py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <div className="text-5xl sm:text-6xl font-black gradient-text-aurora mb-4">
+            <div className="text-3xl sm:text-6xl font-black gradient-text-aurora mb-4 break-words leading-tight">
               2,530,000,000đ+
             </div>
             <p className="text-xl font-semibold text-gray-900 mb-2">

@@ -13,7 +13,10 @@ export default function Footer() {
               </div>
               <span className="text-base font-bold gradient-text-aurora">Ebook Mind</span>
             </div>
-            <p className="text-sm text-gray-500">Kiến thức giá bằng một cốc trà sữa</p>
+            <p className="text-sm text-gray-500">Kiến thức ngách thay đổi mindset</p>
+            <div className="mt-3">
+              <img src="/images/dathongbao-bocongthuong.png" alt="Đã thông báo Bộ Công Thương" className="h-10 w-auto" />
+            </div>
           </div>
           <div>
             <h3 className="font-semibold text-gray-900 mb-3">Sản phẩm</h3>
@@ -42,7 +45,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t text-center text-sm text-gray-400">
-          © 2025 Ebook Mind. All rights reserved.
+          © Ebook Mind. All rights reserved.
         </div>
       </div>
     </footer>
