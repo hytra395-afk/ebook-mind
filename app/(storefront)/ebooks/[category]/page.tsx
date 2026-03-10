@@ -13,7 +13,7 @@ export default async function CategoryEbooksPage({
   params,
   searchParams,
 }: {
-  params: Promise<{ category: string }>
+  params: Promise<{ category?: string }>
   searchParams: Promise<{ level?: string; search?: string; sort?: string; page?: string }>
 }) {
   const { category } = await params
@@ -27,7 +27,10 @@ export default async function CategoryEbooksPage({
     .from('ebooks')
     .select('id, slug, title, description, price, cover_url, rating_avg, rating_count, sales_count, featured, categories(name, slug)', { count: 'exact' })
     .eq('active', true)
-    .eq('categories.slug', category)
+  
+  if (category) {
+    query = query.eq('categories.slug', category)
+  }
 
   if (queryParams.search) {
     query = query.ilike('title', `%${queryParams.search}%`)
@@ -68,7 +71,7 @@ export default async function CategoryEbooksPage({
             {currentCategory?.name || 'Ebook Store'}
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3">
-            <span className="gradient-text-purple">{currentCategory?.name || 'Ebook Store'}</span>
+            <span className="gradient-text-purple">{category ? currentCategory?.name : 'Ebook Store'}</span>
           </h1>
           <p className="text-gray-500 text-sm sm:text-base max-w-lg mx-auto">
             Nội dung được thu thập từ những kinh nghiệm thật, kiến thức thật của hàng trăm người
@@ -152,7 +155,7 @@ export default async function CategoryEbooksPage({
           <div className="mt-12 flex items-center justify-center gap-3 bg-gray-50 rounded-xl p-6">
             {page > 1 && (
               <a
-                href={`/ebooks/${category}?${new URLSearchParams({ ...Object.fromEntries(Object.entries(queryParams).filter(([k]) => k !== 'page')), page: String(page - 1) }).toString()}`}
+                href={`${category ? `/ebooks/${category}` : '/ebooks'}?${new URLSearchParams({ ...Object.fromEntries(Object.entries(queryParams).filter(([k]) => k !== 'page')), page: String(page - 1) }).toString()}`}
                 className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition"
               >
                 Trước
@@ -167,7 +170,7 @@ export default async function CategoryEbooksPage({
             }).map((p) => (
               <a
                 key={p}
-                href={`/ebooks/${category}?${new URLSearchParams({ ...Object.fromEntries(Object.entries(queryParams).filter(([k]) => k !== 'page')), page: String(p) }).toString()}`}
+                href={`${category ? `/ebooks/${category}` : '/ebooks'}?${new URLSearchParams({ ...Object.fromEntries(Object.entries(queryParams).filter(([k]) => k !== 'page')), page: String(p) }).toString()}`}
                 className={`w-10 h-10 flex items-center justify-center rounded-lg text-sm font-medium transition ${
                   p === page
                     ? 'bg-purple-600 text-white shadow-sm'
@@ -180,7 +183,7 @@ export default async function CategoryEbooksPage({
 
             {page < totalPages && (
               <a
-                href={`/ebooks/${category}?${new URLSearchParams({ ...Object.fromEntries(Object.entries(queryParams).filter(([k]) => k !== 'page')), page: String(page + 1) }).toString()}`}
+                href={`${category ? `/ebooks/${category}` : '/ebooks'}?${new URLSearchParams({ ...Object.fromEntries(Object.entries(queryParams).filter(([k]) => k !== 'page')), page: String(page + 1) }).toString()}`}
                 className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition"
               >
                 Sau
