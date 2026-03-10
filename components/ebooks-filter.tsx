@@ -102,7 +102,7 @@ export default function EbooksFilter({
             <button
               key={cat.id}
               type="button"
-              onClick={() => updateParam('category', cat.slug === activeCategory ? undefined : cat.slug)}
+              onClick={() => updateParam('category', cat.slug)}
               className={`px-4 py-1.5 rounded-full text-sm font-medium transition cursor-pointer ${
                 activeCategory === cat.slug
                   ? 'gradient-purple text-white shadow-sm'
