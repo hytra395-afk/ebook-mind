@@ -223,11 +223,11 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
                   </div>
                   <div className="flex items-start gap-2">
                     <ShieldCheck className="w-4 h-4 text-purple-500 flex-shrink-0 mt-0.5" />
-                    <span>Truy cập không giới hạn</span>
+                    <span>Kiến thức thực tế</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <Zap className="w-4 h-4 text-yellow-500 flex-shrink-0 mt-0.5" />
-                    <span>Đảm bảo hoàn tiền 100%</span>
+                    <span>Đọc trọn đời</span>
                   </div>
                 </div>
               </div>
