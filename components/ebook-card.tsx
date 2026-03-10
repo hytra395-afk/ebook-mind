@@ -57,10 +57,17 @@ export default function EbookCard({
 
           {/* Title */}
           <Link href={`/ebooks/${slug}`}>
-            <h3 className="font-bold text-gray-900 text-xl leading-tight line-clamp-2 group-hover:text-purple-600 transition-colors mb-4">
+            <h3 className="font-bold text-gray-900 text-xl leading-tight line-clamp-2 group-hover:text-purple-600 transition-colors mb-2">
               {title}
             </h3>
           </Link>
+
+          {/* Description */}
+          {description && (
+            <p className="text-sm text-gray-600 line-clamp-2 mb-4">
+              {description}
+            </p>
+          )}
 
           {/* Rating + sales */}
           <div className="flex items-center gap-4 text-base text-gray-500 mb-5">
