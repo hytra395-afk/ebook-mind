@@ -188,26 +188,30 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
             <div className="sticky top-20 space-y-4">
 
               {/* Buy Box */}
-              <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hidden lg:block">
+              <div className="bg-white border-2 border-purple-200 rounded-2xl p-6 shadow-sm hidden lg:block">
                 <div className="text-4xl font-extrabold text-purple-600 mb-1">
                   {new Intl.NumberFormat('vi-VN').format(ebook.price)}đ
                 </div>
-                <p className="text-xs text-gray-400 mb-5">Một lần mua, tải về vĩnh viễn</p>
+                <p className="text-xs text-gray-500 mb-4">Rẻ hơn một cốc trà sữa</p>
                 <AddToCartButton ebook={ebook} />
 
+                <button className="w-full mt-3 py-2.5 text-center text-sm font-semibold text-gray-700 hover:bg-gray-50 transition rounded-lg border border-gray-200">
+                  Thêm vào giỏ hàng
+                </button>
+
                 {/* Trust bullets */}
-                <div className="mt-5 space-y-2 text-xs text-gray-500 border-t pt-4">
-                  <div className="flex items-center gap-2">
-                    <Zap className="w-4 h-4 text-yellow-400 flex-shrink-0" />
-                    Nhận link tải ngay sau khi thanh toán
+                <div className="mt-5 space-y-3 text-xs text-gray-600 border-t pt-4">
+                  <div className="flex items-start gap-2">
+                    <Download className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
+                    <span>Tải về ngay sau khi thanh toán</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Download className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                    Định dạng PDF, đọc trên mọi thiết bị
+                  <div className="flex items-start gap-2">
+                    <ShieldCheck className="w-4 h-4 text-purple-500 flex-shrink-0 mt-0.5" />
+                    <span>Truy cập không giới hạn</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <ShieldCheck className="w-4 h-4 text-green-500 flex-shrink-0" />
-                    Thanh toán bảo mật qua Sepay
+                  <div className="flex items-start gap-2">
+                    <Zap className="w-4 h-4 text-yellow-500 flex-shrink-0 mt-0.5" />
+                    <span>Đảm bảo hoàn tiền 100%</span>
                   </div>
                 </div>
               </div>
