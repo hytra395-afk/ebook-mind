@@ -138,7 +138,7 @@ export default async function HomePage() {
                 Đặt cược nhỏ. Điều đó thú vị!
               </h3>
               <p className="text-white/90 leading-relaxed">
-                Với giá chỉ từ một cốc trà sữa, bạn có thể thử nghiệm ý tưởng mới, 
+                Với kiến thức ngách thay đổi mindset, bạn có thể thử nghiệm ý tưởng mới, 
                 học kỹ năng mới, có được mindset bền vững mà không lo rủi ro tài chính. Đó là cách thông minh để đầu tư vào bản&nbsp;thân.
               </p>
             </div>
@@ -195,7 +195,7 @@ export default async function HomePage() {
                   <div className="text-xs sm:text-sm text-gray-600">Ebook</div>
                 </div>
                 <div className="bg-white rounded-xl p-4 text-center">
-                  <div className="text-lg sm:text-2xl font-black text-gray-900 mb-1 break-words">2.5Tđ+</div>
+                  <div className="text-sm sm:text-2xl font-black text-gray-900 mb-1 break-words leading-tight">2,530,000,000đ+</div>
                   <div className="text-xs sm:text-sm text-gray-600">Thu nhập</div>
                 </div>
                 <div className="bg-white rounded-xl p-4 text-center">
@@ -289,7 +289,7 @@ export default async function HomePage() {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Chi phí phù&nbsp;hợp</h3>
               <p className="text-gray-700">
-                Kiến thức bạn sở hữu là những trải nghiệm thật, với giá chỉ từ một cốc trà sữa. Combo tiết kiệm lên đến&nbsp;70%.
+                Kiến thức ngách thay đổi mindset. Combo tiết kiệm lên đến&nbsp;70%.
               </p>
             </div>
 
