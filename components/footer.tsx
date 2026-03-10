@@ -46,7 +46,7 @@ export default function Footer() {
             © Ebook Mind. All rights reserved.
           </div>
           <div className="flex-shrink-0">
-            <img src="/images/dathongbao-bocongthuong.png" alt="Đã thông báo Bộ Công Thương" className="h-12 w-auto" />
+            <img src="/images/bo-cong-thuong-badge.png" alt="Đã thông báo Bộ Công Thương" className="h-12 w-auto" />
           </div>
         </div>
       </div>
