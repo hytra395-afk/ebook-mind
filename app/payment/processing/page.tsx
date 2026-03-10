@@ -41,10 +41,12 @@ export default function PaymentProcessingPage() {
         if (response.ok && data.success) {
           setOrder(data.order)
           
-          // Generate QR code
+          // Generate QR code using Sepay
           if (data.order && !qrCode) {
-            const qrContent = `EBOOK ${data.order.public_token}`
-            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrContent)}`
+            const paymentCode = data.order.payment_code || `EBOOK${data.order.public_token.substring(0, 10)}`
+            const accountNumber = 'VQRQAGAHK6020'
+            const amount = data.order.amount
+            const qrUrl = `https://qr.sepay.vn/img?acc=${accountNumber}&amount=${amount}&des=${encodeURIComponent(paymentCode)}&bank=MB`
             setQrCode(qrUrl)
           }
           
@@ -242,7 +244,7 @@ export default function PaymentProcessingPage() {
                 </div>
                 <div>
                   <p className="text-xs text-gray-600 uppercase tracking-wide mb-1">Nội dung chuyển khoản</p>
-                  <p className="font-mono font-semibold text-gray-900">EBOOK {order.public_token}</p>
+                  <p className="font-mono font-semibold text-gray-900">{order.payment_code || `EBOOK${order.public_token.substring(0, 10)}`}</p>
                 </div>
               </div>
             </div>

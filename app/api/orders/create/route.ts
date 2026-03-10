@@ -14,6 +14,12 @@ interface CreateOrderRequest {
   email?: string
 }
 
+// Generate payment code: EBOOK + 3-10 digit number
+function generatePaymentCode(): string {
+  const randomNumber = Math.floor(Math.random() * 10000000000).toString().padStart(10, '0')
+  return `EBOOK${randomNumber}`
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body: CreateOrderRequest = await request.json()
@@ -80,14 +86,18 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Generate public token for order
+    // Generate public token for order (for URL)
     const publicToken = nanoid(16)
+    
+    // Generate payment code for Sepay (EBOOK + 10 digits)
+    const paymentCode = generatePaymentCode()
 
     // Create order
     const { data: order, error: orderError } = await supabaseAdmin
       .from('orders')
       .insert({
         public_token: publicToken,
+        payment_code: paymentCode,
         status: 'pending',
         amount: totalAmount,
         currency: 'VND',
@@ -131,7 +141,7 @@ export async function POST(request: NextRequest) {
       const sepayPayload = {
         accountNumber: config.sepay.accountNumber,
         amount: totalAmount,
-        content: `Thanh toan don hang ${publicToken}`,
+        content: paymentCode,
       }
 
       console.log('Creating Sepay payment:', sepayPayload)
