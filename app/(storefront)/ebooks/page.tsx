@@ -77,7 +77,7 @@ export default async function EbooksPage({
           <div className="flex items-center justify-center gap-6 mt-6 text-sm text-gray-500">
             <span className="flex items-center gap-1.5">
               <BookOpen className="w-4 h-4 text-purple-400" />
-              {totalEbooks > 0 ? `${totalEbooks}+ ebook` : 'Hàng trăm ebook'}
+              100+ ebook
             </span>
             <span className="text-gray-300">|</span>
             <span className="flex items-center gap-1.5">
