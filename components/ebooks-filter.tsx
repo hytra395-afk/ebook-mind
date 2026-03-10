@@ -88,8 +88,9 @@ export default function EbooksFilter({
       {categories.length > 0 && (
         <div className="flex flex-wrap gap-2">
           <button
+            type="button"
             onClick={() => updateParam('category', undefined)}
-            className={`px-4 py-1.5 rounded-full text-sm font-medium transition ${
+            className={`px-4 py-1.5 rounded-full text-sm font-medium transition cursor-pointer ${
               !activeCategory
                 ? 'gradient-purple text-white shadow-sm'
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -100,8 +101,9 @@ export default function EbooksFilter({
           {categories.map((cat) => (
             <button
               key={cat.id}
+              type="button"
               onClick={() => updateParam('category', cat.slug === activeCategory ? undefined : cat.slug)}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition ${
+              className={`px-4 py-1.5 rounded-full text-sm font-medium transition cursor-pointer ${
                 activeCategory === cat.slug
                   ? 'gradient-purple text-white shadow-sm'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'

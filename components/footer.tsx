@@ -25,10 +25,10 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold text-gray-900 mb-3">Danh Mục</h3>
             <div className="space-y-2">
-              <Link href="/ebooks?category=Kinh Doanh" className="block text-sm text-gray-500 hover:text-purple-600">Kinh Doanh</Link>
-              <Link href="/ebooks?category=Phát Triển Bản Thân" className="block text-sm text-gray-500 hover:text-purple-600">Phát Triển Bản Thân</Link>
-              <Link href="/ebooks?category=Công Nghệ" className="block text-sm text-gray-500 hover:text-purple-600">Công Nghệ</Link>
-              <Link href="/ebooks?category=Sức Khỏe" className="block text-sm text-gray-500 hover:text-purple-600">Sức Khỏe</Link>
+              <Link href="/ebooks?category=kinh-doanh" className="block text-sm text-gray-500 hover:text-purple-600">Kinh Doanh</Link>
+              <Link href="/ebooks?category=phat-trien-ban-than" className="block text-sm text-gray-500 hover:text-purple-600">Phát Triển Bản Thân</Link>
+              <Link href="/ebooks?category=cong-nghe" className="block text-sm text-gray-500 hover:text-purple-600">Công Nghệ</Link>
+              <Link href="/ebooks?category=suc-khoe" className="block text-sm text-gray-500 hover:text-purple-600">Sức Khỏe</Link>
             </div>
           </div>
           <div>
