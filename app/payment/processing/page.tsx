@@ -41,6 +41,13 @@ export default function PaymentProcessingPage() {
         if (response.ok && data.success) {
           setOrder(data.order)
           
+          // Generate QR code
+          if (data.order && !qrCode) {
+            const qrContent = `EBOOK ${data.order.public_token}`
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qrContent)}`
+            setQrCode(qrUrl)
+          }
+          
           if (data.order.status === 'completed') {
             // Redirect to success page
             window.location.href = `/success?token=${token}`
@@ -64,7 +71,7 @@ export default function PaymentProcessingPage() {
     const interval = setInterval(checkOrderStatus, 5000)
 
     return () => clearInterval(interval)
-  }, [token, mounted])
+  }, [token, mounted, qrCode])
 
   // Countdown timer
   useEffect(() => {
@@ -188,13 +195,24 @@ export default function PaymentProcessingPage() {
             {/* QR Code */}
             <div className="text-center mb-8">
               <div className="inline-flex flex-col items-center">
-                <div className="bg-gray-100 w-56 h-56 rounded-xl flex items-center justify-center mb-4 border-2 border-gray-200">
-                  <div className="text-center">
-                    <div className="text-6xl mb-2">📱</div>
-                    <p className="text-sm text-gray-500">Mã QR</p>
-                    <p className="text-xs text-gray-400 mt-1">Quét bằng app ngân hàng</p>
+                {qrCode ? (
+                  <div className="bg-white p-4 rounded-xl border-2 border-gray-200 shadow-sm mb-4">
+                    <Image
+                      src={qrCode}
+                      alt="QR Code thanh toán"
+                      width={300}
+                      height={300}
+                      className="rounded-lg"
+                    />
                   </div>
-                </div>
+                ) : (
+                  <div className="bg-gray-100 w-56 h-56 rounded-xl flex items-center justify-center mb-4 border-2 border-gray-200">
+                    <div className="text-center">
+                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-2"></div>
+                      <p className="text-sm text-gray-500">Đang tạo mã QR...</p>
+                    </div>
+                  </div>
+                )}
               </div>
               <p className="text-sm text-gray-600 mt-4">
                 Quét mã QR bằng ứng dụng ngân hàng của bạn để thanh toán
@@ -224,7 +242,7 @@ export default function PaymentProcessingPage() {
                 </div>
                 <div>
                   <p className="text-xs text-gray-600 uppercase tracking-wide mb-1">Nội dung chuyển khoản</p>
-                  <p className="font-mono font-semibold text-gray-900">Thanh toan {order.public_token}</p>
+                  <p className="font-mono font-semibold text-gray-900">EBOOK {order.public_token}</p>
                 </div>
               </div>
             </div>
