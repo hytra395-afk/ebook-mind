@@ -5,31 +5,17 @@ import { Suspense } from 'react'
 import { BookOpen, Star, Users } from 'lucide-react'
 
 export const revalidate = 300
-export const dynamic = 'force-static'
 
 const ITEMS_PER_PAGE = 9
 
-// Generate static params for categories to avoid ambiguous routes
-export async function generateStaticParams() {
-  const supabase = getSupabase()
-  const { data: categories } = await supabase.from('categories').select('slug')
-  
-  return (categories || []).map((cat) => ({
-    category: cat.slug,
-  }))
-}
-
-export default async function CategoryEbooksPage({
-  params,
+export default async function EbooksPage({
   searchParams,
 }: {
-  params: Promise<{ category?: string }>
-  searchParams: Promise<{ level?: string; search?: string; sort?: string; page?: string }>
+  searchParams: Promise<{ category?: string; level?: string; search?: string; sort?: string; page?: string }>
 }) {
-  const { category } = await params
-  const queryParams = await searchParams
+  const params = await searchParams
   const supabase = getSupabase()
-  const page = Math.max(1, parseInt(queryParams.page || '1', 10))
+  const page = Math.max(1, parseInt(params.page || '1', 10))
   const offset = (page - 1) * ITEMS_PER_PAGE
 
   // Optimize query - only select needed fields
@@ -37,13 +23,12 @@ export default async function CategoryEbooksPage({
     .from('ebooks')
     .select('id, slug, title, description, price, cover_url, rating_avg, rating_count, sales_count, featured, categories(name, slug)', { count: 'exact' })
     .eq('active', true)
-  
-  if (category) {
-    query = query.eq('categories.slug', category)
-  }
 
-  if (queryParams.search) {
-    query = query.ilike('title', `%${queryParams.search}%`)
+  if (params.category) {
+    query = query.eq('categories.slug', params.category)
+  }
+  if (params.search) {
+    query = query.ilike('title', `%${params.search}%`)
   }
 
   const sortMap: Record<string, { col: string; asc: boolean }> = {
@@ -53,7 +38,7 @@ export default async function CategoryEbooksPage({
     price_desc: { col: 'price', asc: false },
     rating: { col: 'rating_avg', asc: false },
   }
-  const sort = sortMap[queryParams.sort || 'newest'] ?? sortMap.newest
+  const sort = sortMap[params.sort || 'newest'] ?? sortMap.newest
   query = query.order(sort.col, { ascending: sort.asc }).range(offset, offset + ITEMS_PER_PAGE - 1)
 
   const { data: ebooks, count: totalCount } = await query
@@ -67,9 +52,7 @@ export default async function CategoryEbooksPage({
   
   const categories = categoriesResult.data
   const levels = levelsResult.data
-  const currentCategory = categories?.find(c => c.slug === category)
-
-  const totalEbooks = ebooks?.length ?? 0
+  const currentCategory = categories?.find(c => c.slug === params.category)
 
   return (
     <div>
@@ -81,7 +64,7 @@ export default async function CategoryEbooksPage({
             {currentCategory?.name || 'Ebook Store'}
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3">
-            <span className="gradient-text-purple">{category ? currentCategory?.name : 'Ebook Store'}</span>
+            <span className="gradient-text-purple">{params.category ? currentCategory?.name : 'Ebook Store'}</span>
           </h1>
           <p className="text-gray-500 text-sm sm:text-base max-w-lg mx-auto">
             Nội dung được thu thập từ những kinh nghiệm thật, kiến thức thật của hàng trăm người
@@ -113,9 +96,9 @@ export default async function CategoryEbooksPage({
           <EbooksFilter
             categories={categories ?? []}
             levels={levels ?? []}
-            activeCategory={category}
-            activeSort={queryParams.sort || 'newest'}
-            search={queryParams.search || ''}
+            activeCategory={params.category}
+            activeSort={params.sort || 'newest'}
+            search={params.search || ''}
           />
         </Suspense>
 
@@ -155,7 +138,7 @@ export default async function CategoryEbooksPage({
           <div className="text-center py-20">
             <BookOpen className="w-12 h-12 text-gray-200 mx-auto mb-4" />
             <p className="text-gray-400 text-sm">
-              {queryParams.search ? `Không tìm thấy ebook nào cho "${queryParams.search}"` : 'Chưa có ebook nào.'}
+              {params.search ? `Không tìm thấy ebook nào cho "${params.search}"` : 'Chưa có ebook nào.'}
             </p>
           </div>
         )}
@@ -165,7 +148,7 @@ export default async function CategoryEbooksPage({
           <div className="mt-12 flex items-center justify-center gap-3 bg-gray-50 rounded-xl p-6">
             {page > 1 && (
               <a
-                href={`${category ? `/ebooks/${category}` : '/ebooks'}?${new URLSearchParams({ ...Object.fromEntries(Object.entries(queryParams).filter(([k]) => k !== 'page')), page: String(page - 1) }).toString()}`}
+                href={`/ebooks?${new URLSearchParams({ ...Object.fromEntries(Object.entries(params).filter(([k]) => k !== 'page')), page: String(page - 1) }).toString()}`}
                 className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition"
               >
                 Trước
@@ -180,7 +163,7 @@ export default async function CategoryEbooksPage({
             }).map((p) => (
               <a
                 key={p}
-                href={`${category ? `/ebooks/${category}` : '/ebooks'}?${new URLSearchParams({ ...Object.fromEntries(Object.entries(queryParams).filter(([k]) => k !== 'page')), page: String(p) }).toString()}`}
+                href={`/ebooks?${new URLSearchParams({ ...Object.fromEntries(Object.entries(params).filter(([k]) => k !== 'page')), page: String(p) }).toString()}`}
                 className={`w-10 h-10 flex items-center justify-center rounded-lg text-sm font-medium transition ${
                   p === page
                     ? 'bg-purple-600 text-white shadow-sm'
@@ -193,7 +176,7 @@ export default async function CategoryEbooksPage({
 
             {page < totalPages && (
               <a
-                href={`${category ? `/ebooks/${category}` : '/ebooks'}?${new URLSearchParams({ ...Object.fromEntries(Object.entries(queryParams).filter(([k]) => k !== 'page')), page: String(page + 1) }).toString()}`}
+                href={`/ebooks?${new URLSearchParams({ ...Object.fromEntries(Object.entries(params).filter(([k]) => k !== 'page')), page: String(page + 1) }).toString()}`}
                 className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition"
               >
                 Sau

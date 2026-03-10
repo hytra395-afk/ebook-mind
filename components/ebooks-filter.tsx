@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter, useSearchParams, usePathname } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useCallback } from 'react'
 import { Search, SlidersHorizontal } from 'lucide-react'
 
@@ -31,7 +31,6 @@ export default function EbooksFilter({
 }: EbooksFilterProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const pathname = usePathname()
 
   const updateParam = useCallback(
     (key: string, value: string | undefined) => {
@@ -42,19 +41,10 @@ export default function EbooksFilter({
         params.delete(key)
       }
       
-      // Determine base URL based on current path
-      let baseUrl = '/ebooks'
-      if (pathname.includes('/ebooks/') && pathname !== '/ebooks') {
-        // We're on a category page like /ebooks/cong-nghe
-        const pathParts = pathname.split('/')
-        const category = pathParts[2]
-        baseUrl = `/ebooks/${category}`
-      }
-      
       const queryString = params.toString()
-      router.push(queryString ? `${baseUrl}?${queryString}` : baseUrl)
+      router.push(queryString ? `/ebooks?${queryString}` : '/ebooks')
     },
-    [router, searchParams, pathname]
+    [router, searchParams]
   )
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
@@ -99,28 +89,30 @@ export default function EbooksFilter({
       {/* Category pills */}
       {categories.length > 0 && (
         <div className="flex flex-wrap gap-2">
-          <a
-            href="/ebooks"
-            className={`px-4 py-1.5 rounded-full text-sm font-medium transition cursor-pointer inline-block ${
+          <button
+            type="button"
+            onClick={() => updateParam('category', undefined)}
+            className={`px-4 py-1.5 rounded-full text-sm font-medium transition cursor-pointer ${
               !activeCategory
                 ? 'gradient-purple text-white shadow-sm'
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
             }`}
           >
             Tất cả
-          </a>
+          </button>
           {categories.map((cat) => (
-            <a
+            <button
               key={cat.id}
-              href={`/ebooks/${cat.slug}`}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition cursor-pointer inline-block ${
+              type="button"
+              onClick={() => updateParam('category', cat.slug)}
+              className={`px-4 py-1.5 rounded-full text-sm font-medium transition cursor-pointer ${
                 activeCategory === cat.slug
                   ? 'bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-white shadow-sm'
                   : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
               }`}
             >
               {cat.name}
-            </a>
+            </button>
           ))}
         </div>
       )}
