@@ -28,7 +28,7 @@ export default function EbookCard({
       <div className="relative bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
         {/* Cover */}
         <Link href={`/ebooks/${slug}`} className="block">
-          <div className="relative aspect-[3/4] overflow-hidden bg-gray-100">
+          <div className="relative aspect-[2/3] overflow-hidden bg-gray-100 rounded-t-2xl">
             <Image
               src={cover_url || 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400'}
               alt={title}
@@ -39,57 +39,57 @@ export default function EbookCard({
             />
             {/* Badges */}
             {featured && (
-              <span className="absolute top-2 left-2 badge-sunset text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+              <span className="absolute top-3 left-3 badge-sunset text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
                 Bestseller
-              </span>
-            )}
-            {category && (
-              <span className="absolute top-2 right-2 glass border-0 text-gray-700 text-xs px-2.5 py-1 rounded-full font-medium">
-                {category}
               </span>
             )}
           </div>
         </Link>
 
         {/* Info */}
-        <div className="p-4">
+        <div className="p-5">
+          {/* Category */}
+          {category && (
+            <p className="text-xs text-gray-500 font-medium mb-2">
+              Cơ bản <span className="text-gray-300">·</span> {category}
+            </p>
+          )}
+
+          {/* Title */}
           <Link href={`/ebooks/${slug}`}>
-            <h3 className="font-semibold text-gray-900 text-sm leading-tight line-clamp-3 group-hover:text-purple-600 transition-colors mb-1">
+            <h3 className="font-bold text-gray-900 text-base leading-snug line-clamp-2 group-hover:text-purple-600 transition-colors mb-3">
               {title}
             </h3>
           </Link>
 
-          {description && (
-            <p className="text-xs text-gray-400 line-clamp-2 mb-3">{description}</p>
-          )}
+          {/* Rating + sales + pages */}
+          <div className="flex items-center gap-3 text-xs text-gray-500 mb-4">
+            {rating_avg > 0 && (
+              <span className="flex items-center gap-1">
+                <span className="text-yellow-400">★</span>
+                <span className="font-medium text-gray-700">{Number(rating_avg).toFixed(1)}</span>
+                {rating_count > 0 && <span className="text-gray-400">({rating_count})</span>}
+              </span>
+            )}
+            {sales_count > 0 && (
+              <span className="flex items-center gap-1">
+                <span className="text-gray-300">👁</span>
+                <span>{sales_count.toLocaleString('vi-VN')} lượt mua</span>
+              </span>
+            )}
+          </div>
 
-          {/* Rating + sales */}
-          {(rating_avg > 0 || sales_count > 0) && (
-            <div className="flex items-center gap-2 text-xs text-gray-400 mb-3">
-              {rating_avg > 0 && (
-                <span className="flex items-center gap-0.5">
-                  <span className="text-yellow-400">★</span>
-                  <span className="font-medium text-gray-600">{Number(rating_avg).toFixed(1)}</span>
-                  {rating_count > 0 && <span>({rating_count})</span>}
-                </span>
-              )}
-              {sales_count > 0 && (
-                <span className="text-gray-300">·</span>
-              )}
-              {sales_count > 0 && (
-                <span>{sales_count.toLocaleString('vi-VN')} đã bán</span>
-              )}
-            </div>
-          )}
+          {/* Pages info */}
+          <p className="text-xs text-gray-400 mb-4">320 trang</p>
 
           {/* Price + CTA */}
           <div className="flex items-center justify-between gap-2">
-            <span className="text-base font-bold text-purple-600">
+            <span className="text-lg font-bold text-purple-600">
               {new Intl.NumberFormat('vi-VN').format(price)}đ
             </span>
             <Link
               href={`/ebooks/${slug}`}
-              className="text-xs font-semibold gradient-purple text-white px-3 py-1.5 rounded-lg hover:opacity-90 transition whitespace-nowrap"
+              className="text-xs font-semibold gradient-purple text-white px-4 py-2 rounded-lg hover:opacity-90 transition whitespace-nowrap"
             >
               Mua ngay
             </Link>
