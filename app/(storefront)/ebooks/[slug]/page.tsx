@@ -129,15 +129,9 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
                 {ebook.categories.name}
               </Link>
             )}
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-tight mb-3">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-tight mb-6">
               {ebook.title}
             </h1>
-
-            {ebook.authors?.name && (
-              <p className="text-sm text-gray-500 mb-3">
-                Tác giả: <span className="font-semibold text-gray-700">{ebook.authors.name}</span>
-              </p>
-            )}
 
             {/* Rating */}
             <div className="flex items-center gap-3 mb-6">
@@ -197,50 +191,47 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
               </span>
             </div>
 
-            {/* Nội dung ebook */}
+            {/* Nội dung ebook & Đánh giá - 2 cột */}
             <div className="mb-8 border-t pt-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Nội dung ebook</h2>
-              <div className="prose prose-sm max-w-none text-gray-700">
-                <p>Hướng dẫn chi tiết từ ý tưởng đến thực hiện kinh doanh thành công. Ebook này sẽ giúp bạn:</p>
-                <ul>
-                  <li><strong>Phần 1: Chuẩn bị</strong> - Xác định ý tưởng, nghiên cứu thị trường, lập kế hoạch chi tiết</li>
-                  <li><strong>Phần 2: Tìm kiếm vốn</strong> - Các nguồn vốn khác nhau, cách viết proposal, thương lượng điều khoản</li>
-                  <li><strong>Phần 3: Xây dựng đội ngũ</strong> - Tuyển dụng, đào tạo, quản lý nhân sự hiệu quả</li>
-                  <li><strong>Phần 4: Phát triển sản phẩm</strong> - Quy trình phát triển, kiểm thử, ra mắt thị trường</li>
-                  <li><strong>Phần 5: Tiếp thị và bán hàng</strong> - Chiến lược marketing, xây dựng brand, tăng doanh số</li>
-                </ul>
-                <p>Mỗi phần đều có <em>case study thực tế</em> từ các doanh nhân thành công, giúp bạn hiểu rõ hơn cách áp dụng vào thực tế.</p>
-              </div>
-            </div>
-
-            {/* Đánh giá */}
-            <div className="mb-8 border-t pt-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Đánh giá từ độc giả</h2>
-              <div className="space-y-4">
-                <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-400 to-orange-500 flex items-center justify-center text-white font-bold text-sm">T</div>
-                    <div>
-                      <p className="font-semibold text-gray-900 text-sm">Trần Minh Tuấn</p>
-                      <div className="flex gap-0.5">
-                        {[1,2,3,4,5].map(i => <Star key={i} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />)}
-                      </div>
-                    </div>
-                  </div>
-                  <p className="text-sm text-gray-700">Ebook này rất hữu ích! Tôi đã áp dụng các chiến lược từ phần tiếp thị và doanh số tăng 40% trong 3 tháng. Tác giả giải thích rất rõ ràng và dễ hiểu.</p>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Nội dung ebook */}
+                <div>
+                  <h2 className="text-xl font-bold text-gray-900 mb-4">Mô tả ebook</h2>
+                  <p className="text-sm text-gray-700 leading-relaxed">Hướng dẫn chi tiết từ ý tưởng đến thực hiện kinh doanh thành công. Bao gồm các bước chuẩn bị, tìm kiếm vốn, xây dựng đội ngũ và phát triển sản phẩm.</p>
                 </div>
 
-                <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center text-white font-bold text-sm">L</div>
-                    <div>
-                      <p className="font-semibold text-gray-900 text-sm">Lê Thị Hương</p>
-                      <div className="flex gap-0.5">
-                        {[1,2,3,4,5].map(i => <Star key={i} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />)}
+                {/* Đánh giá */}
+                <div>
+                  <h2 className="text-xl font-bold text-gray-900 mb-4">Đánh giá (2)</h2>
+                  <div className="space-y-4">
+                    <div className="bg-white rounded-lg p-4 border border-gray-200">
+                      <div className="flex items-start gap-3 mb-3">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">Q</div>
+                        <div className="flex-1">
+                          <p className="font-semibold text-gray-900 text-sm">Ok ok ok</p>
+                          <p className="text-xs text-gray-500">Que trình · 23/2/2025</p>
+                        </div>
                       </div>
+                      <div className="flex gap-0.5 mb-2">
+                        {[1,2,3,4,5].map(i => <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />)}
+                      </div>
+                      <p className="text-sm text-gray-700">Ề nha nội dung đúng cái mình cần. Mình đang muốn kinh doanh gì đó mà chưa biết chọn cái nào</p>
+                    </div>
+
+                    <div className="bg-white rounded-lg p-4 border border-gray-200">
+                      <div className="flex items-start gap-3 mb-3">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">M</div>
+                        <div className="flex-1">
+                          <p className="font-semibold text-gray-900 text-sm">Rất dễ hiểu, dễ áp dụng luôn</p>
+                          <p className="text-xs text-gray-500">Minh Khoa · 3/1/2025</p>
+                        </div>
+                      </div>
+                      <div className="flex gap-0.5 mb-2">
+                        {[1,2,3,4,5].map(i => <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />)}
+                      </div>
+                      <p className="text-sm text-gray-700">Ebook rất hay nhé, dễ hiểu, dễ áp dụng. Mình làm theo được ngay</p>
                     </div>
                   </div>
-                  <p className="text-sm text-gray-700">Tôi là người mới bắt đầu kinh doanh. Ebook này cung cấp lộ trình rõ ràng từ A-Z. Rất đáng giá!</p>
                 </div>
               </div>
             </div>
