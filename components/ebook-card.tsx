@@ -64,7 +64,7 @@ export default function EbookCard({
 
           {/* Description */}
           {description && (
-            <p className="text-sm text-gray-600 line-clamp-2 mb-4">
+            <p className="text-sm text-gray-600 line-clamp-4 mb-4">
               {description}
             </p>
           )}

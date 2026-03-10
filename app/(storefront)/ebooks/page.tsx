@@ -8,7 +8,7 @@ export const revalidate = 300 // ISR: revalidate every 5 minutes for better perf
 
 export const dynamic = 'force-static'
 
-const ITEMS_PER_PAGE = 9
+const ITEMS_PER_PAGE = 12
 
 export default async function EbooksPage({
   searchParams,
@@ -107,8 +107,8 @@ export default async function EbooksPage({
 
         {/* Grid */}
         <Suspense fallback={
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
-            {Array.from({ length: 9 }, (_, i) => (
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {Array.from({ length: 12 }, (_, i) => (
               <div key={i} className="animate-pulse">
                 <div className="bg-gray-200 aspect-[3/4] rounded-xl mb-3"></div>
                 <div className="h-4 bg-gray-200 rounded mb-2"></div>
@@ -117,7 +117,7 @@ export default async function EbooksPage({
             ))}
           </div>
         }>
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {ebooks?.map((ebook: any) => (
               <EbookCard
                 key={ebook.id}
