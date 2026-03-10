@@ -125,30 +125,47 @@ export async function POST(request: NextRequest) {
     }
 
     // Create Sepay payment
-    const sepayPayload = {
-      accountNumber: config.sepay.accountNumber,
-      amount: totalAmount,
-      content: `Thanh toan don hang ${publicToken}`,
+    let sepayData: any = null
+    
+    try {
+      const sepayPayload = {
+        accountNumber: config.sepay.accountNumber,
+        amount: totalAmount,
+        content: `Thanh toan don hang ${publicToken}`,
+      }
+
+      console.log('Creating Sepay payment:', sepayPayload)
+
+      const sepayResponse = await fetch(config.sepay.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${config.sepay.apiKey}`,
+        },
+        body: JSON.stringify(sepayPayload),
+      })
+
+      const responseText = await sepayResponse.text()
+      console.log('Sepay response status:', sepayResponse.status)
+      console.log('Sepay response:', responseText)
+
+      if (!sepayResponse.ok) {
+        console.error('Sepay API error:', responseText)
+        // Continue without Sepay data - allow manual payment
+        sepayData = { error: responseText, manual_payment: true }
+      } else {
+        try {
+          sepayData = JSON.parse(responseText)
+        } catch (e) {
+          console.error('Failed to parse Sepay response:', e)
+          sepayData = { error: 'Invalid JSON response', manual_payment: true }
+        }
+      }
+    } catch (sepayError) {
+      console.error('Sepay request failed:', sepayError)
+      // Continue without Sepay - allow manual payment
+      sepayData = { error: String(sepayError), manual_payment: true }
     }
-
-    const sepayResponse = await fetch(config.sepay.apiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${config.sepay.apiKey}`,
-      },
-      body: JSON.stringify(sepayPayload),
-    })
-
-    if (!sepayResponse.ok) {
-      console.error('Sepay API error:', await sepayResponse.text())
-      return NextResponse.json(
-        { error: 'Failed to create payment' },
-        { status: 500 }
-      )
-    }
-
-    const sepayData = await sepayResponse.json()
 
     // Update order with Sepay transaction ID
     if (sepayData.transactionId) {
