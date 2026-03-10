@@ -457,16 +457,16 @@ export default async function HomePage() {
 
       {/* ─── Featured Ebooks ─── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="flex items-end justify-between mb-8">
-          <div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-              Ebook <span className="gradient-text-purple">Nổi Bật</span>
-            </h2>
-            <p className="text-gray-500 mt-1 text-sm">Được yêu thích và đánh giá cao nhất từ cộng đồng</p>
+        <div className="text-center mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+            Ebook <span className="gradient-text-purple">Nổi Bật</span>
+          </h2>
+          <p className="text-gray-500 mt-1 text-sm">Được yêu thích và đánh giá cao nhất từ cộng đồng</p>
+          <div className="mt-4">
+            <Link href="/ebooks" className="text-sm font-semibold text-purple-600 hover:underline flex items-center gap-1 justify-center">
+              Xem tất cả <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
-          <Link href="/ebooks" className="text-sm font-semibold text-purple-600 hover:underline flex items-center gap-1">
-            Xem tất cả <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {featuredEbooks?.map((ebook: any, idx: number) => (
