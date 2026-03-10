@@ -4,9 +4,11 @@ import EbooksFilter from '@/components/ebooks-filter'
 import { Suspense } from 'react'
 import { BookOpen, Star, Users } from 'lucide-react'
 
-export const revalidate = 30 // ISR: revalidate every 30 seconds for better performance
+export const revalidate = 300 // ISR: revalidate every 5 minutes for better performance
 
-const ITEMS_PER_PAGE = 24
+export const dynamic = 'force-static'
+
+const ITEMS_PER_PAGE = 12
 
 export default async function EbooksPage({
   searchParams,
@@ -104,24 +106,36 @@ export default async function EbooksPage({
         </Suspense>
 
         {/* Grid */}
-        <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          {ebooks?.map((ebook: any) => (
-            <EbookCard
-              key={ebook.id}
-              id={ebook.id}
-              slug={ebook.slug}
-              title={ebook.title}
-              description={ebook.description}
-              price={ebook.price}
-              cover_url={ebook.cover_url}
-              rating_avg={ebook.rating_avg}
-              rating_count={ebook.rating_count}
-              sales_count={ebook.sales_count}
-              featured={ebook.featured}
-              category={ebook.categories?.name}
-            />
-          ))}
-        </div>
+        <Suspense fallback={
+          <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            {Array.from({ length: 12 }, (_, i) => (
+              <div key={i} className="animate-pulse">
+                <div className="bg-gray-200 aspect-[3/4] rounded-xl mb-3"></div>
+                <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                <div className="h-3 bg-gray-200 rounded w-3/4"></div>
+              </div>
+            ))}
+          </div>
+        }>
+          <div className="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            {ebooks?.map((ebook: any) => (
+              <EbookCard
+                key={ebook.id}
+                id={ebook.id}
+                slug={ebook.slug}
+                title={ebook.title}
+                description={ebook.description}
+                price={ebook.price}
+                cover_url={ebook.cover_url}
+                rating_avg={ebook.rating_avg}
+                rating_count={ebook.rating_count}
+                sales_count={ebook.sales_count}
+                featured={ebook.featured}
+                category={ebook.categories?.name}
+              />
+            ))}
+          </div>
+        </Suspense>
 
         {(!ebooks || ebooks.length === 0) && (
           <div className="text-center py-20">
