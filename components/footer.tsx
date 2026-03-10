@@ -46,7 +46,19 @@ export default function Footer() {
             © Ebook Mind. All rights reserved.
           </div>
           <div className="flex-shrink-0">
-            <img src="/images/bo-cong-thuong-badge.png" alt="Đã thông báo Bộ Công Thương" className="h-12 w-auto" />
+            <img 
+              src="/images/bo-cong-thuong-badge.png" 
+              alt="Đã thông báo Bộ Công Thương" 
+              className="h-12 w-auto object-contain"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+              }}
+              onLoad={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'block';
+              }}
+            />
           </div>
         </div>
       </div>
