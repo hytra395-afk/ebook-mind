@@ -192,38 +192,6 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
               </span>
             </div>
 
-            {/* Tabs: Nội dung ebook & Đánh giá */}
-            <EbookTabs />
-
-            {/* Tác giả */}
-            {ebook.authors?.name && (
-              <div className="mb-8 border-t pt-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Về tác giả</h2>
-                <div className="flex gap-4">
-                  {ebook.authors.avatar_url ? (
-                    <Image
-                      src={ebook.authors.avatar_url}
-                      alt={ebook.authors.name}
-                      width={80}
-                      height={80}
-                      className="rounded-full flex-shrink-0 object-cover"
-                    />
-                  ) : (
-                    <div className="w-20 h-20 rounded-full gradient-purple flex-shrink-0 flex items-center justify-center text-white font-bold text-lg">
-                      {ebook.authors.name[0]}
-                    </div>
-                  )}
-                  <div>
-                    <p className="font-bold text-gray-900 text-lg">{ebook.authors.name}</p>
-                    {ebook.authors.bio && (
-                      <p className="text-sm text-gray-600 mt-2 leading-relaxed">{ebook.authors.bio}</p>
-                    )}
-                    <p className="text-sm text-gray-500 mt-3">Với hơn 15 năm kinh nghiệm trong lĩnh vực kinh doanh, tác giả đã giúp hàng trăm doanh nhân khởi nghiệp thành công.</p>
-                  </div>
-                </div>
-              </div>
-            )}
-
             {/* Mobile CTA */}
             <div className="lg:hidden bg-gray-50 rounded-2xl p-5 mb-6">
               <div className="text-3xl font-extrabold text-purple-600 mb-3">
@@ -245,10 +213,6 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
                 <p className="text-xs text-gray-500 mb-4">Rẻ hơn một cốc trà sữa</p>
                 <AddToCartButton ebook={ebook} />
 
-                <button className="w-full mt-3 py-2.5 text-center text-sm font-semibold text-gray-700 hover:bg-gray-50 transition rounded-lg border border-gray-200">
-                  Thêm vào giỏ hàng
-                </button>
-
                 {/* Trust bullets */}
                 <div className="mt-5 space-y-3 text-xs text-gray-600 border-t pt-4">
                   <div className="flex items-start gap-2">
@@ -266,29 +230,40 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
                 </div>
               </div>
 
-              {/* Author Card */}
+            </div>
+          </div>
+        </div>
+
+        {/* Tabs: Nội dung ebook & Đánh giá */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div className="lg:col-span-3">
+              <EbookTabs />
+
+              {/* Tác giả */}
               {ebook.authors?.name && (
-                <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
-                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Tác giả</p>
-                  <div className="flex items-start gap-3">
+                <div className="mb-8 border-t pt-8">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Về tác giả</h2>
+                  <div className="flex gap-4">
                     {ebook.authors.avatar_url ? (
                       <Image
                         src={ebook.authors.avatar_url}
                         alt={ebook.authors.name}
-                        width={44}
-                        height={44}
+                        width={80}
+                        height={80}
                         className="rounded-full flex-shrink-0 object-cover"
                       />
                     ) : (
-                      <div className="w-11 h-11 rounded-full gradient-purple flex-shrink-0 flex items-center justify-center text-white font-bold text-sm">
+                      <div className="w-20 h-20 rounded-full gradient-purple flex-shrink-0 flex items-center justify-center text-white font-bold text-lg">
                         {ebook.authors.name[0]}
                       </div>
                     )}
                     <div>
-                      <p className="font-semibold text-gray-900 text-sm">{ebook.authors.name}</p>
+                      <p className="font-bold text-gray-900 text-lg">{ebook.authors.name}</p>
                       {ebook.authors.bio && (
-                        <p className="text-xs text-gray-500 mt-1 leading-relaxed line-clamp-4">{ebook.authors.bio}</p>
+                        <p className="text-sm text-gray-600 mt-2 leading-relaxed">{ebook.authors.bio}</p>
                       )}
+                      <p className="text-sm text-gray-500 mt-3">Với hơn 15 năm kinh nghiệm trong lĩnh vực kinh doanh, tác giả đã giúp hàng trăm doanh nhân khởi nghiệp thành công.</p>
                     </div>
                   </div>
                 </div>
