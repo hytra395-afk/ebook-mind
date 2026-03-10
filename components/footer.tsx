@@ -49,7 +49,7 @@ export default function Footer() {
             <img 
               src="/images/bo-cong-thuong-badge.png" 
               alt="Badge" 
-              className="h-16 w-auto object-contain"
+              className="h-48 w-auto object-contain"
             />
           </div>
         </div>
