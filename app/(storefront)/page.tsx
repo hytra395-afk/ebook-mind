@@ -457,13 +457,15 @@ export default async function HomePage() {
 
       {/* ─── Featured Ebooks ─── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-            Ebook <span className="gradient-text-purple">Nổi Bật</span>
-          </h2>
-          <p className="text-gray-500 mt-1 text-sm">Được yêu thích và đánh giá cao nhất từ cộng đồng</p>
-          <div className="mt-4">
-            <Link href="/ebooks" className="text-sm font-semibold text-purple-600 hover:underline flex items-center gap-1 justify-center">
+        <div className="mb-8">
+          <div className="text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+              Ebook <span className="gradient-text-purple">Nổi Bật</span>
+            </h2>
+            <p className="text-gray-500 mt-1 text-sm">Được yêu thích và đánh giá cao nhất từ cộng đồng</p>
+          </div>
+          <div className="flex justify-end mt-4">
+            <Link href="/ebooks" className="text-sm font-semibold text-purple-600 hover:underline flex items-center gap-1">
               Xem tất cả <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
