@@ -9,6 +9,16 @@ export const dynamic = 'force-static'
 
 const ITEMS_PER_PAGE = 9
 
+// Generate static params for categories to avoid ambiguous routes
+export async function generateStaticParams() {
+  const supabase = getSupabase()
+  const { data: categories } = await supabase.from('categories').select('slug')
+  
+  return (categories || []).map((cat) => ({
+    category: cat.slug,
+  }))
+}
+
 export default async function CategoryEbooksPage({
   params,
   searchParams,
