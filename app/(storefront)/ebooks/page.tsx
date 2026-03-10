@@ -6,18 +6,22 @@ import { BookOpen, Star, Users } from 'lucide-react'
 
 export const revalidate = 30 // ISR: revalidate every 30 seconds for better performance
 
+const ITEMS_PER_PAGE = 24
+
 export default async function EbooksPage({
   searchParams,
 }: {
-  searchParams: Promise<{ category?: string; level?: string; search?: string; sort?: string }>
+  searchParams: Promise<{ category?: string; level?: string; search?: string; sort?: string; page?: string }>
 }) {
   const params = await searchParams
   const supabase = getSupabase()
+  const page = Math.max(1, parseInt(params.page || '1', 10))
+  const offset = (page - 1) * ITEMS_PER_PAGE
 
   // Optimize query - only select needed fields
   let query = supabase
     .from('ebooks')
-    .select('id, slug, title, description, price, cover_url, rating_avg, rating_count, sales_count, featured, categories(name)')
+    .select('id, slug, title, description, price, cover_url, rating_avg, rating_count, sales_count, featured, categories(name)', { count: 'exact' })
     .eq('active', true)
 
   if (params.category) {
@@ -35,9 +39,10 @@ export default async function EbooksPage({
     rating: { col: 'rating_avg', asc: false },
   }
   const sort = sortMap[params.sort || 'newest'] ?? sortMap.newest
-  query = query.order(sort.col, { ascending: sort.asc })
+  query = query.order(sort.col, { ascending: sort.asc }).range(offset, offset + ITEMS_PER_PAGE - 1)
 
-  const { data: ebooks } = await query
+  const { data: ebooks, count: totalCount } = await query
+  const totalPages = Math.ceil((totalCount || 0) / ITEMS_PER_PAGE)
 
   // Parallel queries for better performance
   const [categoriesResult, levelsResult] = await Promise.all([
@@ -63,8 +68,7 @@ export default async function EbooksPage({
             <span className="gradient-text-purple">Ebook Store</span>
           </h1>
           <p className="text-gray-500 text-sm sm:text-base max-w-lg mx-auto">
-            Đầu tư vào kiến thức — giá chỉ bằng <strong className="text-gray-700">một cốc trà sữa</strong>.
-            Thanh toán xong, nhận link tải ngay lập tức.
+            Nội dung được thu thập từ những kinh nghiệm thật, kiến thức thật của hàng trăm người
           </p>
 
           {/* Stats bar */}
@@ -125,6 +129,43 @@ export default async function EbooksPage({
             <p className="text-gray-400 text-sm">
               {params.search ? `Không tìm thấy ebook nào cho "${params.search}"` : 'Chưa có ebook nào.'}
             </p>
+          </div>
+        )}
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="mt-12 flex items-center justify-center gap-2">
+            {page > 1 && (
+              <a
+                href={`/ebooks?${new URLSearchParams({ ...Object.fromEntries(Object.entries(params).filter(([k]) => k !== 'page')), page: String(page - 1) }).toString()}`}
+                className="px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50"
+              >
+                ← Trước
+              </a>
+            )}
+            
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+              <a
+                key={p}
+                href={`/ebooks?${new URLSearchParams({ ...Object.fromEntries(Object.entries(params).filter(([k]) => k !== 'page')), page: String(p) }).toString()}`}
+                className={`px-3 py-2 rounded-lg text-sm font-medium transition ${
+                  p === page
+                    ? 'bg-purple-600 text-white'
+                    : 'border border-gray-200 text-gray-700 hover:bg-gray-50'
+                }`}
+              >
+                {p}
+              </a>
+            ))}
+
+            {page < totalPages && (
+              <a
+                href={`/ebooks?${new URLSearchParams({ ...Object.fromEntries(Object.entries(params).filter(([k]) => k !== 'page')), page: String(page + 1) }).toString()}`}
+                className="px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50"
+              >
+                Sau →
+              </a>
+            )}
           </div>
         )}
       </div>

@@ -187,20 +187,20 @@ export default async function HomePage() {
               </p>
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-white rounded-xl p-4 text-center">
-                  <div className="text-2xl font-black text-gray-900 mb-1">10,000+</div>
-                  <div className="text-sm text-gray-600">Người dùng</div>
+                  <div className="text-xl sm:text-2xl font-black text-gray-900 mb-1 break-words">10,000+</div>
+                  <div className="text-xs sm:text-sm text-gray-600">Người dùng</div>
                 </div>
                 <div className="bg-white rounded-xl p-4 text-center">
-                  <div className="text-2xl font-black text-gray-900 mb-1">100+</div>
-                  <div className="text-sm text-gray-600">Ebook</div>
+                  <div className="text-xl sm:text-2xl font-black text-gray-900 mb-1 break-words">100+</div>
+                  <div className="text-xs sm:text-sm text-gray-600">Ebook</div>
                 </div>
                 <div className="bg-white rounded-xl p-4 text-center">
-                  <div className="text-2xl font-black text-gray-900 mb-1">2.5Tđ+</div>
-                  <div className="text-sm text-gray-600">Thu nhập</div>
+                  <div className="text-xl sm:text-2xl font-black text-gray-900 mb-1 break-words">2,530,000,000đ+</div>
+                  <div className="text-xs sm:text-sm text-gray-600">Thu nhập</div>
                 </div>
                 <div className="bg-white rounded-xl p-4 text-center">
-                  <div className="text-2xl font-black text-gray-900 mb-1">4.9/5</div>
-                  <div className="text-sm text-gray-600">Đánh giá</div>
+                  <div className="text-xl sm:text-2xl font-black text-gray-900 mb-1 break-words">4.9/5</div>
+                  <div className="text-xs sm:text-sm text-gray-600">Đánh giá</div>
                 </div>
               </div>
               <div className="mt-8 text-center">
