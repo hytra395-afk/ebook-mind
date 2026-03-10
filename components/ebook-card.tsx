@@ -28,7 +28,7 @@ export default function EbookCard({
       <div className="relative bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
         {/* Cover */}
         <Link href={`/ebooks/${slug}`} className="block">
-          <div className="relative aspect-[2/3] overflow-hidden bg-gray-100 rounded-t-2xl">
+          <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 rounded-t-2xl">
             <Image
               src={cover_url || 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400'}
               alt={title}
@@ -39,7 +39,7 @@ export default function EbookCard({
             />
             {/* Badges */}
             {featured && (
-              <span className="absolute top-3 left-3 badge-sunset text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+              <span className="absolute top-3 left-3 badge-sunset text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg">
                 Bestseller
               </span>
             )}
@@ -47,49 +47,49 @@ export default function EbookCard({
         </Link>
 
         {/* Info */}
-        <div className="p-5">
+        <div className="p-6">
           {/* Category */}
           {category && (
-            <p className="text-xs text-gray-500 font-medium mb-2">
+            <p className="text-sm text-gray-500 font-medium mb-3">
               Cơ bản <span className="text-gray-300">·</span> {category}
             </p>
           )}
 
           {/* Title */}
           <Link href={`/ebooks/${slug}`}>
-            <h3 className="font-bold text-gray-900 text-base leading-snug line-clamp-2 group-hover:text-purple-600 transition-colors mb-3">
+            <h3 className="font-bold text-gray-900 text-xl leading-tight line-clamp-2 group-hover:text-purple-600 transition-colors mb-4">
               {title}
             </h3>
           </Link>
 
-          {/* Rating + sales + pages */}
-          <div className="flex items-center gap-3 text-xs text-gray-500 mb-4">
+          {/* Rating + sales */}
+          <div className="flex items-center gap-4 text-base text-gray-500 mb-5">
             {rating_avg > 0 && (
-              <span className="flex items-center gap-1">
-                <span className="text-yellow-400">★</span>
+              <span className="flex items-center gap-1.5">
+                <span className="text-yellow-400 text-lg">★</span>
                 <span className="font-medium text-gray-700">{Number(rating_avg).toFixed(1)}</span>
                 {rating_count > 0 && <span className="text-gray-400">({rating_count})</span>}
               </span>
             )}
             {sales_count > 0 && (
-              <span className="flex items-center gap-1">
-                <span className="text-gray-300">👁</span>
+              <span className="flex items-center gap-1.5">
+                <span className="text-gray-400">👁</span>
                 <span>{sales_count.toLocaleString('vi-VN')} lượt mua</span>
               </span>
             )}
           </div>
 
           {/* Pages info */}
-          <p className="text-xs text-gray-400 mb-4">320 trang</p>
+          <p className="text-sm text-gray-400 mb-5">320 trang</p>
 
           {/* Price + CTA */}
-          <div className="flex items-center justify-between gap-2">
-            <span className="text-lg font-bold text-purple-600">
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-2xl font-bold text-purple-600">
               {new Intl.NumberFormat('vi-VN').format(price)}đ
             </span>
             <Link
               href={`/ebooks/${slug}`}
-              className="text-xs font-semibold gradient-purple text-white px-4 py-2 rounded-lg hover:opacity-90 transition whitespace-nowrap"
+              className="text-sm font-semibold gradient-purple text-white px-6 py-3 rounded-lg hover:opacity-90 transition whitespace-nowrap"
             >
               Mua ngay
             </Link>

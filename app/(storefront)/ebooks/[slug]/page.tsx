@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Star, BookOpen, ShieldCheck, Zap, Download, ChevronRight, FileText } from 'lucide-react'
 import AddToCartButton from '@/components/add-to-cart-button'
+import EbookTabs from '@/components/ebook-tabs'
 
 export const revalidate = 300 // ISR: cache for 5 minutes
 
@@ -96,7 +97,7 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
 
           {/* ── Left: Cover ── */}
           <div className="lg:col-span-1">
-            <div className="sticky top-20">
+            <div>
               <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-xl bg-gray-100 max-w-xs">
                 <Image
                   src={ebook.cover_url || 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=600'}
@@ -191,50 +192,8 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
               </span>
             </div>
 
-            {/* Nội dung ebook & Đánh giá - 2 cột */}
-            <div className="mb-8 border-t pt-8">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {/* Nội dung ebook */}
-                <div>
-                  <h2 className="text-xl font-bold text-gray-900 mb-4">Mô tả ebook</h2>
-                  <p className="text-sm text-gray-700 leading-relaxed">Hướng dẫn chi tiết từ ý tưởng đến thực hiện kinh doanh thành công. Bao gồm các bước chuẩn bị, tìm kiếm vốn, xây dựng đội ngũ và phát triển sản phẩm.</p>
-                </div>
-
-                {/* Đánh giá */}
-                <div>
-                  <h2 className="text-xl font-bold text-gray-900 mb-4">Đánh giá (2)</h2>
-                  <div className="space-y-4">
-                    <div className="bg-white rounded-lg p-4 border border-gray-200">
-                      <div className="flex items-start gap-3 mb-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">Q</div>
-                        <div className="flex-1">
-                          <p className="font-semibold text-gray-900 text-sm">Ok ok ok</p>
-                          <p className="text-xs text-gray-500">Que trình · 23/2/2025</p>
-                        </div>
-                      </div>
-                      <div className="flex gap-0.5 mb-2">
-                        {[1,2,3,4,5].map(i => <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />)}
-                      </div>
-                      <p className="text-sm text-gray-700">Ề nha nội dung đúng cái mình cần. Mình đang muốn kinh doanh gì đó mà chưa biết chọn cái nào</p>
-                    </div>
-
-                    <div className="bg-white rounded-lg p-4 border border-gray-200">
-                      <div className="flex items-start gap-3 mb-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">M</div>
-                        <div className="flex-1">
-                          <p className="font-semibold text-gray-900 text-sm">Rất dễ hiểu, dễ áp dụng luôn</p>
-                          <p className="text-xs text-gray-500">Minh Khoa · 3/1/2025</p>
-                        </div>
-                      </div>
-                      <div className="flex gap-0.5 mb-2">
-                        {[1,2,3,4,5].map(i => <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />)}
-                      </div>
-                      <p className="text-sm text-gray-700">Ebook rất hay nhé, dễ hiểu, dễ áp dụng. Mình làm theo được ngay</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* Tabs: Nội dung ebook & Đánh giá */}
+            <EbookTabs />
 
             {/* Tác giả */}
             {ebook.authors?.name && (
