@@ -455,6 +455,30 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ─── Stats Section (Gumroad-inspired) ─── */}
+      <section className="bg-white py-16 border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-4xl font-bold bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent mb-2">100+</div>
+              <div className="text-gray-600 text-sm">Ebook Chất Lượng</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent mb-2">10,000+</div>
+              <div className="text-gray-600 text-sm">Người Dùng Hài Lòng</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent mb-2">4.9⭐</div>
+              <div className="text-gray-600 text-sm">Đánh Giá Trung Bình</div>
+            </div>
+            <div>
+              <div className="text-4xl font-bold bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent mb-2">24/7</div>
+              <div className="text-gray-600 text-sm">Hỗ Trợ Khách Hàng</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ─── Featured Ebooks ─── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="mb-8">
@@ -494,66 +518,6 @@ export default async function HomePage() {
             <p>Chưa có ebook nổi bật. Thêm ebook trong Admin Dashboard.</p>
           </div>
         )}
-      </section>
-
-      {/* ─── All / Latest Ebooks ─── */}
-      {allEbooks && allEbooks.length > 0 && (
-        <section className="bg-gray-50 py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-end justify-between mb-8">
-              <div>
-                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Ebook Mới Nhất</h2>
-                <p className="text-gray-500 mt-1 text-sm">Cập nhật liên tục mỗi tuần</p>
-              </div>
-              <Link href="/ebooks" className="text-sm font-semibold text-purple-600 hover:underline flex items-center gap-1">
-                Xem tất cả <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-              {allEbooks.map((ebook: any, idx: number) => (
-                <EbookCard
-                  key={ebook.id}
-                  id={ebook.id}
-                  slug={ebook.slug}
-                  title={ebook.title}
-                  description={ebook.description}
-                  price={ebook.price}
-                  cover_url={ebook.cover_url}
-                  rating_avg={ebook.rating_avg}
-                  rating_count={ebook.rating_count}
-                  sales_count={ebook.sales_count}
-                  featured={ebook.featured}
-                  category={ebook.categories?.name}
-                  priority={idx < 2}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ─── Stats Section (Gumroad-inspired) ─── */}
-      <section className="bg-white py-16 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-4xl font-bold bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent mb-2">100+</div>
-              <div className="text-gray-600 text-sm">Ebook Chất Lượng</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent mb-2">10,000+</div>
-              <div className="text-gray-600 text-sm">Người Dùng Hài Lòng</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent mb-2">4.9⭐</div>
-              <div className="text-gray-600 text-sm">Đánh Giá Trung Bình</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent mb-2">24/7</div>
-              <div className="text-gray-600 text-sm">Hỗ Trợ Khách Hàng</div>
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* ─── Popular Tags (Gumroad-inspired) ─── */}
