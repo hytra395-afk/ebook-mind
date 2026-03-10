@@ -195,7 +195,7 @@ export default async function HomePage() {
                   <div className="text-xs sm:text-sm text-gray-600">Ebook</div>
                 </div>
                 <div className="bg-white rounded-xl p-4 text-center">
-                  <div className="text-sm sm:text-2xl font-black text-gray-900 mb-1 break-words leading-tight">2,530,000,000đ+</div>
+                  <div className="text-xl sm:text-2xl font-black text-gray-900 mb-1 break-words">10tr+</div>
                   <div className="text-xs sm:text-sm text-gray-600">Thu nhập</div>
                 </div>
                 <div className="bg-white rounded-xl p-4 text-center">
