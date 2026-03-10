@@ -207,10 +207,12 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
 
               {/* Buy Box */}
               <div className="bg-white border-2 border-purple-200 rounded-2xl p-6 shadow-sm hidden lg:block">
-                <div className="text-4xl font-extrabold text-purple-600 mb-1">
-                  {new Intl.NumberFormat('vi-VN').format(ebook.price)}đ
+                <div className="text-center">
+                  <div className="text-4xl font-extrabold text-purple-600 mb-1">
+                    {new Intl.NumberFormat('vi-VN').format(ebook.price)}đ
+                  </div>
+                  <p className="text-xs text-gray-500 mb-4">Rẻ hơn một cốc trà sữa</p>
                 </div>
-                <p className="text-xs text-gray-500 mb-4">Rẻ hơn một cốc trà sữa</p>
                 <AddToCartButton ebook={ebook} />
 
                 {/* Trust bullets */}
