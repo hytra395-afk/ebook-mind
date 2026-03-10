@@ -53,12 +53,22 @@ export default function Footer() {
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.style.display = 'none';
-              }}
-              onLoad={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.style.display = 'block';
+                // Fallback text nếu ảnh không tải được
+                const parent = target.parentElement;
+                if (parent && !parent.querySelector('.fallback-badge')) {
+                  const fallback = document.createElement('div');
+                  fallback.className = 'fallback-badge text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded';
+                  fallback.textContent = 'Đã thông báo Bộ Công Thương';
+                  parent.appendChild(fallback);
+                }
               }}
             />
+            {/* Fallback text nếu ảnh không tồn tại */}
+            <noscript>
+              <div className="text-xs text-gray-500 border border-gray-300 px-2 py-1 rounded">
+                Đã thông báo Bộ Công Thương
+              </div>
+            </noscript>
           </div>
         </div>
       </div>
