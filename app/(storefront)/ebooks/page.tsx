@@ -148,24 +148,29 @@ export default async function EbooksPage({
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="mt-12 flex items-center justify-center gap-2">
+          <div className="mt-12 flex items-center justify-center gap-3 bg-gray-50 rounded-xl p-6">
             {page > 1 && (
               <a
                 href={`/ebooks?${new URLSearchParams({ ...Object.fromEntries(Object.entries(params).filter(([k]) => k !== 'page')), page: String(page - 1) }).toString()}`}
-                className="px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50"
+                className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition"
               >
-                ← Trước
+                Trước
               </a>
             )}
             
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+            {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
+              if (totalPages <= 5) return i + 1
+              if (page <= 3) return i + 1
+              if (page >= totalPages - 2) return totalPages - 4 + i
+              return page - 2 + i
+            }).map((p) => (
               <a
                 key={p}
                 href={`/ebooks?${new URLSearchParams({ ...Object.fromEntries(Object.entries(params).filter(([k]) => k !== 'page')), page: String(p) }).toString()}`}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition ${
+                className={`w-10 h-10 flex items-center justify-center rounded-lg text-sm font-medium transition ${
                   p === page
-                    ? 'bg-purple-600 text-white'
-                    : 'border border-gray-200 text-gray-700 hover:bg-gray-50'
+                    ? 'bg-purple-600 text-white shadow-sm'
+                    : 'text-gray-600 hover:bg-white'
                 }`}
               >
                 {p}
@@ -175,9 +180,9 @@ export default async function EbooksPage({
             {page < totalPages && (
               <a
                 href={`/ebooks?${new URLSearchParams({ ...Object.fromEntries(Object.entries(params).filter(([k]) => k !== 'page')), page: String(page + 1) }).toString()}`}
-                className="px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50"
+                className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition"
               >
-                Sau →
+                Sau
               </a>
             )}
           </div>
