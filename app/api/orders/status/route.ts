@@ -69,6 +69,7 @@ export async function GET(request: NextRequest) {
       order: {
         id: order.id,
         public_token: order.public_token,
+        payment_code: order.payment_code,
         status: order.status,
         amount: order.amount,
         currency: order.currency,
