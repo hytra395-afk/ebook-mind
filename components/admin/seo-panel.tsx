@@ -113,7 +113,7 @@ export default function SEOPanel({
     if (hasKeywords) score += 20
 
     // Slug is clean
-    const slugOk = slug && !slug.includes(' ') && slug.length > 5
+    const slugOk = !!(slug && !slug.includes(' ') && slug.length > 5)
     checks.push({
       label: 'URL Slug',
       passed: slugOk,
