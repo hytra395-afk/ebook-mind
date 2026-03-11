@@ -1,7 +1,6 @@
 import { getSupabaseAdmin } from '@/lib/db'
-import { BookOpen, Layers, CreditCard, TrendingUp, Clock, CheckCircle, XCircle } from 'lucide-react'
+import { BookOpen, Layers, CreditCard, TrendingUp, Clock, CheckCircle } from 'lucide-react'
 import Link from 'next/link'
-import ActivityStream from '@/components/admin/activity-stream'
 
 export const revalidate = 0
 
@@ -83,72 +82,64 @@ export default async function AdminDashboardPage() {
         ))}
       </div>
 
-      {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Recent Orders - 2/3 width */}
-        <div className="lg:col-span-2 bg-white rounded-xl border">
-          <div className="p-6 border-b flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-gray-900">Đơn hàng gần đây</h2>
-            <Link 
-              href="/admin/orders" 
-              className="text-sm text-purple-600 hover:text-purple-700 font-medium"
-            >
-              Xem tất cả →
-            </Link>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="text-left text-sm text-gray-500 border-b bg-gray-50">
-                  <th className="px-6 py-3 font-medium">Mã đơn</th>
-                  <th className="px-6 py-3 font-medium">Số tiền</th>
-                  <th className="px-6 py-3 font-medium">Trạng thái</th>
-                  <th className="px-6 py-3 font-medium">Email</th>
-                  <th className="px-6 py-3 font-medium">Ngày tạo</th>
-                </tr>
-              </thead>
-              <tbody>
-                {recentOrders?.map((order: any) => (
-                  <tr key={order.id} className="border-b last:border-0 hover:bg-gray-50 transition">
-                    <td className="px-6 py-4">
-                      <Link 
-                        href={`/admin/orders?search=${order.payment_code}`}
-                        className="font-mono text-sm font-medium text-purple-600 hover:text-purple-700"
-                      >
-                        {order.payment_code}
-                      </Link>
-                    </td>
-                    <td className="px-6 py-4 text-sm font-semibold text-gray-900">
-                      {new Intl.NumberFormat('vi-VN').format(order.amount)}đ
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className={`text-xs font-medium px-2.5 py-1 rounded-full border ${getStatusBadge(order.status)}`}>
-                        {getStatusLabel(order.status)}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-500">
-                      {order.email || <span className="text-gray-300">—</span>}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-500">
-                      {new Date(order.created_at).toLocaleString('vi-VN')}
-                    </td>
-                  </tr>
-                ))}
-                {(!recentOrders || recentOrders.length === 0) && (
-                  <tr>
-                    <td colSpan={5} className="px-6 py-10 text-center text-gray-400">
-                      Chưa có đơn hàng
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
+      {/* Recent Orders */}
+      <div className="bg-white rounded-xl border">
+        <div className="p-6 border-b flex items-center justify-between">
+          <h2 className="text-lg font-semibold text-gray-900">Đơn hàng gần đây</h2>
+          <Link 
+            href="/admin/orders" 
+            className="text-sm text-purple-600 hover:text-purple-700 font-medium"
+          >
+            Xem tất cả →
+          </Link>
         </div>
-
-        {/* Activity Stream - 1/3 width */}
-        <div className="lg:col-span-1">
-          <ActivityStream />
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="text-left text-sm text-gray-500 border-b bg-gray-50">
+                <th className="px-6 py-3 font-medium">Mã đơn</th>
+                <th className="px-6 py-3 font-medium">Số tiền</th>
+                <th className="px-6 py-3 font-medium">Trạng thái</th>
+                <th className="px-6 py-3 font-medium">Email</th>
+                <th className="px-6 py-3 font-medium">Ngày tạo</th>
+              </tr>
+            </thead>
+            <tbody>
+              {recentOrders?.map((order: any) => (
+                <tr key={order.id} className="border-b last:border-0 hover:bg-gray-50 transition">
+                  <td className="px-6 py-4">
+                    <Link 
+                      href={`/admin/orders?search=${order.payment_code}`}
+                      className="font-mono text-sm font-medium text-purple-600 hover:text-purple-700"
+                    >
+                      {order.payment_code}
+                    </Link>
+                  </td>
+                  <td className="px-6 py-4 text-sm font-semibold text-gray-900">
+                    {new Intl.NumberFormat('vi-VN').format(order.amount)}đ
+                  </td>
+                  <td className="px-6 py-4">
+                    <span className={`text-xs font-medium px-2.5 py-1 rounded-full border ${getStatusBadge(order.status)}`}>
+                      {getStatusLabel(order.status)}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-500">
+                    {order.email || <span className="text-gray-300">—</span>}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-500">
+                    {new Date(order.created_at).toLocaleString('vi-VN')}
+                  </td>
+                </tr>
+              ))}
+              {(!recentOrders || recentOrders.length === 0) && (
+                <tr>
+                  <td colSpan={5} className="px-6 py-10 text-center text-gray-400">
+                    Chưa có đơn hàng
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
