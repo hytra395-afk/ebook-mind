@@ -289,7 +289,7 @@ export default async function HomePage() {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Chi phí phù&nbsp;hợp</h3>
               <p className="text-gray-700">
-                Kiến thức ngách thay đổi mindset. Combo tiết kiệm lên đến&nbsp;70%.
+                Giá chỉ bằng một chiếc áo. Mua theo combo tiết kiệm tới 30%.
               </p>
             </div>
 
@@ -300,7 +300,7 @@ export default async function HomePage() {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Nhận ngay lập&nbsp;tức</h3>
               <p className="text-gray-700">
-                Thanh toán xong, email link tải tới ngay. Không phải chờ, không phải xác nhận. Bắt đầu đọc trong vòng 1&nbsp;phút.
+                Thanh toán đơn giản, nhận link ebook ngay. Không phải chờ đợi, không phải xác nhận. Bắt đầu đọc trong vòng 1&nbsp;phút.
               </p>
             </div>
           </div>
