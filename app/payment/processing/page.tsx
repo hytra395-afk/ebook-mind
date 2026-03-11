@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Clock, AlertCircle } from 'lucide-react'
+import { Clock, AlertCircle, Copy, CheckCircle } from 'lucide-react'
 
 export const dynamic = 'force-dynamic'
 
@@ -15,6 +15,7 @@ export default function PaymentProcessingPage() {
   const [timeLeft, setTimeLeft] = useState(15 * 60)
   const [error, setError] = useState('')
   const [qrCode, setQrCode] = useState<string>('')
+  const [copied, setCopied] = useState<string>('')
 
   useEffect(() => {
     setMounted(true)
@@ -42,11 +43,10 @@ export default function PaymentProcessingPage() {
           setOrder(data.order)
           
           // Generate QR code using Sepay
-          if (data.order && !qrCode) {
-            const paymentCode = data.order.payment_code || `EBOOK${data.order.public_token.substring(0, 10)}`
+          if (data.order && data.order.payment_code && !qrCode) {
             const accountNumber = 'VQRQAGAHK6020'
             const amount = data.order.amount
-            const qrUrl = `https://qr.sepay.vn/img?acc=${accountNumber}&amount=${amount}&des=${encodeURIComponent(paymentCode)}&bank=MB`
+            const qrUrl = `https://qr.sepay.vn/img?acc=${accountNumber}&amount=${amount}&des=${encodeURIComponent(data.order.payment_code)}&bank=MB`
             setQrCode(qrUrl)
           }
           
@@ -98,6 +98,12 @@ export default function PaymentProcessingPage() {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`
   }
 
+  const copyToClipboard = (text: string, field: string) => {
+    navigator.clipboard.writeText(text)
+    setCopied(field)
+    setTimeout(() => setCopied(''), 2000)
+  }
+
   if (!mounted || loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -138,139 +144,147 @@ export default function PaymentProcessingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-100 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <header className="bg-white border-b border-gray-200">
+        <div className="max-w-4xl mx-auto px-4 py-4">
           <Link href="/" className="inline-flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg gradient-purple flex items-center justify-center text-white font-bold">
-              📚
-            </div>
-            <span className="text-xl font-bold gradient-text-purple">EbookMind</span>
+            <span className="text-xl font-bold text-purple-600">EbookMind</span>
           </Link>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="max-w-2xl mx-auto">
-          {/* Status Card */}
-          <div className="bg-white rounded-2xl p-8 shadow-sm mb-8 border border-gray-100">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple-100 mb-6">
-                <Clock className="w-8 h-8 text-purple-600" />
-              </div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                Đang chờ thanh toán
-              </h1>
-              <p className="text-gray-600 mb-6">
-                Vui lòng thực hiện thanh toán theo thông tin bên dưới
-              </p>
-              
-              {/* Countdown */}
-              <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 mb-6 inline-block">
-                <p className="text-orange-800 font-semibold flex items-center gap-2">
-                  <Clock className="w-4 h-4" />
-                  Thời gian còn lại: <span className="font-mono text-lg text-orange-900">{formatTime(timeLeft)}</span>
-                </p>
-              </div>
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        {/* Countdown Timer */}
+        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-6 flex items-center justify-center gap-2">
+          <Clock className="w-4 h-4 text-yellow-700" />
+          <span className="text-sm text-yellow-800">Thời gian còn lại: <span className="font-mono font-semibold">{formatTime(timeLeft)}</span></span>
+        </div>
 
-              {/* Order Info */}
-              <div className="bg-gray-50 rounded-xl p-6 grid grid-cols-2 gap-6 text-sm">
-                <div>
-                  <p className="text-gray-600 text-xs uppercase tracking-wide mb-2">Mã đơn hàng</p>
-                  <p className="font-mono font-semibold text-gray-900">{order.public_token}</p>
+        <h1 className="text-2xl font-bold text-gray-900 mb-6">Thông tin thanh toán</h1>
+
+        {/* QR Code Section */}
+        <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+            <span>📱</span> QR Code thanh toán
+          </h2>
+          
+          <div className="flex justify-center mb-4">
+            {qrCode ? (
+              <div className="bg-white p-4 rounded-lg border border-gray-200">
+                <Image
+                  src={qrCode}
+                  alt="QR Code thanh toán"
+                  width={280}
+                  height={280}
+                  className="rounded"
+                  unoptimized
+                />
+              </div>
+            ) : (
+              <div className="bg-gray-100 w-72 h-72 rounded-lg flex items-center justify-center border border-gray-200">
+                <div className="text-center">
+                  <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-purple-600 mx-auto mb-2"></div>
+                  <p className="text-sm text-gray-500">Đang tạo mã QR...</p>
                 </div>
-                <div>
-                  <p className="text-gray-600 text-xs uppercase tracking-wide mb-2">Số tiền</p>
-                  <p className="text-2xl font-bold text-purple-600">
-                    {order.amount.toLocaleString('vi-VN')}đ
-                  </p>
-                </div>
+              </div>
+            )}
+          </div>
+          
+          <p className="text-center text-sm text-gray-600">
+            Quét mã QR bằng ứng dụng ngân hàng của bạn để thanh toán
+          </p>
+        </div>
+
+        {/* Divider */}
+        <div className="flex items-center gap-4 mb-6">
+          <div className="flex-1 h-px bg-gray-300"></div>
+          <span className="text-gray-500 text-sm font-medium">Hoặc</span>
+          <div className="flex-1 h-px bg-gray-300"></div>
+        </div>
+
+        {/* Bank Transfer Info */}
+        <div className="bg-purple-50 rounded-lg border border-purple-200 p-6 mb-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Chuyển khoản thủ công</h2>
+          
+          <div className="space-y-4">
+            {/* Account Number */}
+            <div>
+              <p className="text-xs text-gray-600 uppercase tracking-wide mb-1">SỐ TÀI KHOẢN</p>
+              <div className="flex items-center justify-between bg-white rounded-lg p-3 border border-gray-200">
+                <p className="font-mono font-bold text-gray-900 text-lg">VQRQAGAHK6020</p>
+                <button
+                  onClick={() => copyToClipboard('VQRQAGAHK6020', 'account')}
+                  className="text-purple-600 hover:text-purple-700 p-1"
+                >
+                  {copied === 'account' ? <CheckCircle className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Amount */}
+            <div>
+              <p className="text-xs text-gray-600 uppercase tracking-wide mb-1">SỐ TIỀN</p>
+              <div className="flex items-center justify-between bg-white rounded-lg p-3 border border-gray-200">
+                <p className="font-bold text-purple-600 text-lg">{order.amount.toLocaleString('vi-VN')}đ</p>
+                <button
+                  onClick={() => copyToClipboard(order.amount.toString(), 'amount')}
+                  className="text-purple-600 hover:text-purple-700 p-1"
+                >
+                  {copied === 'amount' ? <CheckCircle className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Payment Code */}
+            <div>
+              <p className="text-xs text-gray-600 uppercase tracking-wide mb-1">NỘI DUNG CHUYỂN KHOẢN</p>
+              <div className="flex items-center justify-between bg-white rounded-lg p-3 border border-gray-200">
+                <p className="font-mono font-bold text-gray-900">{order.payment_code}</p>
+                <button
+                  onClick={() => copyToClipboard(order.payment_code, 'code')}
+                  className="text-purple-600 hover:text-purple-700 p-1"
+                >
+                  {copied === 'code' ? <CheckCircle className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
+                </button>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Payment Instructions */}
-          <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-            <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Thông tin thanh toán</h2>
-            
-            {/* QR Code */}
-            <div className="text-center mb-8">
-              <div className="inline-flex flex-col items-center">
-                {qrCode ? (
-                  <div className="bg-white p-4 rounded-xl border-2 border-gray-200 shadow-sm mb-4">
-                    <Image
-                      src={qrCode}
-                      alt="QR Code thanh toán"
-                      width={300}
-                      height={300}
-                      className="rounded-lg"
-                    />
-                  </div>
-                ) : (
-                  <div className="bg-gray-100 w-56 h-56 rounded-xl flex items-center justify-center mb-4 border-2 border-gray-200">
-                    <div className="text-center">
-                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-2"></div>
-                      <p className="text-sm text-gray-500">Đang tạo mã QR...</p>
-                    </div>
-                  </div>
-                )}
-              </div>
-              <p className="text-sm text-gray-600 mt-4">
-                Quét mã QR bằng ứng dụng ngân hàng của bạn để thanh toán
-              </p>
-            </div>
-
-            {/* Divider */}
-            <div className="flex items-center gap-4 mb-8">
-              <div className="flex-1 h-px bg-gray-200"></div>
-              <span className="text-gray-400 text-sm">Hoặc</span>
-              <div className="flex-1 h-px bg-gray-200"></div>
-            </div>
-
-            {/* Bank Transfer Info */}
-            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 mb-6 border border-purple-100">
-              <h3 className="font-semibold text-gray-900 mb-4">
-                Chuyển khoản thủ công
-              </h3>
-              <div className="space-y-4">
-                <div>
-                  <p className="text-xs text-gray-600 uppercase tracking-wide mb-1">Số tài khoản</p>
-                  <p className="font-mono font-semibold text-gray-900 text-lg">VQRQAGAHK6020</p>
-                </div>
-                <div>
-                  <p className="text-xs text-gray-600 uppercase tracking-wide mb-1">Số tiền</p>
-                  <p className="font-semibold text-purple-600 text-lg">{order.amount.toLocaleString('vi-VN')}đ</p>
-                </div>
-                <div>
-                  <p className="text-xs text-gray-600 uppercase tracking-wide mb-1">Nội dung chuyển khoản</p>
-                  <p className="font-mono font-semibold text-gray-900">{order.payment_code || `EBOOK${order.public_token.substring(0, 10)}`}</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Important Notes */}
-            <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-6">
-              <div className="flex gap-3">
-                <AlertCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="font-semibold text-yellow-900 mb-2">Lưu ý quan trọng</h4>
-                  <ul className="text-sm text-yellow-800 space-y-1">
-                    <li>✓ Vui lòng chuyển đúng số tiền và nội dung</li>
-                    <li>✓ Hệ thống sẽ tự động xác nhận sau khi nhận được tiền</li>
-                    <li>✓ Nếu có vấn đề, vui lòng liên hệ hỗ trợ</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* Auto refresh notice */}
-            <div className="mt-8 text-center">
-              <p className="text-sm text-gray-500">
-                💡 Trang này sẽ tự động cập nhật khi thanh toán thành công
-              </p>
+        {/* Important Notes */}
+        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+          <div className="flex gap-3">
+            <AlertCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
+            <div>
+              <h3 className="font-semibold text-yellow-900 mb-2">⚠️ LƯU Ý QUAN TRỌNG - VUI LÒNG ĐỌC KỸ</h3>
+              <ul className="text-sm text-yellow-800 space-y-2">
+                <li className="flex items-start gap-2">
+                  <span className="text-green-600 font-bold">✓</span>
+                  <span>Chuyển khoản <strong>CHÍNH XÁC</strong> số tiền: <strong className="text-purple-600">{order.amount.toLocaleString('vi-VN')}đ</strong></span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-green-600 font-bold">✓</span>
+                  <span>Nhập <strong>ĐÚNG</strong> nội dung chuyển khoản: <strong className="font-mono bg-white px-2 py-0.5 rounded">{order.payment_code}</strong></span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-red-600 font-bold">⚠</span>
+                  <span>Nếu sai số tiền, giao dịch sẽ <strong>KHÔNG</strong> được xác nhận tự động</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-green-600 font-bold">✓</span>
+                  <span>Hệ thống sẽ tự động xác nhận thanh toán trong vòng 1-2 phút sau khi nhận được chuyển khoản thành công</span>
+                </li>
+              </ul>
             </div>
           </div>
+        </div>
+
+        {/* Auto refresh notice */}
+        <div className="text-center">
+          <p className="text-sm text-gray-500">
+            💡 Trang này sẽ tự động cập nhật khi thanh toán thành công
+          </p>
         </div>
       </div>
     </div>

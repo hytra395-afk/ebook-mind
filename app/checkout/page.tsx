@@ -29,6 +29,19 @@ export default function CheckoutPage() {
 
   const handleCheckout = async () => {
     if (cartItems.length === 0) return
+    
+    // Validate email
+    if (!email || !email.trim()) {
+      alert('Vui lòng nhập email để nhận link tải ebook')
+      return
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      alert('Email không hợp lệ. Vui lòng nhập đúng định dạng email')
+      return
+    }
+    
     try {
       setLoading(true)
 
@@ -40,7 +53,7 @@ export default function CheckoutPage() {
       const response = await fetch('/api/orders/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items, email: email || undefined }),
+        body: JSON.stringify({ items, email: email.trim() }),
       })
 
       const data = await response.json()
@@ -112,10 +125,18 @@ export default function CheckoutPage() {
               <h2 className="text-xl font-semibold mb-4">Thông tin thanh toán</h2>
               <div className="space-y-4">
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email (tùy chọn)</label>
-                  <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)}
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                    Email <span className="text-red-500">*</span>
+                  </label>
+                  <input 
+                    type="email" 
+                    id="email" 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="your@email.com"
-                    className="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent" />
+                    required
+                    className="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent" 
+                  />
                   <p className="text-xs text-gray-500 mt-1">Nhập email để nhận link tải về ebook</p>
                 </div>
 
