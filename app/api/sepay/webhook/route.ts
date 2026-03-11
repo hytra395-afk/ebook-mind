@@ -6,13 +6,18 @@ import crypto from 'crypto'
 import { nanoid } from 'nanoid'
 
 interface SepayWebhookPayload {
-  transactionId: string
+  id: number
+  gateway: string
+  transactionDate: string
   accountNumber: string
-  amount: number
+  subAccount: string
+  code: string
   content: string
-  status: string
-  timestamp: number
-  signature?: string
+  transferType: string
+  description: string
+  transferAmount: number
+  referenceCode: string
+  accumulated: number
 }
 
 function verifyApiKey(request: NextRequest): boolean {
@@ -57,13 +62,9 @@ export async function POST(request: NextRequest) {
     const webhookData: SepayWebhookPayload = JSON.parse(body)
     console.log('Parsed webhook data:', JSON.stringify(webhookData, null, 2))
 
-    // Only process successful transactions
-    if (webhookData.status !== 'success') {
-      return NextResponse.json({ message: 'Transaction not successful' })
-    }
-
-    // Extract payment code from content (format: EBOOK1234567890)
-    const paymentCode = webhookData.content.trim()
+    // Sepay always sends successful transactions to webhook
+    // Extract payment code from 'code' field (format: EBOOK1234567890)
+    const paymentCode = webhookData.code.trim()
     
     console.log('Looking for order with payment_code:', paymentCode)
 
@@ -91,8 +92,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Verify amount matches
-    if (Math.abs(order.amount - webhookData.amount) > 0.01) {
-      console.error('Amount mismatch:', order.amount, webhookData.amount)
+    if (Math.abs(order.amount - webhookData.transferAmount) > 0.01) {
+      console.error('Amount mismatch:', order.amount, webhookData.transferAmount)
       return NextResponse.json(
         { error: 'Amount mismatch' },
         { status: 400 }
@@ -104,7 +105,7 @@ export async function POST(request: NextRequest) {
       .from('orders')
       .update({
         status: 'completed',
-        provider_txn_id: webhookData.transactionId,
+        provider_txn_id: webhookData.referenceCode,
         updated_at: new Date().toISOString(),
         metadata: {
           ...order.metadata,

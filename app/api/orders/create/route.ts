@@ -134,62 +134,9 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Create Sepay payment
-    let sepayData: any = null
-    
-    try {
-      const sepayPayload = {
-        accountNumber: config.sepay.accountNumber,
-        amount: totalAmount,
-        content: paymentCode,
-      }
-
-      console.log('Creating Sepay payment:', sepayPayload)
-
-      const sepayResponse = await fetch(config.sepay.apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${config.sepay.apiKey}`,
-        },
-        body: JSON.stringify(sepayPayload),
-      })
-
-      const responseText = await sepayResponse.text()
-      console.log('Sepay response status:', sepayResponse.status)
-      console.log('Sepay response:', responseText)
-
-      if (!sepayResponse.ok) {
-        console.error('Sepay API error:', responseText)
-        // Continue without Sepay data - allow manual payment
-        sepayData = { error: responseText, manual_payment: true }
-      } else {
-        try {
-          sepayData = JSON.parse(responseText)
-        } catch (e) {
-          console.error('Failed to parse Sepay response:', e)
-          sepayData = { error: 'Invalid JSON response', manual_payment: true }
-        }
-      }
-    } catch (sepayError) {
-      console.error('Sepay request failed:', sepayError)
-      // Continue without Sepay - allow manual payment
-      sepayData = { error: String(sepayError), manual_payment: true }
-    }
-
-    // Update order with Sepay transaction ID
-    if (sepayData.transactionId) {
-      await supabaseAdmin
-        .from('orders')
-        .update({ 
-          provider_txn_id: sepayData.transactionId,
-          metadata: { 
-            ...order.metadata, 
-            sepay_data: sepayData 
-          }
-        })
-        .eq('id', order.id)
-    }
+    // Sepay payment info (manual transfer - no API call needed)
+    // User will transfer money manually using payment_code as content
+    console.log('Order created with payment_code:', paymentCode)
 
     // Return redirect URL to processing page
     const redirectUrl = `${config.app.url}/payment/processing?token=${publicToken}`
@@ -198,9 +145,9 @@ export async function POST(request: NextRequest) {
       success: true,
       order_id: order.id,
       public_token: publicToken,
+      payment_code: paymentCode,
       amount: totalAmount,
       redirect_url: redirectUrl,
-      sepay_data: sepayData,
     })
 
   } catch (error) {

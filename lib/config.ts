@@ -15,7 +15,6 @@ export const config = {
     accountNumber: process.env.SEPAY_ACCOUNT_NUMBER!,
     webhookSecret: process.env.SEPAY_WEBHOOK_SECRET!,
     token: process.env.SEPAY_TOKEN!,
-    apiUrl: process.env.SEPAY_API_URL || 'https://my.sepay.vn/userapi/transactions/create',
   },
   
   resend: {
