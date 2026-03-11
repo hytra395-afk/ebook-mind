@@ -79,7 +79,7 @@ export default async function EbooksPage({
             <span className="text-gray-300">|</span>
             <span className="flex items-center gap-1.5">
               <Star className="w-4 h-4 text-yellow-400" />
-              Đánh giá 4.9⭐
+              Đánh giá 4.9/5⭐
             </span>
             <span className="text-gray-300">|</span>
             <span className="flex items-center gap-1.5">
