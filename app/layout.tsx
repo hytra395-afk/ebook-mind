@@ -14,14 +14,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Ebook Mind' }],
   creator: 'Ebook Mind',
   icons: {
-    icon: [
-      { url: '/favicon.svg?v=3', type: 'image/svg+xml' },
-      { url: '/favicon.ico?v=3' },
-      { url: '/favicon-16.png?v=3', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32.png?v=3', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon-48.png?v=3', sizes: '48x48', type: 'image/png' },
-    ],
-    apple: [{ url: '/apple-touch-icon.png?v=3', sizes: '180x180', type: 'image/png' }],
+    icon: { url: '/favicon.svg?v=5', type: 'image/svg+xml' },
   },
   openGraph: {
     type: 'website',
