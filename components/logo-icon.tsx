@@ -23,11 +23,11 @@ export function LogoIcon() {
         <circle cx="20" cy="20" r="3.5" fill="white" />
       </g>
       
-      {/* Gradient definition - Cyan/Blue like PlanAI */}
+      {/* Gradient definition - Purple gradient matching brand */}
       <defs>
         <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#06b6d4" />
-          <stop offset="100%" stopColor="#0ea5e9" />
+          <stop offset="0%" stopColor="#667eea" />
+          <stop offset="100%" stopColor="#764ba2" />
         </linearGradient>
       </defs>
     </svg>

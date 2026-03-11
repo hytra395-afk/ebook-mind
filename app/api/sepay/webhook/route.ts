@@ -172,11 +172,15 @@ export async function POST(request: NextRequest) {
           })
         }
 
-        // Increment ebook sales count
-        await supabaseAdmin.rpc('increment_ebook_sales', {
-          ebook_id: item.ebook_id,
-          increment_by: item.quantity || 1
-        })
+        // Increment ebook sales count (optional - requires RPC function)
+        try {
+          await supabaseAdmin.rpc('increment_ebook_sales', {
+            ebook_id: item.ebook_id,
+            increment_by: item.quantity || 1
+          })
+        } catch (rpcError) {
+          console.warn('Failed to increment sales count (RPC function may not exist):', rpcError)
+        }
       } else if (item.combo_id) {
         // Handle combo items - get all ebooks in combo
         const { data: comboItems, error: comboError } = await supabaseAdmin
@@ -234,11 +238,15 @@ export async function POST(request: NextRequest) {
             })
           }
 
-          // Increment ebook sales count
-          await supabaseAdmin.rpc('increment_ebook_sales', {
-            ebook_id: comboItem.ebook_id,
-            increment_by: item.quantity || 1
-          })
+          // Increment ebook sales count (optional - requires RPC function)
+          try {
+            await supabaseAdmin.rpc('increment_ebook_sales', {
+              ebook_id: comboItem.ebook_id,
+              increment_by: item.quantity || 1
+            })
+          } catch (rpcError) {
+            console.warn('Failed to increment sales count (RPC function may not exist):', rpcError)
+          }
         }
       }
     }
