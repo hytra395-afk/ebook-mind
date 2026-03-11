@@ -149,11 +149,11 @@ export default function PaymentProcessingPage() {
       <header className="bg-white border-b border-gray-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl gradient-purple flex items-center justify-center shadow-md">
-                <span className="text-2xl">�</span>
+            <Link href="/" className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-lg gradient-purple flex items-center justify-center text-white font-bold">
+                📚
               </div>
-              <span className="text-2xl font-extrabold gradient-text-purple">EbookMind</span>
+              <span className="text-xl font-bold gradient-text-purple">Ebook Mind</span>
             </Link>
             <Link 
               href="/ebooks" 
