@@ -56,19 +56,12 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: 'Transaction not successful' })
     }
 
-    // Extract order token from content
-    const contentMatch = webhookData.content.match(/([A-Za-z0-9_-]{16})/)
-    if (!contentMatch) {
-      console.error('Could not extract order token from content:', webhookData.content)
-      return NextResponse.json(
-        { error: 'Invalid transaction content' },
-        { status: 400 }
-      )
-    }
+    // Extract payment code from content (format: EBOOK1234567890)
+    const paymentCode = webhookData.content.trim()
+    
+    console.log('Looking for order with payment_code:', paymentCode)
 
-    const orderToken = contentMatch[1]
-
-    // Find the order
+    // Find the order by payment_code
     const { data: order, error: orderError } = await supabaseAdmin
       .from('orders')
       .select(`
@@ -79,12 +72,12 @@ export async function POST(request: NextRequest) {
           combo_id
         )
       `)
-      .eq('public_token', orderToken)
+      .eq('payment_code', paymentCode)
       .eq('status', 'pending')
       .single()
 
     if (orderError || !order) {
-      console.error('Order not found:', orderToken, orderError)
+      console.error('Order not found with payment_code:', paymentCode, orderError)
       return NextResponse.json(
         { error: 'Order not found' },
         { status: 404 }
