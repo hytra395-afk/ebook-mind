@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { BookOpen } from 'lucide-react'
+import { LogoIcon } from './logo-icon'
 
 export default function Footer() {
   return (
@@ -8,9 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl gradient-purple flex items-center justify-center shadow-md">
-                <span className="text-2xl">📖</span>
-              </div>
+              <LogoIcon />
               <span className="text-xl font-bold gradient-text-purple">Ebook Mind</span>
             </div>
             <p className="text-sm text-gray-500">Kiến thức ngách thay đổi mindset</p>

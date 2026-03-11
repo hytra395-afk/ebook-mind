@@ -1,9 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Clock, AlertCircle, Copy, CheckCircle } from 'lucide-react'
+import { Clock, Copy, CheckCircle, AlertCircle } from 'lucide-react'
+import { LogoIcon } from '@/components/logo-icon'
 
 export const dynamic = 'force-dynamic'
 
@@ -150,9 +151,7 @@ export default function PaymentProcessingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl gradient-purple flex items-center justify-center shadow-md">
-                <span className="text-2xl">�</span>
-              </div>
+              <LogoIcon />
               <span className="text-xl font-bold gradient-text-purple">Ebook Mind</span>
             </Link>
             <Link 
