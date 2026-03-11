@@ -146,47 +146,57 @@ export default function PaymentProcessingPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Link href="/" className="inline-flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg gradient-purple flex items-center justify-center text-white font-bold">
-              📚
-            </div>
-            <span className="text-xl font-bold gradient-text-purple">EbookMind</span>
-          </Link>
-          <Link 
-            href="/ebooks" 
-            className="text-sm text-gray-600 hover:text-purple-600 transition flex items-center gap-1"
-          >
-            ← Quay lại Ebook Store
-          </Link>
+      <header className="bg-white border-b border-gray-200 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center justify-between">
+            <Link href="/" className="flex items-center gap-2">
+              <div className="w-10 h-10 rounded-xl gradient-purple flex items-center justify-center shadow-md">
+                <span className="text-2xl">📚</span>
+              </div>
+              <span className="text-2xl font-extrabold gradient-text-purple">EbookMind</span>
+            </Link>
+            <Link 
+              href="/ebooks" 
+              className="text-sm font-medium text-gray-600 hover:text-purple-600 transition-colors flex items-center gap-1.5"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Quay lại Ebook Store
+            </Link>
+          </div>
         </div>
       </header>
 
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Countdown Timer */}
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-6 flex items-center justify-center gap-2">
-          <Clock className="w-4 h-4 text-yellow-700" />
-          <span className="text-sm text-yellow-800">Thời gian còn lại: <span className="font-mono font-semibold">{formatTime(timeLeft)}</span></span>
+        <div className="bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-yellow-300 rounded-xl p-4 mb-8 flex items-center justify-center gap-3 shadow-sm">
+          <Clock className="w-5 h-5 text-yellow-700" />
+          <span className="text-base font-semibold text-yellow-900">Thời gian còn lại: <span className="font-mono text-lg text-orange-600">{formatTime(timeLeft)}</span></span>
         </div>
 
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">Thông tin thanh toán</h1>
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-8">
+          <span className="gradient-text-purple">Thông tin thanh toán</span>
+        </h1>
 
         {/* QR Code Section */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-            <span>📱</span> QR Code thanh toán
+        <div className="bg-white rounded-2xl border-2 border-gray-200 p-8 mb-8 shadow-lg">
+          <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-md">
+              <span className="text-xl">📱</span>
+            </div>
+            <span>QR Code thanh toán</span>
           </h2>
           
           <div className="flex justify-center mb-4">
             {qrCode ? (
-              <div className="bg-white p-4 rounded-lg border border-gray-200">
+              <div className="bg-white p-6 rounded-2xl border-2 border-purple-200 shadow-xl">
                 <Image
                   src={qrCode}
                   alt="QR Code thanh toán"
-                  width={280}
-                  height={280}
-                  className="rounded"
+                  width={300}
+                  height={300}
+                  className="rounded-xl"
                   unoptimized
                 />
               </div>
@@ -213,15 +223,20 @@ export default function PaymentProcessingPage() {
         </div>
 
         {/* Bank Transfer Info */}
-        <div className="bg-purple-50 rounded-lg border border-purple-200 p-6 mb-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Chuyển khoản thủ công</h2>
+        <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl border-2 border-purple-200 p-8 mb-8 shadow-lg">
+          <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center shadow-md">
+              <span className="text-xl">💳</span>
+            </div>
+            <span>Chuyển khoản thủ công</span>
+          </h2>
           
           <div className="space-y-4">
             {/* Account Number */}
             <div>
               <p className="text-xs text-gray-600 uppercase tracking-wide mb-1">SỐ TÀI KHOẢN</p>
-              <div className="flex items-center justify-between bg-white rounded-lg p-3 border border-gray-200">
-                <p className="font-mono font-bold text-gray-900 text-lg">VQRQAGAHK6020</p>
+              <div className="flex items-center justify-between bg-white rounded-xl p-4 border-2 border-gray-300 shadow-sm hover:shadow-md transition-shadow">
+                <p className="font-mono font-extrabold text-gray-900 text-xl">VQRQAGAHK6020</p>
                 <button
                   onClick={() => copyToClipboard('VQRQAGAHK6020', 'account')}
                   className="text-purple-600 hover:text-purple-700 p-1"
@@ -234,8 +249,8 @@ export default function PaymentProcessingPage() {
             {/* Amount */}
             <div>
               <p className="text-xs text-gray-600 uppercase tracking-wide mb-1">SỐ TIỀN</p>
-              <div className="flex items-center justify-between bg-white rounded-lg p-3 border border-gray-200">
-                <p className="font-bold text-purple-600 text-lg">{order.amount.toLocaleString('vi-VN')}đ</p>
+              <div className="flex items-center justify-between bg-white rounded-xl p-4 border-2 border-gray-300 shadow-sm hover:shadow-md transition-shadow">
+                <p className="font-extrabold text-2xl gradient-text-purple">{order.amount.toLocaleString('vi-VN')}đ</p>
                 <button
                   onClick={() => copyToClipboard(order.amount.toString(), 'amount')}
                   className="text-purple-600 hover:text-purple-700 p-1"
@@ -248,8 +263,8 @@ export default function PaymentProcessingPage() {
             {/* Payment Code */}
             <div>
               <p className="text-xs text-gray-600 uppercase tracking-wide mb-1">NỘI DUNG CHUYỂN KHOẢN</p>
-              <div className="flex items-center justify-between bg-white rounded-lg p-3 border border-gray-200">
-                <p className="font-mono font-bold text-gray-900">{order.payment_code}</p>
+              <div className="flex items-center justify-between bg-white rounded-xl p-4 border-2 border-gray-300 shadow-sm hover:shadow-md transition-shadow">
+                <p className="font-mono font-extrabold text-gray-900 text-lg">{order.payment_code}</p>
                 <button
                   onClick={() => copyToClipboard(order.payment_code, 'code')}
                   className="text-purple-600 hover:text-purple-700 p-1"
@@ -262,7 +277,7 @@ export default function PaymentProcessingPage() {
         </div>
 
         {/* Important Notes */}
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+        <div className="bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-yellow-300 rounded-2xl p-6 mb-8 shadow-lg">
           <div className="flex gap-3">
             <AlertCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
             <div>

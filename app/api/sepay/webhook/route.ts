@@ -39,6 +39,9 @@ function verifyApiKey(request: NextRequest): boolean {
 
 export async function POST(request: NextRequest) {
   try {
+    console.log('=== Sepay Webhook Called ===')
+    console.log('Headers:', Object.fromEntries(request.headers.entries()))
+    
     // Verify API Key authentication
     if (!verifyApiKey(request)) {
       console.error('Webhook authentication failed')
@@ -49,8 +52,10 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.text()
+    console.log('Raw body:', body)
+    
     const webhookData: SepayWebhookPayload = JSON.parse(body)
-    console.log('Sepay webhook received:', webhookData)
+    console.log('Parsed webhook data:', JSON.stringify(webhookData, null, 2))
 
     // Only process successful transactions
     if (webhookData.status !== 'success') {
