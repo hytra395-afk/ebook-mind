@@ -1,20 +1,27 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { LayoutDashboard, BookOpen, Layers, FileText, CreditCard, BarChart3, LogOut } from 'lucide-react'
+import { usePathname, useRouter } from 'next/navigation'
+import { LayoutDashboard, BookOpen, Layers, ShoppingCart, CreditCard, BarChart3, LogOut, Home } from 'lucide-react'
 
 const navItems = [
   { href: '/admin/dashboard', label: 'Tổng quan', icon: LayoutDashboard },
   { href: '/admin/ebooks', label: 'Ebooks', icon: BookOpen },
   { href: '/admin/combos', label: 'Combos', icon: Layers },
-  { href: '/admin/cms', label: 'CMS giới thiệu ebook', icon: FileText },
+  { href: '/admin/orders', label: 'Đơn hàng', icon: ShoppingCart },
   { href: '/admin/payments', label: 'Thanh toán', icon: CreditCard },
   { href: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
 ]
 
 export default function AdminSidebar() {
   const pathname = usePathname()
+  const router = useRouter()
+
+  const handleLogout = () => {
+    localStorage.removeItem('admin_auth')
+    localStorage.removeItem('admin_login_time')
+    router.push('/admin/login')
+  }
 
   return (
     <aside className="w-64 bg-white border-r flex flex-col min-h-screen">
@@ -50,14 +57,21 @@ export default function AdminSidebar() {
         })}
       </nav>
 
-      <div className="p-4 border-t">
+      <div className="p-4 border-t space-y-1">
         <Link
           href="/"
           className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition"
         >
-          <LogOut className="h-5 w-5 text-gray-400" />
+          <Home className="h-5 w-5 text-gray-400" />
           Về trang chủ
         </Link>
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50 transition"
+        >
+          <LogOut className="h-5 w-5 text-red-400" />
+          Đăng xuất
+        </button>
       </div>
     </aside>
   )

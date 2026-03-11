@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || 'G-8C7MLZ7LN4'
 
 export const metadata: Metadata = {
   title: {
@@ -41,6 +43,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi">
+      <head>
+        {/* Google Analytics */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}', {
+              page_title: document.title,
+              page_location: window.location.href,
+            });
+          `}
+        </Script>
+      </head>
       <body className={inter.className}>
         {children}
       </body>
