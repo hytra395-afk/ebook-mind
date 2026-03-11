@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Plus, Trash2, Star, User } from 'lucide-react'
+import { Plus, Trash2, Star, User, Edit2, RefreshCw } from 'lucide-react'
 
 interface Review {
   id?: string
@@ -32,6 +32,7 @@ export default function ReviewsManager({
   onStatsChange
 }: ReviewsManagerProps) {
   const [showForm, setShowForm] = useState(false)
+  const [editingIndex, setEditingIndex] = useState<number | null>(null)
   const [newReview, setNewReview] = useState<Review>({
     rating: 5,
     title: '',
@@ -44,7 +45,16 @@ export default function ReviewsManager({
 
   const addReview = () => {
     if (newReview.reviewer_name && newReview.content) {
-      onChange([...reviews, { ...newReview, id: `temp-${Date.now()}` }])
+      if (editingIndex !== null) {
+        // Update existing review
+        const updatedReviews = [...reviews]
+        updatedReviews[editingIndex] = { ...newReview, id: reviews[editingIndex].id }
+        onChange(updatedReviews)
+        setEditingIndex(null)
+      } else {
+        // Add new review
+        onChange([...reviews, { ...newReview, id: `temp-${Date.now()}` }])
+      }
       setNewReview({
         rating: 5,
         title: '',
@@ -58,8 +68,41 @@ export default function ReviewsManager({
     }
   }
 
+  const editReview = (index: number) => {
+    setNewReview(reviews[index])
+    setEditingIndex(index)
+    setShowForm(true)
+  }
+
   const removeReview = (index: number) => {
     onChange(reviews.filter((_, i) => i !== index))
+  }
+
+  const cancelEdit = () => {
+    setNewReview({
+      rating: 5,
+      title: '',
+      content: '',
+      reviewer_name: '',
+      reviewer_avatar: '',
+      reviewer_gender: 'other',
+      review_date: new Date().toISOString().split('T')[0]
+    })
+    setEditingIndex(null)
+    setShowForm(false)
+  }
+
+  const refreshStats = () => {
+    if (reviews.length > 0) {
+      const avg = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
+      onStatsChange({ 
+        ratingAvg: Math.round(avg * 10) / 10, 
+        ratingCount: reviews.length,
+        salesCount 
+      })
+    } else {
+      onStatsChange({ ratingAvg: 0, ratingCount: 0, salesCount })
+    }
   }
 
   const StarRating = ({ rating, onChange: onRatingChange }: { rating: number; onChange?: (r: number) => void }) => (
@@ -81,24 +124,21 @@ export default function ReviewsManager({
 
   return (
     <div className="space-y-6">
-      {/* Stats */}
-      <div className="bg-purple-50 rounded-xl p-5 border border-purple-100">
+      {/* Stats Header */}
+      <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-6 border border-purple-100">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-semibold text-gray-900">Thống kê đánh giá</h3>
+          <div>
+            <h3 className="text-lg font-bold text-gray-900 mb-1">⭐ Quản lý đánh giá</h3>
+            <p className="text-sm text-gray-600">
+              Thống kê đánh giá: Trung bình <span className="font-bold text-purple-600">{ratingAvg.toFixed(1)} ⭐</span> - {ratingCount} đánh giá
+            </p>
+          </div>
           <button
             type="button"
-            onClick={() => {
-              const avg = reviews.length > 0 
-                ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length 
-                : 0
-              onStatsChange({ 
-                ratingAvg: Math.round(avg * 10) / 10, 
-                ratingCount: reviews.length,
-                salesCount 
-              })
-            }}
-            className="text-sm text-purple-600 hover:text-purple-700"
+            onClick={refreshStats}
+            className="flex items-center gap-2 px-4 py-2 bg-white border border-purple-200 rounded-lg text-sm font-medium text-purple-600 hover:bg-purple-50 transition"
           >
+            <RefreshCw className="w-4 h-4" />
             Làm mới
           </button>
         </div>
@@ -139,12 +179,29 @@ export default function ReviewsManager({
         </div>
       </div>
 
-      {/* Add Review Form */}
+      {/* Add/Edit Review Form */}
       {showForm ? (
-        <div className="bg-blue-50 rounded-xl p-5 border border-blue-100 space-y-4">
-          <h3 className="font-semibold text-gray-900 flex items-center gap-2">
-            <Plus className="w-4 h-4" /> Thêm đánh giá mới
-          </h3>
+        <div className="bg-blue-50 rounded-xl p-6 border border-blue-200 space-y-5">
+          <div className="flex items-center justify-between">
+            <h3 className="font-semibold text-gray-900 flex items-center gap-2">
+              {editingIndex !== null ? (
+                <>
+                  <Edit2 className="w-5 h-5 text-blue-600" /> Sửa đánh giá
+                </>
+              ) : (
+                <>
+                  <Plus className="w-5 h-5 text-blue-600" /> Thêm đánh giá mới
+                </>
+              )}
+            </h3>
+            <button
+              type="button"
+              onClick={cancelEdit}
+              className="text-sm text-gray-500 hover:text-gray-700"
+            >
+              ✕ Đóng
+            </button>
+          </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
@@ -244,11 +301,11 @@ export default function ReviewsManager({
             />
           </div>
 
-          <div className="flex justify-end gap-2">
+          <div className="flex justify-end gap-3 pt-2">
             <button
               type="button"
-              onClick={() => setShowForm(false)}
-              className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800"
+              onClick={cancelEdit}
+              className="px-5 py-2.5 text-sm text-gray-600 hover:text-gray-800 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
             >
               Hủy
             </button>
@@ -256,9 +313,17 @@ export default function ReviewsManager({
               type="button"
               onClick={addReview}
               disabled={!newReview.reviewer_name || !newReview.content}
-              className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg text-sm font-medium hover:bg-purple-700 transition disabled:opacity-50"
+              className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <Plus className="w-4 h-4" /> Thêm đánh giá
+              {editingIndex !== null ? (
+                <>
+                  <Edit2 className="w-4 h-4" /> Cập nhật đánh giá
+                </>
+              ) : (
+                <>
+                  <Plus className="w-4 h-4" /> Thêm đánh giá
+                </>
+              )}
             </button>
           </div>
         </div>
@@ -266,50 +331,93 @@ export default function ReviewsManager({
         <button
           type="button"
           onClick={() => setShowForm(true)}
-          className="w-full flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed border-purple-200 rounded-xl text-purple-600 hover:bg-purple-50 transition"
+          className="w-full flex items-center justify-center gap-2 px-4 py-4 border-2 border-dashed border-blue-300 rounded-xl text-blue-600 hover:bg-blue-50 transition font-medium"
         >
-          <Plus className="w-4 h-4" /> Thêm đánh giá mới
+          <Plus className="w-5 h-5" /> Thêm đánh giá mới
         </button>
       )}
 
       {/* Reviews List */}
       {reviews.length > 0 && (
-        <div className="space-y-3">
-          <h3 className="font-semibold text-gray-900">Danh sách đánh giá ({reviews.length})</h3>
-          {reviews.map((review, index) => (
-            <div key={review.id || index} className="bg-white border rounded-xl p-4 flex gap-4">
-              <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden flex-shrink-0">
-                {review.reviewer_avatar ? (
-                  <img src={review.reviewer_avatar} alt="" className="w-full h-full object-cover" />
-                ) : (
-                  <User className="w-6 h-6 text-gray-400" />
-                )}
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <StarRating rating={review.rating} />
-                  {review.title && <span className="font-medium text-gray-900">{review.title}</span>}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h3 className="font-semibold text-gray-900 text-lg">Danh sách đánh giá ({reviews.length})</h3>
+          </div>
+          <div className="space-y-3">
+            {reviews.map((review, index) => (
+              <div key={review.id || index} className="bg-white border-2 border-gray-100 rounded-xl p-5 hover:border-purple-200 transition">
+                <div className="flex gap-4">
+                  {/* Avatar */}
+                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center overflow-hidden flex-shrink-0 shadow-md">
+                    {review.reviewer_avatar ? (
+                      <img src={review.reviewer_avatar} alt="" className="w-full h-full object-cover" />
+                    ) : (
+                      <span className="text-white font-bold text-lg">
+                        {review.reviewer_name?.[0]?.toUpperCase() || 'U'}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Content */}
+                  <div className="flex-1 min-w-0">
+                    {/* Header */}
+                    <div className="flex items-start justify-between mb-2">
+                      <div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="font-semibold text-gray-900">{review.reviewer_name}</span>
+                          {review.reviewer_gender && (
+                            <span className="text-xs px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full">
+                              {review.reviewer_gender === 'male' ? '👨 Nam' : review.reviewer_gender === 'female' ? '👩 Nữ' : '👤 Khác'}
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <StarRating rating={review.rating} />
+                          {review.review_date && (
+                            <span className="text-xs text-gray-400">
+                              • {new Date(review.review_date).toLocaleDateString('vi-VN', { 
+                                day: '2-digit', 
+                                month: '2-digit', 
+                                year: 'numeric' 
+                              })}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Action buttons */}
+                      <div className="flex items-center gap-1">
+                        <button
+                          type="button"
+                          onClick={() => editReview(index)}
+                          className="p-2 text-blue-500 hover:text-blue-700 hover:bg-blue-50 rounded-lg transition"
+                          title="Sửa đánh giá"
+                        >
+                          <Edit2 className="w-4 h-4" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => removeReview(index)}
+                          className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
+                          title="Xóa đánh giá"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Title */}
+                    {review.title && (
+                      <p className="font-medium text-gray-900 mb-1">{review.title}</p>
+                    )}
+
+                    {/* Content */}
+                    <p className="text-sm text-gray-600 leading-relaxed">{review.content}</p>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
-                  <span className="font-medium">{review.reviewer_name}</span>
-                  {review.review_date && (
-                    <>
-                      <span>•</span>
-                      <span>{new Date(review.review_date).toLocaleDateString('vi-VN')}</span>
-                    </>
-                  )}
-                </div>
-                <p className="text-sm text-gray-600">{review.content}</p>
               </div>
-              <button
-                type="button"
-                onClick={() => removeReview(index)}
-                className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
-              >
-                <Trash2 className="w-4 h-4" />
-              </button>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       )}
     </div>
