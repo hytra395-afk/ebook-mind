@@ -1,38 +1,20 @@
 <svg viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#a855f7;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0ea5e9;stop-opacity:1" />
     </linearGradient>
   </defs>
-  <!-- Rounded square background -->
+  <!-- Rounded square background - cyan/blue gradient -->
   <rect x="8" y="8" width="176" height="176" rx="36" fill="url(#grad)"/>
   
-  <!-- Open book icon - outline only (stroke, not fill) -->
-  <!-- Left page outline -->
-  <path
-    d="M50 70C50 60 58 52 68 52H96V140C96 150 88 158 78 158H68C58 158 50 150 50 140V70Z"
-    fill="none"
-    stroke="white"
-    stroke-width="6"
-    stroke-linejoin="round"
-    stroke-linecap="round"
-  />
-  <!-- Right page outline -->
-  <path
-    d="M96 52H124C134 52 142 60 142 70V140C142 150 134 158 124 158H96V52Z"
-    fill="none"
-    stroke="white"
-    stroke-width="6"
-    stroke-linejoin="round"
-    stroke-linecap="round"
-  />
-  <!-- Spine line -->
-  <path
-    d="M96 52V158"
-    stroke="white"
-    stroke-width="4"
-    stroke-linecap="round"
-  />
+  <!-- Concentric circles - PlanAI style -->
+  <!-- Outer circle -->
+  <circle cx="96" cy="96" r="48" stroke="white" stroke-width="12" fill="none" />
+  
+  <!-- Middle circle -->
+  <circle cx="96" cy="96" r="31" stroke="white" stroke-width="12" fill="none" />
+  
+  <!-- Inner circle - filled -->
+  <circle cx="96" cy="96" r="17" fill="white" />
 </svg>
