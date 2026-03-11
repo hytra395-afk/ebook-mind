@@ -15,39 +15,40 @@ interface SepayWebhookPayload {
   signature?: string
 }
 
-function verifySignature(payload: string, signature: string): boolean {
-  // If no webhook secret configured, skip verification
-  if (!config.sepay.webhookSecret) {
-    return true
+function verifyApiKey(request: NextRequest): boolean {
+  // Sepay sends API Key in Authorization header: "Apikey YOUR_API_KEY"
+  const authHeader = request.headers.get('authorization') || ''
+  
+  // Extract API key from "Apikey YOUR_API_KEY" format
+  const apiKeyMatch = authHeader.match(/^Apikey\s+(.+)$/i)
+  if (!apiKeyMatch) {
+    console.error('Invalid authorization header format:', authHeader)
+    return false
   }
-
-  // If webhook secret is a URL (misconfigured), skip verification
-  if (config.sepay.webhookSecret.startsWith('http')) {
-    return true
+  
+  const providedApiKey = apiKeyMatch[1]
+  const expectedApiKey = config.sepay.webhookSecret
+  
+  if (providedApiKey !== expectedApiKey) {
+    console.error('API key mismatch')
+    return false
   }
-
-  const expectedSignature = crypto
-    .createHmac('sha256', config.sepay.webhookSecret)
-    .update(payload)
-    .digest('hex')
-
-  return signature === expectedSignature
+  
+  return true
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.text()
-    const signature = request.headers.get('x-sepay-signature') || ''
-
-    // Verify signature
-    if (!verifySignature(body, signature)) {
-      console.error('Invalid webhook signature')
+    // Verify API Key authentication
+    if (!verifyApiKey(request)) {
+      console.error('Webhook authentication failed')
       return NextResponse.json(
-        { error: 'Invalid signature' },
+        { error: 'Unauthorized' },
         { status: 401 }
       )
     }
 
+    const body = await request.text()
     const webhookData: SepayWebhookPayload = JSON.parse(body)
     console.log('Sepay webhook received:', webhookData)
 
