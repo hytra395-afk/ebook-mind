@@ -3,14 +3,13 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@supabase/supabase-js'
-import { ArrowLeft, Save, Send, Eye, BookOpen, Image as ImageIcon, FileText, User, Star, Search } from 'lucide-react'
+import { ArrowLeft, Save, Send, Eye, Package, Image as ImageIcon, FileText, Star, Search, Plus, X } from 'lucide-react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import ImageGalleryInput from '@/components/admin/image-gallery-input'
 import HighlightsInput from '@/components/admin/highlights-input'
 import ReviewsManager from '@/components/admin/reviews-manager'
 import SEOPanel from '@/components/admin/seo-panel'
-import AuthorInput from '@/components/admin/author-input'
 
 const RichTextEditor = dynamic(() => import('@/components/admin/rich-text-editor'), { ssr: false })
 
@@ -22,43 +21,32 @@ function getClient() {
 }
 
 const tabs = [
-  { id: 'basic', label: 'Thông tin cơ bản', icon: BookOpen },
-  { id: 'media', label: 'Ảnh & Media', icon: ImageIcon },
-  { id: 'content', label: 'Nội dung', icon: FileText },
-  { id: 'author', label: 'Tác giả', icon: User },
+  { id: 'basic', label: 'Thông tin cơ bản', icon: Package },
+  { id: 'media', label: 'Ảnh & Nội dung', icon: ImageIcon },
+  { id: 'ebooks', label: 'Ebooks trong combo', icon: FileText },
   { id: 'reviews', label: 'Đánh giá', icon: Star },
   { id: 'seo', label: 'SEO', icon: Search },
 ]
 
-export default function NewEbookPage() {
+export default function NewComboPage() {
   const supabase = getClient()
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [activeTab, setActiveTab] = useState('basic')
-  const [categories, setCategories] = useState<any[]>([])
-  const [levels, setLevels] = useState<any[]>([])
+  const [ebooks, setEbooks] = useState<any[]>([])
+  const [selectedEbooks, setSelectedEbooks] = useState<string[]>([])
   
   const [form, setForm] = useState({
     title: '',
     slug: '',
     description: '',
-    category_id: '',
-    level_id: '',
     price: '',
-    pages: '',
-    cover_url: '',
-    external_url: '',
     active: true,
     featured: false,
     status: 'draft',
-    // New fields
-    highlights: [] as string[],
+    cover_url: '',
     content: '',
-    preview_images: [] as string[],
-    author_name: '',
-    author_title: '',
-    author_bio: '',
-    author_avatar: '',
+    highlights: [] as string[],
     og_image_url: '',
     meta_title: '',
     meta_description: '',
@@ -71,35 +59,37 @@ export default function NewEbookPage() {
   const [reviews, setReviews] = useState<any[]>([])
 
   useEffect(() => {
-    Promise.all([
-      supabase.from('categories').select('*'),
-      supabase.from('levels').select('*').order('sort_order'),
-    ]).then(([catRes, lvlRes]) => {
-      setCategories(catRes.data || [])
-      setLevels(lvlRes.data || [])
+    supabase.from('ebooks').select('id, title, cover_url, price').eq('active', true).then(({ data }) => {
+      setEbooks(data || [])
     })
   }, [])
 
   const handleSubmit = async (status: 'draft' | 'published') => {
-    if (!form.title || !form.category_id || !form.level_id || !form.price) {
+    if (!form.title || !form.price) {
       alert('Vui lòng điền đầy đủ thông tin bắt buộc')
       setActiveTab('basic')
       return
     }
 
+    if (selectedEbooks.length === 0) {
+      alert('Vui lòng chọn ít nhất 1 ebook cho combo')
+      setActiveTab('ebooks')
+      return
+    }
+
     setLoading(true)
     try {
-      const res = await fetch('/api/admin/ebooks', {
+      const res = await fetch('/api/admin/combos', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...form,
           status,
           price: Number(form.price),
-          pages: Number(form.pages) || 0,
           rating_avg: Number(form.rating_avg),
           rating_count: Number(form.rating_count),
           sales_count: Number(form.sales_count),
+          ebook_ids: selectedEbooks,
           reviews,
         }),
       })
@@ -109,7 +99,7 @@ export default function NewEbookPage() {
         setLoading(false)
         return 
       }
-      router.push('/admin/ebooks')
+      router.push('/admin/combos')
       router.refresh()
     } catch (err) {
       alert('Lỗi kết nối')
@@ -127,22 +117,35 @@ export default function NewEbookPage() {
       .replace(/(^-|-$)/g, '')
   }
 
+  const toggleEbook = (ebookId: string) => {
+    setSelectedEbooks(prev => 
+      prev.includes(ebookId) 
+        ? prev.filter(id => id !== ebookId)
+        : [...prev, ebookId]
+    )
+  }
+
+  const totalOriginalPrice = selectedEbooks.reduce((sum, id) => {
+    const ebook = ebooks.find(e => e.id === id)
+    return sum + (ebook?.price || 0)
+  }, 0)
+
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-4">
-          <Link href="/admin/ebooks" className="p-2 text-gray-400 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition">
+          <Link href="/admin/combos" className="p-2 text-gray-400 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition">
             <ArrowLeft className="h-5 w-5" />
           </Link>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Thêm Ebook Mới</h1>
-            <p className="text-sm text-gray-500">Tạo ebook với đầy đủ thông tin</p>
+            <h1 className="text-2xl font-bold text-gray-900">Thêm Combo Mới</h1>
+            <p className="text-sm text-gray-500">Tạo combo ebook với giá ưu đãi</p>
           </div>
         </div>
         
         <div className="flex items-center gap-3">
           <Link
-            href={form.slug ? `/ebooks/${form.slug}` : '#'}
+            href={form.slug ? `/combos/${form.slug}` : '#'}
             target="_blank"
             className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition"
           >
@@ -182,6 +185,11 @@ export default function NewEbookPage() {
           >
             <tab.icon className="w-4 h-4" />
             {tab.label}
+            {tab.id === 'ebooks' && selectedEbooks.length > 0 && (
+              <span className="ml-1 px-1.5 py-0.5 bg-purple-100 text-purple-600 text-xs rounded-full">
+                {selectedEbooks.length}
+              </span>
+            )}
           </button>
         ))}
       </div>
@@ -193,13 +201,13 @@ export default function NewEbookPage() {
           <div className="space-y-5 max-w-3xl">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Tên ebook *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Tên combo *</label>
                 <input
                   type="text"
                   value={form.title}
                   onChange={(e) => setForm({ ...form, title: e.target.value, slug: generateSlug(e.target.value) })}
                   className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  placeholder="VD: Khởi nghiệp thành công"
+                  placeholder="VD: Combo Khởi Nghiệp Toàn Diện"
                 />
               </div>
               <div>
@@ -210,7 +218,7 @@ export default function NewEbookPage() {
                   onChange={(e) => setForm({ ...form, slug: e.target.value })}
                   className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 />
-                <p className="text-xs text-gray-400 mt-1">URL: ebookmind.com/ebooks/{form.slug || 'slug'}</p>
+                <p className="text-xs text-gray-400 mt-1">URL: ebookmind.com/combos/{form.slug || 'slug'}</p>
               </div>
             </div>
 
@@ -221,96 +229,60 @@ export default function NewEbookPage() {
                 value={form.description}
                 onChange={(e) => setForm({ ...form, description: e.target.value })}
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                placeholder="Mô tả ngắn gọn về ebook (hiển thị ở trang danh sách)"
+                placeholder="Mô tả ngắn gọn về combo"
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Category *</label>
-                <select
-                  value={form.category_id}
-                  onChange={(e) => setForm({ ...form, category_id: e.target.value })}
-                  className="w-full border rounded-lg px-3 py-2 text-sm"
-                >
-                  <option value="">Chọn category</option>
-                  {categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Level *</label>
-                <select
-                  value={form.level_id}
-                  onChange={(e) => setForm({ ...form, level_id: e.target.value })}
-                  className="w-full border rounded-lg px-3 py-2 text-sm"
-                >
-                  <option value="">Chọn level</option>
-                  {levels.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}
-                </select>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Giá (VND) *</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Giá combo (VND) *</label>
                 <input
                   type="number"
                   value={form.price}
                   onChange={(e) => setForm({ ...form, price: e.target.value })}
                   className="w-full border rounded-lg px-3 py-2 text-sm"
-                  placeholder="49000"
+                  placeholder="99000"
                 />
+                {totalOriginalPrice > 0 && (
+                  <p className="text-xs text-gray-500 mt-1">
+                    Giá gốc: {new Intl.NumberFormat('vi-VN').format(totalOriginalPrice)}đ
+                    {form.price && Number(form.price) < totalOriginalPrice && (
+                      <span className="text-green-600 ml-2">
+                        (Tiết kiệm {Math.round((1 - Number(form.price) / totalOriginalPrice) * 100)}%)
+                      </span>
+                    )}
+                  </p>
+                )}
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Số trang</label>
-                <input
-                  type="number"
-                  value={form.pages}
-                  onChange={(e) => setForm({ ...form, pages: e.target.value })}
-                  className="w-full border rounded-lg px-3 py-2 text-sm"
-                  placeholder="200"
-                />
+              <div className="flex items-end gap-6 pb-2">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={form.active}
+                    onChange={(e) => setForm({ ...form, active: e.target.checked })}
+                    className="rounded text-purple-600"
+                  />
+                  <span className="text-sm text-gray-700">Active</span>
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={form.featured}
+                    onChange={(e) => setForm({ ...form, featured: e.target.checked })}
+                    className="rounded text-purple-600"
+                  />
+                  <span className="text-sm text-gray-700">Featured</span>
+                </label>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Link PDF *</label>
-                <input
-                  type="url"
-                  value={form.external_url}
-                  onChange={(e) => setForm({ ...form, external_url: e.target.value })}
-                  className="w-full border rounded-lg px-3 py-2 text-sm"
-                  placeholder="https://drive.google.com/..."
-                />
-              </div>
-            </div>
-
-            <div className="flex items-center gap-6 pt-2">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={form.active}
-                  onChange={(e) => setForm({ ...form, active: e.target.checked })}
-                  className="rounded text-purple-600"
-                />
-                <span className="text-sm text-gray-700">Active (hiển thị trên website)</span>
-              </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={form.featured}
-                  onChange={(e) => setForm({ ...form, featured: e.target.checked })}
-                  className="rounded text-purple-600"
-                />
-                <span className="text-sm text-gray-700">Featured (nổi bật)</span>
-              </label>
             </div>
           </div>
         )}
 
-        {/* Tab: Media */}
+        {/* Tab: Media & Content */}
         {activeTab === 'media' && (
-          <div className="space-y-6 max-w-4xl">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Ảnh bìa (Cover) *</label>
+          <div className="space-y-6">
+            <div className="max-w-3xl">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Ảnh bìa combo</label>
               <input
                 type="url"
                 value={form.cover_url}
@@ -330,23 +302,7 @@ export default function NewEbookPage() {
               )}
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">
-                Ảnh Preview (Album xem trước nội dung)
-              </label>
-              <ImageGalleryInput
-                images={form.preview_images}
-                onChange={(images) => setForm({ ...form, preview_images: images })}
-                maxImages={10}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Tab: Content */}
-        {activeTab === 'content' && (
-          <div className="space-y-6">
-            <div>
+            <div className="max-w-3xl">
               <label className="block text-sm font-medium text-gray-700 mb-3">Điểm nổi bật</label>
               <HighlightsInput
                 highlights={form.highlights}
@@ -356,30 +312,97 @@ export default function NewEbookPage() {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-3">
-                Giới thiệu chi tiết (Nội dung mô tả đầy đủ)
+                Mô tả chi tiết combo
               </label>
               <RichTextEditor
                 content={form.content}
                 onChange={(content) => setForm({ ...form, content })}
-                placeholder="Viết nội dung giới thiệu chi tiết về ebook... (hỗ trợ H1-H4, bold, italic, link, ảnh)"
+                placeholder="Viết nội dung mô tả chi tiết về combo..."
               />
             </div>
           </div>
         )}
 
-        {/* Tab: Author */}
-        {activeTab === 'author' && (
-          <div className="max-w-3xl">
-            <AuthorInput
-              authorName={form.author_name}
-              authorTitle={form.author_title}
-              authorBio={form.author_bio}
-              authorAvatar={form.author_avatar}
-              onAuthorNameChange={(v) => setForm({ ...form, author_name: v })}
-              onAuthorTitleChange={(v) => setForm({ ...form, author_title: v })}
-              onAuthorBioChange={(v) => setForm({ ...form, author_bio: v })}
-              onAuthorAvatarChange={(v) => setForm({ ...form, author_avatar: v })}
-            />
+        {/* Tab: Ebooks */}
+        {activeTab === 'ebooks' && (
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="font-medium text-gray-900">
+                Chọn ebooks cho combo ({selectedEbooks.length} đã chọn)
+              </h3>
+              {selectedEbooks.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => setSelectedEbooks([])}
+                  className="text-sm text-red-600 hover:text-red-700"
+                >
+                  Bỏ chọn tất cả
+                </button>
+              )}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {ebooks.map((ebook) => {
+                const isSelected = selectedEbooks.includes(ebook.id)
+                return (
+                  <div
+                    key={ebook.id}
+                    onClick={() => toggleEbook(ebook.id)}
+                    className={`flex items-center gap-3 p-3 border-2 rounded-xl cursor-pointer transition ${
+                      isSelected 
+                        ? 'border-purple-500 bg-purple-50' 
+                        : 'border-gray-200 hover:border-gray-300'
+                    }`}
+                  >
+                    <div className="w-12 h-16 rounded overflow-hidden bg-gray-100 flex-shrink-0">
+                      {ebook.cover_url && (
+                        <img src={ebook.cover_url} alt={ebook.title} className="w-full h-full object-cover" />
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium text-sm text-gray-900 line-clamp-2">{ebook.title}</p>
+                      <p className="text-sm text-purple-600 font-semibold">
+                        {new Intl.NumberFormat('vi-VN').format(ebook.price)}đ
+                      </p>
+                    </div>
+                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
+                      isSelected ? 'border-purple-500 bg-purple-500' : 'border-gray-300'
+                    }`}>
+                      {isSelected && <span className="text-white text-xs">✓</span>}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+
+            {selectedEbooks.length > 0 && (
+              <div className="mt-6 p-4 bg-purple-50 rounded-xl">
+                <h4 className="font-medium text-gray-900 mb-2">Ebooks đã chọn:</h4>
+                <div className="flex flex-wrap gap-2">
+                  {selectedEbooks.map((id) => {
+                    const ebook = ebooks.find(e => e.id === id)
+                    return ebook ? (
+                      <span
+                        key={id}
+                        className="inline-flex items-center gap-1 px-3 py-1 bg-white rounded-full text-sm border"
+                      >
+                        {ebook.title}
+                        <button
+                          type="button"
+                          onClick={(e) => { e.stopPropagation(); toggleEbook(id) }}
+                          className="text-gray-400 hover:text-red-500"
+                        >
+                          <X className="w-3 h-3" />
+                        </button>
+                      </span>
+                    ) : null
+                  })}
+                </div>
+                <p className="text-sm text-gray-600 mt-3">
+                  Tổng giá gốc: <span className="font-semibold">{new Intl.NumberFormat('vi-VN').format(totalOriginalPrice)}đ</span>
+                </p>
+              </div>
+            )}
           </div>
         )}
 
