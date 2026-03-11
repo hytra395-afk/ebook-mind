@@ -2,7 +2,7 @@ import { getSupabase } from '@/lib/db'
 import EbookCard from '@/components/ebook-card'
 import EbooksFilter from '@/components/ebooks-filter'
 import { Suspense } from 'react'
-import { BookOpen, Star, Users } from 'lucide-react'
+import { BookOpen, Star, Users, NotebookPen, Search, Lightbulb, Rocket } from 'lucide-react'
 
 export const revalidate = 300
 
@@ -86,6 +86,53 @@ export default async function EbooksPage({
               <Users className="w-4 h-4 text-teal-400" />
               10,000+ độc giả
             </span>
+          </div>
+        </div>
+      </section>
+
+      {/* Reading Effectively Block */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        <div className="rounded-2xl bg-white shadow-sm border border-gray-100 p-6 sm:p-8">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Đọc ebook hiệu quả</h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {/* Step 1 */}
+            <div className="rounded-xl border border-gray-100 bg-gray-50 p-4 sm:p-5 hover:bg-white transition shadow-xs">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center text-white mb-3 shadow-sm">
+                <NotebookPen className="w-5 h-5" />
+              </div>
+              <div className="text-sm font-semibold text-gray-900 mb-1">Bước 1</div>
+              <p className="text-sm text-gray-600">Đọc và ghi chép lại những gì hữu ích.</p>
+            </div>
+
+            {/* Step 2 */}
+            <div className="rounded-xl border border-gray-100 bg-gray-50 p-4 sm:p-5 hover:bg-white transition shadow-xs">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center text-white mb-3 shadow-sm">
+                <Search className="w-5 h-5" />
+              </div>
+              <div className="text-sm font-semibold text-gray-900 mb-1">Bước 2</div>
+              <p className="text-sm text-gray-600">Tìm thêm tài liệu liên quan để hiểu sâu hơn.</p>
+            </div>
+
+            {/* Step 3 */}
+            <div className="rounded-xl border border-gray-100 bg-gray-50 p-4 sm:p-5 hover:bg-white transition shadow-xs">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center text-white mb-3 shadow-sm">
+                <Lightbulb className="w-5 h-5" />
+              </div>
+              <div className="text-sm font-semibold text-gray-900 mb-1">Bước 3</div>
+              <p className="text-sm text-gray-600">Phản biện và chọn lọc ý tưởng một cách chủ động.</p>
+            </div>
+
+            {/* Step 4 */}
+            <div className="rounded-xl border border-gray-100 bg-gray-50 p-4 sm:p-5 hover:bg-white transition shadow-xs">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center text-white mb-3 shadow-sm">
+                <Rocket className="w-5 h-5" />
+              </div>
+              <div className="text-sm font-semibold text-gray-900 mb-1">Bước 4</div>
+              <p className="text-sm text-gray-600">Hành động ngay — tránh đọc xong để đó.</p>
+            </div>
           </div>
         </div>
       </section>
