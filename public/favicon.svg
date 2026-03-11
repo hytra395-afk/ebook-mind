@@ -6,8 +6,8 @@
       <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
     </linearGradient>
   </defs>
-  <!-- Circular background -->
-  <circle cx="96" cy="96" r="96" fill="url(#grad)"/>
+  <!-- Rounded square background -->
+  <rect x="8" y="8" width="176" height="176" rx="36" fill="url(#grad)"/>
   
   <!-- Open book icon - outline only (stroke, not fill) -->
   <!-- Left page outline -->

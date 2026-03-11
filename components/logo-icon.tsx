@@ -23,11 +23,12 @@ export function LogoIcon() {
         <line x1="20" y1="10" x2="20" y2="32" />
       </g>
       
-      {/* Gradient definition */}
+      {/* Gradient definition - Purple → Pink (PlanAI style) */}
       <defs>
         <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#667eea" />
-          <stop offset="100%" stopColor="#764ba2" />
+          <stop offset="0%" stopColor="#6366f1" />
+          <stop offset="60%" stopColor="#8b5cf6" />
+          <stop offset="100%" stopColor="#d946ef" />
         </linearGradient>
       </defs>
     </svg>

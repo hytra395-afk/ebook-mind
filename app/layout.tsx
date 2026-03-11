@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: {
-    default: 'Ebook Mind - Kiến thức giá bằng một cốc trà sữa',
+    default: 'Ebook Mind - Kiến thức ngách thay đổi mindset',
     template: '%s | Ebook Mind',
   },
   description: 'Nền tảng ebook chất lượng cao với giá phải chăng. Kinh doanh, Phát triển bản thân, Công nghệ, Sức khỏe. Thanh toán nhanh, nhận link tải ngay.',
@@ -27,12 +27,12 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'vi_VN',
     siteName: 'Ebook Mind',
-    title: 'Ebook Mind - Kiến thức giá bằng một cốc trà sữa',
+    title: 'Ebook Mind - Kiến thức ngách thay đổi mindset',
     description: 'Hàng trăm ebook chất lượng về Kinh doanh, Phát triển bản thân, Công nghệ. Giá chỉ từ 49.000đ.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ebook Mind - Kiến thức giá bằng một cốc trà sữa',
+    title: 'Ebook Mind - Kiến thức ngách thay đổi mindset',
     description: 'Hàng trăm ebook chất lượng. Giá chỉ từ 49.000đ.',
   },
   robots: {

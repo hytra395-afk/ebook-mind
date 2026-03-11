@@ -90,7 +90,7 @@ export async function sendOrderConfirmationEmail({
             <p style="margin:0;color:#9ca3af;font-size:12px;">
               Gặp vấn đề? Liên hệ <a href="mailto:support@ebookmind.com" style="color:#7c3aed;">support@ebookmind.com</a>
             </p>
-            <p style="margin:8px 0 0;color:#d1d5db;font-size:11px;">© ${new Date().getFullYear()} Ebook Mind · Kiến thức giá bằng một cốc trà sữa</p>
+            <p style="margin:8px 0 0;color:#d1d5db;font-size:11px;">© ${new Date().getFullYear()} Ebook Mind · Kiến thức ngách thay đổi mindset</p>
           </td>
         </tr>
       </table>

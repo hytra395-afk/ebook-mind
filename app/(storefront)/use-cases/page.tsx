@@ -217,7 +217,7 @@ export default function UseCasesPage() {
             Sẵn sàng bắt đầu?
           </h2>
           <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
-            Khám phá hàng trăm ebook chất lượng cao với giá chỉ bằng một cốc trà sữa
+            Kiến thức ngách thay đổi mindset
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
