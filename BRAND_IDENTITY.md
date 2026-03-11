@@ -4,17 +4,20 @@
 
 ### Primary Logo
 ```
-📚 EbookMind
+[�] EbookMind
+(Purple gradient square background)
 ```
 
 ### Logo Specifications
-- **Icon**: 📚 (Books emoji) hoặc SVG custom
-- **Wordmark**: "EbookMind"
-- **Font**: Inter Bold / SF Pro Display Bold
+- **Icon**: � (Open book emoji) trên background gradient purple (#667eea → #764ba2)
+- **Background**: Rounded square (border-radius: 12px), size 48px × 48px
+- **Wordmark**: "EbookMind" (Inter Extrabold, gradient text)
+- **Font**: Inter Extrabold / SF Pro Display Bold
 - **Size**: 
-  - Desktop: 24px height
-  - Mobile: 20px height
-- **Spacing**: 8px gap between icon and text
+  - Desktop: 32px height (logo) + 28px text
+  - Mobile: 28px height (logo) + 24px text
+- **Spacing**: 12px gap between icon and text
+- **Color**: Icon white on gradient purple background, text gradient purple
 
 ### Logo Variations
 1. **Full Logo**: Icon + Wordmark (primary)
