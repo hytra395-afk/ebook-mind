@@ -104,7 +104,7 @@ export default async function EbooksPage({
                 <NotebookPen className="w-5 h-5" />
               </div>
               <div className="text-sm font-semibold text-gray-900 mb-1">Bước 1</div>
-              <p className="text-sm text-gray-600">Đọc và ghi chép lại những gì hữu ích.</p>
+              <p className="text-sm text-gray-600">Đọc và ghi chép lại những kiến thức hữu ích.</p>
             </div>
 
             {/* Step 2 */}
