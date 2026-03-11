@@ -8,8 +8,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg gradient-purple flex items-center justify-center text-white font-bold">
-                �
+              <div className="w-10 h-10 rounded-xl gradient-purple flex items-center justify-center shadow-md">
+                <span className="text-2xl">📖</span>
               </div>
               <span className="text-xl font-bold gradient-text-purple">Ebook Mind</span>
             </div>
