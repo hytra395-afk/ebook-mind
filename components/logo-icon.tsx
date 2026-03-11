@@ -8,10 +8,10 @@ export function LogoIcon() {
       xmlns="http://www.w3.org/2000/svg"
       className="w-10 h-10"
     >
-      {/* Background - Rounded square gradient blue */}
-      <rect width="40" height="40" rx="10" fill="url(#gradient)" />
+      {/* Circular background - purple gradient */}
+      <circle cx="20" cy="20" r="18" fill="url(#gradient)" />
       
-      {/* Concentric circles - PlanAI style */}
+      {/* Concentric circles - centered */}
       <g>
         {/* Outer circle */}
         <circle cx="20" cy="20" r="10" stroke="white" strokeWidth="2.5" fill="none" />
