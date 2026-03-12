@@ -141,13 +141,24 @@ export default function NewEbookPage() {
         </div>
         
         <div className="flex items-center gap-3">
-          <Link
-            href={form.slug ? `/ebooks/${form.slug}` : '#'}
-            target="_blank"
-            className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition"
-          >
-            <Eye className="w-4 h-4" /> Xem trước
-          </Link>
+          {form.slug ? (
+            <Link
+              href={`/ebooks/${form.slug}`}
+              target="_blank"
+              className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-50 transition"
+            >
+              <Eye className="w-4 h-4" /> Xem trước
+            </Link>
+          ) : (
+            <button
+              type="button"
+              disabled
+              title="Vui lòng lưu ebook trước khi xem trước"
+              className="flex items-center gap-2 px-4 py-2 border border-gray-200 rounded-lg text-sm font-medium text-gray-400 cursor-not-allowed opacity-50"
+            >
+              <Eye className="w-4 h-4" /> Xem trước
+            </button>
+          )}
           <button
             type="button"
             onClick={() => handleSubmit('draft')}
