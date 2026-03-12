@@ -6,11 +6,18 @@ interface DownloadItem {
   coverUrl?: string
 }
 
+interface OrderDetails {
+  publicToken: string
+  successUrl?: string
+}
+
 interface SendOrderEmailParams {
   toEmail: string
   orderId: string
   items: DownloadItem[]
   totalAmount: number
+  publicToken?: string
+  userName?: string
 }
 
 export async function sendOrderConfirmationEmail({
@@ -18,6 +25,8 @@ export async function sendOrderConfirmationEmail({
   orderId,
   items,
   totalAmount,
+  publicToken,
+  userName,
 }: SendOrderEmailParams): Promise<boolean> {
   if (!config.brevo.apiKey) {
     console.warn('BREVO_API_KEY not configured, skipping email')
@@ -28,12 +37,21 @@ export async function sendOrderConfirmationEmail({
     .map(
       (item) => `
     <tr>
-      <td style="padding:12px 0;border-bottom:1px solid #f0f0f0;">
-        <strong style="color:#1a1a1a;font-size:15px;">${item.title}</strong><br/>
-        <a href="${item.downloadUrl}"
-           style="display:inline-block;margin-top:8px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;text-decoration:none;padding:8px 20px;border-radius:8px;font-size:13px;font-weight:600;">
-          📥 Tải xuống PDF
-        </a>
+      <td style="padding:16px 0;border-bottom:1px solid #f0f0f0;">
+        <table cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+            <td width="80" style="padding-right:16px;">
+              ${item.coverUrl ? `<img src="${item.coverUrl}" alt="${item.title}" style="width:80px;height:106px;object-fit:cover;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1);" />` : ''}
+            </td>
+            <td style="vertical-align:middle;">
+              <strong style="color:#1a1a1a;font-size:15px;display:block;margin-bottom:8px;">${item.title}</strong>
+              <a href="${item.downloadUrl}"
+                 style="display:inline-block;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;text-decoration:none;padding:10px 24px;border-radius:8px;font-size:13px;font-weight:600;">
+                📥 Tải xuống PDF
+              </a>
+            </td>
+          </tr>
+        </table>
       </td>
     </tr>`
     )
@@ -63,10 +81,10 @@ export async function sendOrderConfirmationEmail({
         <!-- Body -->
         <tr>
           <td style="padding:32px;">
-            <p style="margin:0 0 8px;color:#374151;font-size:15px;">Xin chào,</p>
+            <p style="margin:0 0 8px;color:#374151;font-size:15px;">Xin chào${userName ? ` ${userName}` : ''},</p>
             <p style="margin:0 0 24px;color:#6b7280;font-size:14px;line-height:1.6;">
-              Cảm ơn bạn đã mua ebook tại <strong>Ebook Mind</strong>. 
-              Dưới đây là link tải ebook của bạn. Link có hiệu lực trong <strong>48 giờ</strong>.
+              Cảm ơn bạn đã tin tưởng và mua ebook tại <strong>Ebook Mind</strong>! 🎉<br/>
+              Dưới đây là link tải ebook của bạn. <strong>Link có hiệu lực vĩnh viễn</strong>, bạn có thể tải lại bất cứ lúc nào.
             </p>
 
             <!-- Ebook list -->
@@ -77,10 +95,19 @@ export async function sendOrderConfirmationEmail({
             <!-- Note -->
             <div style="margin-top:24px;padding:16px;background:#f0fdf4;border-radius:10px;border:1px solid #bbf7d0;">
               <p style="margin:0;color:#166534;font-size:13px;line-height:1.5;">
-                💡 <strong>Lưu ý:</strong> Mỗi link tải có giới hạn 5 lượt tải và hết hạn sau 48 giờ. 
-                Hãy lưu file PDF vào thiết bị của bạn ngay sau khi tải.
+                💡 <strong>Lưu ý:</strong> Link tải có hiệu lực vĩnh viễn. Bạn có thể tải lại bất cứ lúc nào. 
+                Hãy lưu file PDF vào thiết bị để đọc offline.
               </p>
             </div>
+            
+            <!-- CTA Button -->
+            ${publicToken ? `
+            <div style="margin-top:24px;text-align:center;">
+              <a href="${config.app.url}/success?token=${publicToken}"
+                 style="display:inline-block;background:#fff;color:#7c3aed;text-decoration:none;padding:12px 32px;border-radius:10px;font-size:14px;font-weight:600;border:2px solid #7c3aed;">
+                📋 Xem chi tiết đơn hàng
+              </a>
+            </div>` : ''}
           </td>
         </tr>
 
@@ -88,7 +115,7 @@ export async function sendOrderConfirmationEmail({
         <tr>
           <td style="padding:20px 32px;background:#f9fafb;border-top:1px solid #f0f0f0;text-align:center;">
             <p style="margin:0;color:#9ca3af;font-size:12px;">
-              Gặp vấn đề? Liên hệ <a href="mailto:support@ebookmind.com" style="color:#7c3aed;">support@ebookmind.com</a>
+              Gặp vấn đề? Liên hệ <a href="mailto:ebookmind0@gmail.com" style="color:#7c3aed;">ebookmind0@gmail.com</a>
             </p>
             <p style="margin:8px 0 0;color:#d1d5db;font-size:11px;">© ${new Date().getFullYear()} Ebook Mind · Kiến thức ngách thay đổi mindset</p>
           </td>
@@ -103,35 +130,70 @@ export async function sendOrderConfirmationEmail({
     .map((item) => `${item.title}\nLink tải: ${item.downloadUrl}`)
     .join('\n\n')
 
-  try {
-    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'api-key': config.brevo.apiKey,
-      },
-      body: JSON.stringify({
-        sender: {
-          name: 'Ebook Mind',
-          email: 'no-reply@ebookmind.com',
+  // Retry logic with exponential backoff
+  const maxRetries = 3
+  let lastError: any = null
+
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'api-key': config.brevo.apiKey,
         },
-        to: [{ email: toEmail }],
-        subject: `📚 Link tải ebook của bạn - Đơn hàng #${orderId.substring(0, 8).toUpperCase()}`,
-        htmlContent,
-        textContent,
-      }),
-    })
+        body: JSON.stringify({
+          sender: {
+            name: 'Ebook Mind',
+            email: 'no-reply@ebookmind.com',
+          },
+          to: [{ email: toEmail }],
+          subject: `📚 Link tải ebook của bạn - Đơn hàng #${orderId.substring(0, 8).toUpperCase()}`,
+          htmlContent,
+          textContent,
+        }),
+      })
 
-    if (!response.ok) {
-      const err = await response.text()
-      console.error('Brevo send error:', err)
-      return false
+      if (!response.ok) {
+        const err = await response.text()
+        console.error(`Brevo send error (attempt ${attempt}/${maxRetries}):`, err)
+        
+        // Don't retry on 4xx errors (client errors)
+        if (response.status >= 400 && response.status < 500) {
+          console.error('Client error - not retrying')
+          return false
+        }
+        
+        lastError = new Error(`HTTP ${response.status}: ${err}`)
+        
+        // Retry on 5xx errors or rate limit
+        if (attempt < maxRetries) {
+          const delay = Math.min(1000 * Math.pow(2, attempt - 1), 5000) // Exponential backoff: 1s, 2s, 4s
+          console.log(`Retrying in ${delay}ms...`)
+          await new Promise(resolve => setTimeout(resolve, delay))
+          continue
+        }
+        
+        return false
+      }
+
+      console.log(`Email sent successfully via Brevo to: ${toEmail} (attempt ${attempt})`)
+      return true
+      
+    } catch (error) {
+      console.error(`Brevo email error (attempt ${attempt}/${maxRetries}):`, error)
+      lastError = error
+      
+      // Retry on network errors
+      if (attempt < maxRetries) {
+        const delay = Math.min(1000 * Math.pow(2, attempt - 1), 5000)
+        console.log(`Network error - retrying in ${delay}ms...`)
+        await new Promise(resolve => setTimeout(resolve, delay))
+        continue
+      }
     }
-
-    console.log('Email sent via Brevo to:', toEmail)
-    return true
-  } catch (error) {
-    console.error('Brevo email error:', error)
-    return false
   }
+
+  console.error('All retry attempts failed:', lastError)
+  return false
 }

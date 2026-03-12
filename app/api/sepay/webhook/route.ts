@@ -124,7 +124,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Collect download items for email
-    const downloadItems: Array<{ title: string; downloadUrl: string }> = []
+    const downloadItems: Array<{ title: string; downloadUrl: string; coverUrl?: string }> = []
 
     // Create licenses and download tokens for ebooks
     for (const item of order.order_items) {
@@ -170,6 +170,7 @@ export async function POST(request: NextRequest) {
           downloadItems.push({
             title: ebookInfo?.title || 'Ebook',
             downloadUrl: `${config.app.url}/api/download?token=${downloadToken}`,
+            coverUrl: ebookInfo?.cover_url,
           })
         }
 
@@ -218,7 +219,7 @@ export async function POST(request: NextRequest) {
 
           const { data: comboEbookInfo } = await supabaseAdmin
             .from('ebooks')
-            .select('title')
+            .select('title, cover_url')
             .eq('id', comboItem.ebook_id)
             .single()
 
@@ -236,6 +237,7 @@ export async function POST(request: NextRequest) {
             downloadItems.push({
               title: comboEbookInfo?.title || 'Ebook',
               downloadUrl: `${config.app.url}/api/download?token=${downloadToken}`,
+              coverUrl: comboEbookInfo?.cover_url,
             })
           }
 
@@ -254,12 +256,39 @@ export async function POST(request: NextRequest) {
 
     // Send email với download links qua Brevo
     if (order.email && downloadItems.length > 0) {
-      await sendOrderConfirmationEmail({
-        toEmail: order.email,
-        orderId: order.id,
-        items: downloadItems,
-        totalAmount: order.amount,
-      })
+      try {
+        const emailSent = await sendOrderConfirmationEmail({
+          toEmail: order.email,
+          orderId: order.id,
+          items: downloadItems,
+          totalAmount: order.amount,
+          publicToken: order.public_token,
+        })
+
+        // Log email status vào metadata
+        await supabaseAdmin
+          .from('orders')
+          .update({
+            metadata: {
+              ...order.metadata,
+              email_logs: [
+                ...(order.metadata?.email_logs || []),
+                {
+                  sent_at: new Date().toISOString(),
+                  status: emailSent ? 'success' : 'failed',
+                  trigger: 'webhook_auto',
+                  recipient: order.email,
+                }
+              ]
+            }
+          })
+          .eq('id', order.id)
+
+        console.log(`Email ${emailSent ? 'sent successfully' : 'failed'} to:`, order.email)
+      } catch (emailError) {
+        console.error('Email sending error:', emailError)
+        // Don't fail the webhook if email fails - user can resend later
+      }
     }
 
     console.log('Order processed successfully:', order.id)
