@@ -11,9 +11,9 @@ UPDATE ebooks SET category_id = NULL WHERE category_id IS NOT NULL;
 DELETE FROM categories;
 
 -- Step 4: Insert new categories with specific order
-INSERT INTO categories (name, slug, description, sort_order) VALUES
-  ('Tư duy solo business', 'tu-duy-solo-business', 'Xây dựng và phát triển business một mình', 1),
-  ('Kinh doanh ngách', 'kinh-doanh-ngach', 'Tìm và khai thác thị trường ngách hiệu quả', 2),
-  ('Phát triển bản thân', 'phat-trien-ban-than', 'Nâng cao kỹ năng và tư duy cá nhân', 3),
-  ('Công nghệ', 'cong-nghe', 'Kiến thức về công nghệ và lập trình', 4),
-  ('Sức khỏe', 'suc-khoe', 'Chăm sóc sức khỏe thể chất và tinh thần', 5);
+INSERT INTO categories (name, slug, description) VALUES
+  ('Tư duy solo business', 'tu-duy-solo-business', 'Xây dựng và phát triển business một mình'),
+  ('Kinh doanh ngách', 'kinh-doanh-ngach', 'Tìm và khai thác thị trường ngách hiệu quả'),
+  ('Phát triển bản thân', 'phat-trien-ban-than', 'Nâng cao kỹ năng và tư duy cá nhân'),
+  ('Công nghệ', 'cong-nghe', 'Kiến thức về công nghệ và lập trình'),
+  ('Sức khỏe', 'suc-khoe', 'Chăm sóc sức khỏe thể chất và tinh thần');
