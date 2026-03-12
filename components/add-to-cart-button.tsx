@@ -14,8 +14,13 @@ export default function AddToCartButton({ ebook }: AddToCartButtonProps) {
 
   const addToCart = (buyNow = false) => {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]')
-    const exists = cart.find((item: any) => item.id === ebook.id)
-    if (!exists) {
+    const existingIndex = cart.findIndex((item: any) => item.id === ebook.id)
+    
+    if (existingIndex >= 0) {
+      // Item already exists - increase quantity
+      cart[existingIndex].quantity = (cart[existingIndex].quantity || 1) + 1
+    } else {
+      // New item - add with quantity = 1
       cart.push({
         id: ebook.id,
         title: ebook.title,
@@ -23,9 +28,12 @@ export default function AddToCartButton({ ebook }: AddToCartButtonProps) {
         cover_url: ebook.cover_url,
         slug: ebook.slug,
         type: 'ebook',
+        quantity: 1,
       })
-      localStorage.setItem('cart', JSON.stringify(cart))
     }
+    
+    localStorage.setItem('cart', JSON.stringify(cart))
+    
     if (buyNow) {
       router.push('/checkout')
     } else {
