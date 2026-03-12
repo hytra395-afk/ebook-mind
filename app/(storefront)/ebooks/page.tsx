@@ -4,7 +4,8 @@ import EbooksFilter from '@/components/ebooks-filter'
 import { Suspense } from 'react'
 import { BookOpen, Star, Users, NotebookPen, Search, Lightbulb, Rocket } from 'lucide-react'
 
-export const revalidate = 300
+export const revalidate = 60 // ISR: revalidate every 60 seconds
+export const dynamic = 'force-dynamic' // Enable dynamic rendering for filters
 
 const ITEMS_PER_PAGE = 9
 

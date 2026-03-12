@@ -6,16 +6,28 @@ import { Star, BookOpen, ShieldCheck, Zap, Download, ChevronRight, FileText, Use
 import AddToCartButton from '@/components/add-to-cart-button'
 import EbookTabs from '@/components/ebook-tabs'
 
-export const revalidate = 300 // ISR: cache for 5 minutes
+export const revalidate = 60 // ISR: cache for 1 minute
+export const dynamic = 'force-static' // Enable static generation
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const supabase = getSupabase()
-  const { data: ebook } = await supabase.from('ebooks').select('title, description').eq('slug', slug).single()
+  const { data: ebook } = await supabase
+    .from('ebooks')
+    .select('title, description, cover_url')
+    .eq('slug', slug)
+    .single()
+  
   if (!ebook) return {}
+  
   return {
     title: `${ebook.title} – Ebook Mind`,
     description: ebook.description?.slice(0, 160),
+    openGraph: {
+      title: ebook.title,
+      description: ebook.description?.slice(0, 160),
+      images: ebook.cover_url ? [ebook.cover_url] : [],
+    },
   }
 }
 
