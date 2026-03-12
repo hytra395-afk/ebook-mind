@@ -46,11 +46,25 @@ export default async function EbooksPage({
 
   // Parallel queries for better performance
   const [categoriesResult, levelsResult] = await Promise.all([
-    supabase.from('categories').select('id, name, slug').order('name'),
+    supabase.from('categories').select('id, name, slug'),
     supabase.from('levels').select('id, name')
   ])
   
-  const categories = categoriesResult.data
+  // Custom order for categories
+  const categoryOrder = [
+    'tu-duy-solo-business',
+    'kinh-doanh-ngach',
+    'phat-trien-ban-than',
+    'cong-nghe',
+    'suc-khoe'
+  ]
+  
+  const categories = categoriesResult.data?.sort((a, b) => {
+    const indexA = categoryOrder.indexOf(a.slug)
+    const indexB = categoryOrder.indexOf(b.slug)
+    return indexA - indexB
+  })
+  
   const levels = levelsResult.data
   const currentCategory = categories?.find(c => c.slug === params.category)
 
