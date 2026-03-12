@@ -1,16 +1,22 @@
 -- Update categories to match new structure
 -- Delete old categories and create new ones
 
--- Step 1: Remove NOT NULL constraint from category_id if it exists
-ALTER TABLE ebooks ALTER COLUMN category_id DROP NOT NULL;
+-- Step 1: Disable foreign key constraints temporarily
+SET session_replication_role = replica;
 
--- Step 2: Update any existing ebooks to avoid foreign key issues
+-- Step 2: Update any existing ebooks to set category_id to NULL
 UPDATE ebooks SET category_id = NULL;
 
--- Step 3: Delete all existing categories (disable foreign key check temporarily)
-DELETE FROM categories WHERE TRUE;
+-- Step 3: Delete all existing categories
+DELETE FROM categories;
 
--- Step 4: Insert new categories
+-- Step 4: Re-enable foreign key constraints
+SET session_replication_role = default;
+
+-- Step 5: Remove NOT NULL constraint from category_id
+ALTER TABLE ebooks ALTER COLUMN category_id DROP NOT NULL;
+
+-- Step 6: Insert new categories
 INSERT INTO categories (name, slug, description) VALUES
   ('Tư duy solo business', 'tu-duy-solo-business', 'Xây dựng và phát triển business một mình'),
   ('Kinh doanh ngách', 'kinh-doanh-ngach', 'Tìm và khai thác thị trường ngách hiệu quả'),
