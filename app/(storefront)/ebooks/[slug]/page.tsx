@@ -160,19 +160,38 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
             </div>
 
             {/* Điểm nổi bật */}
-            {ebook.highlights && ebook.highlights.length > 0 && (
-              <div className="mb-8 p-4 bg-blue-50 rounded-lg border border-blue-100">
-                <h3 className="font-semibold text-gray-900 mb-3 text-sm">Điểm nổi bật:</h3>
-                <ul className="space-y-2 text-sm text-gray-700">
-                  {ebook.highlights.map((highlight: string, index: number) => (
+            <div className="mb-8 p-4 bg-blue-50 rounded-lg border border-blue-100">
+              <h3 className="font-semibold text-gray-900 mb-3 text-sm">Điểm nổi bật:</h3>
+              <ul className="space-y-2 text-sm text-gray-700">
+                {ebook.highlights && ebook.highlights.length > 0 ? (
+                  ebook.highlights.map((highlight: string, index: number) => (
                     <li key={index} className="flex items-start gap-2">
                       <span className="text-blue-600 font-bold mt-0.5">💡</span>
                       <span>{highlight}</span>
                     </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+                  ))
+                ) : (
+                  <>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-600 font-bold mt-0.5">💡</span>
+                      <span>{ebook.pages || 320} trang nội dung chi tiết và dễ hiểu</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-600 font-bold mt-0.5">💡</span>
+                      <span>Kiến thức thực tế từ các chuyên gia và doanh nhân thành công</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-600 font-bold mt-0.5">💡</span>
+                      <span>Tải về ngay sau khi thanh toán, không cần chờ đợi</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-600 font-bold mt-0.5">💡</span>
+                      <span>Truy cập không giới hạn, đọc lại bao nhiêu lần tùy thích</span>
+                    </li>
+                  </>
+                )}
+              </ul>
+            </div>
 
             <p className="text-gray-600 leading-relaxed text-sm mb-8">{ebook.description}</p>
 
