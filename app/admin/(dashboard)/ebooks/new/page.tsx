@@ -327,16 +327,21 @@ export default function NewEbookPage() {
                 value={form.cover_url}
                 onChange={(e) => setForm({ ...form, cover_url: e.target.value })}
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                placeholder="https://..."
+                placeholder="https://drive.google.com/... hoặc URL ảnh trực tiếp"
               />
               {form.cover_url && (
-                <div className="mt-3">
+                <div className="mt-4 bg-gray-50 rounded-lg p-4 border">
+                  <p className="text-xs text-gray-500 mb-2">Preview ảnh bìa:</p>
                   <img
                     src={form.cover_url}
                     alt="Cover preview"
-                    className="w-32 h-48 object-cover rounded-lg border"
-                    onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}
+                    className="w-40 h-60 object-cover rounded-lg border-2 border-purple-200 shadow-md"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = 'none'
+                      alert('Không thể tải ảnh. Vui lòng kiểm tra URL.')
+                    }}
                   />
+                  <p className="text-xs text-gray-400 mt-2">Kích thước khuyến nghị: 400×600px (tỷ lệ 2:3)</p>
                 </div>
               )}
             </div>
@@ -403,7 +408,12 @@ export default function NewEbookPage() {
               ratingAvg={form.rating_avg}
               ratingCount={form.rating_count}
               salesCount={form.sales_count}
-              onStatsChange={(stats) => setForm({ ...form, ...stats })}
+              onStatsChange={(stats) => setForm({ 
+                ...form, 
+                rating_avg: stats.ratingAvg,
+                rating_count: stats.ratingCount,
+                sales_count: stats.salesCount
+              })}
             />
           </div>
         )}

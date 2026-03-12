@@ -30,9 +30,22 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     delete ebookData.author_id
   }
 
+  // Convert camelCase to snake_case for database columns
+  const dbData = {
+    ...ebookData,
+    rating_avg: ebookData.ratingAvg || ebookData.rating_avg || 0,
+    rating_count: ebookData.ratingCount || ebookData.rating_count || 0,
+    sales_count: ebookData.salesCount || ebookData.sales_count || 0,
+    updated_at: new Date().toISOString()
+  }
+  // Remove camelCase versions
+  delete dbData.ratingAvg
+  delete dbData.ratingCount
+  delete dbData.salesCount
+
   const { data, error } = await supabase
     .from('ebooks')
-    .update({ ...ebookData, updated_at: new Date().toISOString() })
+    .update(dbData)
     .eq('id', id)
     .select()
     .single()

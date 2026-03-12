@@ -26,9 +26,21 @@ export async function POST(request: NextRequest) {
     delete ebookData.author_id
   }
 
+  // Convert camelCase to snake_case for database columns
+  const dbData = {
+    ...ebookData,
+    rating_avg: ebookData.ratingAvg || ebookData.rating_avg || 0,
+    rating_count: ebookData.ratingCount || ebookData.rating_count || 0,
+    sales_count: ebookData.salesCount || ebookData.sales_count || 0,
+  }
+  // Remove camelCase versions
+  delete dbData.ratingAvg
+  delete dbData.ratingCount
+  delete dbData.salesCount
+
   const { data: ebook, error } = await supabase
     .from('ebooks')
-    .insert(ebookData)
+    .insert(dbData)
     .select()
     .single()
 
