@@ -55,16 +55,20 @@ export async function POST(request: NextRequest) {
   if (reviews && reviews.length > 0 && ebook) {
     const reviewsToInsert = reviews.map((r: any) => ({
       ebook_id: ebook.id,
-      rating: r.rating,
-      title: r.title,
-      content: r.content,
-      reviewer_name: r.reviewer_name,
-      reviewer_avatar: r.reviewer_avatar,
-      reviewer_gender: r.reviewer_gender,
-      review_date: r.review_date,
+      rating: Number(r.rating) || 5,
+      title: r.title || '',
+      content: r.content || '',
+      reviewer_name: r.reviewer_name || 'Anonymous',
+      reviewer_avatar: r.reviewer_avatar || null,
+      reviewer_gender: r.reviewer_gender || null,
+      review_date: r.review_date || new Date().toISOString().split('T')[0],
     }))
 
-    await supabase.from('reviews').insert(reviewsToInsert)
+    const { error: reviewError } = await supabase.from('reviews').insert(reviewsToInsert)
+    if (reviewError) {
+      console.error('Error inserting reviews:', reviewError)
+      // Don't fail the whole request, just log the error
+    }
   }
 
   return NextResponse.json({ ebook })

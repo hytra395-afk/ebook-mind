@@ -60,22 +60,29 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
   // Handle reviews - delete old and insert new
   if (reviews !== undefined) {
     // Delete existing reviews for this ebook
-    await supabase.from('reviews').delete().eq('ebook_id', id)
+    const { error: deleteError } = await supabase.from('reviews').delete().eq('ebook_id', id)
+    if (deleteError) {
+      console.error('Error deleting old reviews:', deleteError)
+    }
 
     // Insert new reviews
     if (reviews.length > 0) {
       const reviewsToInsert = reviews.map((r: any) => ({
         ebook_id: id,
-        rating: r.rating,
-        title: r.title,
-        content: r.content,
-        reviewer_name: r.reviewer_name,
-        reviewer_avatar: r.reviewer_avatar,
-        reviewer_gender: r.reviewer_gender,
-        review_date: r.review_date,
+        rating: Number(r.rating) || 5,
+        title: r.title || '',
+        content: r.content || '',
+        reviewer_name: r.reviewer_name || 'Anonymous',
+        reviewer_avatar: r.reviewer_avatar || null,
+        reviewer_gender: r.reviewer_gender || null,
+        review_date: r.review_date || new Date().toISOString().split('T')[0],
       }))
 
-      await supabase.from('reviews').insert(reviewsToInsert)
+      const { error: insertError } = await supabase.from('reviews').insert(reviewsToInsert)
+      if (insertError) {
+        console.error('Error inserting reviews:', insertError)
+        return NextResponse.json({ error: 'Failed to save reviews: ' + insertError.message }, { status: 500 })
+      }
     }
   }
 
