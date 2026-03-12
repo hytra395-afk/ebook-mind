@@ -117,12 +117,19 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
 
           {/* ── Center: Info ── */}
           <div className="lg:col-span-2">
-            {ebook.categories?.name && (
-              <Link href={`/ebooks?category=${ebook.categories.slug}`}
-                className="inline-block text-xs font-semibold text-purple-600 bg-purple-50 px-2.5 py-1 rounded-full mb-3 hover:bg-purple-100 transition">
-                {ebook.categories.name}
-              </Link>
-            )}
+            <div className="flex items-center gap-2 mb-3">
+              {ebook.categories?.name && (
+                <Link href={`/ebooks?category=${ebook.categories.slug}`}
+                  className="inline-block text-xs font-semibold text-purple-600 bg-purple-50 px-2.5 py-1 rounded-full hover:bg-purple-100 transition">
+                  {ebook.categories.name}
+                </Link>
+              )}
+              {ebook.levels?.name && (
+                <span className="inline-block text-xs font-semibold text-gray-600 bg-gray-100 px-2.5 py-1 rounded-full">
+                  {ebook.levels.name}
+                </span>
+              )}
+            </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-tight mb-4">
               {ebook.title}
             </h1>
