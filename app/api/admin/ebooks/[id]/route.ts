@@ -75,7 +75,6 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
         reviewer_name: r.reviewer_name || 'Anonymous',
         reviewer_avatar: r.reviewer_avatar || null,
         reviewer_gender: r.reviewer_gender || null,
-        review_date: r.review_date || new Date().toISOString().split('T')[0],
       }))
 
       const { error: insertError } = await supabase.from('reviews').insert(reviewsToInsert)
