@@ -7,7 +7,8 @@ UPDATE ebooks SET category_id = NULL;
 -- Delete all existing categories
 DELETE FROM categories;
 
--- Insert new categories
+-- Insert new categories in correct order
+-- Order: Tư duy solo business, Kinh doanh ngách, Phát triển bản thân, Công nghệ, Sức khỏe
 INSERT INTO categories (name, slug, description) VALUES
   ('Tư duy solo business', 'tu-duy-solo-business', 'Xây dựng và phát triển business một mình'),
   ('Kinh doanh ngách', 'kinh-doanh-ngach', 'Tìm và khai thác thị trường ngách hiệu quả'),
@@ -16,4 +17,4 @@ INSERT INTO categories (name, slug, description) VALUES
   ('Sức khỏe', 'suc-khoe', 'Chăm sóc sức khỏe thể chất và tinh thần');
 
 -- Verify categories were inserted
-SELECT id, name, slug FROM categories ORDER BY name;
+SELECT id, name, slug FROM categories;
