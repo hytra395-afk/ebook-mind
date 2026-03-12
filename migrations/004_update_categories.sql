@@ -1,13 +1,16 @@
 -- Update categories to match new structure
 -- Delete old categories and create new ones
 
--- First, update any existing ebooks to avoid foreign key issues
+-- Step 1: Remove NOT NULL constraint from category_id if it exists
+ALTER TABLE ebooks ALTER COLUMN category_id DROP NOT NULL;
+
+-- Step 2: Update any existing ebooks to avoid foreign key issues
 UPDATE ebooks SET category_id = NULL WHERE category_id IS NOT NULL;
 
--- Delete all existing categories
+-- Step 3: Delete all existing categories
 DELETE FROM categories;
 
--- Insert new categories with specific order
+-- Step 4: Insert new categories with specific order
 INSERT INTO categories (name, slug, description, sort_order) VALUES
   ('Tư duy solo business', 'tu-duy-solo-business', 'Xây dựng và phát triển business một mình', 1),
   ('Kinh doanh ngách', 'kinh-doanh-ngach', 'Tìm và khai thác thị trường ngách hiệu quả', 2),
