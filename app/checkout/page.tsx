@@ -142,7 +142,7 @@ export default function CheckoutPage() {
 
                 <div className="bg-purple-50 p-4 rounded-lg">
                   <h3 className="font-medium text-purple-900 mb-1">Phương thức thanh toán</h3>
-                  <p className="text-sm text-purple-700">Chuyển khoản ngân hàng (Sepay) - Quét mã QR hoặc chuyển khoản</p>
+                  <p className="text-sm text-purple-700">Chuyển khoản ngân hàng - Quét mã QR hoặc chuyển khoản</p>
                 </div>
 
                 <button onClick={handleCheckout} disabled={loading}

@@ -127,10 +127,8 @@ export default function SuccessPage() {
                         )}
                         <div className="flex-1">
                           <h3 className="font-medium">{item.ebook_title}</h3>
-                          <p className="text-sm text-gray-600">Còn lại: {item.download_quota - item.used_count}/{item.download_quota} lượt tải</p>
-                          <p className="text-xs text-gray-500">Hết hạn: {new Date(item.expires_at).toLocaleDateString('vi-VN')}</p>
                         </div>
-                        <a href={item.download_url} download target="_blank" rel="noopener noreferrer"
+                        <a href={item.download_url} target="_blank" rel="noopener noreferrer"
                           className="gradient-purple text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90">
                           Tải về
                         </a>
@@ -146,17 +144,6 @@ export default function SuccessPage() {
             </div>
 
             <div className="space-y-6">
-              {order?.email && (
-                <div className="bg-white rounded-lg p-6 shadow-sm">
-                  <h3 className="font-semibold mb-3">Gửi link qua email</h3>
-                  <p className="text-sm text-gray-600 mb-4">Gửi link tải về đến: <span className="font-medium">{order.email}</span></p>
-                  <button onClick={handleSendEmail} disabled={sendingEmail || emailSent}
-                    className="w-full border border-gray-300 rounded-lg py-2 text-sm font-medium hover:bg-gray-50 disabled:opacity-50">
-                    {sendingEmail ? 'Đang gửi...' : emailSent ? 'Đã gửi ✓' : 'Gửi email'}
-                  </button>
-                </div>
-              )}
-
               <div className="bg-white rounded-lg p-6 shadow-sm">
                 <h3 className="font-semibold mb-3">Thông tin đơn hàng</h3>
                 <div className="space-y-2 text-sm">
@@ -178,7 +165,7 @@ export default function SuccessPage() {
               <div className="bg-purple-50 rounded-lg p-6">
                 <h3 className="font-semibold text-purple-900 mb-2">Cần hỗ trợ?</h3>
                 <p className="text-sm text-purple-700 mb-3">Nếu bạn gặp vấn đề với việc tải về, vui lòng liên hệ:</p>
-                <p className="text-sm text-purple-800 font-medium">support@ebookmind.com</p>
+                <p className="text-sm text-purple-800 font-medium">ebookmind0@gmail.com</p>
               </div>
 
               <Link href="/" className="block w-full text-center border border-gray-300 rounded-lg py-2.5 text-sm font-medium hover:bg-gray-50">
