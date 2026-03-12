@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import { Star, BookOpen, ShieldCheck, Zap, Download, ChevronRight, FileText, Users } from 'lucide-react'
 import AddToCartButton from '@/components/add-to-cart-button'
 import EbookTabs from '@/components/ebook-tabs'
+import EbookImageGallery from '@/components/ebook-image-gallery'
 import { convertDriveUrl } from '@/lib/utils'
 
 export const revalidate = 0 // Always fresh for preview support
@@ -38,7 +39,7 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
 
   const { data: ebook } = await supabase
     .from('ebooks')
-    .select('*, categories(name, slug), levels(name), authors(name, bio, avatar_url)')
+    .select('*, content, preview_images, categories(name, slug), levels(name), authors(name, bio, avatar_url)')
     .eq('slug', slug)
     .eq('active', true)
     .single()
@@ -108,23 +109,15 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
 
-          {/* ── Left: Cover ── */}
+          {/* ── Left: Cover Gallery ── */}
           <div className="lg:col-span-1">
-            <div>
-              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-xl bg-gray-100 max-w-xs">
-                <Image
-                  src={convertDriveUrl(ebook.cover_url || 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=600')}
-                  alt={ebook.title}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-                {ebook.featured && (
-                  <span className="absolute top-3 left-3 bg-gradient-to-r from-pink-500 to-orange-400 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">
-                    Bestseller
-                  </span>
-                )}
-              </div>
+            <div className="max-w-xs">
+              <EbookImageGallery
+                coverUrl={convertDriveUrl(ebook.cover_url || 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=600')}
+                previewImages={(ebook.preview_images || []).map((url: string) => convertDriveUrl(url))}
+                title={ebook.title}
+                featured={ebook.featured}
+              />
             </div>
           </div>
 
@@ -263,7 +256,7 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             <div className="lg:col-span-3">
-              <EbookTabs />
+              <EbookTabs content={ebook.content} reviews={reviews || []} />
 
               {/* Tác giả */}
               {ebook.authors?.name && (
@@ -297,33 +290,6 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
           </div>
         </div>
 
-        {/* ── Reviews ── */}
-        {reviews && reviews.length > 0 && (
-          <section className="mt-16 max-w-2xl">
-            <h2 className="text-xl font-bold text-gray-900 mb-5">
-              Đánh giá từ độc giả
-              <span className="ml-2 text-sm font-normal text-gray-400">({reviews.length})</span>
-            </h2>
-            <div className="space-y-4">
-              {reviews.map((review: any) => (
-                <div key={review.id} className="bg-white border border-gray-100 rounded-2xl p-5">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="flex gap-0.5">
-                      {[1,2,3,4,5].map(s => (
-                        <Star key={s} className={`h-3.5 w-3.5 ${s <= review.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-200'}`} />
-                      ))}
-                    </div>
-                    {review.reviewer_name && (
-                      <span className="text-sm font-semibold text-gray-700">{review.reviewer_name}</span>
-                    )}
-                  </div>
-                  {review.title && <h4 className="font-medium text-sm mb-1">{review.title}</h4>}
-                  {review.content && <p className="text-gray-500 text-sm leading-relaxed">{review.content}</p>}
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
 
         {/* ── Related Ebooks ── */}
         {related && related.length > 0 && (

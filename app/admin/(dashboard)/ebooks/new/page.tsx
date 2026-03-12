@@ -334,7 +334,7 @@ export default function NewEbookPage() {
                 <div className="mt-4 bg-gray-50 rounded-lg p-4 border">
                   <p className="text-xs text-gray-500 mb-2">Preview ảnh bìa:</p>
                   <img
-                    src={form.cover_url}
+                    src={convertDriveUrl(form.cover_url)}
                     alt="Cover preview"
                     className="w-40 h-60 object-cover rounded-lg border-2 border-purple-200 shadow-md"
                     onError={(e) => {
