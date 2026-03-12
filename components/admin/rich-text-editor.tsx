@@ -387,13 +387,25 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Viế
         .wysiwyg-editor p {
           margin: 1em 0;
         }
-        .wysiwyg-editor ul,
+        .wysiwyg-editor ul {
+          margin: 1em 0;
+          padding-left: 2em;
+          list-style-type: disc !important;
+        }
         .wysiwyg-editor ol {
           margin: 1em 0;
           padding-left: 2em;
+          list-style-type: decimal !important;
+        }
+        .wysiwyg-editor ul ul {
+          list-style-type: circle !important;
+        }
+        .wysiwyg-editor ul ul ul {
+          list-style-type: square !important;
         }
         .wysiwyg-editor li {
           margin: 0.5em 0;
+          display: list-item !important;
         }
         .wysiwyg-editor a {
           color: #9333ea;

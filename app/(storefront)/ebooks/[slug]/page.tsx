@@ -5,9 +5,10 @@ import { notFound } from 'next/navigation'
 import { Star, BookOpen, ShieldCheck, Zap, Download, ChevronRight, FileText, Users } from 'lucide-react'
 import AddToCartButton from '@/components/add-to-cart-button'
 import EbookTabs from '@/components/ebook-tabs'
+import { convertDriveUrl } from '@/lib/utils'
 
-export const revalidate = 60 // ISR: cache for 1 minute
-export const dynamic = 'force-static' // Enable static generation
+export const revalidate = 0 // Always fresh for preview support
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -112,7 +113,7 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
             <div>
               <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-xl bg-gray-100 max-w-xs">
                 <Image
-                  src={ebook.cover_url || 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=600'}
+                  src={convertDriveUrl(ebook.cover_url || 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=600')}
                   alt={ebook.title}
                   fill
                   className="object-cover"

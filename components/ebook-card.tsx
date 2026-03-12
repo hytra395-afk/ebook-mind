@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { convertDriveUrl } from '@/lib/utils'
 
 interface EbookCardProps {
   id: string
@@ -30,7 +31,7 @@ export default function EbookCard({
         <Link href={`/ebooks/${slug}`} className="block">
           <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 rounded-t-2xl">
             <Image
-              src={cover_url || 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400'}
+              src={convertDriveUrl(cover_url || 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400')}
               alt={title}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"

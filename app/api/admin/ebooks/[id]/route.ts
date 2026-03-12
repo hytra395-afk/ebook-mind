@@ -43,6 +43,11 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
   delete dbData.ratingCount
   delete dbData.salesCount
 
+  // Remove joined relation objects returned by SELECT queries (not columns)
+  delete dbData.authors
+  delete dbData.categories
+  delete dbData.levels
+
   const { data, error } = await supabase
     .from('ebooks')
     .update(dbData)

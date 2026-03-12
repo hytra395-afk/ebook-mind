@@ -11,6 +11,7 @@ import HighlightsInput from '@/components/admin/highlights-input'
 import ReviewsManager from '@/components/admin/reviews-manager'
 import SEOPanel from '@/components/admin/seo-panel'
 import AuthorInput from '@/components/admin/author-input'
+import { convertDriveUrl } from '@/lib/utils'
 
 const RichTextEditor = dynamic(() => import('@/components/admin/rich-text-editor'), { ssr: false })
 
@@ -325,7 +326,7 @@ export default function NewEbookPage() {
               <input
                 type="url"
                 value={form.cover_url}
-                onChange={(e) => setForm({ ...form, cover_url: e.target.value })}
+                onChange={(e) => setForm({ ...form, cover_url: convertDriveUrl(e.target.value) })}
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 placeholder="https://drive.google.com/... hoặc URL ảnh trực tiếp"
               />
@@ -337,8 +338,7 @@ export default function NewEbookPage() {
                     alt="Cover preview"
                     className="w-40 h-60 object-cover rounded-lg border-2 border-purple-200 shadow-md"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = 'none'
-                      alert('Không thể tải ảnh. Vui lòng kiểm tra URL.')
+                      (e.target as HTMLImageElement).style.opacity = '0.3'
                     }}
                   />
                   <p className="text-xs text-gray-400 mt-2">Kích thước khuyến nghị: 400×600px (tỷ lệ 2:3)</p>

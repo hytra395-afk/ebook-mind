@@ -1,6 +1,7 @@
 'use client'
 
 import { User } from 'lucide-react'
+import { convertDriveUrl } from '@/lib/utils'
 
 interface AuthorInputProps {
   authorName: string
@@ -37,7 +38,7 @@ export default function AuthorInput({
             <div className="w-24 h-24 rounded-full bg-gray-200 overflow-hidden flex items-center justify-center">
               {authorAvatar ? (
                 <img
-                  src={authorAvatar}
+                  src={convertDriveUrl(authorAvatar)}
                   alt={authorName || 'Author'}
                   className="w-full h-full object-cover"
                   onError={(e) => {
@@ -116,7 +117,7 @@ export default function AuthorInput({
           <div className="flex gap-4">
             <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center text-white font-bold text-xl overflow-hidden flex-shrink-0">
               {authorAvatar ? (
-                <img src={authorAvatar} alt={authorName} className="w-full h-full object-cover" />
+                <img src={convertDriveUrl(authorAvatar)} alt={authorName} className="w-full h-full object-cover" />
               ) : (
                 authorName[0]?.toUpperCase()
               )}

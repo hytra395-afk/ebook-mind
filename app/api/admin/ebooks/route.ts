@@ -38,6 +38,11 @@ export async function POST(request: NextRequest) {
   delete dbData.ratingCount
   delete dbData.salesCount
 
+  // Remove joined relation objects returned by SELECT queries (not columns)
+  delete dbData.authors
+  delete dbData.categories
+  delete dbData.levels
+
   const { data: ebook, error } = await supabase
     .from('ebooks')
     .insert(dbData)

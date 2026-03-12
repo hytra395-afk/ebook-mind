@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Plus, X, GripVertical, Image as ImageIcon } from 'lucide-react'
+import { convertDriveUrl } from '@/lib/utils'
 
 interface ImageGalleryInputProps {
   images: string[]
@@ -14,7 +15,7 @@ export default function ImageGalleryInput({ images, onChange, maxImages = 10 }: 
 
   const addImage = () => {
     if (newUrl && images.length < maxImages) {
-      onChange([...images, newUrl])
+      onChange([...images, convertDriveUrl(newUrl)])
       setNewUrl('')
     }
   }
@@ -70,7 +71,7 @@ export default function ImageGalleryInput({ images, onChange, maxImages = 10 }: 
                 alt={`Preview ${index + 1}`}
                 className="w-full h-full object-cover"
                 onError={(e) => {
-                  (e.target as HTMLImageElement).src = 'https://via.placeholder.com/400x600?text=Error'
+                  (e.target as HTMLImageElement).style.opacity = '0.3'
                 }}
               />
               
