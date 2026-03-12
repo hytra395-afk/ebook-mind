@@ -33,7 +33,7 @@ export default function PrivacyPage() {
             <h3 className="text-xl font-semibold text-gray-900 mt-8 mb-3">1.1. Thông tin cá nhân</h3>
             <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-6">
               <li>Họ tên, email khi bạn mua ebook</li>
-              <li>Thông tin thanh toán (được xử lý qua SePay - bên thứ ba bảo mật)</li>
+              <li>Thông tin thanh toán (được xử lý qua cổng thanh toán bảo mật)</li>
               <li>Lịch sử mua hàng và ebook đã tải</li>
             </ul>
 
@@ -43,6 +43,7 @@ export default function PrivacyPage() {
               <li>Thời gian truy cập và các trang bạn xem</li>
               <li>Cookies và công nghệ theo dõi tương tự</li>
               <li>Hành vi duyệt ebook và tương tác với nội dung</li>
+              <li>Dữ liệu hiệu suất website</li>
             </ul>
 
             <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">2. Cách chúng tôi sử dụng thông tin</h2>
@@ -63,8 +64,8 @@ export default function PrivacyPage() {
             </p>
             <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-6">
               <li><strong>Mã hóa SSL/TLS:</strong> Tất cả dữ liệu truyền tải được mã hóa</li>
-              <li><strong>Supabase:</strong> Lưu trữ dữ liệu trên nền tảng bảo mật cấp doanh nghiệp</li>
-              <li><strong>Thanh toán an toàn:</strong> Xử lý qua SePay - đối tác thanh toán uy tín</li>
+              <li><strong>Lưu trữ an toàn:</strong> Dữ liệu được lưu trữ trên nền tảng bảo mật cấp doanh nghiệp</li>
+              <li><strong>Thanh toán an toàn:</strong> Xử lý qua cổng thanh toán uy tín</li>
               <li><strong>Kiểm tra bảo mật:</strong> Định kỳ kiểm tra và cập nhật hệ thống</li>
               <li><strong>Quyền truy cập hạn chế:</strong> Chỉ nhân viên được ủy quyền mới có quyền truy cập</li>
               <li><strong>Backup định kỳ:</strong> Sao lưu dữ liệu để phòng ngừa mất mát</li>
@@ -116,8 +117,8 @@ export default function PrivacyPage() {
 
             <p className="text-gray-700 leading-relaxed mb-4">Chúng tôi chỉ chia sẻ thông tin với:</p>
             <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-6">
-              <li><strong>Nhà cung cấp dịch vụ:</strong> Supabase (database), Vercel (hosting), Brevo (email)</li>
-              <li><strong>Cổng thanh toán:</strong> SePay để xử lý thanh toán an toàn</li>
+              <li><strong>Nhà cung cấp dịch vụ:</strong> Các đối tác cung cấp dịch vụ lưu trữ, email và công cụ hỗ trợ</li>
+              <li><strong>Cổng thanh toán:</strong> Để xử lý thanh toán an toàn</li>
               <li><strong>Yêu cầu pháp lý:</strong> Khi được yêu cầu bởi cơ quan có thẩm quyền theo quy định pháp luật</li>
             </ul>
 
@@ -154,7 +155,7 @@ export default function PrivacyPage() {
 
             <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">9. Chuyển giao dữ liệu quốc tế</h2>
             <p className="text-gray-700 leading-relaxed">
-              Dữ liệu của bạn có thể được lưu trữ và xử lý tại các máy chủ ở nước ngoài (Supabase, Vercel). 
+              Dữ liệu của bạn có thể được lưu trữ và xử lý tại các máy chủ ở nước ngoài. 
               Chúng tôi đảm bảo rằng các đối tác này tuân thủ các tiêu chuẩn bảo mật quốc tế.
             </p>
 
