@@ -2,7 +2,7 @@ import { getSupabase } from '@/lib/db'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { Star, BookOpen, ShieldCheck, Zap, Download, ChevronRight, FileText } from 'lucide-react'
+import { Star, BookOpen, ShieldCheck, Zap, Download, ChevronRight, FileText, Users } from 'lucide-react'
 import AddToCartButton from '@/components/add-to-cart-button'
 import EbookTabs from '@/components/ebook-tabs'
 
@@ -112,13 +112,6 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
                   </span>
                 )}
               </div>
-
-              {/* Mini trust row under cover */}
-              <div className="flex items-center justify-around mt-4 text-xs text-gray-400">
-                <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-green-500" /> An toàn</span>
-                <span className="flex items-center gap-1"><Zap className="w-3.5 h-3.5 text-yellow-500" /> Nhận ngay</span>
-                <span className="flex items-center gap-1"><Download className="w-3.5 h-3.5 text-blue-500" /> PDF</span>
-              </div>
             </div>
           </div>
 
@@ -130,67 +123,58 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
                 {ebook.categories.name}
               </Link>
             )}
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-tight mb-6">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-tight mb-4">
               {ebook.title}
             </h1>
 
-            {/* Rating */}
-            <div className="flex items-center gap-3 mb-6">
+            {/* Rating & Stats - New Design */}
+            <div className="flex flex-wrap items-center gap-4 mb-6">
+              {/* Stars + Rating */}
               {ebook.rating_avg > 0 && (
-                <div className="flex items-center gap-1">
-                  {[1,2,3,4,5].map(s => (
-                    <Star key={s} className={`w-4 h-4 ${s <= ratingStars ? 'fill-yellow-400 text-yellow-400' : 'text-gray-200'}`} />
-                  ))}
-                  <span className="text-sm font-semibold text-gray-700 ml-1">{Number(ebook.rating_avg).toFixed(1)}</span>
-                  <span className="text-sm text-gray-400">({ebook.rating_count})</span>
+                <div className="flex items-center gap-1.5">
+                  <div className="flex gap-0.5">
+                    {[1,2,3,4,5].map(s => (
+                      <Star key={s} className={`w-5 h-5 ${s <= ratingStars ? 'fill-yellow-400 text-yellow-400' : 'fill-gray-200 text-gray-200'}`} />
+                    ))}
+                  </div>
+                  <span className="text-base font-semibold text-gray-700">{Number(ebook.rating_avg).toFixed(1)}</span>
+                  <span className="text-sm text-gray-400">({ebook.rating_count} đánh giá)</span>
                 </div>
               )}
+              
+              {/* Lượt mua */}
               {ebook.sales_count > 0 && (
-                <span className="text-sm text-gray-400">{ebook.sales_count.toLocaleString('vi-VN')} đã bán</span>
+                <div className="flex items-center gap-1.5 text-gray-500">
+                  <Users className="w-4 h-4" />
+                  <span className="text-sm">{ebook.sales_count.toLocaleString('vi-VN')} lượt mua</span>
+                </div>
+              )}
+
+              {/* Số trang */}
+              {ebook.pages > 0 && (
+                <div className="flex items-center gap-1.5 text-gray-500">
+                  <BookOpen className="w-4 h-4" />
+                  <span className="text-sm">{ebook.pages} trang</span>
+                </div>
               )}
             </div>
 
-            {/* Đặc biệt nổi bật */}
-            <div className="mb-8 p-4 bg-blue-50 rounded-lg border border-blue-100">
-              <h3 className="font-semibold text-gray-900 mb-3 text-sm">Đặc biệt nổi bật</h3>
-              <ul className="space-y-2 text-sm text-gray-700">
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-600 font-bold mt-0.5">✓</span>
-                  <span>320 trang nội dung chi tiết và dễ hiểu</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-600 font-bold mt-0.5">✓</span>
-                  <span>Hơn 50 case study thực tế từ các doanh nhân thành công</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-600 font-bold mt-0.5">✓</span>
-                  <span>Tải về ngay sau khi thanh toán, không cần chờ đợi</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-blue-600 font-bold mt-0.5">✓</span>
-                  <span>Truy cập không giới hạn, đọc lại bao nhiêu lần tùy thích</span>
-                </li>
-              </ul>
-            </div>
+            {/* Điểm nổi bật */}
+            {ebook.highlights && ebook.highlights.length > 0 && (
+              <div className="mb-8 p-4 bg-blue-50 rounded-lg border border-blue-100">
+                <h3 className="font-semibold text-gray-900 mb-3 text-sm">Điểm nổi bật:</h3>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  {ebook.highlights.map((highlight: string, index: number) => (
+                    <li key={index} className="flex items-start gap-2">
+                      <span className="text-blue-600 font-bold mt-0.5">💡</span>
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             <p className="text-gray-600 leading-relaxed text-sm mb-8">{ebook.description}</p>
-
-            {/* Metadata pills */}
-            <div className="flex flex-wrap gap-2 mb-6 text-sm text-gray-500">
-              {ebook.levels?.name && (
-                <span className="flex items-center gap-1.5 bg-gray-100 px-3 py-1 rounded-full text-xs">
-                  <BookOpen className="w-3.5 h-3.5" /> {ebook.levels.name}
-                </span>
-              )}
-              {ebook.pages > 0 && (
-                <span className="flex items-center gap-1.5 bg-gray-100 px-3 py-1 rounded-full text-xs">
-                  <FileText className="w-3.5 h-3.5" /> {ebook.pages} trang
-                </span>
-              )}
-              <span className="flex items-center gap-1.5 bg-gray-100 px-3 py-1 rounded-full text-xs">
-                <Download className="w-3.5 h-3.5" /> File PDF
-              </span>
-            </div>
 
             {/* Mobile CTA */}
             <div className="lg:hidden bg-gray-50 rounded-2xl p-5 mb-6">
