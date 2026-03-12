@@ -39,7 +39,7 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
 
   const { data: ebook } = await supabase
     .from('ebooks')
-    .select('*, content, preview_images, categories(name, slug), levels(name), authors(name, bio, avatar_url)')
+    .select('*, content, preview_images, author_name, author_title, author_bio, author_avatar, categories(name, slug), levels(name), authors(name, bio, avatar_url)')
     .eq('slug', slug)
     .eq('active', true)
     .single()
@@ -258,30 +258,32 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
             <div className="lg:col-span-3">
               <EbookTabs content={ebook.content} reviews={reviews || []} />
 
-              {/* Tác giả */}
-              {ebook.authors?.name && (
+              {/* Tác giả - Ưu tiên custom fields trước */}
+              {(ebook.author_name || ebook.authors?.name) && (
                 <div className="mb-8 border-t pt-8">
                   <h2 className="text-2xl font-bold text-gray-900 mb-4">Về tác giả</h2>
                   <div className="flex gap-4">
-                    {ebook.authors.avatar_url ? (
+                    {(ebook.author_avatar || ebook.authors?.avatar_url) ? (
                       <Image
-                        src={ebook.authors.avatar_url}
-                        alt={ebook.authors.name}
+                        src={convertDriveUrl(ebook.author_avatar || ebook.authors.avatar_url)}
+                        alt={ebook.author_name || ebook.authors.name}
                         width={80}
                         height={80}
                         className="rounded-full flex-shrink-0 object-cover"
                       />
                     ) : (
                       <div className="w-20 h-20 rounded-full gradient-purple flex-shrink-0 flex items-center justify-center text-white font-bold text-lg">
-                        {ebook.authors.name[0]}
+                        {(ebook.author_name || ebook.authors.name)[0]}
                       </div>
                     )}
                     <div>
-                      <p className="font-bold text-gray-900 text-lg">{ebook.authors.name}</p>
-                      {ebook.authors.bio && (
-                        <p className="text-sm text-gray-600 mt-2 leading-relaxed">{ebook.authors.bio}</p>
+                      <p className="font-bold text-gray-900 text-lg">{ebook.author_name || ebook.authors.name}</p>
+                      {ebook.author_title && (
+                        <p className="text-sm text-purple-600 font-medium">{ebook.author_title}</p>
                       )}
-                      <p className="text-sm text-gray-500 mt-3">Với hơn 15 năm kinh nghiệm trong lĩnh vực kinh doanh, tác giả đã giúp hàng trăm doanh nhân khởi nghiệp thành công.</p>
+                      {(ebook.author_bio || ebook.authors?.bio) && (
+                        <p className="text-sm text-gray-600 mt-2 leading-relaxed">{ebook.author_bio || ebook.authors.bio}</p>
+                      )}
                     </div>
                   </div>
                 </div>
