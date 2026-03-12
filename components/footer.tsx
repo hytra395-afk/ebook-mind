@@ -37,6 +37,8 @@ export default function Footer() {
               <Link href="/about" className="block text-sm text-gray-500 hover:text-purple-600">Về Chúng Tôi</Link>
               <Link href="/terms" className="block text-sm text-gray-500 hover:text-purple-600">Điều Khoản Sử Dụng</Link>
               <Link href="/refund-policy" className="block text-sm text-gray-500 hover:text-purple-600">Chính Sách Hoàn Tiền</Link>
+              <Link href="/privacy" className="block text-sm text-gray-500 hover:text-purple-600">Chính Sách Bảo Mật</Link>
+              <Link href="/cookies" className="block text-sm text-gray-500 hover:text-purple-600">Chính Sách Cookie</Link>
               <a href="mailto:ebookmind0@gmail.com" className="block text-sm text-gray-500 hover:text-purple-600">Liên Hệ</a>
             </div>
           </div>
