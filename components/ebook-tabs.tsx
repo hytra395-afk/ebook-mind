@@ -54,7 +54,7 @@ export default function EbookTabs({ content, reviews }: EbookTabsProps) {
           <div className="animate-fadeIn">
             {content ? (
               <div 
-                className="prose prose-sm max-w-none text-gray-700"
+                className="ebook-content"
                 dangerouslySetInnerHTML={{ __html: content }}
               />
             ) : (
