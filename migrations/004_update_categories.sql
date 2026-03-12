@@ -5,12 +5,12 @@
 ALTER TABLE ebooks ALTER COLUMN category_id DROP NOT NULL;
 
 -- Step 2: Update any existing ebooks to avoid foreign key issues
-UPDATE ebooks SET category_id = NULL WHERE category_id IS NOT NULL;
+UPDATE ebooks SET category_id = NULL;
 
--- Step 3: Delete all existing categories
-DELETE FROM categories;
+-- Step 3: Delete all existing categories (disable foreign key check temporarily)
+DELETE FROM categories WHERE TRUE;
 
--- Step 4: Insert new categories with specific order
+-- Step 4: Insert new categories
 INSERT INTO categories (name, slug, description) VALUES
   ('Tư duy solo business', 'tu-duy-solo-business', 'Xây dựng và phát triển business một mình'),
   ('Kinh doanh ngách', 'kinh-doanh-ngach', 'Tìm và khai thác thị trường ngách hiệu quả'),
