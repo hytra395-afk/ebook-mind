@@ -14,6 +14,7 @@ interface EbookCardProps {
   sales_count: number
   pages?: number
   featured?: boolean
+  bestseller?: boolean
   category?: string
   level?: string
   priority?: boolean
@@ -21,7 +22,7 @@ interface EbookCardProps {
 
 export default function EbookCard({
   slug, title, description, price, cover_url,
-  rating_avg, rating_count, sales_count, pages, featured, category, level, priority = false
+  rating_avg, rating_count, sales_count, pages, featured, bestseller, category, level, priority = false
 }: EbookCardProps) {
   return (
     <div className="group relative">
@@ -41,7 +42,7 @@ export default function EbookCard({
               sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
             />
             {/* Badges */}
-            {featured && (
+            {bestseller && (
               <span className="absolute top-3 left-3 badge-sunset text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg">
                 Bestseller
               </span>

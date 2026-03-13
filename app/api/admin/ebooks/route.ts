@@ -32,6 +32,7 @@ export async function POST(request: NextRequest) {
     rating_avg: ebookData.ratingAvg || ebookData.rating_avg || 0,
     rating_count: ebookData.ratingCount || ebookData.rating_count || 0,
     sales_count: ebookData.salesCount || ebookData.sales_count || 0,
+    bestseller: ebookData.bestseller || false,
   }
   // Remove camelCase versions
   delete dbData.ratingAvg

@@ -36,6 +36,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     rating_avg: ebookData.ratingAvg || ebookData.rating_avg || 0,
     rating_count: ebookData.ratingCount || ebookData.rating_count || 0,
     sales_count: ebookData.salesCount || ebookData.sales_count || 0,
+    bestseller: ebookData.bestseller !== undefined ? ebookData.bestseller : false,
     updated_at: new Date().toISOString()
   }
   // Remove camelCase versions

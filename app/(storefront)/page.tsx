@@ -13,7 +13,7 @@ export default async function HomePage() {
   // Optimize queries - only select needed fields
   const { data: featuredEbooks } = await supabase
     .from('ebooks')
-    .select('id, slug, title, description, price, cover_url, rating_avg, rating_count, sales_count, featured, categories(name)')
+    .select('id, slug, title, description, price, cover_url, rating_avg, rating_count, sales_count, featured, bestseller, categories(name)')
     .eq('active', true)
     .eq('featured', true)
     .order('sales_count', { ascending: false })
@@ -21,7 +21,7 @@ export default async function HomePage() {
 
   const { data: allEbooks } = await supabase
     .from('ebooks')
-    .select('id, slug, title, description, price, cover_url, rating_avg, rating_count, sales_count, featured, categories(name)')
+    .select('id, slug, title, description, price, cover_url, rating_avg, rating_count, sales_count, featured, bestseller, categories(name)')
     .eq('active', true)
     .order('created_at', { ascending: false })
     .limit(8)
@@ -508,6 +508,7 @@ export default async function HomePage() {
               rating_count={ebook.rating_count}
               sales_count={ebook.sales_count}
               featured={ebook.featured}
+              bestseller={ebook.bestseller}
               category={ebook.categories?.name}
               priority={idx < 4}
             />

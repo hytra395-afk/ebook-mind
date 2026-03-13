@@ -51,6 +51,7 @@ export default function NewEbookPage() {
     external_url: '',
     active: true,
     featured: false,
+    bestseller: false,
     status: 'draft',
     // New fields
     highlights: [] as string[],
@@ -305,15 +306,33 @@ export default function NewEbookPage() {
                 />
                 <span className="text-sm text-gray-700">Active (hiển thị trên website)</span>
               </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={form.featured}
-                  onChange={(e) => setForm({ ...form, featured: e.target.checked })}
-                  className="rounded text-purple-600"
-                />
-                <span className="text-sm text-gray-700">Featured (nổi bật)</span>
-              </label>
+              <div className="space-y-3">
+                <label className="flex items-start gap-3 cursor-pointer p-3 border rounded-lg hover:bg-purple-50 transition">
+                  <input
+                    type="checkbox"
+                    checked={form.featured}
+                    onChange={(e) => setForm({ ...form, featured: e.target.checked })}
+                    className="rounded text-purple-600 mt-1"
+                  />
+                  <div>
+                    <span className="text-sm font-medium text-gray-900">Nổi bật (Featured)</span>
+                    <p className="text-xs text-gray-500 mt-0.5">Hiển thị trong mục "Ebook Nổi Bật" trên trang chủ</p>
+                  </div>
+                </label>
+                
+                <label className="flex items-start gap-3 cursor-pointer p-3 border rounded-lg hover:bg-orange-50 transition">
+                  <input
+                    type="checkbox"
+                    checked={form.bestseller}
+                    onChange={(e) => setForm({ ...form, bestseller: e.target.checked })}
+                    className="rounded text-orange-600 mt-1"
+                  />
+                  <div>
+                    <span className="text-sm font-medium text-gray-900">Bestseller</span>
+                    <p className="text-xs text-gray-500 mt-0.5">Hiển thị nhãn "Bestseller" trên card ebook (không ảnh hưởng trang chủ)</p>
+                  </div>
+                </label>
+              </div>
             </div>
           </div>
         )}
