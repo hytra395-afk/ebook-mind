@@ -71,7 +71,8 @@ export default function ImageGalleryInput({ images, onChange, maxImages = 10 }: 
                 alt={`Preview ${index + 1}`}
                 className="w-full h-full object-cover"
                 onError={(e) => {
-                  (e.target as HTMLImageElement).style.opacity = '0.3'
+                  const img = e.target as HTMLImageElement
+                  img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="300"%3E%3Crect fill="%23f3f4f6" width="200" height="300"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23d1d5db" font-size="12"%3ELỗi%3C/text%3E%3C/svg%3E'
                 }}
               />
               

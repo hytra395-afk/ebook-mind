@@ -320,15 +320,19 @@ export default function EditEbookPage() {
               {form.cover_url && (
                 <div className="mt-4 bg-gray-50 rounded-lg p-4 border">
                   <p className="text-xs text-gray-500 mb-2">Preview ảnh bìa:</p>
-                  <img
-                    src={convertDriveUrl(form.cover_url)}
-                    alt="Cover preview"
-                    className="w-40 h-60 object-cover rounded-lg border-2 border-purple-200 shadow-md"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.opacity = '0.3'
-                    }}
-                  />
+                  <div className="relative w-40 h-60">
+                    <img
+                      src={form.cover_url}
+                      alt="Cover preview"
+                      className="w-full h-full object-cover rounded-lg border-2 border-purple-200 shadow-md"
+                      onError={(e) => {
+                        const img = e.target as HTMLImageElement
+                        img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="300"%3E%3Crect fill="%23f3f4f6" width="200" height="300"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" fill="%23d1d5db" font-size="14"%3ELỗi tải ảnh%3C/text%3E%3C/svg%3E'
+                      }}
+                    />
+                  </div>
                   <p className="text-xs text-gray-400 mt-2">Kích thước khuyến nghị: 400×600px (tỷ lệ 2:3)</p>
+                  <p className="text-xs text-purple-600 mt-1 font-mono break-all">{form.cover_url}</p>
                 </div>
               )}
             </div>
