@@ -444,7 +444,12 @@ export default function NewComboPage() {
               ratingAvg={form.rating_avg}
               ratingCount={form.rating_count}
               salesCount={form.sales_count}
-              onStatsChange={(stats) => setForm({ ...form, ...stats })}
+              onStatsChange={(stats) => setForm({ 
+                ...form, 
+                rating_avg: stats.ratingAvg,
+                rating_count: stats.ratingCount,
+                sales_count: stats.salesCount
+              })}
             />
           </div>
         )}
