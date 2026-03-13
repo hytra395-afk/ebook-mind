@@ -13,7 +13,7 @@ export default function ComboHero() {
         
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
           Combo Ưu Đãi
-          <span className="block mt-2 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+          <span className="block mt-2 text-purple-600">
             Tiết Kiệm Đến 40%
           </span>
         </h1>
@@ -49,7 +49,7 @@ export default function ComboHero() {
             <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
               <Zap className="w-4 h-4 text-orange-600" />
             </div>
-            <span>Hỗ trợ trọn đời</span>
+            <span>Kiến thức thực tế</span>
           </div>
         </div>
       </div>

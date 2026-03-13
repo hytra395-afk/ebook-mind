@@ -10,19 +10,19 @@ const benefits = [
   {
     icon: BookOpen,
     title: 'Kiến thức toàn diện',
-    description: 'Học có hệ thống từ cơ bản đến nâng cao. Nội dung được sắp xếp logic.',
+    description: 'Học có hệ thống. Nội dung được sắp xếp logic.',
     color: 'blue'
   },
   {
     icon: Target,
     title: 'Chọn lọc kỹ càng',
-    description: 'Combo được thiết kế bởi chuyên gia. Đảm bảo chất lượng và hiệu quả.',
+    description: 'Nội dung được thu thập và chọn lọc từ kinh nghiệm thật của hàng trăm người. Đảm bảo chất lượng và hiệu quả.',
     color: 'purple'
   },
   {
     icon: Zap,
     title: 'Truy cập ngay lập tức',
-    description: 'Tải về và học ngay sau khi thanh toán. Không giới hạn thời gian.',
+    description: 'Tải về đọc ngay sau khi thanh toán. Không giới hạn thời gian.',
     color: 'orange'
   }
 ]
