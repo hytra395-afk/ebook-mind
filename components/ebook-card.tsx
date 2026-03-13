@@ -12,6 +12,7 @@ interface EbookCardProps {
   rating_avg: number
   rating_count: number
   sales_count: number
+  pages?: number
   featured?: boolean
   category?: string
   level?: string
@@ -20,7 +21,7 @@ interface EbookCardProps {
 
 export default function EbookCard({
   slug, title, description, price, cover_url,
-  rating_avg, rating_count, sales_count, featured, category, level, priority = false
+  rating_avg, rating_count, sales_count, pages, featured, category, level, priority = false
 }: EbookCardProps) {
   return (
     <div className="group relative">
@@ -91,7 +92,12 @@ export default function EbookCard({
           </div>
 
           {/* Pages info */}
-          <p className="text-xs text-gray-400 mb-4">320 trang</p>
+          {pages && pages > 0 && (
+            <p className="text-xs text-gray-400 mb-4">{pages} trang</p>
+          )}
+          {!pages || pages === 0 && (
+            <p className="text-xs text-gray-400 mb-4">320 trang</p>
+          )}
 
           {/* Price + CTA */}
           <div className="flex items-center justify-between gap-2">
