@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
-import { X, ChevronLeft, ChevronRight } from 'lucide-react'
+import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut, Maximize2 } from 'lucide-react'
 import * as Dialog from '@radix-ui/react-dialog'
 
 interface ImageLightboxProps {
@@ -21,13 +21,26 @@ export default function ImageLightbox({
   title
 }: ImageLightboxProps) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex)
+  const [zoom, setZoom] = useState(100)
+  const [position, setPosition] = useState({ x: 0, y: 0 })
+  const [isDragging, setIsDragging] = useState(false)
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
+  const imageContainerRef = useRef<HTMLDivElement>(null)
 
   // Sync currentIndex with initialIndex when lightbox opens
   useEffect(() => {
     if (open) {
       setCurrentIndex(initialIndex)
+      setZoom(100)
+      setPosition({ x: 0, y: 0 })
     }
   }, [open, initialIndex])
+
+  // Reset zoom when changing images
+  useEffect(() => {
+    setZoom(100)
+    setPosition({ x: 0, y: 0 })
+  }, [currentIndex])
 
   // Keyboard navigation
   useEffect(() => {
@@ -64,6 +77,54 @@ export default function ImageLightbox({
     setCurrentIndex(index)
   }
 
+  const zoomIn = () => {
+    setZoom((prev) => Math.min(prev + 25, 300))
+  }
+
+  const zoomOut = () => {
+    setZoom((prev) => {
+      const newZoom = Math.max(prev - 25, 100)
+      if (newZoom === 100) {
+        setPosition({ x: 0, y: 0 })
+      }
+      return newZoom
+    })
+  }
+
+  const resetZoom = () => {
+    setZoom(100)
+    setPosition({ x: 0, y: 0 })
+  }
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (zoom > 100) {
+      setIsDragging(true)
+      setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y })
+    }
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging && zoom > 100) {
+      setPosition({
+        x: e.clientX - dragStart.x,
+        y: e.clientY - dragStart.y
+      })
+    }
+  }
+
+  const handleMouseUp = () => {
+    setIsDragging(false)
+  }
+
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault()
+    if (e.deltaY < 0) {
+      zoomIn()
+    } else {
+      zoomOut()
+    }
+  }
+
   if (!open) return null
 
   return (
@@ -90,17 +151,66 @@ export default function ImageLightbox({
               </Dialog.Close>
             </div>
 
+            {/* Zoom Controls */}
+            <div className="absolute top-4 left-4 flex flex-col gap-2 z-10">
+              <button
+                onClick={zoomIn}
+                disabled={zoom >= 300}
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md flex items-center justify-center text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label="Phóng to"
+              >
+                <ZoomIn className="w-5 h-5" />
+              </button>
+              <button
+                onClick={zoomOut}
+                disabled={zoom <= 100}
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md flex items-center justify-center text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label="Thu nhỏ"
+              >
+                <ZoomOut className="w-5 h-5" />
+              </button>
+              {zoom > 100 && (
+                <button
+                  onClick={resetZoom}
+                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md flex items-center justify-center text-white transition-colors"
+                  aria-label="Reset zoom"
+                >
+                  <Maximize2 className="w-5 h-5" />
+                </button>
+              )}
+              {zoom > 100 && (
+                <div className="bg-black/60 text-white text-xs px-2 py-1 rounded-full backdrop-blur-md text-center">
+                  {zoom}%
+                </div>
+              )}
+            </div>
+
             {/* Main Image Container */}
-            <div className="flex items-center justify-center w-full h-full px-4 md:px-20">
-              <div className="relative max-w-[90vw] max-h-[80vh] md:max-h-[75vh]">
+            <div 
+              ref={imageContainerRef}
+              className="flex items-center justify-center w-full h-full px-4 md:px-20 overflow-hidden"
+              onWheel={handleWheel}
+            >
+              <div 
+                className="relative max-w-[90vw] max-h-[80vh] md:max-h-[75vh] transition-transform duration-200"
+                style={{
+                  transform: `scale(${zoom / 100}) translate(${position.x}px, ${position.y}px)`,
+                  cursor: zoom > 100 ? (isDragging ? 'grabbing' : 'grab') : 'default'
+                }}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
+              >
                 <Image
                   src={images[currentIndex]}
                   alt={`${title} - Ảnh ${currentIndex + 1}`}
                   width={1200}
                   height={1600}
-                  className="object-contain max-h-[70vh] md:max-h-[75vh] rounded-xl shadow-2xl"
+                  className="object-contain max-h-[70vh] md:max-h-[75vh] rounded-xl shadow-2xl pointer-events-none"
                   priority
                   quality={95}
+                  draggable={false}
                 />
               </div>
             </div>
