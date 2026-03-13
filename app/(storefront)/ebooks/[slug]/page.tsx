@@ -136,7 +136,7 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
                 </span>
               )}
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-tight mb-4">
+            <h1 className="text-lg sm:text-2xl font-bold text-gray-900 leading-tight mb-4">
               {ebook.title}
             </h1>
 

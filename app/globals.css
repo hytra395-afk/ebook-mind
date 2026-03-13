@@ -271,7 +271,7 @@
 
 .ebook-content {
   /* Base typography - optimal reading size */
-  @apply text-base md:text-lg text-gray-800 leading-relaxed;
+  @apply text-sm md:text-base text-gray-800 leading-relaxed;
   
   /* Max width for optimal reading (60-75 characters per line) */
   @apply max-w-3xl;
