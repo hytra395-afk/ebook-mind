@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import ImageLightbox from './image-lightbox'
 
 interface EbookImageGalleryProps {
   coverUrl: string
@@ -19,6 +20,8 @@ export default function EbookImageGallery({
 }: EbookImageGalleryProps) {
   const allImages = [coverUrl, ...previewImages].filter(Boolean)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [lightboxIndex, setLightboxIndex] = useState(0)
 
   const goToPrevious = () => {
     setActiveIndex((prev) => (prev === 0 ? allImages.length - 1 : prev - 1))
@@ -32,10 +35,18 @@ export default function EbookImageGallery({
     setActiveIndex(index)
   }
 
+  const openLightbox = (index: number) => {
+    setLightboxIndex(index)
+    setLightboxOpen(true)
+  }
+
   return (
     <div className="space-y-3">
       {/* Main Image Viewer */}
-      <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-xl bg-gray-100 group">
+      <div 
+        className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-xl bg-gray-100 group cursor-zoom-in"
+        onClick={() => openLightbox(activeIndex)}
+      >
         <Image
           src={allImages[activeIndex]}
           alt={`${title} - Ảnh ${activeIndex + 1}`}
@@ -87,6 +98,7 @@ export default function EbookImageGallery({
             <button
               key={index}
               onClick={() => goToImage(index)}
+              onDoubleClick={() => openLightbox(index)}
               className={`relative flex-shrink-0 w-16 h-20 rounded-lg overflow-hidden border-2 transition-all ${
                 index === activeIndex
                   ? 'border-purple-600 ring-2 ring-purple-200'
@@ -107,6 +119,15 @@ export default function EbookImageGallery({
           ))}
         </div>
       )}
+
+      {/* Image Lightbox */}
+      <ImageLightbox
+        images={allImages}
+        initialIndex={lightboxIndex}
+        open={lightboxOpen}
+        onOpenChange={setLightboxOpen}
+        title={title}
+      />
     </div>
   )
 }
