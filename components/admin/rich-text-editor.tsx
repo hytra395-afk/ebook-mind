@@ -6,7 +6,8 @@ import {
   Heading1, Heading2, Heading3, Heading4,
   List, ListOrdered, Link as LinkIcon, Image as ImageIcon, 
   Undo, Redo, Type, Eraser,
-  AlignLeft, AlignCenter, AlignRight, AlignJustify
+  AlignLeft, AlignCenter, AlignRight, AlignJustify,
+  ChevronDown, Minus, Plus
 } from 'lucide-react'
 
 interface RichTextEditorProps {
@@ -20,6 +21,9 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Viế
   const [activeFormats, setActiveFormats] = useState<Set<string>>(new Set())
   const [stats, setStats] = useState({ words: 0, chars: 0 })
   const [isEmpty, setIsEmpty] = useState(true)
+  const [fontSize, setFontSize] = useState('14px')
+  const [lineHeight, setLineHeight] = useState('1.6')
+  const [showFontSizeMenu, setShowFontSizeMenu] = useState(false)
 
   // Initialize content
   useEffect(() => {
@@ -96,6 +100,21 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Viế
     return () => document.removeEventListener('selectionchange', handleSelectionChange)
   }, [updateActiveFormats])
 
+  // Close font size menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      if (!target.closest('.font-size-dropdown')) {
+        setShowFontSizeMenu(false)
+      }
+    }
+    
+    if (showFontSizeMenu) {
+      document.addEventListener('click', handleClickOutside)
+      return () => document.removeEventListener('click', handleClickOutside)
+    }
+  }, [showFontSizeMenu])
+
   // Format text commands
   const formatText = useCallback((command: string) => {
     document.execCommand(command, false, undefined)
@@ -132,6 +151,48 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Viế
   const removeFormat = useCallback(() => {
     document.execCommand('removeFormat', false, undefined)
     document.execCommand('formatBlock', false, 'p')
+    editorRef.current?.focus()
+  }, [])
+
+  // Apply font size
+  const applyFontSize = useCallback((size: string) => {
+    setFontSize(size)
+    if (editorRef.current) {
+      const selection = window.getSelection()
+      if (selection && !selection.isCollapsed) {
+        document.execCommand('fontSize', false, '7')
+        const fontElements = editorRef.current.querySelectorAll('font[size="7"]')
+        fontElements.forEach((el) => {
+          const span = document.createElement('span')
+          span.style.fontSize = size
+          span.innerHTML = el.innerHTML
+          el.parentNode?.replaceChild(span, el)
+        })
+      }
+    }
+    setShowFontSizeMenu(false)
+    editorRef.current?.focus()
+  }, [])
+
+  // Apply line height
+  const applyLineHeight = useCallback((height: string) => {
+    setLineHeight(height)
+    if (editorRef.current) {
+      editorRef.current.style.lineHeight = height
+    }
+    editorRef.current?.focus()
+  }, [])
+
+  // Increase/decrease paragraph spacing
+  const adjustParagraphSpacing = useCallback((increase: boolean) => {
+    if (editorRef.current) {
+      const paragraphs = editorRef.current.querySelectorAll('p, h1, h2, h3, h4')
+      paragraphs.forEach((p) => {
+        const currentMargin = parseFloat(window.getComputedStyle(p as HTMLElement).marginBottom) || 16
+        const newMargin = increase ? currentMargin + 4 : Math.max(0, currentMargin - 4)
+        ;(p as HTMLElement).style.marginBottom = `${newMargin}px`
+      })
+    }
     editorRef.current?.focus()
   }, [])
 
@@ -213,6 +274,81 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Viế
         >
           <Redo className="w-4 h-4" />
         </ToolbarButton>
+
+        <div className="w-px h-6 bg-gray-300 mx-1" />
+
+        {/* Font Size Dropdown */}
+        <div className="relative font-size-dropdown">
+          <button
+            type="button"
+            onClick={() => setShowFontSizeMenu(!showFontSizeMenu)}
+            className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-700 bg-white border rounded hover:bg-gray-50 transition-colors"
+            title="Cỡ chữ"
+          >
+            <Type className="w-4 h-4" />
+            <span className="text-xs">{fontSize}</span>
+            <ChevronDown className="w-3 h-3" />
+          </button>
+          {showFontSizeMenu && (
+            <div className="absolute top-full left-0 mt-1 bg-white border rounded-lg shadow-lg py-1 z-20 min-w-[120px]">
+              {['12px', '14px', '16px', '18px', '20px', '24px', '28px', '32px'].map((size) => (
+                <button
+                  key={size}
+                  type="button"
+                  onClick={() => applyFontSize(size)}
+                  className={`w-full px-3 py-2 text-left text-sm hover:bg-purple-50 transition-colors ${
+                    fontSize === size ? 'bg-purple-100 text-purple-600 font-medium' : 'text-gray-700'
+                  }`}
+                  style={{ fontSize: size }}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Line Height Controls */}
+        <div className="flex items-center gap-1 px-2 py-1 bg-white border rounded">
+          <button
+            type="button"
+            onClick={() => applyLineHeight(String(Math.max(1.0, parseFloat(lineHeight) - 0.2)))}
+            className="p-1 hover:bg-gray-100 rounded transition-colors"
+            title="Giảm giãn cách dòng"
+          >
+            <Minus className="w-3 h-3" />
+          </button>
+          <span className="text-xs font-medium text-gray-600 min-w-[2rem] text-center">{lineHeight}</span>
+          <button
+            type="button"
+            onClick={() => applyLineHeight(String(Math.min(3.0, parseFloat(lineHeight) + 0.2)))}
+            className="p-1 hover:bg-gray-100 rounded transition-colors"
+            title="Tăng giãn cách dòng"
+          >
+            <Plus className="w-3 h-3" />
+          </button>
+        </div>
+
+        {/* Paragraph Spacing */}
+        <div className="flex items-center gap-1 px-2 py-1 bg-white border rounded">
+          <button
+            type="button"
+            onClick={() => adjustParagraphSpacing(false)}
+            className="p-1 hover:bg-gray-100 rounded transition-colors"
+            title="Giảm khoảng cách đoạn"
+          >
+            <Minus className="w-3 h-3" />
+          </button>
+          <span className="text-xs font-medium text-gray-600">¶</span>
+          <button
+            type="button"
+            onClick={() => adjustParagraphSpacing(true)}
+            className="p-1 hover:bg-gray-100 rounded transition-colors"
+            title="Tăng khoảng cách đoạn"
+          >
+            <Plus className="w-3 h-3" />
+          </button>
+        </div>
 
         <div className="w-px h-6 bg-gray-300 mx-1" />
 
@@ -375,8 +511,8 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Viế
           className="wysiwyg-editor min-h-[300px] max-h-[500px] overflow-y-auto p-4 focus:outline-none"
           style={{
             fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-            fontSize: '14px',
-            lineHeight: '1.6',
+            fontSize: fontSize,
+            lineHeight: lineHeight,
           }}
         />
       </div>
