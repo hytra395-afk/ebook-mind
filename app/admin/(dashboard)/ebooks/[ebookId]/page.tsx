@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import { createClient } from '@supabase/supabase-js'
-import { ArrowLeft, Trash2, Save, Send, Eye, BookOpen, Image as ImageIcon, FileText, User, Star, Search } from 'lucide-react'
+import { ArrowLeft, Save, Send, Eye, BookOpen, Image as ImageIcon, FileText, User, Star, Search } from 'lucide-react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import ImageGalleryInput from '@/components/admin/image-gallery-input'
@@ -11,6 +11,7 @@ import HighlightsInput from '@/components/admin/highlights-input'
 import ReviewsManager from '@/components/admin/reviews-manager'
 import SEOPanel from '@/components/admin/seo-panel'
 import AuthorInput from '@/components/admin/author-input'
+import DeleteButton from '@/components/admin/delete-button'
 import { convertDriveUrl } from '@/lib/utils'
 
 const RichTextEditor = dynamic(() => import('@/components/admin/rich-text-editor'), { ssr: false })
@@ -116,9 +117,7 @@ export default function EditEbookPage() {
     setLoading(false)
   }
 
-  const handleDelete = async () => {
-    if (!confirm('Bạn chắc chắn muốn xóa ebook này?')) return
-    await fetch(`/api/admin/ebooks/${ebookId}`, { method: 'DELETE' })
+  const handleDeleteSuccess = () => {
     router.push('/admin/ebooks')
     router.refresh()
   }
@@ -139,13 +138,13 @@ export default function EditEbookPage() {
         </div>
         
         <div className="flex items-center gap-3">
-          <button
-            type="button"
-            onClick={handleDelete}
-            className="flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg text-sm font-medium transition"
-          >
-            <Trash2 className="w-4 h-4" /> Xóa
-          </button>
+          <DeleteButton
+            itemId={ebookId}
+            itemType="ebook"
+            itemTitle={form.title}
+            onDelete={handleDeleteSuccess}
+            variant="button"
+          />
           <Link
             href={`/ebooks/${form.slug}`}
             target="_blank"

@@ -2,6 +2,7 @@ import { getSupabaseAdmin } from '@/lib/db'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Plus, Pencil } from 'lucide-react'
+import DeleteButton from '@/components/admin/delete-button'
 
 export const revalidate = 0
 
@@ -67,12 +68,20 @@ export default async function AdminEbooksPage() {
                     )}
                   </td>
                   <td className="px-6 py-4">
-                    <Link
-                      href={`/admin/ebooks/${ebook.id}`}
-                      className="inline-flex items-center gap-1 text-sm text-purple-600 hover:text-purple-800"
-                    >
-                      <Pencil className="h-3.5 w-3.5" /> Sửa
-                    </Link>
+                    <div className="flex items-center gap-3">
+                      <Link
+                        href={`/admin/ebooks/${ebook.id}`}
+                        className="inline-flex items-center gap-1 text-sm text-purple-600 hover:text-purple-800"
+                      >
+                        <Pencil className="h-3.5 w-3.5" /> Sửa
+                      </Link>
+                      <DeleteButton
+                        itemId={ebook.id}
+                        itemType="ebook"
+                        itemTitle={ebook.title}
+                        variant="text"
+                      />
+                    </div>
                   </td>
                 </tr>
               ))}

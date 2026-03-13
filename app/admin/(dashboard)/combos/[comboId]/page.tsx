@@ -3,12 +3,13 @@
 import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import { createClient } from '@supabase/supabase-js'
-import { ArrowLeft, Trash2, Save, Send, Eye, Package, Image as ImageIcon, FileText, Star, Search, X } from 'lucide-react'
+import { ArrowLeft, Save, Send, Eye, Package, Image as ImageIcon, FileText, Star, Search, X } from 'lucide-react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import HighlightsInput from '@/components/admin/highlights-input'
 import ReviewsManager from '@/components/admin/reviews-manager'
 import SEOPanel from '@/components/admin/seo-panel'
+import DeleteButton from '@/components/admin/delete-button'
 
 const RichTextEditor = dynamic(() => import('@/components/admin/rich-text-editor'), { ssr: false })
 
@@ -116,9 +117,7 @@ export default function EditComboPage() {
     setLoading(false)
   }
 
-  const handleDelete = async () => {
-    if (!confirm('Bạn chắc chắn muốn xóa combo này?')) return
-    await fetch(`/api/admin/combos/${comboId}`, { method: 'DELETE' })
+  const handleDeleteSuccess = () => {
     router.push('/admin/combos')
     router.refresh()
   }
@@ -152,13 +151,13 @@ export default function EditComboPage() {
         </div>
         
         <div className="flex items-center gap-3">
-          <button
-            type="button"
-            onClick={handleDelete}
-            className="flex items-center gap-2 px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg text-sm font-medium transition"
-          >
-            <Trash2 className="w-4 h-4" /> Xóa
-          </button>
+          <DeleteButton
+            itemId={comboId}
+            itemType="combo"
+            itemTitle={form.title}
+            onDelete={handleDeleteSuccess}
+            variant="button"
+          />
           <Link
             href={`/combos/${form.slug}`}
             target="_blank"
