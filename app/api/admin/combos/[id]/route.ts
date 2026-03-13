@@ -49,23 +49,27 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     }
   }
 
-  // Handle reviews - delete old and insert new
+  // Handle reviews - delete old and insert new (use combo_reviews table)
   if (reviews !== undefined) {
-    await supabase.from('reviews').delete().eq('combo_id', id)
+    await supabase.from('combo_reviews').delete().eq('combo_id', id)
 
     if (reviews.length > 0) {
       const reviewsToInsert = reviews.map((r: any) => ({
         combo_id: id,
-        rating: r.rating,
-        title: r.title,
-        content: r.content,
-        reviewer_name: r.reviewer_name,
-        reviewer_avatar: r.reviewer_avatar,
-        reviewer_gender: r.reviewer_gender,
-        review_date: r.review_date,
+        rating: Number(r.rating) || 5,
+        title: r.title || '',
+        content: r.content || '',
+        reviewer_name: r.reviewer_name || 'Anonymous',
+        reviewer_avatar: r.reviewer_avatar || null,
+        reviewer_gender: r.reviewer_gender || null,
+        review_date: r.review_date || new Date().toISOString().split('T')[0],
       }))
 
-      await supabase.from('reviews').insert(reviewsToInsert)
+      const { error: insertError } = await supabase.from('combo_reviews').insert(reviewsToInsert)
+      if (insertError) {
+        console.error('Error inserting combo reviews:', insertError)
+        return NextResponse.json({ error: 'Failed to save reviews: ' + insertError.message }, { status: 500 })
+      }
     }
   }
 

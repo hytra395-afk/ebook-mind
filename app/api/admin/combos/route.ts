@@ -40,20 +40,23 @@ export async function POST(request: NextRequest) {
     await supabase.from('combo_items').insert(comboItems)
   }
 
-  // Insert reviews if provided
+  // Insert reviews if provided (into combo_reviews table)
   if (reviews && reviews.length > 0 && combo) {
     const reviewsToInsert = reviews.map((r: any) => ({
       combo_id: combo.id,
-      rating: r.rating,
-      title: r.title,
-      content: r.content,
-      reviewer_name: r.reviewer_name,
-      reviewer_avatar: r.reviewer_avatar,
-      reviewer_gender: r.reviewer_gender,
-      review_date: r.review_date,
+      rating: Number(r.rating) || 5,
+      title: r.title || '',
+      content: r.content || '',
+      reviewer_name: r.reviewer_name || 'Anonymous',
+      reviewer_avatar: r.reviewer_avatar || null,
+      reviewer_gender: r.reviewer_gender || null,
+      review_date: r.review_date || new Date().toISOString().split('T')[0],
     }))
 
-    await supabase.from('reviews').insert(reviewsToInsert)
+    const { error: reviewError } = await supabase.from('combo_reviews').insert(reviewsToInsert)
+    if (reviewError) {
+      console.error('Error inserting combo reviews:', reviewError)
+    }
   }
 
   return NextResponse.json({ combo })

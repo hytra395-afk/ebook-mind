@@ -43,10 +43,12 @@ export default function NewComboPage() {
     price: '',
     active: true,
     featured: false,
+    bestseller: false,
     status: 'draft',
     cover_url: '',
     content: '',
     highlights: [] as string[],
+    preview_images: [] as string[],
     og_image_url: '',
     meta_title: '',
     meta_description: '',
@@ -254,7 +256,7 @@ export default function NewComboPage() {
                   </p>
                 )}
               </div>
-              <div className="flex items-end gap-6 pb-2">
+              <div className="flex items-center gap-6 pt-2">
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
@@ -262,18 +264,37 @@ export default function NewComboPage() {
                     onChange={(e) => setForm({ ...form, active: e.target.checked })}
                     className="rounded text-purple-600"
                   />
-                  <span className="text-sm text-gray-700">Active</span>
-                </label>
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={form.featured}
-                    onChange={(e) => setForm({ ...form, featured: e.target.checked })}
-                    className="rounded text-purple-600"
-                  />
-                  <span className="text-sm text-gray-700">Featured</span>
+                  <span className="text-sm text-gray-700">Active (hiển thị trên website)</span>
                 </label>
               </div>
+            </div>
+
+            <div className="space-y-3">
+              <label className="flex items-start gap-3 cursor-pointer p-3 border rounded-lg hover:bg-purple-50 transition">
+                <input
+                  type="checkbox"
+                  checked={form.featured}
+                  onChange={(e) => setForm({ ...form, featured: e.target.checked })}
+                  className="rounded text-purple-600 mt-1"
+                />
+                <div>
+                  <span className="text-sm font-medium text-gray-900">Nổi bật (Featured)</span>
+                  <p className="text-xs text-gray-500 mt-0.5">Hiển thị trong mục "Combo Nổi Bật" trên trang chủ</p>
+                </div>
+              </label>
+              
+              <label className="flex items-start gap-3 cursor-pointer p-3 border rounded-lg hover:bg-orange-50 transition">
+                <input
+                  type="checkbox"
+                  checked={form.bestseller}
+                  onChange={(e) => setForm({ ...form, bestseller: e.target.checked })}
+                  className="rounded text-orange-600 mt-1"
+                />
+                <div>
+                  <span className="text-sm font-medium text-gray-900">Bestseller</span>
+                  <p className="text-xs text-gray-500 mt-0.5">Hiển thị nhãn "Bestseller" trên card combo (không ảnh hưởng trang chủ)</p>
+                </div>
+              </label>
             </div>
           </div>
         )}
@@ -300,6 +321,14 @@ export default function NewComboPage() {
                   />
                 </div>
               )}
+            </div>
+
+            <div className="max-w-3xl">
+              <label className="block text-sm font-medium text-gray-700 mb-3">Ảnh preview (Gallery)</label>
+              <ImageGalleryInput
+                images={form.preview_images}
+                onChange={(preview_images) => setForm({ ...form, preview_images })}
+              />
             </div>
 
             <div className="max-w-3xl">

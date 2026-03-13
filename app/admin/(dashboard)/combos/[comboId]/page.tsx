@@ -7,6 +7,7 @@ import { ArrowLeft, Save, Send, Eye, Package, Image as ImageIcon, FileText, Star
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import HighlightsInput from '@/components/admin/highlights-input'
+import ImageGalleryInput from '@/components/admin/image-gallery-input'
 import ReviewsManager from '@/components/admin/reviews-manager'
 import SEOPanel from '@/components/admin/seo-panel'
 import DeleteButton from '@/components/admin/delete-button'
@@ -46,7 +47,7 @@ export default function EditComboPage() {
         supabase.from('combos').select('*').eq('id', comboId).single(),
         supabase.from('ebooks').select('id, title, cover_url, price').eq('active', true),
         supabase.from('combo_items').select('ebook_id').eq('combo_id', comboId),
-        supabase.from('reviews').select('*').eq('combo_id', comboId).order('created_at', { ascending: false }),
+        supabase.from('combo_reviews').select('*').eq('combo_id', comboId).order('created_at', { ascending: false }),
       ])
       
       if (comboRes.data) {
@@ -54,6 +55,7 @@ export default function EditComboPage() {
         setForm({
           ...combo,
           highlights: combo.highlights || [],
+          preview_images: combo.preview_images || [],
           keywords: combo.keywords || [],
           content: combo.content || '',
           cover_url: combo.cover_url || '',
@@ -63,6 +65,7 @@ export default function EditComboPage() {
           rating_avg: combo.rating_avg || 0,
           rating_count: combo.rating_count || 0,
           sales_count: combo.sales_count || 0,
+          bestseller: combo.bestseller || false,
           status: combo.status || 'published',
         })
       }
@@ -265,7 +268,7 @@ export default function EditComboPage() {
                   </p>
                 )}
               </div>
-              <div className="flex items-end gap-6 pb-2">
+              <div className="flex items-center gap-6 pt-2">
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
@@ -273,18 +276,37 @@ export default function EditComboPage() {
                     onChange={(e) => setForm({ ...form, active: e.target.checked })}
                     className="rounded text-purple-600"
                   />
-                  <span className="text-sm text-gray-700">Active</span>
-                </label>
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={form.featured || false}
-                    onChange={(e) => setForm({ ...form, featured: e.target.checked })}
-                    className="rounded text-purple-600"
-                  />
-                  <span className="text-sm text-gray-700">Featured</span>
+                  <span className="text-sm text-gray-700">Active (hiển thị trên website)</span>
                 </label>
               </div>
+            </div>
+
+            <div className="space-y-3">
+              <label className="flex items-start gap-3 cursor-pointer p-3 border rounded-lg hover:bg-purple-50 transition">
+                <input
+                  type="checkbox"
+                  checked={form.featured || false}
+                  onChange={(e) => setForm({ ...form, featured: e.target.checked })}
+                  className="rounded text-purple-600 mt-1"
+                />
+                <div>
+                  <span className="text-sm font-medium text-gray-900">Nổi bật (Featured)</span>
+                  <p className="text-xs text-gray-500 mt-0.5">Hiển thị trong mục "Combo Nổi Bật" trên trang chủ</p>
+                </div>
+              </label>
+              
+              <label className="flex items-start gap-3 cursor-pointer p-3 border rounded-lg hover:bg-orange-50 transition">
+                <input
+                  type="checkbox"
+                  checked={form.bestseller || false}
+                  onChange={(e) => setForm({ ...form, bestseller: e.target.checked })}
+                  className="rounded text-orange-600 mt-1"
+                />
+                <div>
+                  <span className="text-sm font-medium text-gray-900">Bestseller</span>
+                  <p className="text-xs text-gray-500 mt-0.5">Hiển thị nhãn "Bestseller" trên card combo (không ảnh hưởng trang chủ)</p>
+                </div>
+              </label>
             </div>
           </div>
         )}
@@ -310,6 +332,14 @@ export default function EditComboPage() {
                   />
                 </div>
               )}
+            </div>
+
+            <div className="max-w-3xl">
+              <label className="block text-sm font-medium text-gray-700 mb-3">Ảnh preview (Gallery)</label>
+              <ImageGalleryInput
+                images={form.preview_images || []}
+                onChange={(preview_images) => setForm({ ...form, preview_images })}
+              />
             </div>
 
             <div className="max-w-3xl">
