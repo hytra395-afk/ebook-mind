@@ -128,7 +128,7 @@ export default function AuthorInput({
                 <p className="text-sm text-purple-600">{authorTitle}</p>
               )}
               {authorBio && (
-                <p className="text-sm text-gray-600 mt-1 line-clamp-2">{authorBio}</p>
+                <p className="text-sm text-gray-600 mt-1">{authorBio}</p>
               )}
             </div>
           </div>

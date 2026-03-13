@@ -7,7 +7,7 @@ import {
   List, ListOrdered, Link as LinkIcon, Image as ImageIcon, 
   Undo, Redo, Type, Eraser,
   AlignLeft, AlignCenter, AlignRight, AlignJustify,
-  ChevronDown, Minus, Plus
+  ChevronDown, Minus, Plus, Palette, Table
 } from 'lucide-react'
 
 interface RichTextEditorProps {
@@ -24,6 +24,8 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Viế
   const [fontSize, setFontSize] = useState('14px')
   const [lineHeight, setLineHeight] = useState('1.6')
   const [showFontSizeMenu, setShowFontSizeMenu] = useState(false)
+  const [showColorPicker, setShowColorPicker] = useState(false)
+  const [textColor, setTextColor] = useState('#000000')
 
   // Initialize content
   useEffect(() => {
@@ -100,20 +102,23 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Viế
     return () => document.removeEventListener('selectionchange', handleSelectionChange)
   }, [updateActiveFormats])
 
-  // Close font size menu when clicking outside
+  // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       const target = e.target as HTMLElement
       if (!target.closest('.font-size-dropdown')) {
         setShowFontSizeMenu(false)
       }
+      if (!target.closest('.color-picker-dropdown')) {
+        setShowColorPicker(false)
+      }
     }
     
-    if (showFontSizeMenu) {
+    if (showFontSizeMenu || showColorPicker) {
       document.addEventListener('click', handleClickOutside)
       return () => document.removeEventListener('click', handleClickOutside)
     }
-  }, [showFontSizeMenu])
+  }, [showFontSizeMenu, showColorPicker])
 
   // Format text commands
   const formatText = useCallback((command: string) => {
@@ -192,6 +197,37 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Viế
         const newMargin = increase ? currentMargin + 4 : Math.max(0, currentMargin - 4)
         ;(p as HTMLElement).style.marginBottom = `${newMargin}px`
       })
+    }
+    editorRef.current?.focus()
+  }, [])
+
+  // Apply text color
+  const applyTextColor = useCallback((color: string) => {
+    setTextColor(color)
+    document.execCommand('foreColor', false, color)
+    setShowColorPicker(false)
+    editorRef.current?.focus()
+  }, [])
+
+  // Insert table
+  const insertTable = useCallback(() => {
+    const rows = window.prompt('Số hàng:', '3')
+    const cols = window.prompt('Số cột:', '3')
+    if (rows && cols) {
+      const numRows = parseInt(rows, 10)
+      const numCols = parseInt(cols, 10)
+      if (numRows > 0 && numCols > 0) {
+        let tableHTML = '<table border="1" style="border-collapse: collapse; width: 100%; margin: 16px 0;">'
+        for (let i = 0; i < numRows; i++) {
+          tableHTML += '<tr>'
+          for (let j = 0; j < numCols; j++) {
+            tableHTML += '<td style="border: 1px solid #ddd; padding: 8px;">Nội dung</td>'
+          }
+          tableHTML += '</tr>'
+        }
+        tableHTML += '</table>'
+        document.execCommand('insertHTML', false, tableHTML)
+      }
     }
     editorRef.current?.focus()
   }, [])
@@ -470,6 +506,43 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Viế
 
         <div className="w-px h-6 bg-gray-300 mx-1" />
 
+        {/* Text Color Picker */}
+        <div className="relative color-picker-dropdown">
+          <button
+            type="button"
+            onClick={() => setShowColorPicker(!showColorPicker)}
+            className="flex items-center gap-1 p-2 text-gray-600 hover:bg-gray-100 rounded transition-colors"
+            title="Màu chữ"
+          >
+            <Palette className="w-4 h-4" />
+            <div className="w-4 h-4 rounded border" style={{ backgroundColor: textColor }} />
+          </button>
+          {showColorPicker && (
+            <div className="absolute top-full left-0 mt-1 bg-white border rounded-lg shadow-lg p-3 z-20">
+              <div className="grid grid-cols-6 gap-2 mb-2">
+                {['#000000', '#374151', '#6B7280', '#EF4444', '#F97316', '#F59E0B', '#10B981', '#3B82F6', '#8B5CF6', '#EC4899', '#FFFFFF', '#F3F4F6'].map((color) => (
+                  <button
+                    key={color}
+                                        type="button"
+                    onClick={() => applyTextColor(color)}
+                    className="w-6 h-6 rounded border-2 hover:scale-110 transition-transform"
+                    style={{ backgroundColor: color, borderColor: textColor === color ? '#8B5CF6' : '#E5E7EB' }}
+                    title={color}
+                  />
+                ))}
+              </div>
+              <input
+                type="color"
+                value={textColor}
+                onChange={(e) => applyTextColor(e.target.value)}
+                className="w-full h-8 rounded cursor-pointer"
+              />
+            </div>
+          )}
+        </div>
+
+        <div className="w-px h-6 bg-gray-300 mx-1" />
+
         {/* Link & Image */}
         <ToolbarButton 
           onClick={insertLink} 
@@ -482,6 +555,12 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Viế
           title="Chèn ảnh"
         >
           <ImageIcon className="w-4 h-4" />
+        </ToolbarButton>
+        <ToolbarButton 
+          onClick={insertTable} 
+          title="Chèn bảng"
+        >
+          <Table className="w-4 h-4" />
         </ToolbarButton>
 
         <div className="w-px h-6 bg-gray-300 mx-1" />
@@ -605,6 +684,21 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Viế
         .wysiwyg-editor strike,
         .wysiwyg-editor s {
           text-decoration: line-through;
+        }
+        .wysiwyg-editor table {
+          border-collapse: collapse;
+          width: 100%;
+          margin: 16px 0;
+        }
+        .wysiwyg-editor table td,
+        .wysiwyg-editor table th {
+          border: 1px solid #e5e7eb;
+          padding: 8px;
+          text-align: left;
+        }
+        .wysiwyg-editor table th {
+          background-color: #f9fafb;
+          font-weight: 600;
         }
       `}</style>
     </div>
