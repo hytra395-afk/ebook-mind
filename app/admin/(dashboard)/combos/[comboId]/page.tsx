@@ -11,6 +11,7 @@ import ImageGalleryInput from '@/components/admin/image-gallery-input'
 import ReviewsManager from '@/components/admin/reviews-manager'
 import SEOPanel from '@/components/admin/seo-panel'
 import DeleteButton from '@/components/admin/delete-button'
+import { convertDriveUrl } from '@/lib/utils'
 
 const RichTextEditor = dynamic(() => import('@/components/admin/rich-text-editor'), { ssr: false })
 
@@ -315,21 +316,27 @@ export default function EditComboPage() {
         {activeTab === 'media' && (
           <div className="space-y-6">
             <div className="max-w-3xl">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Ảnh bìa combo</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Ảnh bìa combo *</label>
               <input
                 type="url"
                 value={form.cover_url || ''}
-                onChange={(e) => setForm({ ...form, cover_url: e.target.value })}
+                onChange={(e) => setForm({ ...form, cover_url: convertDriveUrl(e.target.value) })}
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                placeholder="https://drive.google.com/file/d/... hoặc URL trực tiếp"
               />
+              <p className="text-xs text-gray-400 mt-1">Hỗ trợ Google Drive URL - sẽ tự động chuyển đổi</p>
               {form.cover_url && (
-                <div className="mt-3">
+                <div className="mt-3 p-4 bg-gray-50 rounded-lg">
+                  <p className="text-xs text-gray-500 mb-2">Preview:</p>
                   <img
-                    src={form.cover_url}
+                    src={convertDriveUrl(form.cover_url)}
                     alt="Cover preview"
-                    className="w-32 h-48 object-cover rounded-lg border"
-                    onError={(e) => (e.target as HTMLImageElement).style.display = 'none'}
+                    className="w-40 h-56 object-cover rounded-lg border-2 border-gray-200 shadow-sm"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400'
+                    }}
                   />
+                  <p className="text-xs text-gray-400 mt-2 break-all">URL: {convertDriveUrl(form.cover_url)}</p>
                 </div>
               )}
             </div>
