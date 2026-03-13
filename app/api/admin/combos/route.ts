@@ -21,9 +21,21 @@ export async function POST(request: NextRequest) {
   // Extract ebook_ids and reviews from body
   const { ebook_ids, reviews, ...comboData } = body
 
+  // Convert camelCase to snake_case for database columns
+  const dbData = {
+    ...comboData,
+    rating_avg: comboData.ratingAvg || comboData.rating_avg || 0,
+    rating_count: comboData.ratingCount || comboData.rating_count || 0,
+    sales_count: comboData.salesCount || comboData.sales_count || 0,
+  }
+  // Remove camelCase versions
+  delete dbData.ratingAvg
+  delete dbData.ratingCount
+  delete dbData.salesCount
+
   const { data: combo, error } = await supabase
     .from('combos')
-    .insert(comboData)
+    .insert(dbData)
     .select()
     .single()
 

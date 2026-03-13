@@ -25,9 +25,22 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
   // Extract ebook_ids and reviews from body
   const { ebook_ids, reviews, ...comboData } = body
 
+  // Convert camelCase to snake_case for database columns
+  const dbData = {
+    ...comboData,
+    rating_avg: comboData.ratingAvg || comboData.rating_avg || 0,
+    rating_count: comboData.ratingCount || comboData.rating_count || 0,
+    sales_count: comboData.salesCount || comboData.sales_count || 0,
+    updated_at: new Date().toISOString()
+  }
+  // Remove camelCase versions
+  delete dbData.ratingAvg
+  delete dbData.ratingCount
+  delete dbData.salesCount
+
   const { data, error } = await supabase
     .from('combos')
-    .update({ ...comboData, updated_at: new Date().toISOString() })
+    .update(dbData)
     .eq('id', id)
     .select()
     .single()
