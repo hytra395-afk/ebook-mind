@@ -16,7 +16,7 @@ const benefits = [
   {
     icon: Target,
     title: 'Chọn lọc kỹ càng',
-    description: 'Nội dung được thu thập và chọn lọc từ kinh nghiệm thật của hàng trăm người. Đảm bảo chất lượng và hiệu quả.',
+    description: 'Nội dung được thu thập và chọn lọc từ kinh nghiệm thật của hàng trăm người.',
     color: 'purple'
   },
   {
