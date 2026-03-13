@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { Plus, Trash2, Star, User, Edit2, RefreshCw } from 'lucide-react'
+import { useState, useMemo } from 'react'
+import { Plus, Trash2, Star, User, Edit2, RefreshCw, ArrowUpDown } from 'lucide-react'
 
 interface Review {
   id?: string
@@ -33,6 +33,8 @@ export default function ReviewsManager({
 }: ReviewsManagerProps) {
   const [showForm, setShowForm] = useState(false)
   const [editingIndex, setEditingIndex] = useState<number | null>(null)
+  const [sortBy, setSortBy] = useState<'date' | 'rating' | 'name'>('date')
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc')
   const [newReview, setNewReview] = useState<Review>({
     rating: 5,
     title: '',
@@ -102,6 +104,36 @@ export default function ReviewsManager({
       })
     } else {
       onStatsChange({ ratingAvg: 0, ratingCount: 0, salesCount })
+    }
+  }
+
+  // Sort reviews
+  const sortedReviews = useMemo(() => {
+    const sorted = [...reviews]
+    sorted.sort((a, b) => {
+      let comparison = 0
+      
+      if (sortBy === 'date') {
+        const dateA = new Date(a.review_date || 0).getTime()
+        const dateB = new Date(b.review_date || 0).getTime()
+        comparison = dateB - dateA
+      } else if (sortBy === 'rating') {
+        comparison = b.rating - a.rating
+      } else if (sortBy === 'name') {
+        comparison = (a.reviewer_name || '').localeCompare(b.reviewer_name || '')
+      }
+      
+      return sortOrder === 'asc' ? -comparison : comparison
+    })
+    return sorted
+  }, [reviews, sortBy, sortOrder])
+
+  const toggleSort = (newSortBy: 'date' | 'rating' | 'name') => {
+    if (sortBy === newSortBy) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')
+    } else {
+      setSortBy(newSortBy)
+      setSortOrder('desc')
     }
   }
 
@@ -342,9 +374,47 @@ export default function ReviewsManager({
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="font-semibold text-gray-900 text-lg">Danh sách đánh giá ({reviews.length})</h3>
+            
+            {/* Sort Controls */}
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-gray-500">Sắp xếp:</span>
+              <button
+                type="button"
+                onClick={() => toggleSort('date')}
+                className={`flex items-center gap-1 px-3 py-1.5 text-xs font-medium rounded-lg transition ${
+                  sortBy === 'date' ? 'bg-purple-100 text-purple-700' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
+              >
+                Ngày
+                {sortBy === 'date' && <ArrowUpDown className="w-3 h-3" />}
+              </button>
+              <button
+                type="button"
+                onClick={() => toggleSort('rating')}
+                className={`flex items-center gap-1 px-3 py-1.5 text-xs font-medium rounded-lg transition ${
+                  sortBy === 'rating' ? 'bg-purple-100 text-purple-700' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
+              >
+                Điểm
+                {sortBy === 'rating' && <ArrowUpDown className="w-3 h-3" />}
+              </button>
+              <button
+                type="button"
+                onClick={() => toggleSort('name')}
+                className={`flex items-center gap-1 px-3 py-1.5 text-xs font-medium rounded-lg transition ${
+                  sortBy === 'name' ? 'bg-purple-100 text-purple-700' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
+              >
+                Tên
+                {sortBy === 'name' && <ArrowUpDown className="w-3 h-3" />}
+              </button>
+              <span className="text-xs text-gray-400">
+                {sortOrder === 'desc' ? '↓' : '↑'}
+              </span>
+            </div>
           </div>
           <div className="space-y-3">
-            {reviews.map((review, index) => (
+            {sortedReviews.map((review, index) => (
               <div key={review.id || index} className="bg-white border-2 border-gray-100 rounded-xl p-5 hover:border-purple-200 transition">
                 <div className="flex gap-4">
                   {/* Avatar */}
@@ -389,7 +459,7 @@ export default function ReviewsManager({
                       <div className="flex items-center gap-1">
                         <button
                           type="button"
-                          onClick={() => editReview(index)}
+                          onClick={() => editReview(reviews.findIndex(r => r.id === review.id))}
                           className="p-2 text-blue-500 hover:text-blue-700 hover:bg-blue-50 rounded-lg transition"
                           title="Sửa đánh giá"
                         >
@@ -397,7 +467,7 @@ export default function ReviewsManager({
                         </button>
                         <button
                           type="button"
-                          onClick={() => removeReview(index)}
+                          onClick={() => removeReview(reviews.findIndex(r => r.id === review.id))}
                           className="p-2 text-red-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition"
                           title="Xóa đánh giá"
                         >
