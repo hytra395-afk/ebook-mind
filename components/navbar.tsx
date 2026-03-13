@@ -16,7 +16,7 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10)
     }
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -40,16 +40,16 @@ export default function Navbar() {
 
             {/* Desktop Nav */}
             <nav className="hidden md:flex items-center gap-6">
-              <Link href="/ebooks" className="text-sm font-medium text-gray-600 hover:text-purple-600 transition-colors">
+              <Link href="/ebooks" className="text-base font-medium text-gray-600 hover:text-purple-600 transition-colors">
                 Ebook Store
               </Link>
-              <Link href="/combos" className="text-sm font-medium text-gray-600 hover:text-purple-600 transition-colors">
-                Combo
+              <Link href="/combos" className="text-base font-medium text-gray-600 hover:text-purple-600 transition-colors">
+                Combos
               </Link>
-              <Link href="/use-cases" className="text-sm font-medium text-gray-600 hover:text-purple-600 transition-colors">
+              <Link href="/use-cases" className="text-base font-medium text-gray-600 hover:text-purple-600 transition-colors">
                 Use Cases
               </Link>
-              <Link href="/about" className="text-sm font-medium text-gray-600 hover:text-purple-600 transition-colors">
+              <Link href="/about" className="text-base font-medium text-gray-600 hover:text-purple-600 transition-colors">
                 Về Chúng Tôi
               </Link>
             </nav>
@@ -96,10 +96,10 @@ export default function Navbar() {
               className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
             />
           </form>
-          <Link href="/ebooks" onClick={() => setMobileOpen(false)} className="block text-sm font-medium text-gray-700 py-1">Ebook Store</Link>
-          <Link href="/combos" onClick={() => setMobileOpen(false)} className="block text-sm font-medium text-gray-700 py-1">Combo</Link>
-          <Link href="/use-cases" onClick={() => setMobileOpen(false)} className="block text-sm font-medium text-gray-700 py-1">Use Cases</Link>
-          <Link href="/about" onClick={() => setMobileOpen(false)} className="block text-sm font-medium text-gray-700 py-1">Về Chúng Tôi</Link>
+          <Link href="/ebooks" onClick={() => setMobileOpen(false)} className="block text-base font-medium text-gray-700 py-1">Ebook Store</Link>
+          <Link href="/combos" onClick={() => setMobileOpen(false)} className="block text-base font-medium text-gray-700 py-1">Combos</Link>
+          <Link href="/use-cases" onClick={() => setMobileOpen(false)} className="block text-base font-medium text-gray-700 py-1">Use Cases</Link>
+          <Link href="/about" onClick={() => setMobileOpen(false)} className="block text-base font-medium text-gray-700 py-1">Về Chúng Tôi</Link>
           <Link href="/cart" onClick={() => setMobileOpen(false)} className="block text-sm font-medium text-gray-700 py-1">Giỏ hàng</Link>
         </div>
       )}

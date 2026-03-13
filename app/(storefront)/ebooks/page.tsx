@@ -72,33 +72,33 @@ export default async function EbooksPage({
   return (
     <div>
       {/* Store Header */}
-      <section className="hero-gradient py-10 text-center">
+      <section className="hero-gradient py-11 text-center">
         <div className="max-w-2xl mx-auto px-4">
-          <div className="inline-flex items-center gap-2 bg-white/60 border border-purple-200 text-purple-600 text-xs font-medium px-3 py-1 rounded-full mb-4">
-            <BookOpen className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 bg-white/60 border border-purple-200 text-purple-600 text-sm font-medium px-3.5 py-1.5 rounded-full mb-4">
+            <BookOpen className="w-4 h-4" />
             {currentCategory?.name || 'Ebook Store'}
           </div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3">
+          <h1 className="text-4xl sm:text-[2.75rem] font-extrabold text-gray-900 mb-3">
             <span className="gradient-text-purple">{params.category ? currentCategory?.name : 'Ebook Store'}</span>
           </h1>
-          <p className="text-gray-500 text-sm sm:text-base max-w-lg mx-auto">
+          <p className="text-gray-500 text-base sm:text-lg max-w-lg mx-auto">
             Nội dung được thu thập từ những kinh nghiệm thật, kiến thức thật của hàng trăm người
           </p>
 
           {/* Stats bar */}
-          <div className="flex items-center justify-center gap-6 mt-6 text-sm text-gray-500">
+          <div className="flex items-center justify-center gap-6 mt-6 text-base text-gray-500">
             <span className="flex items-center gap-1.5">
-              <BookOpen className="w-4 h-4 text-purple-400" />
+              <BookOpen className="w-[1.125rem] h-[1.125rem] text-purple-400" />
               100+ ebook
             </span>
             <span className="text-gray-300">|</span>
             <span className="flex items-center gap-1.5">
-              <Star className="w-4 h-4 text-yellow-400" />
+              <Star className="w-[1.125rem] h-[1.125rem] text-yellow-400" />
               Đánh giá 4.9/5⭐
             </span>
             <span className="text-gray-300">|</span>
             <span className="flex items-center gap-1.5">
-              <Users className="w-4 h-4 text-teal-400" />
+              <Users className="w-[1.125rem] h-[1.125rem] text-teal-400" />
               10,000+ độc giả
             </span>
           </div>
@@ -107,46 +107,46 @@ export default async function EbooksPage({
 
       {/* Reading Effectively Block */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-        <div className="rounded-2xl bg-white shadow-sm border border-gray-100 p-6 sm:p-8">
+        <div className="rounded-2xl bg-white shadow-sm border border-gray-100 p-7 sm:p-9">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Đọc ebook hiệu quả</h2>
+            <h2 className="text-[1.4rem] sm:text-[1.7rem] font-bold text-gray-900">Đọc ebook hiệu quả</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {/* Step 1 */}
-            <div className="rounded-xl border border-gray-100 bg-gray-50 p-4 sm:p-5 hover:bg-white transition shadow-xs">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center text-white mb-3 shadow-sm">
-                <NotebookPen className="w-5 h-5" />
+            <div className="rounded-xl border border-gray-100 bg-gray-50 p-5 sm:p-6 hover:bg-white transition shadow-xs">
+              <div className="w-11 h-11 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center text-white mb-3 shadow-sm">
+                <NotebookPen className="w-[1.4rem] h-[1.4rem]" />
               </div>
-              <div className="text-sm font-semibold text-gray-900 mb-1">Bước 1</div>
-              <p className="text-sm text-gray-600">Đọc và ghi chép lại những kiến thức hữu ích.</p>
+              <div className="text-[0.94rem] font-semibold text-gray-900 mb-1">Bước 1</div>
+              <p className="text-[0.94rem] text-gray-600">Đọc và ghi chép lại những kiến thức hữu ích.</p>
             </div>
 
             {/* Step 2 */}
-            <div className="rounded-xl border border-gray-100 bg-gray-50 p-4 sm:p-5 hover:bg-white transition shadow-xs">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center text-white mb-3 shadow-sm">
-                <Search className="w-5 h-5" />
+            <div className="rounded-xl border border-gray-100 bg-gray-50 p-5 sm:p-6 hover:bg-white transition shadow-xs">
+              <div className="w-11 h-11 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center text-white mb-3 shadow-sm">
+                <Search className="w-[1.4rem] h-[1.4rem]" />
               </div>
-              <div className="text-sm font-semibold text-gray-900 mb-1">Bước 2</div>
-              <p className="text-sm text-gray-600">Tìm thêm tài liệu liên quan để hiểu sâu hơn.</p>
+              <div className="text-[0.94rem] font-semibold text-gray-900 mb-1">Bước 2</div>
+              <p className="text-[0.94rem] text-gray-600">Tìm thêm tài liệu liên quan để hiểu sâu hơn.</p>
             </div>
 
             {/* Step 3 */}
-            <div className="rounded-xl border border-gray-100 bg-gray-50 p-4 sm:p-5 hover:bg-white transition shadow-xs">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center text-white mb-3 shadow-sm">
-                <Lightbulb className="w-5 h-5" />
+            <div className="rounded-xl border border-gray-100 bg-gray-50 p-5 sm:p-6 hover:bg-white transition shadow-xs">
+              <div className="w-11 h-11 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center text-white mb-3 shadow-sm">
+                <Lightbulb className="w-[1.4rem] h-[1.4rem]" />
               </div>
-              <div className="text-sm font-semibold text-gray-900 mb-1">Bước 3</div>
-              <p className="text-sm text-gray-600">Phản biện và chọn lọc ý tưởng một cách chủ động.</p>
+              <div className="text-[0.94rem] font-semibold text-gray-900 mb-1">Bước 3</div>
+              <p className="text-[0.94rem] text-gray-600">Phản biện và chọn lọc ý tưởng một cách chủ động.</p>
             </div>
 
             {/* Step 4 */}
-            <div className="rounded-xl border border-gray-100 bg-gray-50 p-4 sm:p-5 hover:bg-white transition shadow-xs">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center text-white mb-3 shadow-sm">
-                <Rocket className="w-5 h-5" />
+            <div className="rounded-xl border border-gray-100 bg-gray-50 p-5 sm:p-6 hover:bg-white transition shadow-xs">
+              <div className="w-11 h-11 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center text-white mb-3 shadow-sm">
+                <Rocket className="w-[1.4rem] h-[1.4rem]" />
               </div>
-              <div className="text-sm font-semibold text-gray-900 mb-1">Bước 4</div>
-              <p className="text-sm text-gray-600">Hành động ngay — tránh đọc xong để đó.</p>
+              <div className="text-[0.94rem] font-semibold text-gray-900 mb-1">Bước 4</div>
+              <p className="text-[0.94rem] text-gray-600">Hành động ngay — tránh đọc xong để đó.</p>
             </div>
           </div>
         </div>
