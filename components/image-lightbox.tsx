@@ -125,6 +125,18 @@ export default function ImageLightbox({
     }
   }
 
+  const handleImageClick = (e: React.MouseEvent) => {
+    // Prevent click when dragging
+    if (isDragging) return
+    
+    // Toggle zoom: click to zoom in, click at max zoom to reset
+    if (zoom >= 300) {
+      resetZoom()
+    } else {
+      zoomIn()
+    }
+  }
+
   if (!open) return null
 
   return (
@@ -195,12 +207,13 @@ export default function ImageLightbox({
                 className="relative max-w-[90vw] max-h-[80vh] md:max-h-[75vh] transition-transform duration-200"
                 style={{
                   transform: `scale(${zoom / 100}) translate(${position.x}px, ${position.y}px)`,
-                  cursor: zoom > 100 ? (isDragging ? 'grabbing' : 'grab') : 'default'
+                  cursor: zoom > 100 ? (isDragging ? 'grabbing' : 'grab') : 'zoom-in'
                 }}
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
                 onMouseLeave={handleMouseUp}
+                onClick={handleImageClick}
               >
                 <Image
                   src={images[currentIndex]}
