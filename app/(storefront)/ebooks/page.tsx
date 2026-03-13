@@ -22,7 +22,7 @@ export default async function EbooksPage({
   // Optimize query - only select needed fields
   let query = supabase
     .from('ebooks')
-    .select('id, slug, title, description, price, cover_url, rating_avg, rating_count, sales_count, featured, categories(name, slug)', { count: 'exact' })
+    .select('id, slug, title, description, price, cover_url, rating_avg, rating_count, sales_count, featured, categories(name, slug), levels(name)', { count: 'exact' })
     .eq('active', true)
 
   if (params.category) {
@@ -191,6 +191,7 @@ export default async function EbooksPage({
                 sales_count={ebook.sales_count}
                 featured={ebook.featured}
                 category={ebook.categories?.name}
+                level={ebook.levels?.name}
               />
             ))}
           </div>

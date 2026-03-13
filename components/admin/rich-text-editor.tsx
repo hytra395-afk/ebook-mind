@@ -5,7 +5,8 @@ import {
   Bold, Italic, Underline as UnderlineIcon, Strikethrough,
   Heading1, Heading2, Heading3, Heading4,
   List, ListOrdered, Link as LinkIcon, Image as ImageIcon, 
-  Undo, Redo, Type, Eraser
+  Undo, Redo, Type, Eraser,
+  AlignLeft, AlignCenter, AlignRight, AlignJustify
 } from 'lucide-react'
 
 interface RichTextEditorProps {
@@ -301,6 +302,34 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Viế
           title="Danh sách đánh số"
         >
           <ListOrdered className="w-4 h-4" />
+        </ToolbarButton>
+
+        <div className="w-px h-6 bg-gray-300 mx-1" />
+
+        {/* Text Alignment */}
+        <ToolbarButton 
+          onClick={() => formatText('justifyLeft')} 
+          title="Căn trái"
+        >
+          <AlignLeft className="w-4 h-4" />
+        </ToolbarButton>
+        <ToolbarButton 
+          onClick={() => formatText('justifyCenter')} 
+          title="Căn giữa"
+        >
+          <AlignCenter className="w-4 h-4" />
+        </ToolbarButton>
+        <ToolbarButton 
+          onClick={() => formatText('justifyRight')} 
+          title="Căn phải"
+        >
+          <AlignRight className="w-4 h-4" />
+        </ToolbarButton>
+        <ToolbarButton 
+          onClick={() => formatText('justifyFull')} 
+          title="Căn đều"
+        >
+          <AlignJustify className="w-4 h-4" />
         </ToolbarButton>
 
         <div className="w-px h-6 bg-gray-300 mx-1" />

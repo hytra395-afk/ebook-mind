@@ -14,12 +14,13 @@ interface EbookCardProps {
   sales_count: number
   featured?: boolean
   category?: string
+  level?: string
   priority?: boolean
 }
 
 export default function EbookCard({
   slug, title, description, price, cover_url,
-  rating_avg, rating_count, sales_count, featured, category, priority = false
+  rating_avg, rating_count, sales_count, featured, category, level, priority = false
 }: EbookCardProps) {
   return (
     <div className="group relative">
@@ -48,39 +49,41 @@ export default function EbookCard({
         </Link>
 
         {/* Info */}
-        <div className="p-6">
-          {/* Category */}
-          {category && (
-            <p className="text-sm text-gray-500 font-medium mb-3">
-              Cơ bản <span className="text-gray-300">·</span> {category}
+        <div className="p-5">
+          {/* Category + Level */}
+          {(level || category) && (
+            <p className="text-xs text-gray-500 font-medium mb-2">
+              {level && <span>{level}</span>}
+              {level && category && <span className="text-gray-300 mx-1">·</span>}
+              {category && <span>{category}</span>}
             </p>
           )}
 
           {/* Title */}
           <Link href={`/ebooks/${slug}`}>
-            <h3 className="font-bold text-gray-900 text-xl leading-tight group-hover:text-purple-600 transition-colors mb-2">
+            <h3 className="font-bold text-gray-900 text-lg leading-tight group-hover:text-purple-600 transition-colors mb-2">
               {title}
             </h3>
           </Link>
 
           {/* Description */}
           {description && (
-            <p className="text-sm text-gray-600 line-clamp-4 mb-4">
+            <p className="text-xs text-gray-600 line-clamp-3 mb-3">
               {description}
             </p>
           )}
 
           {/* Rating + sales */}
-          <div className="flex items-center gap-4 text-base text-gray-500 mb-5">
+          <div className="flex items-center gap-3 text-sm text-gray-500 mb-4">
             {rating_avg > 0 && (
-              <span className="flex items-center gap-1.5">
-                <span className="text-yellow-400 text-lg">★</span>
+              <span className="flex items-center gap-1">
+                <span className="text-yellow-400">★</span>
                 <span className="font-medium text-gray-700">{Number(rating_avg).toFixed(1)}</span>
                 {rating_count > 0 && <span className="text-gray-400">({rating_count})</span>}
               </span>
             )}
             {sales_count > 0 && (
-              <span className="flex items-center gap-1.5">
+              <span className="flex items-center gap-1">
                 <span className="text-gray-400">👁</span>
                 <span>{sales_count.toLocaleString('vi-VN')} lượt mua</span>
               </span>
@@ -88,16 +91,16 @@ export default function EbookCard({
           </div>
 
           {/* Pages info */}
-          <p className="text-sm text-gray-400 mb-5">320 trang</p>
+          <p className="text-xs text-gray-400 mb-4">320 trang</p>
 
           {/* Price + CTA */}
-          <div className="flex items-center justify-between gap-3">
-            <span className="text-2xl font-bold text-purple-600">
+          <div className="flex items-center justify-between gap-2">
+            <span className="text-xl font-bold text-purple-600">
               {new Intl.NumberFormat('vi-VN').format(price)}đ
             </span>
             <Link
               href={`/ebooks/${slug}`}
-              className="text-sm font-semibold gradient-purple text-white px-6 py-3 rounded-lg hover:opacity-90 transition whitespace-nowrap"
+              className="text-xs font-semibold gradient-purple text-white px-5 py-2.5 rounded-lg hover:opacity-90 transition whitespace-nowrap"
             >
               Mua ngay
             </Link>
