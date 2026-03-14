@@ -81,7 +81,7 @@ export default async function EbooksPage({
           <h1 className="text-4xl sm:text-[2.75rem] font-extrabold text-gray-900 mb-3">
             <span className="gradient-text-purple">{params.category ? currentCategory?.name : 'Ebook Store'}</span>
           </h1>
-          <p className="text-gray-500 text-base sm:text-lg mx-auto whitespace-nowrap">
+          <p className="text-gray-500 text-base sm:text-lg max-w-lg mx-auto">
             Nội dung được thu thập từ những kinh nghiệm thật, kiến thức thật của hàng trăm người
           </p>
 
