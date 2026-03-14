@@ -82,7 +82,7 @@ export default async function EbooksPage({
             <span className="gradient-text-purple">{params.category ? currentCategory?.name : 'Ebook Store'}</span>
           </h1>
           <p className="text-gray-500 text-base sm:text-lg max-w-lg mx-auto">
-            Nội dung được thu thập từ những kinh nghiệm thật, kiến thức thật của hàng trăm người
+            Nội dung được thu thập từ những kinh nghiệm thật,<br />kiến thức thật của hàng trăm người
           </p>
 
           {/* Stats bar */}
