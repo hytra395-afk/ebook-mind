@@ -32,7 +32,7 @@ export default function EbookCard({
       <div className="relative bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
         {/* Cover */}
         <Link href={`/ebooks/${slug}`} className="block">
-          <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 rounded-t-2xl">
+          <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 rounded-t-2xl scale-[0.92]">
             <Image
               src={convertDriveUrl(cover_url || 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400')}
               alt={title}
@@ -43,18 +43,18 @@ export default function EbookCard({
             />
             {/* Badges */}
             {bestseller && (
-              <span className="absolute top-3 left-3 badge-sunset text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg">
+              <span className="absolute top-2.5 left-2.5 badge-sunset text-white text-[0.81rem] font-bold px-3.5 py-1.5 rounded-full shadow-lg">
                 Bestseller
               </span>
             )}
           </div>
         </Link>
 
-        {/* Info */}
-        <div className="p-5">
+        {/* Info - Reduced 8% */}
+        <div className="p-4">
           {/* Category + Level */}
           {(level || category) && (
-            <p className="text-xs text-gray-500 font-medium mb-2">
+            <p className="text-[0.69rem] text-gray-500 font-medium mb-1.5">
               {level && <span>{level}</span>}
               {level && category && <span className="text-gray-300 mx-1">·</span>}
               {category && <span>{category}</span>}
@@ -63,20 +63,20 @@ export default function EbookCard({
 
           {/* Title */}
           <Link href={`/ebooks/${slug}`}>
-            <h3 className="font-bold text-gray-900 text-lg leading-tight group-hover:text-purple-600 transition-colors mb-2">
+            <h3 className="font-bold text-gray-900 text-[1.01rem] leading-tight group-hover:text-purple-600 transition-colors mb-1.5">
               {title}
             </h3>
           </Link>
 
           {/* Description */}
           {description && (
-            <p className="text-xs text-gray-600 line-clamp-3 mb-3">
+            <p className="text-[0.69rem] text-gray-600 line-clamp-3 mb-2.5">
               {description}
             </p>
           )}
 
           {/* Rating + sales */}
-          <div className="flex items-center gap-3 text-sm text-gray-500 mb-4">
+          <div className="flex items-center gap-2.5 text-[0.81rem] text-gray-500 mb-3">
             {rating_avg > 0 && (
               <span className="flex items-center gap-1">
                 <span className="text-yellow-400">★</span>
@@ -94,20 +94,20 @@ export default function EbookCard({
 
           {/* Pages info */}
           {pages && pages > 0 && (
-            <p className="text-xs text-gray-400 mb-4">{pages} trang</p>
+            <p className="text-[0.69rem] text-gray-400 mb-3">{pages} trang</p>
           )}
           {!pages || pages === 0 && (
-            <p className="text-xs text-gray-400 mb-4">320 trang</p>
+            <p className="text-[0.69rem] text-gray-400 mb-3">320 trang</p>
           )}
 
           {/* Price + CTA */}
           <div className="flex items-center justify-between gap-2">
-            <span className="text-xl font-bold text-purple-600">
+            <span className="text-[1.15rem] font-bold text-purple-600">
               {new Intl.NumberFormat('vi-VN').format(price)}đ
             </span>
             <Link
               href={`/ebooks/${slug}`}
-              className="text-xs font-semibold gradient-purple text-white px-5 py-2.5 rounded-lg hover:opacity-90 transition whitespace-nowrap"
+              className="text-[0.69rem] font-semibold gradient-purple text-white px-4 py-2 rounded-lg hover:opacity-90 transition whitespace-nowrap"
             >
               Mua ngay
             </Link>
