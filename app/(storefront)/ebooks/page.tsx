@@ -118,8 +118,8 @@ export default async function EbooksPage({
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center text-white mb-2.5 shadow-sm">
                 <NotebookPen className="w-[1.29rem] h-[1.29rem]" />
               </div>
-              <div className="text-[0.86rem] font-semibold text-gray-900 mb-1">Bước 1</div>
-              <p className="text-[0.86rem] text-gray-600">Đọc và ghi chép lại những kiến thức hữu ích.</p>
+              <div className="text-[0.93rem] font-semibold text-gray-900 mb-1">Bước 1</div>
+              <p className="text-[0.93rem] text-gray-600">Đọc và ghi chép lại những kiến thức hữu ích.</p>
             </div>
 
             {/* Step 2 */}
@@ -127,8 +127,8 @@ export default async function EbooksPage({
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center text-white mb-2.5 shadow-sm">
                 <Search className="w-[1.29rem] h-[1.29rem]" />
               </div>
-              <div className="text-[0.86rem] font-semibold text-gray-900 mb-1">Bước 2</div>
-              <p className="text-[0.86rem] text-gray-600">Tìm thêm tài liệu liên quan để hiểu sâu hơn.</p>
+              <div className="text-[0.93rem] font-semibold text-gray-900 mb-1">Bước 2</div>
+              <p className="text-[0.93rem] text-gray-600">Tìm thêm tài liệu liên quan để hiểu sâu hơn.</p>
             </div>
 
             {/* Step 3 */}
@@ -136,8 +136,8 @@ export default async function EbooksPage({
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center text-white mb-2.5 shadow-sm">
                 <Lightbulb className="w-[1.29rem] h-[1.29rem]" />
               </div>
-              <div className="text-[0.86rem] font-semibold text-gray-900 mb-1">Bước 3</div>
-              <p className="text-[0.86rem] text-gray-600">Phản biện và chọn lọc ý tưởng một cách chủ động.</p>
+              <div className="text-[0.93rem] font-semibold text-gray-900 mb-1">Bước 3</div>
+              <p className="text-[0.93rem] text-gray-600">Phản biện và chọn lọc ý tưởng một cách chủ động.</p>
             </div>
 
             {/* Step 4 */}
@@ -145,8 +145,8 @@ export default async function EbooksPage({
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-fuchsia-500 flex items-center justify-center text-white mb-2.5 shadow-sm">
                 <Rocket className="w-[1.29rem] h-[1.29rem]" />
               </div>
-              <div className="text-[0.86rem] font-semibold text-gray-900 mb-1">Bước 4</div>
-              <p className="text-[0.86rem] text-gray-600">Hành động ngay — tránh đọc xong để đó.</p>
+              <div className="text-[0.93rem] font-semibold text-gray-900 mb-1">Bước 4</div>
+              <p className="text-[0.93rem] text-gray-600">Hành động ngay — tránh đọc xong để đó.</p>
             </div>
           </div>
         </div>
