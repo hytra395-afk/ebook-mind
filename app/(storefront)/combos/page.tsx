@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { Gift, Star } from 'lucide-react'
 import ComboHero from '@/components/combo-hero'
 import ComboBenefits from '@/components/combo-benefits'
+import { convertDriveUrl } from '@/lib/utils'
 
 export const revalidate = 60
 
@@ -43,7 +44,7 @@ export default async function CombosPage() {
                 <div className="relative h-48 bg-gradient-to-br from-purple-100 via-pink-100 to-purple-100">
                   {combo.cover_url ? (
                     <Image
-                      src={combo.cover_url}
+                      src={convertDriveUrl(combo.cover_url)}
                       alt={combo.title}
                       fill
                       className="object-cover"

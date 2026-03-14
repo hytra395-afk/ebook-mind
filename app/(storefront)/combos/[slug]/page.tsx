@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Gift, ArrowLeft } from 'lucide-react'
 import BuyComboButton from './buy-combo-button'
+import { convertDriveUrl } from '@/lib/utils'
 
 export const revalidate = 60
 
@@ -55,7 +56,7 @@ export default async function ComboDetailPage({ params }: { params: Promise<{ sl
           <Link key={item.id} href={`/ebooks/${item.ebooks?.slug}`} className="flex gap-4 bg-white border rounded-xl p-4 hover:shadow-md transition-shadow">
             <div className="relative w-20 h-28 rounded-lg overflow-hidden flex-shrink-0">
               <Image
-                src={item.ebooks?.cover_url || 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=200'}
+                src={convertDriveUrl(item.ebooks?.cover_url || 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=200')}
                 alt={item.ebooks?.title || ''}
                 fill
                 className="object-cover"
