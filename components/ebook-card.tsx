@@ -50,11 +50,11 @@ export default function EbookCard({
           </div>
         </Link>
 
-        {/* Info - Reduced 8% */}
+        {/* Info */}
         <div className="p-4">
           {/* Category + Level */}
           {(level || category) && (
-            <p className="text-[0.69rem] text-gray-500 font-medium mb-1.5">
+            <p className="text-[0.75rem] text-gray-500 font-medium mb-1.5">
               {level && <span>{level}</span>}
               {level && category && <span className="text-gray-300 mx-1">·</span>}
               {category && <span>{category}</span>}
@@ -63,14 +63,14 @@ export default function EbookCard({
 
           {/* Title */}
           <Link href={`/ebooks/${slug}`}>
-            <h3 className="font-bold text-gray-900 text-[1.01rem] leading-tight group-hover:text-purple-600 transition-colors mb-1.5">
+            <h3 className="font-bold text-gray-900 text-[1.09rem] leading-tight group-hover:text-purple-600 transition-colors mb-1.5">
               {title}
             </h3>
           </Link>
 
           {/* Description */}
           {description && (
-            <p className="text-[0.69rem] text-gray-600 line-clamp-3 mb-2.5">
+            <p className="text-[0.75rem] text-gray-600 line-clamp-3 mb-2.5">
               {description}
             </p>
           )}
