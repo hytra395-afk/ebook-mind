@@ -204,7 +204,7 @@ export default async function HomePage() {
                 </div>
               </div>
               <div className="mt-8 text-center">
-                <Link href="/ebooks?category=kinh-doanh" className="btn-aurora text-white px-5 py-3 rounded-xl font-semibold shadow-lg inline-flex items-center">
+                <Link href="/ebooks?category=kinh-doanh-ngach" className="btn-aurora text-white px-5 py-3 rounded-xl font-semibold shadow-lg inline-flex items-center">
                   Đọc ebook kinh doanh ngay
                 </Link>
               </div>
