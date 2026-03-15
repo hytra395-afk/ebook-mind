@@ -21,8 +21,44 @@ export default function CartPage() {
 
   useEffect(() => {
     setMounted(true)
-    const stored = JSON.parse(localStorage.getItem('cart') || '[]')
-    setCart(stored)
+    const validateCart = async () => {
+      const stored = JSON.parse(localStorage.getItem('cart') || '[]')
+      
+      if (stored.length === 0) {
+        setCart([])
+        return
+      }
+
+      // Validate each item exists and is active
+      const validatedCart = []
+      for (const item of stored) {
+        try {
+          if (item.type === 'ebook') {
+            const response = await fetch(`/api/ebooks/validate?id=${item.id}`)
+            const data = await response.json()
+            if (data.valid) {
+              validatedCart.push(item)
+            }
+          } else if (item.type === 'combo') {
+            const response = await fetch(`/api/combos/validate?id=${item.id}`)
+            const data = await response.json()
+            if (data.valid) {
+              validatedCart.push(item)
+            }
+          }
+        } catch (error) {
+          console.error('Error validating cart item:', error)
+        }
+      }
+
+      // Update cart with only valid items
+      if (validatedCart.length !== stored.length) {
+        localStorage.setItem('cart', JSON.stringify(validatedCart))
+      }
+      setCart(validatedCart)
+    }
+
+    validateCart()
   }, [])
 
   const removeItem = (id: string) => {
