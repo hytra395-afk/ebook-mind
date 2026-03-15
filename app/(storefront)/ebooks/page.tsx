@@ -4,8 +4,8 @@ import EbooksFilter from '@/components/ebooks-filter'
 import { Suspense } from 'react'
 import { BookOpen, Star, Users, NotebookPen, Search, Lightbulb, Rocket } from 'lucide-react'
 
-export const revalidate = 60 // ISR: revalidate every 60 seconds
-export const dynamic = 'force-dynamic' // Enable dynamic rendering for filters
+export const revalidate = 300 // ISR: revalidate every 5 minutes
+export const dynamic = 'auto' // Auto rendering for better performance
 
 const ITEMS_PER_PAGE = 9
 
@@ -181,7 +181,7 @@ export default async function EbooksPage({
           </div>
         }>
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
-            {ebooks?.map((ebook: any) => (
+            {ebooks?.map((ebook: any, idx: number) => (
               <EbookCard
                 key={ebook.id}
                 id={ebook.id}
@@ -198,6 +198,7 @@ export default async function EbooksPage({
                 category={ebook.categories?.name}
                 level={ebook.levels?.name}
                 pages={ebook.pages}
+                priority={idx < 3}
               />
             ))}
           </div>

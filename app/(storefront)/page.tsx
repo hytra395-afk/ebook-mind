@@ -3,7 +3,7 @@ import EbookCard from '@/components/ebook-card'
 import Link from 'next/link'
 import { TrendingUp, Sparkles, BadgeCheck, ArrowRight, Zap } from 'lucide-react'
 
-export const revalidate = 60
+export const revalidate = 300 // ISR: revalidate every 5 minutes
 
 // Enable static generation for better performance
 export const dynamic = 'force-static'

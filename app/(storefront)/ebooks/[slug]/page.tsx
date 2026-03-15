@@ -8,8 +8,8 @@ import EbookTabs from '@/components/ebook-tabs'
 import EbookImageGallery from '@/components/ebook-image-gallery'
 import { convertDriveUrl } from '@/lib/utils'
 
-export const revalidate = 0 // Always fresh for preview support
-export const dynamic = 'force-dynamic'
+export const revalidate = 300 // ISR: revalidate every 5 minutes
+export const dynamic = 'auto' // Auto rendering for better performance
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params

@@ -39,6 +39,7 @@ export default function EbookCard({
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
               priority={priority}
+              loading={priority ? 'eager' : 'lazy'}
               sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
             />
             {/* Badges */}
