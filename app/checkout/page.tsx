@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+import { convertDriveUrl } from '@/lib/utils'
 
 interface CartItem {
   id: string
@@ -19,11 +21,57 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     setMounted(true)
-    const stored = localStorage.getItem('cart')
-    if (stored) {
-      try { setCartItems(JSON.parse(stored)) } catch { setCartItems([]) }
+    
+    // Check if this is a direct purchase (Buy Now)
+    const params = new URLSearchParams(window.location.search)
+    const isDirect = params.get('direct') === 'true'
+    const ebookId = params.get('ebook_id')
+    const comboId = params.get('combo_id')
+    
+    if (isDirect && (ebookId || comboId)) {
+      // Direct purchase - fetch item from database
+      fetchDirectItem(ebookId, comboId)
+    } else {
+      // Normal cart checkout
+      const stored = localStorage.getItem('cart')
+      if (stored) {
+        try { setCartItems(JSON.parse(stored)) } catch { setCartItems([]) }
+      }
     }
   }, [])
+
+  const fetchDirectItem = async (ebookId: string | null, comboId: string | null) => {
+    try {
+      if (ebookId) {
+        const response = await fetch(`/api/ebooks/${ebookId}`)
+        const data = await response.json()
+        if (data.ebook) {
+          setCartItems([{
+            id: data.ebook.id,
+            type: 'ebook',
+            title: data.ebook.title,
+            cover_url: data.ebook.cover_url,
+            price: data.ebook.price,
+          }])
+        }
+      } else if (comboId) {
+        const response = await fetch(`/api/combos/${comboId}`)
+        const data = await response.json()
+        if (data.combo) {
+          setCartItems([{
+            id: data.combo.id,
+            type: 'combo',
+            title: data.combo.title,
+            cover_url: data.combo.cover_url,
+            price: data.combo.price,
+          }])
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching direct item:', error)
+      setCartItems([])
+    }
+  }
 
   const total = cartItems.reduce((sum, item) => sum + item.price, 0)
 
@@ -105,7 +153,14 @@ export default function CheckoutPage() {
                 {cartItems.map((item) => (
                   <div key={item.id} className="flex items-center space-x-4">
                     {item.cover_url && (
-                      <img src={item.cover_url} alt={item.title} className="w-16 h-20 object-cover rounded" />
+                      <div className="relative w-16 h-20 flex-shrink-0">
+                        <Image 
+                          src={convertDriveUrl(item.cover_url)} 
+                          alt={item.title} 
+                          fill
+                          className="object-cover rounded" 
+                        />
+                      </div>
                     )}
                     <div className="flex-1">
                       <h3 className="font-medium">{item.title}</h3>

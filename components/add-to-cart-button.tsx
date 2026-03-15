@@ -12,7 +12,12 @@ export default function AddToCartButton({ ebook }: AddToCartButtonProps) {
   const router = useRouter()
   const [added, setAdded] = useState(false)
 
-  const addToCart = (buyNow = false) => {
+  const buyNow = () => {
+    // Direct purchase - bypass cart, go straight to checkout with this ebook only
+    router.push(`/checkout?direct=true&ebook_id=${ebook.id}`)
+  }
+
+  const addToCart = () => {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]')
     const existingIndex = cart.findIndex((item: any) => item.id === ebook.id)
     
@@ -33,21 +38,16 @@ export default function AddToCartButton({ ebook }: AddToCartButtonProps) {
     }
     
     localStorage.setItem('cart', JSON.stringify(cart))
-    
-    if (buyNow) {
-      router.push('/checkout')
-    } else {
-      setAdded(true)
-      setTimeout(() => setAdded(false), 2000)
-      router.push('/cart')
-    }
+    setAdded(true)
+    setTimeout(() => setAdded(false), 2000)
+    router.push('/cart')
   }
 
   return (
     <div className="space-y-2.5">
       {/* Primary: Buy now */}
       <button
-        onClick={() => addToCart(true)}
+        onClick={buyNow}
         className="w-full flex items-center justify-center gap-2 gradient-purple text-white py-3.5 px-6 rounded-xl font-semibold shadow-md hover:opacity-90 transition-opacity text-sm"
       >
         <Zap className="h-4 w-4" />
@@ -56,7 +56,7 @@ export default function AddToCartButton({ ebook }: AddToCartButtonProps) {
 
       {/* Secondary: Add to cart */}
       <button
-        onClick={() => addToCart(false)}
+        onClick={addToCart}
         className="w-full flex items-center justify-center gap-2 border border-gray-200 text-gray-700 py-3 px-6 rounded-xl font-semibold hover:bg-gray-50 transition text-sm"
       >
         <ShoppingCart className="h-4 w-4" />
