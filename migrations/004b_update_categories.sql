@@ -10,9 +10,9 @@ DELETE FROM categories;
 -- Insert new categories in correct order
 -- Order: Tư duy solo business, Kinh doanh ngách, Phát triển bản thân, Công nghệ, Sức khỏe
 INSERT INTO categories (name, slug, description) VALUES
-  ('Tư duy solo business', 'tu-duy-solo-business', 'Xây dựng và phát triển business một mình'),
+  ('Solo Business', 'tu-duy-solo-business', 'Xây dựng và phát triển business một mình'),
   ('Kinh doanh ngách', 'kinh-doanh-ngach', 'Tìm và khai thác thị trường ngách hiệu quả'),
-  ('Phát triển bản thân', 'phat-trien-ban-than', 'Nâng cao kỹ năng và tư duy cá nhân'),
+  ('Phát triển mindset', 'phat-trien-ban-than', 'Nâng cao kỹ năng và tư duy cá nhân'),
   ('Công nghệ', 'cong-nghe', 'Kiến thức về công nghệ và lập trình'),
   ('Sức khỏe', 'suc-khoe', 'Chăm sóc sức khỏe thể chất và tinh thần');
 
