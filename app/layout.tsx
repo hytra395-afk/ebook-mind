@@ -15,6 +15,9 @@ export const metadata: Metadata = {
   keywords: ['ebook', 'sách điện tử', 'kinh doanh', 'phát triển bản thân', 'công nghệ', 'học online', 'PDF'],
   authors: [{ name: 'Ebook Mind' }],
   creator: 'Ebook Mind',
+  verification: {
+    google: 'google820a48875af9910d',
+  },
   icons: {
     icon: { url: '/favicon.svg?v=5', type: 'image/svg+xml' },
   },
