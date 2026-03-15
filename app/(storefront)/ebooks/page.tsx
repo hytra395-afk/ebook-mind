@@ -53,9 +53,9 @@ export default async function EbooksPage({
   
   // Custom order for categories
   const categoryOrder = [
-    'tu-duy-solo-business',
+    'solo-business',
     'kinh-doanh-ngach',
-    'phat-trien-ban-than',
+    'phat-trien-mindset',
     'cong-nghe',
     'suc-khoe'
   ]

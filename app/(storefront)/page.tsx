@@ -557,7 +557,7 @@ export default async function HomePage() {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {[
             { label: 'Kinh Doanh', emoji: '💼', href: '/ebooks?category=kinh-doanh', gradient: 'btn-aurora' },
-            { label: 'Phát Triển Mindset', emoji: '🌱', href: '/ebooks?category=phat-trien-ban-than', gradient: 'btn-miami' },
+            { label: 'Phát Triển Mindset', emoji: '🌱', href: '/ebooks?category=phat-trien-mindset', gradient: 'btn-miami' },
             { label: 'Công Nghệ', emoji: '💻', href: '/ebooks?category=cong-nghe', gradient: 'btn-aurora' },
             { label: 'Sức Khỏe', emoji: '❤️', href: '/ebooks?category=suc-khoe', gradient: 'btn-sunset' },
           ].map((cat) => (
