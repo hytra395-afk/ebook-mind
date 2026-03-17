@@ -18,6 +18,7 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false)
   const [cartItems, setCartItems] = useState<CartItem[]>([])
   const [mounted, setMounted] = useState(false)
+  const [fetchingDirectItem, setFetchingDirectItem] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -30,6 +31,7 @@ export default function CheckoutPage() {
     
     if (isDirect && (ebookId || comboId)) {
       // Direct purchase - fetch item from database
+      setFetchingDirectItem(true)
       fetchDirectItem(ebookId, comboId)
     } else {
       // Normal cart checkout
@@ -70,6 +72,8 @@ export default function CheckoutPage() {
     } catch (error) {
       console.error('Error fetching direct item:', error)
       setCartItems([])
+    } finally {
+      setFetchingDirectItem(false)
     }
   }
 
@@ -122,6 +126,18 @@ export default function CheckoutPage() {
   }
 
   if (!mounted) return null
+
+  // Show loading while fetching direct purchase item
+  if (fetchingDirectItem) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Đang tải thông tin sản phẩm...</p>
+        </div>
+      </div>
+    )
+  }
 
   if (cartItems.length === 0) {
     return (
