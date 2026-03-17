@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+import { convertDriveUrl } from '@/lib/utils'
 
 export const dynamic = 'force-dynamic'
 
@@ -16,6 +18,7 @@ export default function SuccessPage() {
   const [emailError, setEmailError] = useState('')
   const [toastMessage, setToastMessage] = useState('')
   const [toastType, setToastType] = useState<'success' | 'error' | 'info'>('success')
+  const [showLinkIndex, setShowLinkIndex] = useState<number | null>(null)
 
   useEffect(() => {
     setMounted(true)
@@ -197,17 +200,45 @@ export default function SuccessPage() {
                 {order?.download_tokens && order.download_tokens.length > 0 ? (
                   <div className="space-y-4">
                     {order.download_tokens.map((item: any, index: number) => (
-                      <div key={index} className="flex items-center space-x-4 p-4 border rounded-lg">
-                        {item.ebook_cover && (
-                          <img src={item.ebook_cover} alt={item.ebook_title} className="w-16 h-20 object-cover rounded" />
-                        )}
-                        <div className="flex-1">
-                          <h3 className="font-medium">{item.ebook_title}</h3>
+                      <div key={index} className="border rounded-lg p-4">
+                        <div className="flex items-center space-x-4">
+                          {item.ebook_cover && (
+                            <div className="relative w-16 h-20 flex-shrink-0">
+                              <Image 
+                                src={convertDriveUrl(item.ebook_cover)} 
+                                alt={item.ebook_title} 
+                                fill
+                                className="object-cover rounded" 
+                              />
+                            </div>
+                          )}
+                          <div className="flex-1">
+                            <h3 className="font-medium">{item.ebook_title}</h3>
+                          </div>
+                          <button
+                            onClick={() => setShowLinkIndex(showLinkIndex === index ? null : index)}
+                            className="gradient-purple text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-all"
+                          >
+                            {showLinkIndex === index ? '✕ Đóng' : '📖 Link Ebook'}
+                          </button>
                         </div>
-                        <a href={item.download_url} target="_blank" rel="noopener noreferrer"
-                          className="gradient-purple text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90">
-                          Tải về
-                        </a>
+                        
+                        {showLinkIndex === index && (
+                          <div className="mt-4 pt-4 border-t">
+                            <p className="text-sm text-gray-600 mb-2">Link Google Drive của ebook:</p>
+                            <a 
+                              href={item.download_url} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="block p-3 bg-purple-50 border border-purple-200 rounded-lg text-purple-700 hover:bg-purple-100 transition-colors break-all text-sm"
+                            >
+                              {item.download_url}
+                            </a>
+                            <p className="text-xs text-gray-500 mt-2">
+                              💡 Click vào link để xem nội dung ebook trên Google Drive
+                            </p>
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
