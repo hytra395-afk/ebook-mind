@@ -24,14 +24,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'vi_VN',
+    url: 'https://ebookmind.com',
     siteName: 'Ebook Mind',
     title: 'Ebook Mind - Kiến thức ngách thay đổi mindset',
     description: 'Hàng trăm ebook chất lượng về Kinh doanh, Phát triển bản thân, Công nghệ. Giá chỉ từ 49.000đ.',
+    images: [
+      {
+        url: 'https://ebookmind.com/android-chrome-512.png',
+        width: 512,
+        height: 512,
+        alt: 'Ebook Mind Logo',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Ebook Mind - Kiến thức ngách thay đổi mindset',
     description: 'Hàng trăm ebook chất lượng. Giá chỉ từ 49.000đ.',
+    images: ['https://ebookmind.com/android-chrome-512.png'],
   },
   robots: {
     index: true,
