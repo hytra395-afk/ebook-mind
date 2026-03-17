@@ -226,14 +226,25 @@ export default function SuccessPage() {
                         {showLinkIndex === index && (
                           <div className="mt-4 pt-4 border-t">
                             <p className="text-sm text-gray-600 mb-2">Link Google Drive của ebook:</p>
-                            <a 
-                              href={item.download_url} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="block p-3 bg-purple-50 border border-purple-200 rounded-lg text-purple-700 hover:bg-purple-100 transition-colors break-all text-sm"
-                            >
-                              {item.download_url}
-                            </a>
+                            {item.drive_url ? (
+                              <a 
+                                href={item.drive_url} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="block p-3 bg-purple-50 border border-purple-200 rounded-lg text-purple-700 hover:bg-purple-100 transition-colors break-all text-sm"
+                              >
+                                {item.drive_url}
+                              </a>
+                            ) : (
+                              <a 
+                                href={item.download_url} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="block p-3 bg-purple-50 border border-purple-200 rounded-lg text-purple-700 hover:bg-purple-100 transition-colors break-all text-sm"
+                              >
+                                {item.download_url}
+                              </a>
+                            )}
                             <p className="text-xs text-gray-500 mt-2">
                               💡 Click vào link để xem nội dung ebook trên Google Drive
                             </p>

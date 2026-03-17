@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
         .from('licenses')
         .select(`
           *,
-          ebooks (id, title, cover_url),
+          ebooks (id, title, cover_url, external_url),
           download_tokens (token, expires_at, used_count)
         `)
         .eq('order_id', order.id)
@@ -56,6 +56,7 @@ export async function GET(request: NextRequest) {
             download_url: license.download_tokens?.[0]?.token 
               ? `/api/download?token=${license.download_tokens[0].token}`
               : null,
+            drive_url: license.ebooks?.external_url || null,
             expires_at: license.download_tokens?.[0]?.expires_at,
             used_count: license.download_tokens?.[0]?.used_count || 0,
             download_quota: license.download_quota,

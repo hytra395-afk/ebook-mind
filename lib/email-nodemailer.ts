@@ -71,7 +71,11 @@ export async function sendViaNodemailer(params: SendEmailParams): Promise<boolea
     const htmlContent = `
 <!DOCTYPE html>
 <html>
-<head><meta charset="utf-8"/></head>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="color-scheme" content="light only">
+  <meta name="supported-color-schemes" content="light">
+</head>
 <body style="margin:0;padding:0;background:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f5f5;padding:32px 0;">
     <tr><td align="center">
@@ -82,10 +86,10 @@ export async function sendViaNodemailer(params: SendEmailParams): Promise<boolea
           <td style="background:linear-gradient(135deg,#ede9fe,#fce7f3);padding:32px;text-align:center;">
             <div style="display:inline-flex;align-items:center;gap:8px;">
               <div style="width:36px;height:36px;background:linear-gradient(135deg,#7c3aed,#a855f7);border-radius:10px;display:inline-block;"></div>
-              <span style="font-size:20px;font-weight:700;color:#7c3aed;">Ebook Mind</span>
+              <span style="font-size:20px;font-weight:700;color:#7c3aed !important;">Ebook Mind</span>
             </div>
-            <h1 style="margin:16px 0 4px;font-size:24px;color:#1a1a1a;font-weight:800;">Thanh toán thành công! 🎉</h1>
-            <p style="margin:0;color:#6b7280;font-size:14px;">Đơn hàng #${orderId.substring(0, 8).toUpperCase()} · ${new Intl.NumberFormat('vi-VN').format(totalAmount)}đ</p>
+            <h1 style="margin:16px 0 4px;font-size:24px;color:#1a1a1a !important;font-weight:800;">Thanh toán thành công! 🎉</h1>
+            <p style="margin:0;color:#6b7280 !important;font-size:14px;">Đơn hàng #${orderId.substring(0, 8).toUpperCase()} · ${new Intl.NumberFormat('vi-VN').format(totalAmount)}đ</p>
           </td>
         </tr>
 

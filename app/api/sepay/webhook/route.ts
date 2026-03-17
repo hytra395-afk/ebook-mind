@@ -132,7 +132,7 @@ export async function POST(request: NextRequest) {
         // Get ebook info for email
         const { data: ebookInfo } = await supabaseAdmin
           .from('ebooks')
-          .select('title, cover_url')
+          .select('title, cover_url, external_url')
           .eq('id', item.ebook_id)
           .single()
         // Create license
@@ -219,7 +219,7 @@ export async function POST(request: NextRequest) {
 
           const { data: comboEbookInfo } = await supabaseAdmin
             .from('ebooks')
-            .select('title, cover_url')
+            .select('title, cover_url, external_url')
             .eq('id', comboItem.ebook_id)
             .single()
 
