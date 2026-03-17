@@ -9,6 +9,19 @@ export const metadata: Metadata = {
     title: 'Câu Chuyện Thành Công - Ebook Mind',
     description: 'Những câu chuyện thực tế từ người đọc Ebook Mind',
     type: 'website',
+    url: 'https://ebookmind.com/use-cases',
+    images: [
+      {
+        url: 'https://ebookmind.com/android-chrome-512.png',
+        width: 512,
+        height: 512,
+        alt: 'Ebook Mind Logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['https://ebookmind.com/android-chrome-512.png'],
   },
 }
 

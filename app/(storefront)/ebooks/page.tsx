@@ -12,6 +12,19 @@ export const metadata: Metadata = {
     title: 'Ebook Store - Kiến Thức Ngách Thay Đổi Mindset',
     description: 'Hàng trăm ebook chất lượng. Giá chỉ từ 49.000đ',
     type: 'website',
+    url: 'https://ebookmind.com/ebooks',
+    images: [
+      {
+        url: 'https://ebookmind.com/android-chrome-512.png',
+        width: 512,
+        height: 512,
+        alt: 'Ebook Mind Logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['https://ebookmind.com/android-chrome-512.png'],
   },
 }
 

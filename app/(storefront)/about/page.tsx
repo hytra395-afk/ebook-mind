@@ -7,6 +7,19 @@ export const metadata: Metadata = {
     title: 'Về Chúng Tôi - Ebook Mind',
     description: 'Nền tảng ebook chất lượng cao với kiến thức thực tế và giá cả phù hợp',
     type: 'website',
+    url: 'https://ebookmind.com/about',
+    images: [
+      {
+        url: 'https://ebookmind.com/android-chrome-512.png',
+        width: 512,
+        height: 512,
+        alt: 'Ebook Mind Logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['https://ebookmind.com/android-chrome-512.png'],
   },
 }
 

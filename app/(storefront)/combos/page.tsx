@@ -14,6 +14,19 @@ export const metadata: Metadata = {
     title: 'Combo Ebook Giá Rẻ - Ebook Mind',
     description: 'Mua combo ebook tiết kiệm hơn. Giảm giá đến 30%',
     type: 'website',
+    url: 'https://ebookmind.com/combos',
+    images: [
+      {
+        url: 'https://ebookmind.com/android-chrome-512.png',
+        width: 512,
+        height: 512,
+        alt: 'Ebook Mind Logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['https://ebookmind.com/android-chrome-512.png'],
   },
 }
 
