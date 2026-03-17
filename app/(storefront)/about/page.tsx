@@ -1,3 +1,15 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Về Chúng Tôi - Ebook Mind',
+  description: 'Ebook Mind là nền tảng ebook chất lượng cao với sứ mệnh mang kiến thức và giá trị thực tế đến gần hơn với mọi người. Kiến thức thực tế, giá cả phù hợp.',
+  openGraph: {
+    title: 'Về Chúng Tôi - Ebook Mind',
+    description: 'Nền tảng ebook chất lượng cao với kiến thức thực tế và giá cả phù hợp',
+    type: 'website',
+  },
+}
+
 export default function AboutPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

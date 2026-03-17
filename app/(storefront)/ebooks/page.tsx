@@ -3,6 +3,17 @@ import EbookCard from '@/components/ebook-card'
 import EbooksFilter from '@/components/ebooks-filter'
 import { Suspense } from 'react'
 import { BookOpen, Star, Users, NotebookPen, Search, Lightbulb, Rocket } from 'lucide-react'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Ebook Store - Kiến Thức Ngách Thay Đổi Mindset',
+  description: 'Khám phá hàng trăm ebook chất lượng về Kinh Doanh, Solo Business, Phát Triển Mindset, Công Nghệ, Sức Khỏe. Giá chỉ từ 49.000đ. Tải ngay sau khi thanh toán.',
+  openGraph: {
+    title: 'Ebook Store - Kiến Thức Ngách Thay Đổi Mindset',
+    description: 'Hàng trăm ebook chất lượng. Giá chỉ từ 49.000đ',
+    type: 'website',
+  },
+}
 
 export const revalidate = 300 // ISR: revalidate every 5 minutes
 export const dynamic = 'auto' // Auto rendering for better performance

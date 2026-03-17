@@ -1,5 +1,16 @@
 import { BookOpen, Target, Briefcase, Plane, Store, Coffee, RotateCcw, PenTool } from 'lucide-react'
 import Link from 'next/link'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Câu Chuyện Thành Công - Ebook Mind',
+  description: 'Những câu chuyện thực tế từ người đọc Ebook Mind: Từ văn phòng ra kinh doanh, bỏ phố về quê, mở cửa hàng online, làm freelancer. Kiến thức thay đổi cuộc sống.',
+  openGraph: {
+    title: 'Câu Chuyện Thành Công - Ebook Mind',
+    description: 'Những câu chuyện thực tế từ người đọc Ebook Mind',
+    type: 'website',
+  },
+}
 
 export default function UseCasesPage() {
   const USE_CASES = [

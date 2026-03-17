@@ -5,6 +5,17 @@ import { Gift, Star } from 'lucide-react'
 import ComboHero from '@/components/combo-hero'
 import ComboBenefits from '@/components/combo-benefits'
 import { convertDriveUrl } from '@/lib/utils'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Combo Ebook Giá Rẻ - Ebook Mind',
+  description: 'Mua combo ebook tiết kiệm hơn. Gói kiến thức trọn vẹn về Kinh Doanh, Phát Triển Bản Thân, Công Nghệ. Giảm giá đến 30% khi mua combo.',
+  openGraph: {
+    title: 'Combo Ebook Giá Rẻ - Ebook Mind',
+    description: 'Mua combo ebook tiết kiệm hơn. Giảm giá đến 30%',
+    type: 'website',
+  },
+}
 
 export const revalidate = 60
 
