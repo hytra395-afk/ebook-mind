@@ -75,45 +75,19 @@ export async function sendViaNodemailer(params: SendEmailParams): Promise<boolea
   <meta charset="utf-8"/>
   <meta name="color-scheme" content="light">
   <meta name="supported-color-schemes" content="light">
-  <style>
-    @media (prefers-color-scheme: dark) {
-      .light-only {
-        color-scheme: light !important;
-      }
-      .force-light-bg {
-        background: #ede9fe !important;
-        background: linear-gradient(135deg, #ede9fe, #fce7f3) !important;
-      }
-      .force-dark-text {
-        color: #1a1a1a !important;
-      }
-      .force-gray-text {
-        color: #6b7280 !important;
-      }
-      .force-purple-text {
-        color: #7c3aed !important;
-      }
-    }
-  </style>
 </head>
-<body class="light-only" style="margin:0;padding:0;background:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+<body style="margin:0;padding:0;background:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f5f5;padding:32px 0;">
     <tr><td align="center">
       <table width="600" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);">
         
         <!-- Header -->
         <tr>
-          <td class="force-light-bg" style="background:linear-gradient(135deg,#ede9fe,#fce7f3);padding:32px;text-align:center;">
-            <table cellpadding="0" cellspacing="0" width="100%">
-              <tr>
-                <td align="center">
-                  <img src="https://ebookmind.com/android-chrome-512.png" alt="Ebook Mind" width="48" height="48" style="display:block;margin:0 auto 12px;border-radius:10px;" />
-                  <span class="force-purple-text" style="font-size:20px;font-weight:700;color:#7c3aed;display:block;margin-bottom:16px;">Ebook Mind</span>
-                </td>
-              </tr>
-            </table>
-            <h1 class="force-dark-text" style="margin:0 0 4px;font-size:24px;color:#1a1a1a;font-weight:800;">Thanh toán thành công! 🎉</h1>
-            <p class="force-gray-text" style="margin:0;color:#6b7280;font-size:14px;">Đơn hàng #${orderId.substring(0, 8).toUpperCase()} · ${new Intl.NumberFormat('vi-VN').format(totalAmount)}đ</p>
+          <td style="background:#ede9fe;background:linear-gradient(135deg,#ede9fe,#fce7f3);padding:32px;text-align:center;">
+            <img src="https://ebookmind.com/favicon-96x96.png" alt="Ebook Mind" width="56" height="56" style="display:block;margin:0 auto 12px;" />
+            <div style="font-size:20px;font-weight:700;color:#7c3aed;margin-bottom:16px;">Ebook Mind</div>
+            <h1 style="margin:0 0 4px;font-size:24px;color:#1a1a1a !important;font-weight:800;-webkit-text-fill-color:#1a1a1a !important;">Thanh toán thành công! 🎉</h1>
+            <p style="margin:0;color:#6b7280 !important;font-size:14px;-webkit-text-fill-color:#6b7280 !important;">Đơn hàng #${orderId.substring(0, 8).toUpperCase()} · ${new Intl.NumberFormat('vi-VN').format(totalAmount)}đ</p>
           </td>
         </tr>
 
