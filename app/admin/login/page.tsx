@@ -2,14 +2,21 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { createClient } from '@supabase/supabase-js'
 import { BookOpen, User, Lock, LogIn } from 'lucide-react'
 
-const ADMIN_USERNAME = process.env.NEXT_PUBLIC_ADMIN_USERNAME || 'admin ebook mind'
-const ADMIN_PASSWORD = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'ebookmind290502@'
+const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL || 'admin@ebookmind.com'
+
+function getSupabaseClient() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
+}
 
 export default function AdminLoginPage() {
   const router = useRouter()
-  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState(ADMIN_EMAIL)
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -19,15 +26,43 @@ export default function AdminLoginPage() {
     setLoading(true)
     setError('')
 
-    // Validate username and password
-    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-      localStorage.setItem('admin_auth', 'true')
-      localStorage.setItem('admin_login_time', Date.now().toString())
+    try {
+      const supabase = getSupabaseClient()
+      const { data, error: authError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
+
+      if (authError) {
+        setError(authError.message || 'Đăng nhập thất bại')
+        setLoading(false)
+        return
+      }
+
+      if (!data.user) {
+        setError('Không thể xác thực người dùng')
+        setLoading(false)
+        return
+      }
+
+      // Verify user has admin role
+      const isAdmin = 
+        data.user.role === 'admin' ||
+        data.user.user_metadata?.role === 'admin' ||
+        data.user.app_metadata?.role === 'admin'
+
+      if (!isAdmin) {
+        await supabase.auth.signOut()
+        setError('Bạn không có quyền truy cập admin')
+        setLoading(false)
+        return
+      }
+
       router.push('/admin/dashboard')
-    } else {
-      setError('Tên đăng nhập hoặc mật khẩu không đúng')
+    } catch (err: any) {
+      setError(err.message || 'Lỗi kết nối')
+      setLoading(false)
     }
-    setLoading(false)
   }
 
   return (
@@ -43,19 +78,19 @@ export default function AdminLoginPage() {
         </div>
 
         <form onSubmit={handleLogin} className="space-y-5">
-          {/* Username */}
+          {/* Email */}
           <div>
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1.5">
-              Tên đăng nhập
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1.5">
+              Email
             </label>
             <div className="relative">
               <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
               <input
-                type="text"
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Nhập tên đăng nhập..."
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="admin@ebookmind.com"
                 className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
                 required
               />
