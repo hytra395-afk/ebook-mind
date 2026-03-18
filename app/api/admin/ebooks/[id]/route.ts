@@ -3,9 +3,9 @@ import { getSupabaseAdmin } from '@/lib/db'
 import { requireAdmin } from '@/lib/auth'
 
 // GET - Get single ebook with all relations
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   return requireAdmin(request, async () => {
-    const { id } = params
+    const { id } = await params
     const supabase = getSupabaseAdmin()
 
     const { data, error } = await supabase
@@ -20,9 +20,9 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 }
 
 // PUT - Update ebook
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   return requireAdmin(request, async () => {
-    const { id } = params
+    const { id } = await params
     const supabase = getSupabaseAdmin()
     const body = await request.json()
 
@@ -96,9 +96,9 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 }
 
 // DELETE - Delete ebook
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   return requireAdmin(request, async () => {
-    const { id } = params
+    const { id } = await params
     const supabase = getSupabaseAdmin()
 
     const { error } = await supabase.from('ebooks').delete().eq('id', id)
