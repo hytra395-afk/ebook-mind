@@ -84,20 +84,11 @@ export async function sendViaNodemailer(params: SendEmailParams): Promise<boolea
         <!-- Header -->
         <tr>
           <td style="background:#ede9fe;background:linear-gradient(135deg,#ede9fe,#fce7f3);padding:40px 32px;text-align:center;">
-            <!-- Logo + Brand (matching website) -->
-            <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 24px;">
-              <tr>
-                <td style="padding-right:12px;">
-                  <img src="https://ebookmind.com/favicon-96x96.png" alt="Ebook Mind" width="48" height="48" style="display:block;vertical-align:middle;" />
-                </td>
-                <td style="vertical-align:middle;">
-                  <span style="font-size:28px;font-weight:800;color:#7c3aed;letter-spacing:-0.5px;">Ebook Mind</span>
-                </td>
-              </tr>
-            </table>
+            <!-- Brand name only -->
+            <h1 style="margin:0 0 24px;font-size:32px;font-weight:800;color:#7c3aed;letter-spacing:-0.5px;">Ebook Mind</h1>
             <!-- Success message - pure black for dark mode readability -->
-            <h2 style="margin:0 0 8px;font-size:26px;color:#000000;font-weight:800;letter-spacing:-0.5px;">Thanh toán thành công! 🎉</h2>
-            <p style="margin:0;color:#1f2937;font-size:15px;font-weight:500;">Đơn hàng #${orderId.substring(0, 8).toUpperCase()} · ${new Intl.NumberFormat('vi-VN').format(totalAmount)}đ</p>
+            <h2 style="margin:0 0 12px;font-size:26px;color:#000000;font-weight:800;letter-spacing:-0.5px;">Thanh toán thành công! 🎉</h2>
+            <p style="margin:0;color:#000000 !important;font-size:15px;font-weight:600;-webkit-text-fill-color:#000000 !important;">Đơn hàng #${orderId.substring(0, 8).toUpperCase()} · ${new Intl.NumberFormat('vi-VN').format(totalAmount)}đ</p>
           </td>
         </tr>
 
