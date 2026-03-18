@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     description: 'Hàng trăm ebook chất lượng về Kinh doanh, Phát triển bản thân, Công nghệ. Giá chỉ từ 49.000đ.',
     images: [
       {
-        url: 'https://ebookmind.com/og-image.svg',
+        url: 'https://ebookmind.com/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Ebook Mind - Kiến thức ngách thay đổi mindset',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Ebook Mind - Kiến thức ngách thay đổi mindset',
     description: 'Hàng trăm ebook chất lượng. Giá chỉ từ 49.000đ.',
-    images: ['https://ebookmind.com/og-image.svg'],
+    images: ['https://ebookmind.com/og-image.png'],
   },
   robots: {
     index: true,
