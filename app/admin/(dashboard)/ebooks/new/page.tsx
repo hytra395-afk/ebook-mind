@@ -91,30 +91,21 @@ export default function NewEbookPage() {
 
     setLoading(true)
     try {
-      const res = await fetch('/api/admin/ebooks', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...form,
-          status,
-          price: Number(form.price),
-          pages: Number(form.pages) || 0,
-          rating_avg: Number(form.rating_avg),
-          rating_count: Number(form.rating_count),
-          sales_count: Number(form.sales_count),
-          reviews,
-        }),
+      const { adminPost } = await import('@/lib/admin-api')
+      await adminPost('/api/admin/ebooks', {
+        ...form,
+        status,
+        price: Number(form.price),
+        pages: Number(form.pages) || 0,
+        rating_avg: Number(form.rating_avg),
+        rating_count: Number(form.rating_count),
+        sales_count: Number(form.sales_count),
+        reviews,
       })
-      const data = await res.json()
-      if (!res.ok) { 
-        alert('Lỗi: ' + data.error)
-        setLoading(false)
-        return 
-      }
       router.push('/admin/ebooks')
       router.refresh()
-    } catch (err) {
-      alert('Lỗi kết nối')
+    } catch (err: any) {
+      alert('Lỗi: ' + (err.message || 'Không thể tạo ebook'))
     }
     setLoading(false)
   }

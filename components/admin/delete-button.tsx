@@ -27,16 +27,12 @@ export default function DeleteButton({
   const handleDelete = async () => {
     setDeleting(true)
     try {
+      const { adminDelete } = await import('@/lib/admin-api')
       const endpoint = itemType === 'ebook' 
         ? `/api/admin/ebooks/${itemId}`
         : `/api/admin/combos/${itemId}`
       
-      const res = await fetch(endpoint, { method: 'DELETE' })
-      
-      if (!res.ok) {
-        const data = await res.json()
-        throw new Error(data.error || 'Xóa thất bại')
-      }
+      await adminDelete(endpoint)
 
       setOpen(false)
       

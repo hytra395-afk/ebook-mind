@@ -93,30 +93,21 @@ export default function EditComboPage() {
 
     setLoading(true)
     try {
-      const res = await fetch(`/api/admin/combos/${comboId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...form,
-          status,
-          price: Number(form.price),
-          rating_avg: Number(form.rating_avg),
-          rating_count: Number(form.rating_count),
-          sales_count: Number(form.sales_count),
-          ebook_ids: selectedEbooks,
-          reviews,
-        }),
+      const { adminPut } = await import('@/lib/admin-api')
+      await adminPut(`/api/admin/combos/${comboId}`, {
+        ...form,
+        status,
+        price: Number(form.price),
+        rating_avg: Number(form.rating_avg),
+        rating_count: Number(form.rating_count),
+        sales_count: Number(form.sales_count),
+        ebook_ids: selectedEbooks,
+        reviews,
       })
-      const data = await res.json()
-      if (!res.ok) { 
-        alert('Lỗi: ' + data.error)
-        setLoading(false)
-        return 
-      }
       router.push('/admin/combos')
       router.refresh()
-    } catch { 
-      alert('Lỗi kết nối') 
+    } catch (err: any) {
+      alert('Lỗi: ' + (err.message || 'Không thể cập nhật combo'))
     }
     setLoading(false)
   }

@@ -46,37 +46,43 @@ export default function EditEbookPage() {
 
   useEffect(() => {
     const load = async () => {
-      const [ebookRes, catRes, lvlRes, reviewsRes] = await Promise.all([
-        fetch(`/api/admin/ebooks/${ebookId}`).then(r => r.json()),
-        supabase.from('categories').select('*'),
-        supabase.from('levels').select('*').order('sort_order'),
-        supabase.from('reviews').select('*').eq('ebook_id', ebookId).order('created_at', { ascending: false }),
-      ])
-      if (ebookRes.ebook) {
-        const ebook = ebookRes.ebook
-        setForm({
-          ...ebook,
-          highlights: ebook.highlights || [],
-          preview_images: ebook.preview_images || [],
-          keywords: ebook.keywords || [],
-          author_name: ebook.author_name || '',
-          author_title: ebook.author_title || '',
-          author_bio: ebook.author_bio || '',
-          author_avatar: ebook.author_avatar || '',
-          content: ebook.content || '',
-          meta_title: ebook.meta_title || '',
-          meta_description: ebook.meta_description || '',
-          og_image_url: ebook.og_image_url || '',
-          rating_avg: ebook.rating_avg || 0,
-          rating_count: ebook.rating_count || 0,
-          sales_count: ebook.sales_count || 0,
-          status: ebook.status || 'published',
-          bestseller: ebook.bestseller || false,
-        })
+      try {
+        const { adminGet } = await import('@/lib/admin-api')
+        const [ebookRes, catRes, lvlRes, reviewsRes] = await Promise.all([
+          adminGet(`/api/admin/ebooks/${ebookId}`),
+          supabase.from('categories').select('*'),
+          supabase.from('levels').select('*').order('sort_order'),
+          supabase.from('reviews').select('*').eq('ebook_id', ebookId).order('created_at', { ascending: false }),
+        ])
+        if (ebookRes.ebook) {
+          const ebook = ebookRes.ebook
+          setForm({
+            ...ebook,
+            highlights: ebook.highlights || [],
+            preview_images: ebook.preview_images || [],
+            keywords: ebook.keywords || [],
+            author_name: ebook.author_name || '',
+            author_title: ebook.author_title || '',
+            author_bio: ebook.author_bio || '',
+            author_avatar: ebook.author_avatar || '',
+            content: ebook.content || '',
+            meta_title: ebook.meta_title || '',
+            meta_description: ebook.meta_description || '',
+            og_image_url: ebook.og_image_url || '',
+            rating_avg: ebook.rating_avg || 0,
+            rating_count: ebook.rating_count || 0,
+            sales_count: ebook.sales_count || 0,
+            status: ebook.status || 'published',
+            bestseller: ebook.bestseller || false,
+          })
+        }
+        setCategories(catRes.data || [])
+        setLevels(lvlRes.data || [])
+        setReviews(reviewsRes.data || [])
+      } catch (error) {
+        console.error('Error loading ebook:', error)
+        alert('Lỗi khi tải ebook')
       }
-      setCategories(catRes.data || [])
-      setLevels(lvlRes.data || [])
-      setReviews(reviewsRes.data || [])
     }
     load()
   }, [ebookId])
@@ -90,30 +96,21 @@ export default function EditEbookPage() {
 
     setLoading(true)
     try {
-      const res = await fetch(`/api/admin/ebooks/${ebookId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...form,
-          status,
-          price: Number(form.price),
-          pages: Number(form.pages) || 0,
-          rating_avg: Number(form.rating_avg),
-          rating_count: Number(form.rating_count),
-          sales_count: Number(form.sales_count),
-          reviews,
-        }),
+      const { adminPut } = await import('@/lib/admin-api')
+      await adminPut(`/api/admin/ebooks/${ebookId}`, {
+        ...form,
+        status,
+        price: Number(form.price),
+        pages: Number(form.pages) || 0,
+        rating_avg: Number(form.rating_avg),
+        rating_count: Number(form.rating_count),
+        sales_count: Number(form.sales_count),
+        reviews,
       })
-      const data = await res.json()
-      if (!res.ok) { 
-        alert('Lỗi: ' + data.error)
-        setLoading(false)
-        return 
-      }
       router.push('/admin/ebooks')
       router.refresh()
-    } catch { 
-      alert('Lỗi kết nối') 
+    } catch (err: any) {
+      alert('Lỗi: ' + (err.message || 'Không thể cập nhật ebook'))
     }
     setLoading(false)
   }
