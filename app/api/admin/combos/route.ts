@@ -1,75 +1,80 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSupabaseAdmin } from '@/lib/db'
+import { requireAdmin } from '@/lib/auth'
 
 // GET - List all combos (admin)
-export async function GET() {
-  const supabase = getSupabaseAdmin()
-  const { data, error } = await supabase
-    .from('combos')
-    .select('*, combo_items(id, ebook_id)')
-    .order('created_at', { ascending: false })
+export async function GET(request: NextRequest) {
+  return requireAdmin(request, async () => {
+    const supabase = getSupabaseAdmin()
+    const { data, error } = await supabase
+      .from('combos')
+      .select('*, combo_items(id, ebook_id)')
+      .order('created_at', { ascending: false })
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
-  return NextResponse.json({ combos: data })
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json({ combos: data })
+  })
 }
 
 // POST - Create combo
 export async function POST(request: NextRequest) {
-  const supabase = getSupabaseAdmin()
-  const body = await request.json()
+  return requireAdmin(request, async () => {
+    const supabase = getSupabaseAdmin()
+    const body = await request.json()
 
-  // Extract ebook_ids and reviews from body
-  const { ebook_ids, reviews, ...comboData } = body
+    // Extract ebook_ids and reviews from body
+    const { ebook_ids, reviews, ...comboData } = body
 
-  // Convert camelCase to snake_case for database columns
-  const dbData = {
-    ...comboData,
-    rating_avg: comboData.ratingAvg || comboData.rating_avg || 0,
-    rating_count: comboData.ratingCount || comboData.rating_count || 0,
-    sales_count: comboData.salesCount || comboData.sales_count || 0,
-  }
-  // Remove camelCase versions
-  delete dbData.ratingAvg
-  delete dbData.ratingCount
-  delete dbData.salesCount
-
-  const { data: combo, error } = await supabase
-    .from('combos')
-    .insert(dbData)
-    .select()
-    .single()
-
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 })
-
-  // Insert combo_items
-  if (ebook_ids && ebook_ids.length > 0 && combo) {
-    const comboItems = ebook_ids.map((ebookId: string, index: number) => ({
-      combo_id: combo.id,
-      ebook_id: ebookId,
-      sort_order: index,
-    }))
-
-    await supabase.from('combo_items').insert(comboItems)
-  }
-
-  // Insert reviews if provided (into combo_reviews table)
-  if (reviews && reviews.length > 0 && combo) {
-    const reviewsToInsert = reviews.map((r: any) => ({
-      combo_id: combo.id,
-      rating: Number(r.rating) || 5,
-      title: r.title || '',
-      content: r.content || '',
-      reviewer_name: r.reviewer_name || 'Anonymous',
-      reviewer_avatar: r.reviewer_avatar || null,
-      reviewer_gender: r.reviewer_gender || null,
-      review_date: r.review_date || new Date().toISOString().split('T')[0],
-    }))
-
-    const { error: reviewError } = await supabase.from('combo_reviews').insert(reviewsToInsert)
-    if (reviewError) {
-      console.error('Error inserting combo reviews:', reviewError)
+    // Convert camelCase to snake_case for database columns
+    const dbData = {
+      ...comboData,
+      rating_avg: comboData.ratingAvg || comboData.rating_avg || 0,
+      rating_count: comboData.ratingCount || comboData.rating_count || 0,
+      sales_count: comboData.salesCount || comboData.sales_count || 0,
     }
-  }
+    // Remove camelCase versions
+    delete dbData.ratingAvg
+    delete dbData.ratingCount
+    delete dbData.salesCount
 
-  return NextResponse.json({ combo })
+    const { data: combo, error } = await supabase
+      .from('combos')
+      .insert(dbData)
+      .select()
+      .single()
+
+    if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+
+    // Insert combo_items
+    if (ebook_ids && ebook_ids.length > 0 && combo) {
+      const comboItems = ebook_ids.map((ebookId: string, index: number) => ({
+        combo_id: combo.id,
+        ebook_id: ebookId,
+        sort_order: index,
+      }))
+
+      await supabase.from('combo_items').insert(comboItems)
+    }
+
+    // Insert reviews if provided (into combo_reviews table)
+    if (reviews && reviews.length > 0 && combo) {
+      const reviewsToInsert = reviews.map((r: any) => ({
+        combo_id: combo.id,
+        rating: Number(r.rating) || 5,
+        title: r.title || '',
+        content: r.content || '',
+        reviewer_name: r.reviewer_name || 'Anonymous',
+        reviewer_avatar: r.reviewer_avatar || null,
+        reviewer_gender: r.reviewer_gender || null,
+        review_date: r.review_date || new Date().toISOString().split('T')[0],
+      }))
+
+      const { error: reviewError } = await supabase.from('combo_reviews').insert(reviewsToInsert)
+      if (reviewError) {
+        console.error('Error inserting combo reviews:', reviewError)
+      }
+    }
+
+    return NextResponse.json({ combo })
+  })
 }
