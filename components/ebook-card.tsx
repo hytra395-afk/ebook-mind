@@ -102,13 +102,13 @@ export default function EbookCard({
           )}
 
           {/* Price + CTA */}
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
             <span className="text-[1.15rem] font-bold text-purple-600">
               {new Intl.NumberFormat('vi-VN').format(price)}đ
             </span>
             <Link
               href={`/ebooks/${slug}`}
-              className="text-[0.69rem] font-semibold gradient-purple text-white px-4 py-2 rounded-lg hover:opacity-90 transition whitespace-nowrap"
+              className="w-full sm:w-auto text-center text-[0.69rem] font-semibold gradient-purple text-white px-4 py-2 rounded-lg hover:opacity-90 transition whitespace-nowrap"
             >
               Mua ngay
             </Link>

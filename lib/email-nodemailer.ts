@@ -83,11 +83,10 @@ export async function sendViaNodemailer(params: SendEmailParams): Promise<boolea
         
         <!-- Header -->
         <tr>
-          <td style="background:#ede9fe;background:linear-gradient(135deg,#ede9fe,#fce7f3);padding:32px;text-align:center;">
-            <img src="https://ebookmind.com/favicon-96x96.png" alt="Ebook Mind" width="56" height="56" style="display:block;margin:0 auto 12px;" />
-            <div style="font-size:20px;font-weight:700;color:#7c3aed;margin-bottom:16px;">Ebook Mind</div>
-            <h1 style="margin:0 0 4px;font-size:24px;color:#1a1a1a !important;font-weight:800;-webkit-text-fill-color:#1a1a1a !important;">Thanh toán thành công! 🎉</h1>
-            <p style="margin:0;color:#6b7280 !important;font-size:14px;-webkit-text-fill-color:#6b7280 !important;">Đơn hàng #${orderId.substring(0, 8).toUpperCase()} · ${new Intl.NumberFormat('vi-VN').format(totalAmount)}đ</p>
+          <td style="background:#ede9fe;background:linear-gradient(135deg,#ede9fe,#fce7f3);padding:40px 32px;text-align:center;">
+            <h1 style="margin:0 0 24px;font-size:28px;font-weight:800;background:linear-gradient(135deg,#7c3aed,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Ebook Mind</h1>
+            <h2 style="margin:0 0 8px;font-size:24px;color:#000000 !important;font-weight:800;-webkit-text-fill-color:#000000 !important;mso-line-height-rule:exactly;">Thanh toán thành công! 🎉</h2>
+            <p style="margin:0;color:#4b5563 !important;font-size:15px;-webkit-text-fill-color:#4b5563 !important;font-weight:500;">Đơn hàng #${orderId.substring(0, 8).toUpperCase()} · ${new Intl.NumberFormat('vi-VN').format(totalAmount)}đ</p>
           </td>
         </tr>
 
