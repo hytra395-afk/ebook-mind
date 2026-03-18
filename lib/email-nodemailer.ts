@@ -96,7 +96,7 @@ export async function sendViaNodemailer(params: SendEmailParams): Promise<boolea
             <p style="margin:0 0 8px;color:#374151;font-size:15px;">Xin chào${userName ? ` ${userName}` : ''},</p>
             <p style="margin:0 0 24px;color:#6b7280;font-size:14px;line-height:1.6;">
               Cảm ơn bạn đã tin tưởng và mua ebook tại <strong>Ebook Mind</strong>! 🎉<br/>
-              Dưới đây là link tải ebook của bạn. <strong>Link có hiệu lực vĩnh viễn</strong>, bạn có thể tải lại bất cứ lúc nào.
+              Dưới đây là link tải ebook của bạn. Mở ra đọc online được ngay hoặc cách tốt nhất là tải về máy để lưu trữ dài hạn.
             </p>
 
             <!-- Ebook list -->
@@ -107,7 +107,7 @@ export async function sendViaNodemailer(params: SendEmailParams): Promise<boolea
             <!-- Note -->
             <div style="margin-top:24px;padding:16px;background:#f0fdf4;border-radius:10px;border:1px solid #bbf7d0;">
               <p style="margin:0;color:#166534;font-size:13px;line-height:1.5;">
-                💡 <strong>Lưu ý:</strong> Link tải có hiệu lực vĩnh viễn. Bạn có thể tải lại bất cứ lúc nào. 
+                💡 <strong>Lưu ý:</strong> Link tải có hiệu lực lâu dài. Bạn có thể tải lại bất cứ lúc nào. 
                 Hãy lưu file PDF vào thiết bị để đọc offline.
               </p>
             </div>
