@@ -28,7 +28,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: ebook.title,
       description: ebook.description?.slice(0, 160),
-      images: ebook.cover_url ? [ebook.cover_url] : [],
+      images: ebook.cover_url ? [ebook.cover_url] : [
+        {
+          url: 'https://ebookmind.com/og-image.png',
+          width: 1200,
+          height: 630,
+          alt: 'Ebook Mind - Kiến thức ngách thay đổi mindset',
+        }
+      ],
     },
   }
 }

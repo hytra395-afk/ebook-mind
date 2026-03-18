@@ -17,16 +17,16 @@ export const metadata: Metadata = {
     url: 'https://ebookmind.com/combos',
     images: [
       {
-        url: 'https://ebookmind.com/android-chrome-512.png',
-        width: 512,
-        height: 512,
-        alt: 'Ebook Mind Logo',
+        url: 'https://ebookmind.com/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Ebook Mind - Kiến thức ngách thay đổi mindset',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['https://ebookmind.com/android-chrome-512.png'],
+    images: ['https://ebookmind.com/og-image.png'],
   },
 }
 
