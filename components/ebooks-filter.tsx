@@ -41,6 +41,11 @@ export default function EbooksFilter({
         params.delete(key)
       }
       
+      // Reset page to 1 when changing category, search, or sort
+      if (key === 'category' || key === 'search' || key === 'sort') {
+        params.delete('page')
+      }
+      
       const queryString = params.toString()
       router.push(queryString ? `/ebooks?${queryString}` : '/ebooks')
     },
