@@ -58,7 +58,6 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
     .select('*')
     .eq('ebook_id', ebook.id)
     .order('review_date', { ascending: false })
-    .limit(10)
 
   const { data: related } = await supabase
     .from('ebooks')
