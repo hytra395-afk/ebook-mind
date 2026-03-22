@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
+import Head from 'next/head'
 import { createClient } from '@supabase/supabase-js'
 import BlogHero from '@/components/blog/blog-hero'
 import BlogCard from '@/components/blog/blog-card'
@@ -85,8 +86,18 @@ export default function BlogPage() {
   const regularPosts = posts.slice(1)
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <BlogHero />
+    <>
+      <Head>
+        <title>Blog Kinh Doanh 2026 - Kiến Thức Vốn Nhỏ, Solo Business | Ebook Mind</title>
+        <meta name="description" content="Khám phá bí quyết kinh doanh vốn nhỏ, solo business, kinh doanh ngách từ những người thành công. Hướng dẫn chi tiết, thực chiến, dễ áp dụng." />
+        <meta name="keywords" content="blog kinh doanh, kinh doanh vốn nhỏ, solo business, kinh doanh ngách, ít vốn kinh doanh gì, ebook kinh doanh" />
+        <meta property="og:title" content="Blog Kinh Doanh 2026 - Kiến Thức Vốn Nhỏ, Solo Business" />
+        <meta property="og:description" content="Khám phá bí quyết kinh doanh vốn nhỏ, solo business, kinh doanh ngách từ những người thành công." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ebookmind.com/blog" />
+      </Head>
+      <div className="min-h-screen bg-gray-50">
+        <BlogHero />
       
       <div className="container mx-auto px-4 py-8">
         <CategoryFilter />
@@ -150,20 +161,7 @@ export default function BlogPage() {
           </a>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   )
-}
-
-export async function generateMetadata() {
-  return {
-    title: 'Blog Kinh Doanh 2026 - Kiến Thức Vốn Nhỏ, Solo Business | Ebook Mind',
-    description: 'Khám phá bí quyết kinh doanh vốn nhỏ, solo business, kinh doanh ngách từ những người thành công. Hướng dẫn chi tiết, thực chiến, dễ áp dụng.',
-    keywords: ['blog kinh doanh', 'kinh doanh vốn nhỏ', 'solo business', 'kinh doanh ngách', 'ít vốn kinh doanh gì', 'ebook kinh doanh'],
-    openGraph: {
-      title: 'Blog Kinh Doanh 2026 - Kiến Thức Vốn Nhỏ, Solo Business',
-      description: 'Khám phá bí quyết kinh doanh vốn nhỏ, solo business, kinh doanh ngách từ những người thành công.',
-      type: 'website',
-      url: 'https://ebookmind.com/blog',
-    }
-  }
 }
