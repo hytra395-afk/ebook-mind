@@ -16,10 +16,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .select('id, updated_at')
     .eq('active', true)
 
+  const { data: blogPosts } = await supabase
+    .from('blog_posts')
+    .select('slug, updated_at')
+    .eq('status', 'published')
+
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: base, lastModified: new Date(), priority: 1.0, changeFrequency: 'daily' },
     { url: `${base}/ebooks`, lastModified: new Date(), priority: 0.9, changeFrequency: 'daily' },
     { url: `${base}/combos`, lastModified: new Date(), priority: 0.8, changeFrequency: 'weekly' },
+    { url: `${base}/blog`, lastModified: new Date(), priority: 0.9, changeFrequency: 'daily' },
     { url: `${base}/about`, lastModified: new Date(), priority: 0.5, changeFrequency: 'monthly' },
     { url: `${base}/use-cases`, lastModified: new Date(), priority: 0.6, changeFrequency: 'monthly' },
   ]
@@ -38,5 +44,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: 'weekly',
   }))
 
-  return [...staticRoutes, ...ebookRoutes, ...comboRoutes]
+  const blogRoutes: MetadataRoute.Sitemap = (blogPosts ?? []).map((p) => ({
+    url: `${base}/blog/${p.slug}`,
+    lastModified: p.updated_at ? new Date(p.updated_at) : new Date(),
+    priority: 0.8,
+    changeFrequency: 'weekly',
+  }))
+
+  return [...staticRoutes, ...ebookRoutes, ...comboRoutes, ...blogRoutes]
 }
