@@ -49,9 +49,9 @@ export default function Navbar() {
               <Link href="/use-cases" className="text-base font-medium text-gray-600 hover:text-purple-600 transition-colors">
                 Use Cases
               </Link>
-              <Link href="/blog" className="text-base font-medium text-gray-600 hover:text-purple-600 transition-colors">
+              {/* <Link href="/blog" className="text-base font-medium text-gray-600 hover:text-purple-600 transition-colors">
                 Blog
-              </Link>
+              </Link> */}
               <Link href="/about" className="text-base font-medium text-gray-600 hover:text-purple-600 transition-colors">
                 Về Chúng Tôi
               </Link>
@@ -102,7 +102,7 @@ export default function Navbar() {
           <Link href="/ebooks" onClick={() => setMobileOpen(false)} className="block text-base font-medium text-gray-700 py-1">Ebook Store</Link>
           <Link href="/combos" onClick={() => setMobileOpen(false)} className="block text-base font-medium text-gray-700 py-1">Combos</Link>
           <Link href="/use-cases" onClick={() => setMobileOpen(false)} className="block text-base font-medium text-gray-700 py-1">Use Cases</Link>
-          <Link href="/blog" onClick={() => setMobileOpen(false)} className="block text-base font-medium text-gray-700 py-1">Blog</Link>
+          {/* <Link href="/blog" onClick={() => setMobileOpen(false)} className="block text-base font-medium text-gray-700 py-1">Blog</Link> */}
           <Link href="/about" onClick={() => setMobileOpen(false)} className="block text-base font-medium text-gray-700 py-1">Về Chúng Tôi</Link>
           <Link href="/cart" onClick={() => setMobileOpen(false)} className="block text-sm font-medium text-gray-700 py-1">Giỏ hàng</Link>
         </div>
