@@ -1,12 +1,13 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
-import Head from 'next/head'
 import { createClient } from '@supabase/supabase-js'
 import BlogHero from '@/components/blog/blog-hero'
 import BlogCard from '@/components/blog/blog-card'
 import CategoryFilter from '@/components/blog/category-filter'
+
+export const dynamic = 'force-dynamic'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -24,7 +25,7 @@ interface BlogPost {
   published_at: string
 }
 
-export default function BlogPage() {
+function BlogPageContent() {
   const searchParams = useSearchParams()
   const category = searchParams.get('category')
   const [posts, setPosts] = useState<BlogPost[]>([])
@@ -86,17 +87,7 @@ export default function BlogPage() {
   const regularPosts = posts.slice(1)
 
   return (
-    <>
-      <Head>
-        <title>Blog Kinh Doanh 2026 - Kiến Thức Vốn Nhỏ, Solo Business | Ebook Mind</title>
-        <meta name="description" content="Khám phá bí quyết kinh doanh vốn nhỏ, solo business, kinh doanh ngách từ những người thành công. Hướng dẫn chi tiết, thực chiến, dễ áp dụng." />
-        <meta name="keywords" content="blog kinh doanh, kinh doanh vốn nhỏ, solo business, kinh doanh ngách, ít vốn kinh doanh gì, ebook kinh doanh" />
-        <meta property="og:title" content="Blog Kinh Doanh 2026 - Kiến Thức Vốn Nhỏ, Solo Business" />
-        <meta property="og:description" content="Khám phá bí quyết kinh doanh vốn nhỏ, solo business, kinh doanh ngách từ những người thành công." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ebookmind.com/blog" />
-      </Head>
-      <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50">
         <BlogHero />
       
       <div className="container mx-auto px-4 py-8">
@@ -162,6 +153,30 @@ export default function BlogPage() {
         </div>
       </section>
       </div>
-    </>
+  )
+}
+
+export default function BlogPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50">
+        <div className="animate-pulse">
+          <div className="h-64 bg-gray-200"></div>
+          <div className="container mx-auto px-4 py-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="bg-white rounded-xl p-6">
+                  <div className="h-40 bg-gray-200 rounded-lg mb-4"></div>
+                  <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                  <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    }>
+      <BlogPageContent />
+    </Suspense>
   )
 }

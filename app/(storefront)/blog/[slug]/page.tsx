@@ -8,8 +8,6 @@ import BlogContent from '@/components/blog/blog-content'
 import TableOfContents from '@/components/blog/table-of-contents'
 import RelatedPosts from '@/components/blog/related-posts'
 
-export const dynamic = 'force-dynamic'
-
 interface PageProps {
   params: { slug: string }
 }
