@@ -9,15 +9,16 @@ import TableOfContents from '@/components/blog/table-of-contents'
 import RelatedPosts from '@/components/blog/related-posts'
 
 interface PageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params
   const supabase = getSupabase()
   const { data: post } = await supabase
     .from('blog_posts')
     .select('*')
-    .eq('slug', params.slug)
+    .eq('slug', slug)
     .eq('status', 'published')
     .single()
 
@@ -51,12 +52,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export const revalidate = 3600
 
 export default async function BlogPostPage({ params }: PageProps) {
+  const { slug } = await params
   const supabase = getSupabase()
   
   const { data: post } = await supabase
     .from('blog_posts')
     .select('*')
-    .eq('slug', params.slug)
+    .eq('slug', slug)
     .eq('status', 'published')
     .single()
 
@@ -70,7 +72,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     .select('*')
     .eq('category', post.category)
     .eq('status', 'published')
-    .neq('slug', params.slug)
+    .neq('slug', slug)
     .limit(3)
 
   // Extract headings for TOC
