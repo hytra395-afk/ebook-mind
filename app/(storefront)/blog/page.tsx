@@ -4,6 +4,8 @@ import BlogHero from '@/components/blog/blog-hero'
 import BlogCard from '@/components/blog/blog-card'
 import CategoryFilter from '@/components/blog/category-filter'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Blog Kinh Doanh 2026 - Kiến Thức Vốn Nhỏ, Solo Business | Ebook Mind',
   description: 'Khám phá bí quyết kinh doanh vốn nhỏ, solo business, kinh doanh ngách từ những người thành công. Hướng dẫn chi tiết, thực chiến, dễ áp dụng.',
