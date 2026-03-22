@@ -12,10 +12,10 @@ export default function BlogHero() {
           
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
-              Kiến Thức Kinh Doanh
+              Kiến Thức Phát Triển
             </span>
             <br />
-            <span className="text-gray-900">Thực Chiến 2026</span>
+            <span className="text-gray-900">Tốt Nhất 2026</span>
           </h1>
           
           <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
