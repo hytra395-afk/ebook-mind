@@ -1,89 +1,118 @@
-import { Metadata } from 'next'
-import { getSupabase } from '@/lib/db'
+'use client'
+
+import { useEffect, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
+import { createClient } from '@supabase/supabase-js'
 import BlogHero from '@/components/blog/blog-hero'
 import BlogCard from '@/components/blog/blog-card'
 import CategoryFilter from '@/components/blog/category-filter'
 
-export const dynamic = 'force-dynamic'
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
 
-export const metadata: Metadata = {
-  title: 'Blog Kinh Doanh 2026 - Kiến Thức Vốn Nhỏ, Solo Business | Ebook Mind',
-  description: 'Khám phá bí quyết kinh doanh vốn nhỏ, solo business, kinh doanh ngách từ những người thành công. Hướng dẫn chi tiết, thực chiến, dễ áp dụng.',
-  keywords: ['blog kinh doanh', 'kinh doanh vốn nhỏ', 'solo business', 'kinh doanh ngách', 'ít vốn kinh doanh gì', 'ebook kinh doanh'],
-  openGraph: {
-    title: 'Blog Kinh Doanh 2026 - Kiến Thức Vốn Nhỏ, Solo Business',
-    description: 'Khám phá bí quyết kinh doanh vốn nhỏ, solo business, kinh doanh ngách từ những người thành công.',
-    type: 'website',
-    url: 'https://ebookmind.com/blog',
-  }
+interface BlogPost {
+  id: string
+  title: string
+  slug: string
+  category: string
+  excerpt: string
+  featured_image: string
+  read_time: number
+  published_at: string
 }
 
-export const revalidate = 3600
+export default function BlogPage() {
+  const searchParams = useSearchParams()
+  const category = searchParams.get('category')
+  const [posts, setPosts] = useState<BlogPost[]>([])
+  const [loading, setLoading] = useState(true)
 
-interface PageProps {
-  searchParams: { category?: string }
-}
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        let query = supabase
+          .from('blog_posts')
+          .select('*')
+          .eq('status', 'published')
+          .order('published_at', { ascending: false })
 
-export default async function BlogPage({ searchParams }: PageProps) {
-  const supabase = getSupabase()
-  const category = searchParams.category
+        if (category && category !== 'all') {
+          query = query.eq('category', category)
+        }
 
-  let query = supabase
-    .from('blog_posts')
-    .select('*')
-    .eq('status', 'published')
-    .order('published_at', { ascending: false })
+        const { data, error } = await query
 
-  if (category && category !== 'Tất cả') {
-    query = query.eq('category', category)
-  }
+        if (error) {
+          console.error('Error fetching posts:', error)
+          return
+        }
 
-  const { data: posts } = await query
+        setPosts(data || [])
+      } catch (error) {
+        console.error('Error:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
 
-  const featuredPost = posts?.[0]
-  const regularPosts = posts?.slice(1) || []
+    fetchPosts()
+  }, [category])
 
-  return (
-    <div>
-      <BlogHero />
-
-      {/* Category Filter */}
-      <section className="py-8 bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <CategoryFilter />
-        </div>
-      </section>
-
-      {/* Featured Post */}
-      {featuredPost && (
-        <section className="py-12 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Bài Viết Nổi Bật</h2>
-            <BlogCard {...featuredPost} featured />
-          </div>
-        </section>
-      )}
-
-      {/* Blog Grid */}
-      <section className="py-12 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8">
-            {category && category !== 'Tất cả' ? category : 'Tất Cả Bài Viết'}
-          </h2>
-          
-          {regularPosts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {regularPosts.map((post) => (
-                <BlogCard key={post.slug} {...post} />
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <div className="animate-pulse">
+          <div className="h-64 bg-gray-200"></div>
+          <div className="container mx-auto px-4 py-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="bg-white rounded-xl p-6">
+                  <div className="h-40 bg-gray-200 rounded-lg mb-4"></div>
+                  <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                  <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                </div>
               ))}
             </div>
-          ) : (
-            <div className="text-center py-16">
-              <p className="text-gray-500">Chưa có bài viết nào trong danh mục này.</p>
-            </div>
-          )}
+          </div>
         </div>
-      </section>
+      </div>
+    )
+  }
+
+  const featuredPost = posts[0]
+  const regularPosts = posts.slice(1)
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <BlogHero />
+      
+      <div className="container mx-auto px-4 py-8">
+        <CategoryFilter currentCategory={category || 'all'} />
+      </div>
+
+      <div className="container mx-auto px-4 py-12">
+        {featuredPost && (
+          <div className="mb-12">
+            <BlogCard post={featuredPost} featured={true} />
+          </div>
+        )}
+
+        {regularPosts.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {regularPosts.map((post) => (
+              <BlogCard key={post.id} post={post} />
+            ))}
+          </div>
+        )}
+
+        {posts.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-gray-500 text-lg">Không có bài viết nào trong danh mục này.</p>
+          </div>
+        )}
+      </div>
 
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500">
@@ -105,4 +134,18 @@ export default async function BlogPage({ searchParams }: PageProps) {
       </section>
     </div>
   )
+}
+
+export async function generateMetadata() {
+  return {
+    title: 'Blog Kinh Doanh 2026 - Kiến Thức Vốn Nhỏ, Solo Business | Ebook Mind',
+    description: 'Khám phá bí quyết kinh doanh vốn nhỏ, solo business, kinh doanh ngách từ những người thành công. Hướng dẫn chi tiết, thực chiến, dễ áp dụng.',
+    keywords: ['blog kinh doanh', 'kinh doanh vốn nhỏ', 'solo business', 'kinh doanh ngách', 'ít vốn kinh doanh gì', 'ebook kinh doanh'],
+    openGraph: {
+      title: 'Blog Kinh Doanh 2026 - Kiến Thức Vốn Nhỏ, Solo Business',
+      description: 'Khám phá bí quyết kinh doanh vốn nhỏ, solo business, kinh doanh ngách từ những người thành công.',
+      type: 'website',
+      url: 'https://ebookmind.com/blog',
+    }
+  }
 }
