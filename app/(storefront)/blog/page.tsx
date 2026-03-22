@@ -89,20 +89,38 @@ export default function BlogPage() {
       <BlogHero />
       
       <div className="container mx-auto px-4 py-8">
-        <CategoryFilter currentCategory={category || 'all'} />
+        <CategoryFilter />
       </div>
 
       <div className="container mx-auto px-4 py-12">
         {featuredPost && (
           <div className="mb-12">
-            <BlogCard post={featuredPost} featured={true} />
+            <BlogCard 
+              slug={featuredPost.slug}
+              title={featuredPost.title}
+              excerpt={featuredPost.excerpt}
+              featured_image={featuredPost.featured_image}
+              category={featuredPost.category}
+              published_at={featuredPost.published_at}
+              read_time={featuredPost.read_time}
+              featured={true}
+            />
           </div>
         )}
 
         {regularPosts.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {regularPosts.map((post) => (
-              <BlogCard key={post.id} post={post} />
+              <BlogCard 
+                key={post.id}
+                slug={post.slug}
+                title={post.title}
+                excerpt={post.excerpt}
+                featured_image={post.featured_image}
+                category={post.category}
+                published_at={post.published_at}
+                read_time={post.read_time}
+              />
             ))}
           </div>
         )}
