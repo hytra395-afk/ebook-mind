@@ -122,7 +122,7 @@ UPDATE public.blog_posts SET
 
 <h3>Muốn Học Sâu Hơn?</h3>
 
-<p>Tôi đã gom hết những bài học xương máu 15 năm qua (và cả những điều tôi ước gì ai đó nói với tôi từ năm đầu) vào bộ ebook kinh doanh thực chiến tại <strong>ebookmind.com/ebooks</strong>.</p>
+<p>Bạn có thể tìm đọc các bài viết trong <strong>Ebook Store</strong> - Nơi tập hợp những kiến thức không ở đâu có.</p>
 
 <p>Đặc biệt trong chuyên mục:</p>
 

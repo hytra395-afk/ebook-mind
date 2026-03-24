@@ -214,10 +214,10 @@ export default async function BlogPostPage({ params }: PageProps) {
                   Đọc nội dung chuyên sâu hơn? Khám phá ebook thực chiến từ A → Z
                 </h2>
               </div>
-              <p className="text-gray-600 mb-8 text-lg max-w-2xl mx-auto">
+              <p className="text-gray-600 mb-6 text-lg">
                 Bài viết này chỉ là phần nổi của tảng băng chìm. Trong bộ sưu tập ebook của chúng tôi, 
-                bạn sẽ tìm thấy những kiến thức chuyên sâu, case study thực tế, và lộ trình từng bước chi tiết 
-                để bắt đầu kinh doanh hay áp dụng ngay vào business của bạn.
+                bạn sẽ tìm thấy những kiến thức chuyên sâu, case study thực tế, và lộ trình từng bước 
+                chi tiết để bắt đầu kinh doanh hay áp dụng ngay vào business của bạn.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link

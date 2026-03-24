@@ -48,7 +48,7 @@ UPDATE public.blog_posts SET
 
 <p>Thực tế: <strong>Khách hàng đầu tiên chính là người giúp bạn hoàn thiện sản phẩm.</strong></p>
 
-<p>Tôi từng tặng miễn phí 50 ebook đầu tiên cho nhóm khách hàng tiềm năng và xin feedback chi tiết. Kết quả? Họ không chỉ mua phiên bản trả phí sau này mà còn giới thiệu bạn bè.</p>
+<p>Tôi từng tặng miễn phí 1 tháng sử dụng sản phẩm đầu tiên cho nhóm khách hàng tiềm năng và xin feedback chi tiết. Kết quả? Họ không chỉ mua phiên bản trả phí sau này mà còn giới thiệu bạn bè.</p>
 
 <p>Lợi nhuận sẽ đến tự nhiên khi bạn đã giải quyết đúng vấn đề và xây được lòng tin.</p>
 
@@ -70,7 +70,7 @@ UPDATE public.blog_posts SET
 
 <p>Chỉ cần duy trì 1 năm, bạn sẽ có hơn 7000 trang kiến thức – tương đương một tấm bằng MBA thực chiến.</p>
 
-<p><strong>Ebookmind.com/ebooks</strong> chính là nơi tôi và hàng nghìn người khác tìm những cuốn thực chiến nhất, không lý thuyết suông.</p>
+<p><strong>Ebook Mind</strong> chính là nơi tôi và hàng nghìn người khác tìm những cuốn thực chiến nhất, không lý thuyết suông.</p>
 
 <h2>7. Tư Duy Cộng Tác Thay Vì Cạnh Tranh</h2>
 
@@ -123,13 +123,7 @@ UPDATE public.blog_posts SET
 
 <p>Nếu bạn đang cảm thấy mình thiếu một hoặc vài mindset, đừng lo. Hầu hết mọi người đều bắt đầu từ con số 0. <strong>Quan trọng là bạn nhận ra và bắt đầu thay đổi ngay hôm nay.</strong></p>
 
-<h3>Bạn Muốn Đi Sâu Hơn?</h3>
-
-<p>Tôi đã tổng hợp tất cả vào bộ ebook kinh doanh thực chiến tại <strong>ebookmind.com/ebooks</strong>. Đặc biệt, trong chuyên mục <em>Phát triển Mindset</em> có những cuốn giúp bạn xây dựng nền tảng tư duy vững chắc nhất trong 3 năm đầu.</p>
-
-<p><a href="https://ebookmind.com/ebooks">👉 Nhấn vào đây để xem ngay các ebook kinh doanh thực chiến</a></p>
-
-<p><strong>Cùng nhau xây dựng một năm bùng nổ nhé!</strong></p>',
+',
   meta_title = '10 Mindset Kinh Doanh Cần Có Để Thắng Trong 3 Năm Đầu | Ebook Mind',
   meta_description = '10 mindset kinh doanh thực chiến giúp bạn không chỉ sống sót mà còn thắng trong 3 năm đầu. Từ giải quyết vấn đề khách hàng đến xây dựng hệ thống.',
   keywords = ARRAY['mindset kinh doanh', 'tư duy doanh nhân', 'khởi nghiệp thành công', '3 năm đầu kinh doanh', 'tư duy dài hạn'],
