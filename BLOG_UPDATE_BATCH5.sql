@@ -121,6 +121,6 @@ UPDATE public.blog_posts SET
   meta_description = '10 bài học xương máu từ 10 năm kinh doanh. Từ chọn ngách đúng, xây hệ thống, đến quản lý dòng tiền và sức khỏe. Những sai lầm phổ biến nhất mà ai cũng từng mắc.',
   keywords = ARRAY['bài học kinh doanh', '10 năm kinh doanh', 'sai lầm kinh doanh', 'kinh nghiệm kinh doanh', 'bài học xương máu'],
   read_time = 16
-WHERE slug = '7-mindset-kinh-doanh-can-co-de-thanh-cong-2026';
+WHERE slug = 'vuot-qua-noi-so-that-bai-khi-kinh-doanh-von-nho';
 
 SELECT 'Updated blog post #5: 10 Năm Kinh Doanh - 10 Bài Học Xương Máu' as result;
