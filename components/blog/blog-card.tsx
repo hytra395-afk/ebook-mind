@@ -60,7 +60,7 @@ export default function BlogCard({
               <span className={`inline-block px-3 py-1 rounded-full text-white text-xs font-semibold mb-3 ${getCategoryColor(category)}`}>
                 {category}
               </span>
-              <h2 className="text-2xl font-bold text-white mb-2 line-clamp-2">
+              <h2 className="text-2xl font-bold text-white mb-2">
                 {title}
               </h2>
               <p className="text-gray-200 text-sm line-clamp-2 mb-3">
@@ -99,7 +99,7 @@ export default function BlogCard({
           <span className={`inline-block px-2.5 py-1 rounded-full text-white text-xs font-semibold mb-3 self-start ${getCategoryColor(category)}`}>
             {category}
           </span>
-          <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-purple-600 transition-colors">
+          <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
             {title}
           </h3>
           <p className="text-gray-600 text-sm line-clamp-3 mb-4 flex-1">

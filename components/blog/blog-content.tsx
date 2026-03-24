@@ -43,13 +43,13 @@ export default function BlogContent({ content }: BlogContentProps) {
           font-weight: 600;
         }
         .prose a {
-          color: #7c3aed;
+          color: #2563eb;
           text-decoration: none;
           font-weight: 500;
           transition: color 0.2s;
         }
         .prose a:hover {
-          color: #6d28d9;
+          color: #1d4ed8;
           text-decoration: underline;
         }
         .prose ul, .prose ol {
