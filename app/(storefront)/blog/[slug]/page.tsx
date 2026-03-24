@@ -198,19 +198,9 @@ export default async function BlogPostPage({ params }: PageProps) {
             )}
           </div>
 
-          {/* Article Content with TOC */}
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-              {/* Table of Contents */}
-              <aside className="lg:col-span-4">
-                <TableOfContents headings={headings} />
-              </aside>
-
-              {/* Main Content */}
-              <div className="lg:col-span-8">
-                <BlogContent content={post.content} />
-              </div>
-            </div>
+          {/* Article Content */}
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <BlogContent content={post.content} />
           </div>
         </article>
 
@@ -226,19 +216,29 @@ export default async function BlogPostPage({ params }: PageProps) {
               <div className="flex items-center gap-3 mb-4">
                 <BookOpen className="w-8 h-8 text-purple-600" />
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-                  Tìm Hiểu Sâu Hơn Về {post.category}
+                  Muốn Đi Sâu Hơn? Khám Phá Ebook Thực Chiến
                 </h2>
               </div>
               <p className="text-gray-600 mb-6 text-lg">
-                Khám phá các ebook chuyên sâu với kiến thức thực chiến, case study chi tiết 
-                và lộ trình từng bước để thành công trong lĩnh vực này.
+                Bài viết này chỉ là phần nổi của tảng băng. Trong bộ sưu tập ebook của chúng tôi, 
+                bạn sẽ tìm thấy kiến thức chuyên sâu, case study thực tế, và lộ trình từng bước 
+                để áp dụng ngay vào business của bạn.
               </p>
-              <Link
-                href="/ebooks"
-                className="inline-block bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-xl transition"
-              >
-                Xem Ebook Liên Quan
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href="/ebooks"
+                  className="inline-flex items-center justify-center bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-xl transition"
+                >
+                  <BookOpen className="w-5 h-5 mr-2" />
+                  Xem Tất Cả Ebook
+                </Link>
+                <Link
+                  href={`/ebooks?category=${encodeURIComponent(post.category.toLowerCase().replace(/ /g, '-'))}`}
+                  className="inline-flex items-center justify-center border-2 border-purple-600 text-purple-600 px-8 py-3 rounded-xl font-semibold hover:bg-purple-50 transition"
+                >
+                  Ebook {post.category}
+                </Link>
+              </div>
             </div>
           </div>
         </section>
