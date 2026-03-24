@@ -204,11 +204,6 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
         </article>
 
-        {/* Related Posts */}
-        {relatedPosts && relatedPosts.length > 0 && (
-          <RelatedPosts posts={relatedPosts} />
-        )}
-
         {/* CTA Section */}
         <section className="py-16 bg-gradient-to-br from-purple-50 to-pink-50">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -242,6 +237,11 @@ export default async function BlogPostPage({ params }: PageProps) {
             </div>
           </div>
         </section>
+
+        {/* Related Posts */}
+        {relatedPosts && relatedPosts.length > 0 && (
+          <RelatedPosts posts={relatedPosts} />
+        )}
       </div>
     </>
   )
