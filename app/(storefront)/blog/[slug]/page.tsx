@@ -207,19 +207,19 @@ export default async function BlogPostPage({ params }: PageProps) {
         {/* CTA Section */}
         <section className="py-16 bg-gradient-to-br from-purple-50 to-pink-50">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-white rounded-2xl p-8 sm:p-12 shadow-lg border border-purple-100">
-              <div className="flex items-center gap-3 mb-4">
+            <div className="bg-white rounded-2xl p-8 sm:p-12 shadow-lg border border-purple-100 text-center">
+              <div className="flex items-center justify-center gap-3 mb-4">
                 <BookOpen className="w-8 h-8 text-purple-600" />
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-                  Muốn Đi Sâu Hơn? Khám Phá Ebook Thực Chiến
+                  Đọc nội dung chuyên sâu hơn? Khám phá ebook thực chiến từ A → Z
                 </h2>
               </div>
-              <p className="text-gray-600 mb-6 text-lg">
-                Bài viết này chỉ là phần nổi của tảng băng. Trong bộ sưu tập ebook của chúng tôi, 
-                bạn sẽ tìm thấy kiến thức chuyên sâu, case study thực tế, và lộ trình từng bước 
-                để áp dụng ngay vào business của bạn.
+              <p className="text-gray-600 mb-8 text-lg max-w-2xl mx-auto">
+                Bài viết này chỉ là phần nổi của tảng băng chìm. Trong bộ sưu tập ebook của chúng tôi, 
+                bạn sẽ tìm thấy những kiến thức chuyên sâu, case study thực tế, và lộ trình từng bước chi tiết 
+                để bắt đầu kinh doanh hay áp dụng ngay vào business của bạn.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   href="/ebooks"
                   className="inline-flex items-center justify-center bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-xl transition"
