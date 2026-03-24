@@ -6,10 +6,11 @@ interface BlogContentProps {
 
 export default function BlogContent({ content }: BlogContentProps) {
   return (
-    <div className="prose prose-lg max-w-none">
+    <div className="prose prose-lg prose-headings:font-bold prose-p:text-gray-700 prose-a:text-purple-600 prose-strong:text-gray-900 max-w-none w-full">
       <style jsx global>{`
         .prose {
           color: #374151;
+          line-height: 1.75;
         }
         .prose h2 {
           font-size: 1.875rem;
@@ -96,6 +97,8 @@ export default function BlogContent({ content }: BlogContentProps) {
           border-radius: 0.75rem;
           margin: 2rem 0;
           box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+          max-width: 100%;
+          height: auto;
         }
         .prose table {
           width: 100%;
