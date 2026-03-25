@@ -20,14 +20,14 @@ UPDATE public.blog_posts SET
 
 <h3>Tại Sao Bẫy Này Khó Tránh Đến Vậy?</h3>
 
-<p>Não bộ chúng ta không phân biệt được sự khác nhau giữa <em>'cảm giác bận rộn'</em> và <em>'thật sự tạo ra giá trị'</em>. Khi thiết kế logo, mua phần mềm, in card visit – não bộ ghi nhận đó là hành động. Cảm giác đang tiến tới. Nhưng thực chất, bạn chỉ đang tiêu tiền vào những thứ chưa cần thiết.</p>
+<p>Não bộ chúng ta không phân biệt được sự khác nhau giữa "cảm giác bận rộn" và "thật sự tạo ra giá trị". Khi thiết kế logo, mua phần mềm, in card visit – não bộ ghi nhận đó là hành động. Cảm giác đang tiến tới. Nhưng thực chất, bạn chỉ đang tiêu tiền vào những thứ chưa cần thiết.</p>
 
 <p>Có 3 nguyên nhân tâm lý chính khiến bẫy này hoạt động hiệu quả đến vậy:</p>
 
 <ul>
-<li><strong>Nỗi sợ bị đánh giá:</strong> 'Nếu mình không có logo đẹp, website xịn, người ta không tin tưởng'. Sự thật là khách hàng đầu tiên của bạn quan tâm đến sản phẩm, không phải logo.</li>
-<li><strong>Tâm lý đám đông:</strong> 'Người ta ai cũng có bộ nhận diện thương hiệu'. Nhưng những người bạn thấy trên mạng đã có doanh thu ổn định trước khi họ đầu tư vào branding.</li>
-<li><strong>Cảm giác kiểm soát:</strong> Mua đồ, setup hệ thống cho cảm giác đang làm chủ tình hình. Trong khi thứ bạn cần nhất – khách hàng – lại không thể 'mua' được bằng cách đó.</li>
+<li><strong>Nỗi sợ bị đánh giá:</strong> "Nếu mình không có logo đẹp, website xịn, người ta không tin tưởng". Sự thật là khách hàng đầu tiên của bạn quan tâm đến sản phẩm, không phải logo.</li>
+<li><strong>Tâm lý đám đông:</strong> "Người ta ai cũng có bộ nhận diện thương hiệu". Nhưng những người bạn thấy trên mạng đã có doanh thu ổn định trước khi họ đầu tư vào branding.</li>
+<li><strong>Cảm giác kiểm soát:</strong> Mua đồ, setup hệ thống cho cảm giác đang làm chủ tình hình. Trong khi thứ bạn cần nhất – khách hàng – lại không thể "mua" được bằng cách đó.</li>
 </ul>
 
 <h2>7 Khoản Chi "Bẫy" Phổ Biến Nhất Khi Mới Bắt Đầu Kinh Doanh</h2>
@@ -52,9 +52,9 @@ UPDATE public.blog_posts SET
 
 <p><strong>✅ Cách tránh:</strong> Dùng Google Sheets miễn phí cho đến khi có ít nhất 30–50 đơn/tháng. Phần mềm là để giải quyết vấn đề của tăng trưởng, không phải của người chưa có doanh thu.</p>
 
-<h3>4. Nhập Hàng Số Lượng Lớn Ngay Từ Đầu Để 'Được Giá'</h3>
+<h3>4. Nhập Hàng Số Lượng Lớn Ngay Từ Đầu Để "Được Giá"</h3>
 
-<p><strong>⚠ Biểu hiện:</strong> Nhập 200–500 sản phẩm một lúc vì 'giá sỉ rẻ hơn nhiều'.</p>
+<p><strong>⚠ Biểu hiện:</strong> Nhập 200–500 sản phẩm một lúc vì "giá sỉ rẻ hơn nhiều".</p>
 
 <p><strong>✅ Cách tránh:</strong> Nhập tối thiểu để test thị trường: 20–30 sản phẩm. Giá sỉ không có nghĩa lý gì nếu hàng không bán được.</p>
 
@@ -66,7 +66,7 @@ UPDATE public.blog_posts SET
 
 <h3>6. Thuê Nhân Viên Quá Sớm</h3>
 
-<p><strong>⚠ Biểu hiện:</strong> Tuyển 1–2 người hỗ trợ từ tháng đầu vì 'một mình không làm hết'.</p>
+<p><strong>⚠ Biểu hiện:</strong> Tuyển 1–2 người hỗ trợ từ tháng đầu vì "một mình không làm hết".</p>
 
 <p><strong>✅ Cách tránh:</strong> Làm một mình đến khi không còn đủ sức là lúc nên thuê người. Giai đoạn đầu, một mình bạn hiểu rõ nhất về sản phẩm và khách hàng.</p>
 
@@ -149,7 +149,7 @@ UPDATE public.blog_posts SET
 
 <h3>📌 Điều Chị H. Làm Đúng</h3>
 
-<p>Chị không cố tỏ ra 'chuyên nghiệp' trước khi chứng minh được sản phẩm của mình có người mua. Thay vào đó, chị dành toàn bộ năng lượng vào chất lượng sản phẩm và chăm sóc từng khách hàng. Khi sản phẩm đã được thị trường xác nhận, branding chỉ là bước khuếch đại – không phải điểm xuất phát.</p>
+<p>Chị không cố tỏ ra "chuyên nghiệp" trước khi chứng minh được sản phẩm của mình có người mua. Thay vào đó, chị dành toàn bộ năng lượng vào chất lượng sản phẩm và chăm sóc từng khách hàng. Khi sản phẩm đã được thị trường xác nhận, branding chỉ là bước khuếch đại – không phải điểm xuất phát.</p>
 
 <p>Câu chuyện của chị H. không phải ngoại lệ. Đây là hành trình của hầu hết những người kinh doanh thật sự thành công từ nhỏ: <strong>sản phẩm trước, hệ thống sau, thương hiệu cuối cùng.</strong></p>
 
@@ -166,7 +166,7 @@ UPDATE public.blog_posts SET
 <li>☐ Khách hàng của tôi có quan tâm đến thứ này không – hay chỉ tôi quan tâm?</li>
 </ul>
 
-<p><strong>Nếu câu trả lời cho câu 1 là 'Không' – đó là dấu hiệu bạn đang chuẩn bị rơi vào Bẫy Nhiệt Huyết. Hãy dừng lại.</strong></p>
+<p><strong>Nếu câu trả lời cho câu 1 là "Không" – đó là dấu hiệu bạn đang chuẩn bị rơi vào Bẫy Nhiệt Huyết. Hãy dừng lại.</strong></p>
 
 <h2>Khi Nào Thì Nên Đầu Tư Bài Bản Hơn?</h2>
 
