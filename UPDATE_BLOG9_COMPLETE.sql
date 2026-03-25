@@ -241,7 +241,7 @@ INSERT INTO public.blog_posts (
 <p><strong>📘 <a href="https://ebookmind.com/ebooks/20-ngach-cho-freelance-tu-0-den-nhung-dau-tien-cac-cong-viec-an-giup-ban-kiem-tien-that">20 Ngách Cho Freelance – Từ 0 Đến Những $ Đầu Tiên, Các Công Việc "Ẩn" Giúp Bạn Kiếm Tiền Thật</a></strong></p>
 
 <p><strong>→ <a href="https://ebookmind.com/ebooks?category=kinh-doanh-ngach">Xem toàn bộ ebook kinh doanh ngách</a></strong></p>',
-  'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=630&fit=crop',
+  'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop',
   'Nên Kinh Doanh Gì Trong 3 Năm Tới 2026–2028? 10 Ngách Ít Vốn | Ebook Mind',
   'Phân tích 10 ngách kinh doanh ít vốn, tiềm năng lớn giai đoạn 2026–2028 dựa trên 3 xu hướng thị trường lớn.',
   ARRAY['ngách kinh doanh', 'ý tưởng kinh doanh 2026', 'kinh doanh ít vốn', 'kinh doanh online', 'xu hướng thị trường'],
