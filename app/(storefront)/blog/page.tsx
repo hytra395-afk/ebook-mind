@@ -83,9 +83,6 @@ function BlogPageContent() {
     )
   }
 
-  const featuredPost = posts[0]
-  const regularPosts = posts.slice(1)
-
   return (
     <div className="min-h-screen bg-gray-50">
         <BlogHero />
@@ -95,24 +92,9 @@ function BlogPageContent() {
       </div>
 
       <div className="container mx-auto px-4 py-12">
-        {featuredPost && (
-          <div className="mb-12">
-            <BlogCard 
-              slug={featuredPost.slug}
-              title={featuredPost.title}
-              excerpt={featuredPost.excerpt}
-              featured_image={featuredPost.featured_image}
-              category={featuredPost.category}
-              published_at={featuredPost.published_at}
-              read_time={featuredPost.read_time}
-              featured={true}
-            />
-          </div>
-        )}
-
-        {regularPosts.length > 0 && (
+        {posts.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {regularPosts.map((post) => (
+            {posts.map((post) => (
               <BlogCard 
                 key={post.id}
                 slug={post.slug}
