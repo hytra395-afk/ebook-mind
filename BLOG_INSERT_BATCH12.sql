@@ -124,7 +124,7 @@ INSERT INTO public.blog_posts (
 <p>Đó là cách nhanh nhất để rút ngắn hành trình thất bại và học từ kinh nghiệm của người đi trước.</p>
 
 <p>7 insight trên chỉ là phần nổi. Khi bạn bắt đầu đọc và áp dụng theo cách đúng, bạn sẽ tự tìm ra thêm rất nhiều điều thay đổi tư duy của chính mình.</p>',
-  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=630&fit=crop',
+  'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1200&h=630&fit=crop',
   'Đọc Sách Kinh Doanh: 7 Insight Thay Đổi Tư Duy | Ebook Mind',
   '7 insight thật sự thay đổi tư duy kinh doanh – không phải những thứ bạn nghĩ. Cách đọc sách kinh doanh hiệu quả và Ebook Mind.',
   ARRAY['sách kinh doanh', 'thay đổi tư duy', 'insight kinh doanh', 'phát triển bản thân', 'ebook mind'],
