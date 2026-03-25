@@ -114,6 +114,6 @@ UPDATE public.blog_posts SET
   meta_description = 'Vốn ít không phải bất lợi mà là lợi thế nếu biết dùng thông minh. Công thức 50/30/20, chiến lược Lean Startup và 5 mô hình kinh doanh ít vốn hiệu quả nhất 2026.',
   keywords = ARRAY['vốn ít kinh doanh', 'kinh doanh ít vốn', 'phân bổ vốn', 'lean startup', 'công thức 50/30/20'],
   read_time = 16
-WHERE slug = 'kinh-doanh-it-von-duoi-5-trieu-huong-dan-tu-a-z';
+WHERE slug = 'tu-nhan-vien-van-phong-luong-12-trieu-den-chu-doanh-nghiep-thu-200-trieu-thang';
 
 SELECT 'Updated blog post #3: Vốn Ít Nhưng Muốn Kinh Doanh' as result;

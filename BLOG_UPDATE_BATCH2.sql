@@ -138,6 +138,6 @@ UPDATE public.blog_posts SET
   meta_description = 'Sau 15 năm từ mất trắng 200 triệu đến xây dựng doanh nghiệp ổn định, tôi chia sẻ 5 sự thật ngược đời mà không ai dám nói thẳng. Bài học xương máu đắt giá.',
   keywords = ARRAY['kinh doanh 15 năm', 'sự thật kinh doanh', 'thất bại kinh doanh', 'bài học kinh doanh', 'khởi nghiệp thất bại'],
   read_time = 18
-WHERE slug = 'kinh-doanh-von-nho-2026-top-15-y-tuong';
+WHERE slug = '15-nam-kinh-doanh-tu-that-bai-nhieu-lan-toi-phat-hien-ra-5-su-that-nguoc-doi';
 
 SELECT 'Updated blog post #2: 15 Năm Kinh Doanh - 5 Sự Thật Ngược Đời' as result;

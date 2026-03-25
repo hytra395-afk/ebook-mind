@@ -219,19 +219,13 @@ export default async function BlogPostPage({ params }: PageProps) {
                 bạn sẽ tìm thấy những kiến thức chuyên sâu, case study thực tế, và lộ trình từng bước 
                 chi tiết để bắt đầu kinh doanh hay áp dụng ngay vào business của bạn.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex justify-center">
                 <Link
                   href="/ebooks"
                   className="inline-flex items-center justify-center bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-xl transition"
                 >
                   <BookOpen className="w-5 h-5 mr-2" />
                   Xem Tất Cả Ebook
-                </Link>
-                <Link
-                  href={`/ebooks?category=${encodeURIComponent(post.category.toLowerCase().replace(/ /g, '-'))}`}
-                  className="inline-flex items-center justify-center border-2 border-purple-600 text-purple-600 px-8 py-3 rounded-xl font-semibold hover:bg-purple-50 transition"
-                >
-                  Ebook {post.category}
                 </Link>
               </div>
             </div>

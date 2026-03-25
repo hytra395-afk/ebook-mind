@@ -110,6 +110,6 @@ UPDATE public.blog_posts SET
   meta_description = 'Hàng nghìn dân văn phòng đang tranh thủ giờ rảnh để kinh doanh thêm. 4 mô hình phổ biến, cách quản lý thời gian và tránh cạm bẫy khi làm song song.',
   keywords = ARRAY['dân văn phòng kinh doanh', 'kinh doanh thêm', 'làm thêm sau giờ', 'side hustle', 'thu nhập thụ động'],
   read_time = 14
-WHERE slug = 'kinh-doanh-online-khong-can-von-5-mo-hinh-zero-risk-2026';
+WHERE slug = 'kinh-doanh-online-khong-can-von-5-mo-hinh-zero-risk-ai-cung-lam-duoc-nam-2026';
 
 SELECT 'Updated blog post #4: Dân Văn Phòng Tranh Thủ Kinh Doanh' as result;
