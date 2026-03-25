@@ -42,7 +42,15 @@ export default function BlogCard({
       'Kinh Doanh Ngách': 'bg-gradient-to-r from-teal-400 to-cyan-400',
       'Mindset & Tư Duy': 'bg-gradient-to-r from-orange-400 to-rose-500',
       'Kỹ Năng': 'bg-gradient-to-r from-blue-500 to-cyan-500',
-      'Ebook & Học Tập': 'bg-gradient-to-r from-purple-500 to-pink-500'
+      'Ebook & Học Tập': 'bg-gradient-to-r from-purple-500 to-pink-500',
+      'Mindset Kinh Doanh': 'bg-gradient-to-r from-orange-400 to-rose-500',
+      'Kinh Nghiệm Kinh Doanh': 'bg-gradient-to-r from-blue-500 to-indigo-500',
+      'Kinh Doanh Online': 'bg-gradient-to-r from-green-500 to-teal-500',
+      'Câu Chuyện Thành Công': 'bg-gradient-to-r from-purple-500 to-pink-500',
+      'Kinh Doanh': 'bg-gradient-to-r from-indigo-500 to-purple-500',
+      'Phát Triển Bản Thân': 'bg-gradient-to-r from-emerald-500 to-green-500',
+      'Công Nghệ': 'bg-gradient-to-r from-cyan-500 to-blue-500',
+      'Sức Khỏe': 'bg-gradient-to-r from-rose-500 to-pink-500'
     }
     return colors[cat] || 'bg-gradient-to-r from-gray-500 to-gray-600'
   }
