@@ -88,6 +88,8 @@ INSERT INTO public.blog_posts (
 <p><strong>📈 Tiềm năng:</strong> 40–70 triệu/tháng</p>
 <p><strong>⚡ Độ khó:</strong> ★★★☆☆ Trung bình</p>
 
+<p><strong>Đọc ngay ebook →</strong> <a href="https://ebookmind.com/ebooks/ngach-ban-set-do-an-healthy-online-kiem-thu-nhap-40-50-trieu-thang">Ngách bán set đồ ăn healthy online: Kiếm thu nhập 40-50 triệu/tháng</a></p>
+
 <h3>4. 👴 Dịch vụ chăm sóc & đồng hành người cao tuổi tại nhà</h3>
 
 <p>Ngách này gần như trống hoàn toàn ở quy mô nhỏ. Người cao tuổi cần: người đồng hành đi khám, giúp đặt lịch bệnh viện, đọc đơn thuốc, hướng dẫn dùng smartphone, nấu ăn theo chế độ bệnh, trò chuyện hằng ngày. Con cái họ bận đi làm và sẵn sàng trả tiền cho người làm điều này chu đáo. Một mình bạn có thể phục vụ 5–8 gia đình/tháng với thu nhập tốt.</p>
@@ -111,6 +113,8 @@ INSERT INTO public.blog_posts (
 <p><strong>💰 Vốn:</strong> 5–15 triệu (thiết bị cơ bản + sản phẩm)</p>
 <p><strong>📈 Tiềm năng:</strong> 25–60 triệu/tháng</p>
 <p><strong>⚡ Độ khó:</strong> ★★★☆☆ Trung bình</p>
+
+<p><strong>Đọc ngay ebook để mở spa mini tại nhà →</strong> <a href="https://ebookmind.com/ebooks/mo-spa-mini-tai-nha-kiem-thu-nhap-25-trieu-thang-von-nho-loi-nhuan-cao">Mở SPA MINI TẠI NHÀ: Kiếm thu nhập > 25 triệu/tháng, vốn nhỏ - lợi nhuận cao</a></p>
 
 <h3>7. 🎓 Gia sư/coaching kỹ năng ngách cho người đi làm</h3>
 
@@ -219,7 +223,19 @@ INSERT INTO public.blog_posts (
 
 <p>Câu hỏi không còn là "có cơ hội không". Câu hỏi là: bạn có đủ dũng cảm để bắt đầu với một ngách nhỏ, test thực tế, và kiên trì đủ lâu để thấy kết quả không?</p>
 
-<p>Nếu bạn đang muốn tìm hiểu sâu hơn về cách xây dựng một mô hình kinh doanh ngách từ đầu – từ chọn ngách, test thị trường, đến vận hành và tăng trưởng – bộ ebook tại Ebookmind được viết từ kinh nghiệm thực chiến của hàng trăm người đã làm đúng điều đó.</p>',
+<p>Nếu bạn đang muốn tìm hiểu sâu hơn về cách xây dựng một mô hình kinh doanh ngách từ đầu – từ chọn ngách, test thị trường, đến vận hành và tăng trưởng – bộ ebook tại Ebookmind được viết từ kinh nghiệm thực chiến của hàng trăm người đã làm đúng điều đó.</p>
+
+<h2>📚 Bắt Đầu Đúng Ngách – Đọc Đúng Ebook</h2>
+
+<p><strong>📘 <a href="https://ebookmind.com/ebooks/100-y-tuong-kinh-doanh-ngach-thu-70-trieu-thang-solo-business">100 Ý Tưởng Kinh Doanh Ngách Thu 70 Triệu/Tháng (Solo Business)</a></strong> – 137 trang, kiểm chứng thực tế</p>
+
+<p><strong>📘 <a href="https://ebookmind.com/ebooks/khoi-nghiep-von-thap-chi-duoi-20-trieu-bi-quyet-kiem-60-trieu-thang-tu-100-solo-business">Khởi Nghiệp Vốn Thấp Dưới 20 Triệu – Bí Quyết Kiếm >60 Triệu/Tháng Từ 100 Solo Business</a></strong></p>
+
+<p><strong>📘 <a href="https://ebookmind.com/ebooks/kinh-doanh-o-que-khong-can-len-thanh-pho-10-mo-hinh-kinh-doanh-nho-kiem-15-40-trieu-thang-ngay-tai-nha">Kinh Doanh Ở Quê, Không Cần Lên Thành Phố – 10 Mô Hình Kiếm 15–40 Triệu/Tháng Ngay Tại Nhà</a></strong></p>
+
+<p><strong>📘 <a href="https://ebookmind.com/ebooks/20-ngach-cho-freelance-tu-0-den-nhung-dau-tien-cac-cong-viec-an-giup-ban-kiem-tien-that">20 Ngách Cho Freelance – Từ 0 Đến Những $ Đầu Tiên, Các Công Việc "Ẩn" Giúp Bạn Kiếm Tiền Thật</a></strong></p>
+
+<p><strong>→ <a href="https://ebookmind.com/ebooks?category=kinh-doanh-ngach">Xem toàn bộ ebook kinh doanh ngách</a></strong></p>',
   'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=630&fit=crop',
   'Nên Kinh Doanh Gì Trong 3 Năm Tới 2026–2028? 10 Ngách Ít Vốn | Ebook Mind',
   'Phân tích 10 ngách kinh doanh ít vốn, tiềm năng lớn giai đoạn 2026–2028 dựa trên 3 xu hướng thị trường lớn.',
