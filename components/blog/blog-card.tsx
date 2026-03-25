@@ -31,6 +31,10 @@ export default function BlogCard({
     })
   }
 
+  const capitalizeTitle = (text: string) => {
+    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
+  }
+
   const getCategoryColor = (cat: string) => {
     const colors: Record<string, string> = {
       'Kinh Doanh Vốn Nhỏ': 'bg-gradient-to-r from-indigo-500 to-violet-500',
@@ -61,7 +65,7 @@ export default function BlogCard({
                 {category}
               </span>
               <h2 className="text-2xl font-bold text-white mb-2">
-                {title}
+                {capitalizeTitle(title)}
               </h2>
               <p className="text-gray-200 text-sm line-clamp-2 mb-3">
                 {excerpt}
@@ -100,7 +104,7 @@ export default function BlogCard({
             {category}
           </span>
           <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
-            {title}
+            {capitalizeTitle(title)}
           </h3>
           <p className="text-gray-600 text-sm line-clamp-3 mb-4 flex-1">
             {excerpt}
