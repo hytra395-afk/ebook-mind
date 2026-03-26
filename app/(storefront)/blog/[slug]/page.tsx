@@ -193,7 +193,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                   fill
                   className="object-cover"
                   priority
-                  unoptimized={post.featured_image.includes('unsplash.com')}
+                  unoptimized={true}
                 />
               </div>
             )}
