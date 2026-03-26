@@ -174,7 +174,8 @@ export default function CheckoutPage() {
                           src={convertDriveUrl(item.cover_url)} 
                           alt={item.title} 
                           fill
-                          className="object-cover rounded" 
+                          className="object-cover rounded"
+                          unoptimized={true}
                         />
                       </div>
                     )}

@@ -196,7 +196,7 @@ export default function PaymentProcessingPage() {
                   width={300}
                   height={300}
                   className="rounded-xl"
-                  unoptimized
+                  unoptimized={true}
                 />
               </div>
             ) : (
