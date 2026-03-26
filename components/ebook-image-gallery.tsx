@@ -54,7 +54,6 @@ export default function EbookImageGallery({
           className="object-cover"
           priority={activeIndex === 0}
           sizes="(max-width: 768px) 100vw, 400px"
-          unoptimized={true}
         />
         
         {/* Featured Badge */}

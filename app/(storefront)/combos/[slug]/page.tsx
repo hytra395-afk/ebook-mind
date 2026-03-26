@@ -60,7 +60,6 @@ export default async function ComboDetailPage({ params }: { params: Promise<{ sl
                 alt={item.ebooks?.title || ''}
                 fill
                 className="object-cover"
-                unoptimized={true}
               />
             </div>
             <div>
