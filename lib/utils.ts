@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 /**
  * Convert Google Drive share URL to direct image URL
  * Input:  https://drive.google.com/file/d/FILE_ID/view?usp=sharing
- * Output: https://drive.google.com/uc?export=view&id=FILE_ID
+ * Output: https://lh3.googleusercontent.com/d/FILE_ID (CORS-friendly)
  */
 export function convertDriveUrl(url: string): string {
   if (!url) return url
@@ -16,14 +16,15 @@ export function convertDriveUrl(url: string): string {
   // Handle: https://drive.google.com/file/d/FILE_ID/view?...
   const fileMatch = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/)
   if (fileMatch) {
-    return `https://drive.google.com/uc?export=view&id=${fileMatch[1]}`
+    return `https://lh3.googleusercontent.com/d/${fileMatch[1]}`
   }
 
   // Handle: https://drive.google.com/open?id=FILE_ID
   const openMatch = url.match(/drive\.google\.com\/open\?id=([a-zA-Z0-9_-]+)/)
   if (openMatch) {
-    return `https://drive.google.com/uc?export=view&id=${openMatch[1]}`
+    return `https://lh3.googleusercontent.com/d/${openMatch[1]}`
   }
 
+  // If already converted or other format, return as is
   return url
 }
