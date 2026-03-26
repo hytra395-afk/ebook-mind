@@ -1,10 +1,23 @@
 'use client'
 
+import { marked } from 'marked'
+import { useMemo } from 'react'
+
 interface BlogContentProps {
   content: string
 }
 
 export default function BlogContent({ content }: BlogContentProps) {
+  const htmlContent = useMemo(() => {
+    // Configure marked options
+    marked.setOptions({
+      breaks: true,
+      gfm: true,
+    })
+    
+    return marked(content)
+  }, [content])
+
   return (
     <div className="prose prose-lg prose-headings:font-bold prose-p:text-gray-700 prose-a:text-purple-600 prose-strong:text-gray-900 max-w-none w-full">
       <style jsx global>{`
@@ -120,7 +133,7 @@ export default function BlogContent({ content }: BlogContentProps) {
           background: #f9fafb;
         }
       `}</style>
-      <div dangerouslySetInnerHTML={{ __html: content }} />
+      <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
     </div>
   )
 }
