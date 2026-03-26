@@ -9,9 +9,11 @@ export function cn(...inputs: ClassValue[]) {
  * Convert Google Drive share URL to direct image URL
  * Input:  https://drive.google.com/file/d/FILE_ID/view?usp=sharing
  * Output: https://drive.google.com/thumbnail?id=FILE_ID&sz=w1000 (Works with public files)
+ * 
+ * Note: Google Drive files MUST be set to "Anyone with the link can view" for this to work
  */
 export function convertDriveUrl(url: string): string {
-  if (!url) return url
+  if (!url) return 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400&h=600&fit=crop'
 
   // Handle: https://drive.google.com/file/d/FILE_ID/view?...
   const fileMatch = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/)
