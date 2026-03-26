@@ -41,6 +41,7 @@ export default function EbookCard({
               priority={priority}
               loading={priority ? 'eager' : 'lazy'}
               sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              unoptimized={cover_url?.includes('thumbnail?id=') || false}
             />
             {/* Badges */}
             {bestseller && (
