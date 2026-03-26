@@ -311,6 +311,7 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
                       <Image
                         src={rel.cover_url || 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=300'}
                         alt={rel.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        unoptimized={true}
                       />
                     </div>
                     <div className="p-3">
