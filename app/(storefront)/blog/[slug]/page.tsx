@@ -7,6 +7,7 @@ import { getSupabase } from '@/lib/db'
 import BlogContent from '@/components/blog/blog-content'
 import TableOfContents from '@/components/blog/table-of-contents'
 import RelatedPosts from '@/components/blog/related-posts'
+import { convertBlogImageUrl } from '@/lib/utils'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -188,7 +189,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             {post.featured_image && (
               <div className="relative h-96 rounded-2xl overflow-hidden mb-12">
                 <Image
-                  src={post.featured_image}
+                  src={convertBlogImageUrl(post.featured_image)}
                   alt={post.title}
                   fill
                   className="object-cover"

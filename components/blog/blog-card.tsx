@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar, Clock } from 'lucide-react'
+import { convertBlogImageUrl } from '@/lib/utils'
 
 interface BlogCardProps {
   slug: string
@@ -61,7 +62,7 @@ export default function BlogCard({
         <div className="bg-white rounded-2xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
           <div className="relative h-80 overflow-hidden">
             <Image
-              src={featured_image}
+              src={convertBlogImageUrl(featured_image)}
               alt={title}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -101,7 +102,7 @@ export default function BlogCard({
       <div className="bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
         <div className="relative h-48 overflow-hidden">
           <Image
-            src={featured_image}
+            src={convertBlogImageUrl(featured_image)}
             alt={title}
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-300"
