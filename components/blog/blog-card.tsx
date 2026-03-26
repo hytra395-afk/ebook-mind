@@ -66,6 +66,7 @@ export default function BlogCard({
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              unoptimized={featured_image.includes('unsplash.com')}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-6">
@@ -105,6 +106,7 @@ export default function BlogCard({
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-300"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            unoptimized={featured_image.includes('unsplash.com')}
           />
         </div>
         <div className="p-5 flex-1 flex flex-col">
