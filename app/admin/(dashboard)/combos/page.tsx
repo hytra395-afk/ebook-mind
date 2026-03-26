@@ -47,7 +47,7 @@ export default async function AdminCombosPage() {
                   <div className="flex items-center gap-3">
                     {combo.cover_url && (
                       <div className="relative w-10 h-14 rounded overflow-hidden bg-gray-100 flex-shrink-0">
-                        <Image src={combo.cover_url} alt={combo.title} fill className="object-cover" unoptimized={true} />
+                        <Image src={combo.cover_url} alt={combo.title} fill className="object-cover" />
                       </div>
                     )}
                     <div>

@@ -121,7 +121,7 @@ export default function CartPage() {
                     {/* Product Image */}
                     <div className="relative w-24 h-32 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100 shadow-sm">
                       {item.cover_url ? (
-                        <Image src={item.cover_url} alt={item.title} fill className="object-cover" unoptimized={true} />
+                        <Image src={item.cover_url} alt={item.title} fill className="object-cover" />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs font-medium">
                           {item.type === 'combo' ? 'COMBO' : 'EBOOK'}

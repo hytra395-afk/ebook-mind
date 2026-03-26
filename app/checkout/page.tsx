@@ -175,7 +175,6 @@ export default function CheckoutPage() {
                           alt={item.title} 
                           fill
                           className="object-cover rounded"
-                          unoptimized={true}
                         />
                       </div>
                     )}

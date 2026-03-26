@@ -224,7 +224,6 @@ export default function ImageLightbox({
                   priority
                   quality={95}
                   draggable={false}
-                  unoptimized={true}
                 />
               </div>
             </div>
