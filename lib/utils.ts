@@ -6,30 +6,20 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 /**
- * Convert Google Drive share URL to image URL (for ebook covers)
+ * Convert Google Drive share URL to thumbnail API (for ebook covers)
  * Input:  https://drive.google.com/file/d/FILE_ID/view?usp=sharing
- * Output: https://drive.google.com/thumbnail?id=FILE_ID&sz=w1000 (NEW - no Vercel quota)
- *     OR: https://drive.google.com/uc?export=view&id=FILE_ID (OLD - already converted, keep as is)
- * 
- * Strategy:
- * - If URL is already converted to uc?export=view → Keep it (old ebooks)
- * - If URL is raw Drive link → Convert to thumbnail API (new ebooks, no quota)
+ * Output: https://drive.google.com/thumbnail?id=FILE_ID&sz=w1000
+ * Note: Works with unoptimized=true, doesn't consume Vercel quota
  */
 export function convertDriveUrl(url: string): string {
   if (!url) return url
 
-  // If already converted to uc?export=view, keep it (old ebooks)
-  if (url.includes('uc?export=view') || url.includes('uc?id=')) {
-    return url
-  }
-
-  // If already converted to thumbnail API, keep it (new ebooks)
+  // If already converted to thumbnail API, keep it
   if (url.includes('thumbnail?id=')) {
     return url
   }
 
   // Handle: https://drive.google.com/file/d/FILE_ID/view?...
-  // Convert to thumbnail API (new ebooks - no Vercel quota)
   const fileMatch = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/)
   if (fileMatch) {
     return `https://drive.google.com/thumbnail?id=${fileMatch[1]}&sz=w1000`
@@ -39,6 +29,12 @@ export function convertDriveUrl(url: string): string {
   const openMatch = url.match(/drive\.google\.com\/open\?id=([a-zA-Z0-9_-]+)/)
   if (openMatch) {
     return `https://drive.google.com/thumbnail?id=${openMatch[1]}&sz=w1000`
+  }
+
+  // Handle old uc?export=view format (convert to thumbnail API)
+  const ucMatch = url.match(/uc\?(?:export=view&)?id=([a-zA-Z0-9_-]+)/)
+  if (ucMatch) {
+    return `https://drive.google.com/thumbnail?id=${ucMatch[1]}&sz=w1000`
   }
 
   return url

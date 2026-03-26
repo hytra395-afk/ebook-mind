@@ -1,26 +1,19 @@
-# Workflow: Thêm Ebook Mới Không Tốn Vercel Image Optimization Quota
+# Workflow: Thêm Ebook - Không Tốn Vercel Image Optimization Quota
 
-## 🎯 Mục Đích
-Hướng dẫn thêm ebook mới sử dụng Google Drive thumbnail API để **KHÔNG tốn Vercel Image Optimization quota**.
+## 🎯 Giải Pháp Đơn Giản
 
-Ebook cũ vẫn hoạt động bình thường với cấu hình hiện tại.
+**TẤT CẢ ebook (cũ và mới) đều dùng Google Drive thumbnail API → Không tốn Vercel quota**
 
 ---
 
-## 📝 Bước 1: Upload Ảnh Lên Google Drive
+## 📝 Cách Thêm Ebook
 
+### **Bước 1: Upload Ảnh Lên Google Drive**
 1. Upload ảnh cover ebook lên Google Drive
-2. Right-click → Share → "Anyone with the link can view"
-3. Copy link: `https://drive.google.com/file/d/FILE_ID/view?usp=sharing`
+2. Right-click → Share → **"Anyone with the link can view"**
+3. Copy link gốc: `https://drive.google.com/file/d/FILE_ID/view?usp=sharing`
 
-**Lưu ý:** Giữ nguyên link này, KHÔNG convert sang format khác.
-
----
-
-## 📝 Bước 2: Insert Vào Database
-
-Khi insert ebook mới vào Supabase, dùng **link Google Drive gốc**:
-
+### **Bước 2: Insert Vào Database**
 ```sql
 INSERT INTO ebooks (
   title,
@@ -28,22 +21,19 @@ INSERT INTO ebooks (
   cover_url,
   ...
 ) VALUES (
-  'Tên Ebook Mới',
-  'slug-ebook-moi',
-  'https://drive.google.com/file/d/FILE_ID/view?usp=sharing',  -- Link gốc
+  'Tên Ebook',
+  'slug-ebook',
+  'https://drive.google.com/file/d/FILE_ID/view?usp=sharing',
   ...
 );
 ```
 
-**QUAN TRỌNG:** 
-- ✅ Dùng link gốc: `https://drive.google.com/file/d/FILE_ID/view?usp=sharing`
-- ❌ KHÔNG convert sang: `https://drive.google.com/uc?export=view&id=FILE_ID`
+**Chỉ cần copy link gốc từ Google Drive, hệ thống tự động xử lý.**
 
 ---
 
 ## 🔧 Cách Hoạt Động
 
-### **Ebook Mới (Link Gốc):**
 ```
 Database: https://drive.google.com/file/d/FILE_ID/view?usp=sharing
     ↓
@@ -51,64 +41,28 @@ convertDriveUrl() tự động convert sang:
     ↓
 https://drive.google.com/thumbnail?id=FILE_ID&sz=w1000
     ↓
-unoptimized={true} (tự động detect)
+unoptimized={true} (luôn bật)
     ↓
 ✅ Không tốn Vercel Image Optimization quota
-```
-
-### **Ebook Cũ (Link Đã Convert):**
-```
-Database: https://drive.google.com/uc?export=view&id=FILE_ID
-    ↓
-convertDriveUrl() giữ nguyên
-    ↓
-https://drive.google.com/uc?export=view&id=FILE_ID
-    ↓
-unoptimized={false} (Vercel proxy)
-    ↓
-❌ Tốn Vercel quota (nhưng vẫn hoạt động bình thường)
 ```
 
 ---
 
 ## ✅ Kết Quả
 
-**Ebook mới:**
-- ✅ Hiển thị bình thường
-- ✅ Không tốn Vercel Image Optimization quota
-- ✅ Load trực tiếp từ Google Drive CDN
-
-**Ebook cũ:**
-- ✅ Vẫn hoạt động bình thường
-- ✅ Không cần thay đổi gì
-- ❌ Vẫn tốn quota (nhưng đã tối ưu hóa)
-
----
-
-## 📊 Ví Dụ Thực Tế
-
-### **Ebook Mới - Không Tốn Quota:**
-```sql
-INSERT INTO ebooks (title, cover_url) VALUES (
-  'Ebook Mới 2026',
-  'https://drive.google.com/file/d/1ABC123xyz/view?usp=sharing'
-);
-```
-
-### **Ebook Cũ - Vẫn Hoạt Động:**
-```sql
--- Không cần thay đổi gì
--- Database vẫn giữ: https://drive.google.com/uc?export=view&id=OLD_FILE_ID
-```
+- ✅ Tất cả ebook hiển thị bình thường
+- ✅ **0 Vercel Image Optimization quota**
+- ✅ Load nhanh từ Google Drive CDN
+- ✅ Không phân biệt ebook cũ hay mới
 
 ---
 
 ## 🎯 Tóm Tắt
 
-1. **Upload ảnh lên Google Drive** → Set quyền "Anyone with the link"
-2. **Copy link gốc** (format: `/file/d/FILE_ID/view`)
-3. **Insert vào database** với link gốc
-4. **Hệ thống tự động** convert sang thumbnail API
-5. **Không tốn Vercel quota** ✅
+1. Upload ảnh lên Google Drive
+2. Set quyền "Anyone with the link can view"
+3. Copy link gốc
+4. Paste vào database
+5. **Xong** ✅
 
-**Ebook cũ không cần làm gì, vẫn hoạt động bình thường.**
+**Đơn giản, không lằng nhằng.**

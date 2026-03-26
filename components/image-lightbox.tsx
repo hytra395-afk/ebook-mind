@@ -224,7 +224,7 @@ export default function ImageLightbox({
                   priority
                   quality={95}
                   draggable={false}
-                  unoptimized={images[0]?.includes('thumbnail?id=') || false}
+                  unoptimized={true}
                 />
               </div>
             </div>
