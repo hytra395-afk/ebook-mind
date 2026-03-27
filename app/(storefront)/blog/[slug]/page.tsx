@@ -67,14 +67,13 @@ export default async function BlogPostPage({ params }: PageProps) {
     notFound()
   }
 
-  // Get related posts from same category
+  // Get all published blog posts except current one
   const { data: relatedPosts } = await supabase
     .from('blog_posts')
     .select('*')
-    .eq('category', post.category)
     .eq('status', 'published')
     .neq('slug', slug)
-    .limit(3)
+    .order('published_at', { ascending: false })
 
   // Extract headings for TOC
   const headingRegex = /<h([23])[^>]*id="([^"]*)"[^>]*>(.*?)<\/h\1>/g
