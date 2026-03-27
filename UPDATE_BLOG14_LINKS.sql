@@ -1,25 +1,8 @@
--- Insert Blog Post 14: Personal Brand Là Gì Và Tại Sao Đây Là Tài Sản Quan Trọng Nhất Bạn Có Thể Xây Dựng Khi Kinh Doanh Một Mình
--- Chạy trong Supabase SQL Editor
+-- Update Blog Post 14 - Fix ebook links to use proper markdown format with clickable titles
 
-INSERT INTO public.blog_posts (
-  title,
-  slug,
-  excerpt,
-  content,
-  featured_image,
-  category,
-  published_at,
-  read_time,
-  meta_title,
-  meta_description,
-  status,
-  created_at,
-  updated_at
-) VALUES (
-  'Personal Brand Là Gì Và Tại Sao Đây Là Tài Sản Quan Trọng Nhất Bạn Có Thể Xây Dựng Khi Kinh Doanh Một Mình',
-  'personal-brand-la-gi-va-tai-sao-day-la-tai-san-quan-trong-nhat-ban-co-the-xay-dung-khi-kinh-doanh-mot-minh',
-  'Hai người bán cùng một loại bánh, cùng công thức, cùng giá. Người thứ nhất mỗi tháng phải chạy quảng cáo, giảm giá, làm khuyến mãi liên tục mới có đơn. Người thứ hai không cần quảng cáo – khách tự tìm đến, đặt hàng lại mỗi tuần, và còn giới thiệu người quen. Sự khác biệt duy nhất: người thứ hai có personal brand.',
-  '# Personal Brand Là Gì Và Tại Sao Đây Là Tài Sản Quan Trọng Nhất Bạn Có Thể Xây Dựng Khi Kinh Doanh Một Mình
+UPDATE public.blog_posts 
+SET content = 
+'# Personal Brand Là Gì Và Tại Sao Đây Là Tài Sản Quan Trọng Nhất Bạn Có Thể Xây Dựng Khi Kinh Doanh Một Mình
 
 Hai người bán cùng một loại bánh, cùng công thức, cùng giá. Người thứ nhất mỗi tháng phải chạy quảng cáo, giảm giá, làm khuyến mãi liên tục mới có đơn. Người thứ hai không cần quảng cáo – khách tự tìm đến, đặt hàng lại mỗi tuần, và còn giới thiệu người quen.
 
@@ -211,13 +194,5 @@ Khi đã có audience từ personal brand, đây là cách chuyển đổi họ 
 ### 📘 [20 Sai Lầm Chí Mạng Khi Khởi Nghiệp 1 Mình – Bản Đồ Thoát Hiểm Cho Solo Business](https://ebookmind.com/ebooks/20-sai-lam-chi-mang-khi-khoi-nghiep-1-minh)
 
 Tránh những bẫy phổ biến nhất khi xây dựng solo business và personal brand, đạt lợi nhuận bền vững sớm hơn 6–12 tháng.',
-  'https://drive.google.com/file/d/1Ekrmo7dKd0TB83Divw6RHGpIJMepU5D5/view?usp=sharing',
-  'Kinh Doanh',
-  NOW(),
-  15,
-  'Personal Brand Là Gì Và Tại Sao Đây Là Tài Sản Quan Trọng Nhất Bạn Có Thể Xây Dựng Khi Kinh Doanh Một Mình',
-  'Hai người bán cùng một loại bánh, cùng công thức, cùng giá. Người thứ nhất mỗi tháng phải chạy quảng cáo, giảm giá, làm khuyến mãi liên tục mới có đơn. Người thứ hai không cần quảng cáo – khách tự tìm đến, đặt hàng lại mỗi tuần, và còn giới thiệu người quen. Sự khác biệt duy nhất: người thứ hai có personal brand.',
-  'published',
-  NOW(),
-  NOW()
-);
+updated_at = NOW()
+WHERE slug = 'personal-brand-la-gi-va-tai-sao-day-la-tai-san-quan-trong-nhat-ban-co-the-xay-dung-khi-kinh-doanh-mot-minh';

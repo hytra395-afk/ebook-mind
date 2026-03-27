@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Plus, Pencil } from 'lucide-react'
 import DeleteButton from '@/components/admin/delete-button'
+import { convertDriveUrl } from '@/lib/utils'
 
 export const revalidate = 0
 
@@ -45,7 +46,7 @@ export default async function AdminEbooksPage() {
                     <div className="flex items-center gap-3">
                       <div className="relative w-10 h-14 rounded overflow-hidden bg-gray-100 flex-shrink-0">
                         {ebook.cover_url && (
-                          <Image src={ebook.cover_url} alt={ebook.title} fill className="object-cover" unoptimized={true} />
+                          <Image src={convertDriveUrl(ebook.cover_url)} alt={ebook.title} fill className="object-cover" unoptimized={true} />
                         )}
                       </div>
                       <div>

@@ -309,7 +309,7 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
                   <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
                     <div className="relative aspect-[3/4] bg-gray-100">
                       <Image
-                        src={rel.cover_url || 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=300'}
+                        src={convertDriveUrl(rel.cover_url) || 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=300'}
                         alt={rel.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300"
                         unoptimized={true}
                       />
