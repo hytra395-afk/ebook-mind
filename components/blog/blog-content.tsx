@@ -36,7 +36,7 @@ export default function BlogContent({ content }: BlogContentProps) {
           line-height: 1.75;
         }
         .prose h2 {
-          font-size: 1.875rem;
+          font-size: 1.5rem;
           font-weight: 700;
           color: #111827;
           margin-top: 2.5rem;
@@ -44,14 +44,14 @@ export default function BlogContent({ content }: BlogContentProps) {
           line-height: 1.3;
         }
         .prose h3 {
-          font-size: 1.5rem;
+          font-size: 1.25rem;
           font-weight: 600;
           color: #1f2937;
           margin-top: 2rem;
           margin-bottom: 1rem;
         }
         .prose h4 {
-          font-size: 1.25rem;
+          font-size: 1.125rem;
           font-weight: 600;
           color: #374151;
           margin-top: 1.5rem;
