@@ -15,7 +15,17 @@ export default function BlogContent({ content }: BlogContentProps) {
       gfm: true,
     })
     
-    return marked(content)
+    let processedContent = marked(content) as string
+    
+    // Wrap ebook links section with special styling
+    if (processedContent.includes('Các ebook liên quan bạn có thể tham khảo:')) {
+      processedContent = processedContent.replace(
+        /<h2>Các ebook liên quan bạn có thể tham khảo:<\/h2>([\s\S]*?)(?=<h2|$)/,
+        '<div class="ebook-links-section"><h2>Các ebook liên quan bạn có thể tham khảo:</h2>$1</div>'
+      )
+    }
+    
+    return processedContent
   }, [content])
 
   return (
@@ -131,6 +141,59 @@ export default function BlogContent({ content }: BlogContentProps) {
         }
         .prose tr:hover {
           background: #f9fafb;
+        }
+        
+        /* Ebook links section styling */
+        .ebook-links-section {
+          background: #f8fafc;
+          border: 1px solid #e2e8f0;
+          border-radius: 0.75rem;
+          padding: 1.5rem;
+          margin: 2rem 0;
+        }
+        
+        .ebook-links-section ul {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+        }
+        
+        .ebook-links-section li {
+          margin-bottom: 1rem;
+          padding: 0.75rem;
+          background: white;
+          border-radius: 0.5rem;
+          border: 1px solid #f1f5f9;
+          transition: all 0.2s;
+        }
+        
+        .ebook-links-section li:last-child {
+          margin-bottom: 0;
+        }
+        
+        .ebook-links-section li:hover {
+          border-color: #8b5cf6;
+          box-shadow: 0 2px 8px rgba(139, 92, 246, 0.1);
+          transform: translateY(-1px);
+        }
+        
+        .ebook-links-section li strong {
+          color: #6366f1;
+          font-weight: 600;
+          font-size: 0.9rem;
+          display: block;
+          margin-bottom: 0.25rem;
+        }
+        
+        .ebook-links-section li a {
+          color: #4f46e5;
+          font-weight: 500;
+          font-size: 0.95rem;
+          line-height: 1.5;
+        }
+        
+        .ebook-links-section li:hover a {
+          color: #6366f1;
         }
       `}</style>
       <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
