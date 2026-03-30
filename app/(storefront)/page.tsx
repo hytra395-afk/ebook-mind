@@ -139,7 +139,7 @@ export default async function HomePage() {
               </h3>
               <p className="text-white/90 leading-relaxed">
                 Với kiến thức ngách thay đổi mindset, bạn có thể thử nghiệm ý tưởng mới, 
-                học kỹ năng mới, có được mindset bền vững mà không lo rủi ro tài chính. Đó là cách thông minh để đầu tư vào bản&nbsp;thân.
+                học kỹ năng mới, có được mindset bền vững mà không lo rủi ro. Đó là cách thông minh để đầu tư vào bản&nbsp;thân.
               </p>
             </div>
           </div>
@@ -195,8 +195,8 @@ export default async function HomePage() {
                   <div className="text-xs sm:text-sm text-gray-600">Ebook</div>
                 </div>
                 <div className="bg-white rounded-xl p-4 text-center">
-                  <div className="text-xl sm:text-2xl font-black text-gray-900 mb-1 break-words">10tr+</div>
-                  <div className="text-xs sm:text-sm text-gray-600">Thu nhập</div>
+                  <div className="text-xl sm:text-2xl font-black text-gray-900 mb-1 break-words">100+</div>
+                  <div className="text-xs sm:text-sm text-gray-600">Tác giả</div>
                 </div>
                 <div className="bg-white rounded-xl p-4 text-center">
                   <div className="text-xl sm:text-2xl font-black text-gray-900 mb-1 break-words">4.9/5</div>
@@ -312,15 +312,9 @@ export default async function HomePage() {
       <section className="bg-gradient-to-br from-purple-50 to-pink-50 py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <div className="text-3xl sm:text-6xl font-black gradient-text-aurora mb-4 break-words leading-tight">
-              2,530,000,000đ+
-            </div>
-            <p className="text-xl font-semibold text-gray-900 mb-2">
-              Tổng thu nhập thêm mà người dùng đã kiếm được nhờ áp dụng kiến thức trong Ebook
-            </p>
-            <p className="text-sm italic text-gray-600 max-w-2xl mx-auto">
-              (Con số này chỉ là phần nhỏ, dựa trên một số khách hàng chủ động chia sẻ lại cho chúng tôi)
-            </p>
+            <h2 className="text-3xl sm:text-5xl font-bold text-gray-900 mb-4">
+              Người dùng <span className="bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">nói gì</span>
+            </h2>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
@@ -679,6 +673,15 @@ export default async function HomePage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ─── Disclaimer ─── */}
+      <section className="bg-gray-50 py-8 border-t border-gray-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          <p className="text-sm text-gray-600 leading-relaxed">
+            <strong>Miễn trừ trách nhiệm:</strong> Kết quả kinh doanh phụ thuộc vào nỗ lực và kỹ năng của mỗi cá nhân. Chúng tôi không cam kết doanh thu hay lợi nhuận cụ thể khi bạn sử dụng các ý tưởng trong ebook này.
+          </p>
         </div>
       </section>
     </div>
