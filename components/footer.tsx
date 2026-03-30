@@ -58,8 +58,8 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-    {/* Fixed Disclaimer Block */}
-    <div className="fixed bottom-0 left-0 right-0 bg-gray-100 border-t border-gray-300 py-3 px-4 z-50">
+    {/* Disclaimer Block */}
+    <div className="bg-gray-100 border-t border-gray-300 py-4 px-4">
       <div className="max-w-7xl mx-auto">
         <p className="text-sm text-gray-600 leading-relaxed">
           <strong>Miễn trừ trách nhiệm:</strong> Kết quả kinh doanh, học tập phụ thuộc vào nỗ lực và kỹ năng của mỗi cá nhân. Chúng tôi KHÔNG cam kết doanh thu hay lợi nhuận cụ thể khi bạn sử dụng các ý tưởng, hướng dẫn trong ebook.
