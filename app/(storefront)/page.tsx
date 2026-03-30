@@ -675,15 +675,6 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* ─── Disclaimer ─── */}
-      <section className="bg-gray-50 py-8 border-t border-gray-200">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <p className="text-sm text-gray-600 leading-relaxed">
-            <strong>Miễn trừ trách nhiệm:</strong> Kết quả kinh doanh phụ thuộc vào nỗ lực và kỹ năng của mỗi cá nhân. Chúng tôi không cam kết doanh thu hay lợi nhuận cụ thể khi bạn sử dụng các ý tưởng trong ebook này.
-          </p>
-        </div>
-      </section>
     </div>
   )
 }
