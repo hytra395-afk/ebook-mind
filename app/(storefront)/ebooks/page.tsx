@@ -108,7 +108,7 @@ export default async function EbooksPage({
           <p className="text-gray-500 text-base sm:text-lg max-w-lg mx-auto">
             {params.category && currentCategory?.description ? currentCategory.description : (
               <>
-                Nội dung được thu thập từ những kinh nghiệm thật,<br />kiến thức thật của hàng trăm người
+                Kiến thức thật, kinh nghiệm thực tế được thu thập từ hàng trăm người
               </>
             )}
           </p>
