@@ -44,7 +44,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-6 pt-6 border-t">
-          <div className="text-center mb-4">
+          <div className="mb-4">
             <p className="text-sm text-gray-600 leading-relaxed">
               <strong>Miễn trừ trách nhiệm:</strong> Kết quả kinh doanh, học tập phụ thuộc vào nỗ lực và kỹ năng của mỗi cá nhân. Chúng tôi KHÔNG cam kết doanh thu hay lợi nhuận cụ thể khi bạn sử dụng các ý tưởng, hướng dẫn trong ebook.
             </p>
