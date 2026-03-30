@@ -29,6 +29,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
   }
 
+  const ogImage = post.featured_image ? convertBlogImageUrl(post.featured_image) : 'https://ebookmind.com/og-image.png'
+  
   return {
     title: post.meta_title || `${post.title} | Blog Ebook Mind`,
     description: post.meta_description || post.excerpt,
@@ -39,13 +41,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: 'article',
       publishedTime: post.published_at,
       authors: ['Ebook Mind'],
-      images: [post.featured_image],
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        }
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: post.meta_title || post.title,
       description: post.meta_description || post.excerpt,
-      images: [post.featured_image],
+      images: [ogImage],
     }
   }
 }

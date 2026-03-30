@@ -22,21 +22,29 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   
   if (!ebook) return {}
   
+  const ogImage = ebook.cover_url ? convertDriveUrl(ebook.cover_url) : 'https://ebookmind.com/og-image.png'
+  
   return {
     title: `${ebook.title} – Ebook Mind`,
     description: ebook.description?.slice(0, 160),
     openGraph: {
       title: ebook.title,
       description: ebook.description?.slice(0, 160),
-      images: ebook.cover_url ? [ebook.cover_url] : [
+      images: [
         {
-          url: 'https://ebookmind.com/og-image.png',
+          url: ogImage,
           width: 1200,
           height: 630,
-          alt: 'Ebook Mind - Kiến thức ngách thay đổi mindset',
+          alt: ebook.title,
         }
       ],
     },
+    twitter: {
+      card: 'summary_large_image',
+      title: ebook.title,
+      description: ebook.description?.slice(0, 160),
+      images: [ogImage],
+    }
   }
 }
 
