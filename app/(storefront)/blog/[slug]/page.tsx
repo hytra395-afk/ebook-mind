@@ -7,7 +7,7 @@ import { getSupabase } from '@/lib/db'
 import BlogContent from '@/components/blog/blog-content'
 import TableOfContents from '@/components/blog/table-of-contents'
 import RelatedPosts from '@/components/blog/related-posts'
-import { convertBlogImageUrl } from '@/lib/utils'
+import { convertBlogImageUrl, convertBlogImageUrlForOG } from '@/lib/utils'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
   }
 
-  const ogImage = post.featured_image ? convertBlogImageUrl(post.featured_image) : 'https://ebookmind.com/og-image.png'
+  const ogImage = post.featured_image ? convertBlogImageUrlForOG(post.featured_image) : 'https://ebookmind.com/og-image.png'
   
   return {
     title: post.meta_title || `${post.title} | Blog Ebook Mind`,

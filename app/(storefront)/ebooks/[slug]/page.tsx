@@ -6,7 +6,7 @@ import { Star, BookOpen, ShieldCheck, Zap, Download, ChevronRight, FileText, Use
 import AddToCartButton from '@/components/add-to-cart-button'
 import EbookTabs from '@/components/ebook-tabs'
 import EbookImageGallery from '@/components/ebook-image-gallery'
-import { convertDriveUrl } from '@/lib/utils'
+import { convertDriveUrl, convertDriveUrlForOG } from '@/lib/utils'
 
 export const revalidate = 300 // ISR: revalidate every 5 minutes
 export const dynamic = 'auto' // Auto rendering for better performance
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   
   if (!ebook) return {}
   
-  const ogImage = ebook.cover_url ? convertDriveUrl(ebook.cover_url) : 'https://ebookmind.com/og-image.png'
+  const ogImage = ebook.cover_url ? convertDriveUrlForOG(ebook.cover_url) : 'https://ebookmind.com/og-image.png'
   
   return {
     title: `${ebook.title} – Ebook Mind`,
