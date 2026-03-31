@@ -94,10 +94,10 @@ export default function RootLayout({
             "description": "Nền tảng ebook chất lượng cao với giá phải chăng. Kinh doanh, Phát triển bản thân, Công nghệ, Sức khỏe.",
             "aggregateRating": {
               "@type": "AggregateRating",
-              "ratingValue": "4.9",
+              "ratingValue": "5.0",
               "bestRating": "5",
               "worstRating": "1",
-              "ratingCount": "247"
+              "ratingCount": "5000"
             },
             "contactPoint": {
               "@type": "ContactPoint",
