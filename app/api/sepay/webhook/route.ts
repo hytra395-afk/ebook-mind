@@ -34,11 +34,19 @@ function verifyApiKey(request: NextRequest): boolean {
   const providedApiKey = apiKeyMatch[1]
   const expectedApiKey = config.sepay.webhookSecret
   
+  console.log('🔑 Webhook API Key Verification:')
+  console.log('Provided key (first 20 chars):', providedApiKey.substring(0, 20) + '...')
+  console.log('Expected key (first 20 chars):', expectedApiKey.substring(0, 20) + '...')
+  console.log('Keys match:', providedApiKey === expectedApiKey)
+  
   if (providedApiKey !== expectedApiKey) {
-    console.error('API key mismatch')
+    console.error('❌ API key mismatch!')
+    console.error('Provided full key:', providedApiKey)
+    console.error('Expected full key:', expectedApiKey)
     return false
   }
   
+  console.log('✅ API key verified successfully')
   return true
 }
 
