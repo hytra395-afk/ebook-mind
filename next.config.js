@@ -25,6 +25,13 @@ const nextConfig = {
     optimizeCss: true,
     optimizePackageImports: ['lucide-react', '@supabase/supabase-js'],
   },
+  // Modularize imports to reduce bundle size
+  modularizeImports: {
+    'lucide-react': {
+      transform: 'lucide-react/dist/esm/icons/{{kebabCase member}}',
+      skipDefaultConversion: true,
+    },
+  },
   // Compiler optimizations
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',

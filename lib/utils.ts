@@ -66,32 +66,20 @@ export function convertBlogImageUrl(url: string): string {
 }
 
 /**
- * Convert Google Drive URL to proxied URL for OG images (to bypass robots.txt)
- * This is specifically for Open Graph images that need to be crawled by Googlebot
+ * Convert Google Drive URL for OG images - use direct thumbnail URL
+ * Note: Google Drive may block Googlebot via robots.txt, but direct links work for social sharing
  */
 export function convertDriveUrlForOG(url: string): string {
   if (!url) return url
-
-  // If it's a Google Drive URL, proxy it through our API
-  if (url.includes('drive.google.com')) {
-    const driveUrl = convertDriveUrl(url)
-    return `https://ebookmind.com/api/image-proxy?url=${encodeURIComponent(driveUrl)}`
-  }
-
-  return url
+  // Use direct Google Drive thumbnail URL (no proxy to save Vercel bandwidth)
+  return convertDriveUrl(url)
 }
 
 /**
- * Convert blog image URL to proxied URL for OG images
+ * Convert blog image URL for OG images - use direct thumbnail URL
  */
 export function convertBlogImageUrlForOG(url: string): string {
   if (!url) return url
-
-  // If it's a Google Drive URL, proxy it through our API
-  if (url.includes('drive.google.com')) {
-    const driveUrl = convertBlogImageUrl(url)
-    return `https://ebookmind.com/api/image-proxy?url=${encodeURIComponent(driveUrl)}`
-  }
-
-  return url
+  // Use direct Google Drive thumbnail URL (no proxy to save Vercel bandwidth)
+  return convertBlogImageUrl(url)
 }
