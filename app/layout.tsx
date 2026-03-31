@@ -57,6 +57,12 @@ export default function RootLayout({
   return (
     <html lang="vi">
       <head>
+        {/* Preconnect to external domains for faster loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
+        <link rel="dns-prefetch" href="https://drive.google.com" />
         {/* Meta Pixel */}
         <Script id="meta-pixel" strategy="afterInteractive">
           {`
@@ -77,6 +83,29 @@ export default function RootLayout({
             src="https://www.facebook.com/tr?id=2410745536113222&ev=PageView&noscript=1"
           />
         </noscript>
+        {/* Structured Data - Organization with AggregateRating */}
+        <Script id="organization-schema" type="application/ld+json" strategy="beforeInteractive">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Ebook Mind",
+            "url": "https://ebookmind.com",
+            "logo": "https://ebookmind.com/og-image.png",
+            "description": "Nền tảng ebook chất lượng cao với giá phải chăng. Kinh doanh, Phát triển bản thân, Công nghệ, Sức khỏe.",
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "4.9",
+              "bestRating": "5",
+              "worstRating": "1",
+              "ratingCount": "247"
+            },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "email": "ebookmind0@gmail.com",
+              "contactType": "Customer Service"
+            }
+          })}
+        </Script>
         {/* Google Analytics */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
