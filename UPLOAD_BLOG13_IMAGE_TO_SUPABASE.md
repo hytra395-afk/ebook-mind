@@ -1,7 +1,7 @@
 # Upload Ảnh Bài #13 Lên Supabase Storage
 
 ## Bước 1: Tạo Bucket (nếu chưa có)
-1. Mở Supabase Dashboard: https://supabase.com/dashboard/project/ckohoqembjurgwxvvzcf
+1. Mở Supabase Dashboard → Chọn project Ebook Mind
 2. Vào "Storage" → "Buckets"
 3. Click "New bucket"
 4. Tên: `blog-images`
@@ -17,13 +17,13 @@
 
 ## Bước 3: Copy URL
 1. Click vào file đã upload
-2. Copy URL: `https://ckohoqembjurgwxvvzcf.supabase.co/storage/v1/object/public/blog-images/blog-13-cash-flow.jpg`
+2. Copy URL từ Supabase Storage
 
 ## Bước 4: Update Database
 Chạy SQL query:
 ```sql
 UPDATE public.blog_posts
-SET featured_image = 'https://ckohoqembjurgwxvvzcf.supabase.co/storage/v1/object/public/blog-images/blog-13-cash-flow.jpg'
+SET featured_image = 'YOUR_SUPABASE_STORAGE_URL/blog-images/blog-13-cash-flow.jpg'
 WHERE slug = 'tai-sao-nhieu-nguoi-kinh-doanh-gioi-van-ngheo-su-that-ve-dong-tien-ma-truong-dai-hoc-khong-day-ban';
 ```
 

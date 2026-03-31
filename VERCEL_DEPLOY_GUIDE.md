@@ -14,15 +14,15 @@ Vào Settings > Environment Variables, thêm:
 
 ```env
 # Supabase
-NEXT_PUBLIC_SUPABASE_URL=https://ckohoqembjurgwxvvzcf.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url_here
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key_here
 
 # Sepay
-SEPAY_API_KEY=40KPESXRD5XUKP6WYLKYOJGMBMJBRQZ4SEXDLUNDTCBZVZFIJL5I1FVAMRZGVKWT
-SEPAY_ACCOUNT_NUMBER=VQRQAGAHK6020
-SEPAY_WEBHOOK_SECRET=your_webhook_secret
-SEPAY_TOKEN=40KPESXRD5XUKP6WYLKYOJGMBMJBRQZ4SEXDLUNDTCBZVZFIJL5I1FVAMRZGVKWT
+SEPAY_API_KEY=your_sepay_api_key_here
+SEPAY_ACCOUNT_NUMBER=your_account_number_here
+SEPAY_WEBHOOK_SECRET=your_webhook_secret_here
+SEPAY_TOKEN=your_sepay_token_here
 SEPAY_API_URL=https://my.sepay.vn/userapi/transactions/create
 
 # App

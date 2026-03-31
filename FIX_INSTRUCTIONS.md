@@ -11,7 +11,7 @@
 #### Các bước thực hiện:
 
 1. Đăng nhập vào Supabase Dashboard: https://supabase.com/dashboard
-2. Chọn project: `ckohoqembjurgwxvvzcf`
+2. Chọn project: Ebook Mind
 3. Vào **SQL Editor** (menu bên trái)
 4. Tạo new query và paste nội dung từ file `migrations/006_fix_author_avatar.sql`
 5. Nhấn **Run** để thực thi

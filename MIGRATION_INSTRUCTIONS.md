@@ -6,7 +6,7 @@
 
 **Chạy trên Supabase Dashboard:**
 
-1. Vào https://supabase.com/dashboard/project/ckohoqembjurgwxvvzcf/sql/new
+1. Vào Supabase Dashboard → SQL Editor → New Query
 2. Copy nội dung file `migrations/005_add_bestseller_field.sql`
 3. Paste vào SQL Editor
 4. Click "Run" để thực thi
@@ -26,7 +26,7 @@
 
 **Chạy trên Supabase Dashboard:**
 
-1. Vào https://supabase.com/dashboard/project/ckohoqembjurgwxvvzcf/sql/new
+1. Vào Supabase Dashboard → SQL Editor → New Query
 2. Copy nội dung file `migrations/006_upgrade_combos_table.sql`
 3. Paste vào SQL Editor
 4. Click "Run" để thực thi

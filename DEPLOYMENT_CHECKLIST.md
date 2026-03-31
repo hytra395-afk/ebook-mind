@@ -4,7 +4,7 @@
 
 ### Truy cập Supabase Dashboard
 1. Đăng nhập: https://supabase.com/dashboard
-2. Project: `ckohoqembjurgwxvvzcf` (Ebook Mind)
+2. Chọn project: Ebook Mind
 3. Menu: **SQL Editor** → **New Query**
 
 ### Chạy Migration SQL

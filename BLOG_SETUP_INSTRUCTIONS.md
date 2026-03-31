@@ -22,7 +22,7 @@
 
 ### Bước 1: Chạy SQL Script (1 phút)
 
-1. Mở Supabase Dashboard: https://supabase.com/dashboard/project/ckohoqembjurgwxvvzcf/sql
+1. Mở Supabase Dashboard → SQL Editor
 2. Copy toàn bộ nội dung file `SETUP_BLOG.sql`
 3. Paste vào SQL Editor
 4. Click "Run" hoặc nhấn Cmd+Enter
@@ -93,7 +93,7 @@ Dev server đã chạy tại: **http://localhost:3000**
 
 ### Lỗi: Blog page trống
 **Giải pháp:** 
-1. Check Supabase có data: https://supabase.com/dashboard/project/ckohoqembjurgwxvvzcf/editor
+1. Check Supabase có data: Dashboard → Table Editor
 2. Chọn table `blog_posts`, xem có 20 rows không
 3. Nếu không có, chạy lại SQL script
 
@@ -118,7 +118,7 @@ git commit -m "feat: add blog system with 20 SEO posts"
 git push origin main
 
 # 3. Chạy SQL script trên Production Supabase
-# Truy cập: https://supabase.com/dashboard/project/ckohoqembjurgwxvvzcf/sql
+# Truy cập: Supabase Dashboard → SQL Editor
 # Chạy SETUP_BLOG.sql
 
 # 4. Vercel tự động deploy

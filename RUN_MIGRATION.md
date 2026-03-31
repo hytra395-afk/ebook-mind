@@ -10,7 +10,7 @@ Chạy migration SQL sau trên Supabase production database:
 
 ### Bước 1: Truy cập Supabase Dashboard
 1. Vào https://supabase.com/dashboard
-2. Chọn project: `ckohoqembjurgwxvvzcf`
+2. Chọn project của bạn (Ebook Mind)
 3. Vào **SQL Editor**
 
 ### Bước 2: Chạy migration

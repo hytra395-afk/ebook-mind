@@ -12,7 +12,7 @@
 
 ### Bước 1: Mở Supabase SQL Editor
 
-Truy cập: https://supabase.com/dashboard/project/ckohoqembjurgwxvvzcf/sql
+Truy cập: Supabase Dashboard → SQL Editor
 
 ### Bước 2: Chạy PART 1 (Bài 1-10)
 
