@@ -28,7 +28,7 @@ export default function Footer() {
               <Link href="/ebooks?category=solo-business" className="block text-sm text-gray-500 hover:text-purple-600">Solo Business</Link>
               <Link href="/ebooks?category=kinh-doanh-ngach" className="block text-sm text-gray-500 hover:text-purple-600">Kinh Doanh Ngách</Link>
               <Link href="/ebooks?category=phat-trien-mindset" className="block text-sm text-gray-500 hover:text-purple-600">Phát Triển Mindset</Link>
-              <Link href="/ebooks?category=cong-nghe" className="block text-sm text-gray-500 hover:text-purple-600">Công Nghệ</Link>
+              <Link href="/ebooks?category=cong-nghe" className="block text-sm text-gray-500 hover:text-purple-600">Chuyên môn</Link>
               <Link href="/ebooks?category=suc-khoe" className="block text-sm text-gray-500 hover:text-purple-600">Sức Khỏe</Link>
             </div>
           </div>

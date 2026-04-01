@@ -3,6 +3,7 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useCallback } from 'react'
 import { Search, SlidersHorizontal } from 'lucide-react'
+import SubcategoryFilter from './subcategory-filter'
 
 interface Category {
   id: string
@@ -15,17 +16,28 @@ interface Level {
   name: string
 }
 
+interface Subcategory {
+  id: string
+  name: string
+  slug: string
+  icon?: string
+}
+
 interface EbooksFilterProps {
   categories: Category[]
   levels: Level[]
+  subcategories?: Subcategory[]
   activeCategory?: string
+  activeSubcategory?: string
   activeSort: string
   search: string
 }
 
 export default function EbooksFilter({
   categories,
+  subcategories,
   activeCategory,
+  activeSubcategory,
   activeSort,
   search,
 }: EbooksFilterProps) {
@@ -120,6 +132,14 @@ export default function EbooksFilter({
             </button>
           ))}
         </div>
+      )}
+
+      {/* Subcategory filter - only show when category is selected and has subcategories */}
+      {activeCategory && subcategories && subcategories.length > 0 && (
+        <SubcategoryFilter
+          subcategories={subcategories}
+          activeSubcategory={activeSubcategory}
+        />
       )}
     </div>
   )

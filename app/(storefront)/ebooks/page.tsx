@@ -36,7 +36,7 @@ const ITEMS_PER_PAGE = 9
 export default async function EbooksPage({
   searchParams,
 }: {
-  searchParams: Promise<{ category?: string; level?: string; search?: string; sort?: string; page?: string }>
+  searchParams: Promise<{ category?: string; subcategory?: string; level?: string; search?: string; sort?: string; page?: string }>
 }) {
   const params = await searchParams
   const supabase = getSupabase()
@@ -46,11 +46,14 @@ export default async function EbooksPage({
   // Optimize query - only select needed fields
   let query = supabase
     .from('ebooks')
-    .select('id, slug, title, description, price, cover_url, rating_avg, rating_count, sales_count, pages, featured, bestseller, category_id, categories!inner(name, slug), levels(name)', { count: 'exact' })
+    .select('id, slug, title, description, price, cover_url, rating_avg, rating_count, sales_count, pages, featured, bestseller, category_id, subcategory_id, categories!inner(name, slug), levels(name), subcategories(name, slug)', { count: 'exact' })
     .eq('active', true)
 
   if (params.category) {
     query = query.eq('categories.slug', params.category)
+  }
+  if (params.subcategory) {
+    query = query.eq('subcategories.slug', params.subcategory)
   }
   if (params.search) {
     query = query.ilike('title', `%${params.search}%`)
@@ -70,9 +73,18 @@ export default async function EbooksPage({
   const totalPages = Math.ceil((totalCount || 0) / ITEMS_PER_PAGE)
 
   // Parallel queries for better performance
-  const [categoriesResult, levelsResult] = await Promise.all([
+  const [categoriesResult, levelsResult, subcategoriesResult] = await Promise.all([
     supabase.from('categories').select('id, name, slug, description'),
-    supabase.from('levels').select('id, name')
+    supabase.from('levels').select('id, name'),
+    // Fetch subcategories only if a category is selected
+    params.category 
+      ? supabase
+          .from('subcategories')
+          .select('id, name, slug, icon, categories!inner(slug)')
+          .eq('categories.slug', params.category)
+          .eq('active', true)
+          .order('sort_order')
+      : Promise.resolve({ data: null, error: null })
   ])
   
   // Custom order for categories
@@ -91,6 +103,7 @@ export default async function EbooksPage({
   })
   
   const levels = levelsResult.data
+  const subcategories = subcategoriesResult.data
   const currentCategory = categories?.find(c => c.slug === params.category)
 
   return (
@@ -186,7 +199,9 @@ export default async function EbooksPage({
           <EbooksFilter
             categories={categories ?? []}
             levels={levels ?? []}
+            subcategories={subcategories ?? []}
             activeCategory={params.category}
+            activeSubcategory={params.subcategory}
             activeSort={params.sort || 'newest'}
             search={params.search || ''}
           />
