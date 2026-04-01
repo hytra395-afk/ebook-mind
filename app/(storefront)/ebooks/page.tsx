@@ -44,17 +44,18 @@ export default async function EbooksPage({
   const offset = (page - 1) * ITEMS_PER_PAGE
 
   // Optimize query - only select needed fields
+  // Use inner join for subcategories when filtering by subcategory
+  const subcategoriesJoin = params.subcategory ? 'subcategories!inner(name, slug)' : 'subcategories(name, slug)'
+  
   let query = supabase
     .from('ebooks')
-    .select('id, slug, title, description, price, cover_url, rating_avg, rating_count, sales_count, pages, featured, bestseller, category_id, subcategory_id, categories!inner(name, slug), levels(name), subcategories(name, slug)', { count: 'exact' })
+    .select(`id, slug, title, description, price, cover_url, rating_avg, rating_count, sales_count, pages, featured, bestseller, category_id, subcategory_id, categories!inner(name, slug), levels(name), ${subcategoriesJoin}`, { count: 'exact' })
     .eq('active', true)
 
   if (params.category) {
     query = query.eq('categories.slug', params.category)
   }
   if (params.subcategory) {
-    // Use inner join for subcategories when filtering
-    query = query.not('subcategory_id', 'is', null)
     query = query.eq('subcategories.slug', params.subcategory)
   }
   if (params.search) {
