@@ -299,7 +299,7 @@ export default function EditEbookPage() {
                   <option value="">-- Không chọn --</option>
                   {subcategories.map((s) => (
                     <option key={s.id} value={s.id}>
-                      {s.icon && `${s.icon} `}{s.name}
+                      {s.name}
                     </option>
                   ))}
                 </select>
