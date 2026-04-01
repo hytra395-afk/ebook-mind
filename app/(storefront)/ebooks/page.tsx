@@ -53,6 +53,8 @@ export default async function EbooksPage({
     query = query.eq('categories.slug', params.category)
   }
   if (params.subcategory) {
+    // Use inner join for subcategories when filtering
+    query = query.not('subcategory_id', 'is', null)
     query = query.eq('subcategories.slug', params.subcategory)
   }
   if (params.search) {

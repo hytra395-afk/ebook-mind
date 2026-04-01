@@ -66,13 +66,12 @@ export default function SubcategoryFilter({
             key={subcat.id}
             type="button"
             onClick={() => updateParam(subcat.slug)}
-            className={`px-3 py-1.5 rounded-lg text-sm font-medium transition cursor-pointer border inline-flex items-center gap-1.5 ${
+            className={`px-3 py-1.5 rounded-lg text-sm font-medium transition cursor-pointer border ${
               activeSubcategory === subcat.slug
                 ? 'bg-purple-50 text-purple-700 border-purple-200'
                 : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50'
             }`}
           >
-            {subcat.icon && <span>{subcat.icon}</span>}
             {subcat.name}
           </button>
         ))}
