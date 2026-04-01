@@ -38,12 +38,14 @@ export default function NewEbookPage() {
   const [activeTab, setActiveTab] = useState('basic')
   const [categories, setCategories] = useState<any[]>([])
   const [levels, setLevels] = useState<any[]>([])
+  const [subcategories, setSubcategories] = useState<any[]>([])
   
   const [form, setForm] = useState({
     title: '',
     slug: '',
     description: '',
     category_id: '',
+    subcategory_id: '',
     level_id: '',
     price: '',
     pages: '',
@@ -81,6 +83,24 @@ export default function NewEbookPage() {
       setLevels(lvlRes.data || [])
     })
   }, [])
+
+  // Load subcategories when category changes
+  useEffect(() => {
+    if (form.category_id) {
+      supabase
+        .from('subcategories')
+        .select('*')
+        .eq('category_id', form.category_id)
+        .eq('active', true)
+        .order('sort_order')
+        .then(({ data }) => {
+          setSubcategories(data || [])
+        })
+    } else {
+      setSubcategories([])
+      setForm({ ...form, subcategory_id: '' })
+    }
+  }, [form.category_id])
 
   const handleSubmit = async (status: 'draft' | 'published') => {
     if (!form.title || !form.category_id || !form.level_id || !form.price) {
@@ -234,7 +254,7 @@ export default function NewEbookPage() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">Category *</label>
                 <select
                   value={form.category_id}
-                  onChange={(e) => setForm({ ...form, category_id: e.target.value })}
+                  onChange={(e) => setForm({ ...form, category_id: e.target.value, subcategory_id: '' })}
                   className="w-full border rounded-lg px-3 py-2 text-sm"
                 >
                   <option value="">Chọn category</option>
@@ -253,6 +273,30 @@ export default function NewEbookPage() {
                 </select>
               </div>
             </div>
+
+            {/* Subcategory - only show if category has subcategories */}
+            {subcategories.length > 0 && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Phân loại chi tiết {subcategories.length > 0 && '(Tùy chọn)'}
+                </label>
+                <select
+                  value={form.subcategory_id}
+                  onChange={(e) => setForm({ ...form, subcategory_id: e.target.value })}
+                  className="w-full border rounded-lg px-3 py-2 text-sm"
+                >
+                  <option value="">-- Không chọn --</option>
+                  {subcategories.map((s) => (
+                    <option key={s.id} value={s.id}>
+                      {s.icon && `${s.icon} `}{s.name}
+                    </option>
+                  ))}
+                </select>
+                <p className="text-xs text-gray-500 mt-1">
+                  Giúp người dùng lọc ebook theo phân loại cụ thể hơn
+                </p>
+              </div>
+            )}
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               <div>

@@ -41,6 +41,7 @@ export default function EditEbookPage() {
   const [activeTab, setActiveTab] = useState('basic')
   const [categories, setCategories] = useState<any[]>([])
   const [levels, setLevels] = useState<any[]>([])
+  const [subcategories, setSubcategories] = useState<any[]>([])
   const [form, setForm] = useState<any>(null)
   const [reviews, setReviews] = useState<any[]>([])
 
@@ -58,6 +59,7 @@ export default function EditEbookPage() {
           const ebook = ebookRes.ebook
           setForm({
             ...ebook,
+            subcategory_id: ebook.subcategory_id || '',
             highlights: ebook.highlights || [],
             preview_images: ebook.preview_images || [],
             keywords: ebook.keywords || [],
@@ -75,6 +77,19 @@ export default function EditEbookPage() {
             status: ebook.status || 'published',
             bestseller: ebook.bestseller || false,
           })
+          
+          // Load subcategories for the current category
+          if (ebook.category_id) {
+            supabase
+              .from('subcategories')
+              .select('*')
+              .eq('category_id', ebook.category_id)
+              .eq('active', true)
+              .order('sort_order')
+              .then(({ data }) => {
+                setSubcategories(data || [])
+              })
+          }
         }
         setCategories(catRes.data || [])
         setLevels(lvlRes.data || [])
@@ -86,6 +101,26 @@ export default function EditEbookPage() {
     }
     load()
   }, [ebookId])
+
+  // Load subcategories when category changes
+  useEffect(() => {
+    if (form?.category_id) {
+      supabase
+        .from('subcategories')
+        .select('*')
+        .eq('category_id', form.category_id)
+        .eq('active', true)
+        .order('sort_order')
+        .then(({ data }) => {
+          setSubcategories(data || [])
+        })
+    } else {
+      setSubcategories([])
+      if (form) {
+        setForm({ ...form, subcategory_id: '' })
+      }
+    }
+  }, [form?.category_id])
 
   const handleSubmit = async (status: 'draft' | 'published') => {
     if (!form.title || !form.category_id || !form.level_id || !form.price) {
@@ -230,7 +265,7 @@ export default function EditEbookPage() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">Category *</label>
                 <select
                   value={form.category_id || ''}
-                  onChange={(e) => setForm({ ...form, category_id: e.target.value })}
+                  onChange={(e) => setForm({ ...form, category_id: e.target.value, subcategory_id: '' })}
                   className="w-full border rounded-lg px-3 py-2 text-sm"
                 >
                   <option value="">Chọn category</option>
@@ -249,6 +284,30 @@ export default function EditEbookPage() {
                 </select>
               </div>
             </div>
+
+            {/* Subcategory - only show if category has subcategories */}
+            {subcategories.length > 0 && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Phân loại chi tiết {subcategories.length > 0 && '(Tùy chọn)'}
+                </label>
+                <select
+                  value={form.subcategory_id || ''}
+                  onChange={(e) => setForm({ ...form, subcategory_id: e.target.value })}
+                  className="w-full border rounded-lg px-3 py-2 text-sm"
+                >
+                  <option value="">-- Không chọn --</option>
+                  {subcategories.map((s) => (
+                    <option key={s.id} value={s.id}>
+                      {s.icon && `${s.icon} `}{s.name}
+                    </option>
+                  ))}
+                </select>
+                <p className="text-xs text-gray-500 mt-1">
+                  Giúp người dùng lọc ebook theo phân loại cụ thể hơn
+                </p>
+              </div>
+            )}
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               <div>

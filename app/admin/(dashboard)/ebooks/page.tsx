@@ -11,7 +11,7 @@ export default async function AdminEbooksPage() {
   const supabase = getSupabaseAdmin()
   const { data: ebooks } = await supabase
     .from('ebooks')
-    .select('*, categories(name), levels(name), authors(name)')
+    .select('*, categories(name), subcategories(name, icon), levels(name), authors(name)')
     .order('created_at', { ascending: false })
 
   return (
@@ -33,6 +33,7 @@ export default async function AdminEbooksPage() {
               <tr className="text-left text-sm text-gray-500 border-b bg-gray-50">
                 <th className="px-6 py-3 font-medium">Ebook</th>
                 <th className="px-6 py-3 font-medium">Category</th>
+                <th className="px-6 py-3 font-medium">Subcategory</th>
                 <th className="px-6 py-3 font-medium">Giá</th>
                 <th className="px-6 py-3 font-medium">Đã bán</th>
                 <th className="px-6 py-3 font-medium">Trạng thái</th>
@@ -56,6 +57,16 @@ export default async function AdminEbooksPage() {
                     </div>
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-600">{ebook.categories?.name || '-'}</td>
+                  <td className="px-6 py-4 text-sm text-gray-500">
+                    {ebook.subcategories ? (
+                      <span className="inline-flex items-center gap-1">
+                        {ebook.subcategories.icon && <span>{ebook.subcategories.icon}</span>}
+                        <span>{ebook.subcategories.name}</span>
+                      </span>
+                    ) : (
+                      <span className="text-gray-400">-</span>
+                    )}
+                  </td>
                   <td className="px-6 py-4 text-sm font-semibold">{new Intl.NumberFormat('vi-VN').format(ebook.price)}đ</td>
                   <td className="px-6 py-4 text-sm text-gray-600">{ebook.sales_count}</td>
                   <td className="px-6 py-4">
@@ -87,7 +98,7 @@ export default async function AdminEbooksPage() {
                 </tr>
               ))}
               {(!ebooks || ebooks.length === 0) && (
-                <tr><td colSpan={6} className="px-6 py-10 text-center text-gray-400">Chưa có ebook nào</td></tr>
+                <tr><td colSpan={7} className="px-6 py-10 text-center text-gray-400">Chưa có ebook nào</td></tr>
               )}
             </tbody>
           </table>
