@@ -38,20 +38,25 @@ export default function FeaturedPostsSection({ posts }: FeaturedPostsSectionProp
     return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase()
   }
 
-  const getGradientBg = (index: number) => {
-    const gradients = [
-      'bg-gradient-to-br from-cyan-400 via-cyan-500 to-teal-600',
-      'bg-gradient-to-br from-emerald-400 via-green-500 to-teal-600'
-    ]
-    return gradients[index % gradients.length]
-  }
-
-  const getAccentColor = (index: number) => {
-    const colors = [
-      'bg-cyan-500 text-white',
-      'bg-emerald-500 text-white'
-    ]
-    return colors[index % colors.length]
+  const getCategoryColor = (cat: string) => {
+    const colors: Record<string, string> = {
+      'Kinh Doanh Vốn Nhỏ': 'bg-gradient-to-r from-indigo-500 to-violet-500',
+      'Solo Business': 'bg-gradient-to-r from-violet-500 to-fuchsia-500',
+      'Kinh Doanh Ngách': 'bg-gradient-to-r from-teal-400 to-cyan-400',
+      'Mindset & Tư Duy': 'bg-gradient-to-r from-orange-400 to-rose-500',
+      'Kỹ Năng': 'bg-gradient-to-r from-blue-500 to-cyan-500',
+      'Ebook & Học Tập': 'bg-gradient-to-r from-purple-500 to-pink-500',
+      'Mindset Kinh Doanh': 'bg-gradient-to-r from-orange-400 to-rose-500',
+      'Kinh Nghiệm Kinh Doanh': 'bg-gradient-to-r from-blue-500 to-indigo-500',
+      'Kinh Doanh Online': 'bg-gradient-to-r from-green-500 to-teal-500',
+      'Câu Chuyện Thành Công': 'bg-gradient-to-r from-purple-500 to-pink-500',
+      'Kinh Doanh': 'bg-gradient-to-r from-indigo-500 to-purple-500',
+      'Phát Triển Bản Thân': 'bg-gradient-to-r from-emerald-500 to-green-500',
+      'Công Nghệ': 'bg-gradient-to-r from-cyan-500 to-blue-500',
+      'Chuyên môn': 'bg-gradient-to-r from-cyan-500 to-blue-500',
+      'Sức Khỏe': 'bg-gradient-to-r from-rose-500 to-pink-500'
+    }
+    return colors[cat] || 'bg-gradient-to-r from-gray-500 to-gray-600'
   }
 
   return (
@@ -66,73 +71,56 @@ export default function FeaturedPostsSection({ posts }: FeaturedPostsSectionProp
         </div>
 
         {/* Featured Posts Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {posts.slice(0, 2).map((post, index) => (
-            <Link key={post.id} href={`/blog/${post.slug}`} className="group block h-full">
-              <div className="h-full rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                {/* Gradient Background with Decorative Elements */}
-                <div className={`relative h-80 ${getGradientBg(index)} overflow-hidden flex items-center justify-center`}>
-                  {/* Decorative circles */}
-                  <div className="absolute top-0 right-0 w-40 h-40 rounded-full bg-white/10 -mr-20 -mt-20"></div>
-                  <div className="absolute bottom-0 left-0 w-32 h-32 rounded-full bg-white/10 -ml-16 -mb-16"></div>
-                  <div className="absolute top-1/2 left-1/3 w-24 h-24 rounded-full bg-white/5"></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {posts.slice(0, 2).map((post) => (
+            <Link key={post.id} href={`/blog/${post.slug}`} className="group block">
+              <div className="bg-white rounded-xl overflow-hidden border border-gray-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                {/* Featured Image */}
+                <div className="relative h-64 overflow-hidden">
+                  <Image
+                    src={convertBlogImageUrl(post.featured_image)}
+                    alt={post.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    unoptimized={true}
+                  />
+                </div>
 
-                  {/* Featured Image - positioned as accent */}
-                  {post.featured_image && (
-                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-48 h-48 opacity-30">
-                      <Image
-                        src={convertBlogImageUrl(post.featured_image)}
-                        alt={post.title}
-                        fill
-                        className="object-cover"
-                        unoptimized={true}
-                      />
-                    </div>
-                  )}
+                {/* Content */}
+                <div className="p-6">
+                  {/* Category Badge */}
+                  <span className={`inline-block px-3 py-1 rounded-full text-white text-xs font-semibold mb-3 ${getCategoryColor(post.category)}`}>
+                    {post.category}
+                  </span>
 
-                  {/* Content */}
-                  <div className="relative z-10 p-8 text-white">
-                    <div className={`inline-block px-4 py-2 rounded-full text-sm font-semibold mb-4 ${getAccentColor(index)}`}>
-                      {post.category}
-                    </div>
-                    <h3 className="text-2xl md:text-3xl font-bold mb-3 leading-tight group-hover:opacity-90 transition-opacity">
-                      {capitalizeTitle(post.title)}
-                    </h3>
-                    <p className="text-white/90 text-base line-clamp-3 mb-4">
-                      {post.excerpt}
-                    </p>
-                    <div className="flex items-center gap-4 text-white/80 text-sm">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
-                        {formatDate(post.published_at)}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-4 h-4" />
-                        {post.read_time} phút đọc
-                      </span>
-                    </div>
-                  </div>
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-purple-600 transition-colors">
+                    {capitalizeTitle(post.title)}
+                  </h3>
 
-                  {/* Arrow icon */}
-                  <div className="absolute bottom-6 right-6 z-10">
-                    <div className="bg-white/20 p-3 rounded-full group-hover:bg-white/30 transition-colors">
-                      <ArrowRight className="w-5 h-5 text-white group-hover:translate-x-1 transition-transform" />
-                    </div>
+                  {/* Excerpt */}
+                  <p className="text-gray-600 text-sm line-clamp-3 mb-4">
+                    {post.excerpt}
+                  </p>
+
+                  {/* Meta Info */}
+                  <div className="flex items-center gap-3 text-gray-500 text-xs pt-3 border-t border-gray-100">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-3.5 h-3.5" />
+                      {formatDate(post.published_at)}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5" />
+                      {post.read_time} phút đọc
+                    </span>
                   </div>
                 </div>
 
-                {/* Bottom Info Bar */}
-                <div className="bg-white px-8 py-4 flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-gray-600 text-sm">
-                    {post.author && (
-                      <>
-                        <span className="font-medium">{post.author}</span>
-                        <span>•</span>
-                      </>
-                    )}
-                    <span>{post.read_time} phút</span>
-                  </div>
-                  <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-purple-600 group-hover:translate-x-1 transition-all" />
+                {/* Bottom Bar */}
+                <div className="px-6 py-3 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
+                  <span className="text-gray-600 text-xs font-medium">{post.read_time} phút</span>
+                  <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-purple-600 group-hover:translate-x-1 transition-all" />
                 </div>
               </div>
             </Link>
