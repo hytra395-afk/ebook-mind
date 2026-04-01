@@ -6,6 +6,7 @@ import { createClient } from '@supabase/supabase-js'
 import BlogHero from '@/components/blog/blog-hero'
 import BlogCard from '@/components/blog/blog-card'
 import CategoryFilter from '@/components/blog/category-filter'
+import FeaturedPostsSection from '@/components/blog/featured-posts-section'
 
 export const dynamic = 'force-dynamic'
 
@@ -23,17 +24,36 @@ interface BlogPost {
   featured_image: string
   read_time: number
   published_at: string
+  featured?: boolean
+  author?: string
 }
 
 function BlogPageContent() {
   const searchParams = useSearchParams()
   const category = searchParams.get('category')
   const [posts, setPosts] = useState<BlogPost[]>([])
+  const [featuredPosts, setFeaturedPosts] = useState<BlogPost[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function fetchPosts() {
       try {
+        // Fetch featured posts (only on initial load, not when category changes)
+        if (!category || category === 'all') {
+          const { data: featured, error: featuredError } = await supabase
+            .from('blog_posts')
+            .select('*')
+            .eq('status', 'published')
+            .eq('featured', true)
+            .order('published_at', { ascending: false })
+            .limit(2)
+
+          if (!featuredError) {
+            setFeaturedPosts(featured || [])
+          }
+        }
+
+        // Fetch regular posts
         let query = supabase
           .from('blog_posts')
           .select('*')
@@ -90,6 +110,11 @@ function BlogPageContent() {
       <div className="container mx-auto px-4 py-8">
         <CategoryFilter />
       </div>
+
+      {/* Featured Posts Section - only show on homepage */}
+      {(!category || category === 'all') && featuredPosts.length > 0 && (
+        <FeaturedPostsSection posts={featuredPosts} />
+      )}
 
       <div className="container mx-auto px-4 py-12">
         {posts.length > 0 && (
