@@ -28,8 +28,8 @@ export const metadata: Metadata = {
   },
 }
 
-export const revalidate = 300 // ISR: revalidate every 5 minutes
-export const dynamic = 'auto' // Auto rendering for better performance
+export const revalidate = 60 // ISR: revalidate every 1 minute
+export const dynamic = 'force-dynamic' // Force dynamic for filters to work properly
 
 const ITEMS_PER_PAGE = 9
 
@@ -43,13 +43,12 @@ export default async function EbooksPage({
   const page = Math.max(1, parseInt(params.page || '1', 10))
   const offset = (page - 1) * ITEMS_PER_PAGE
 
-  // Optimize query - only select needed fields
-  // Use inner join for subcategories when filtering by subcategory
+  // Optimize query - only select needed fields, use minimal joins
   const subcategoriesJoin = params.subcategory ? 'subcategories!inner(name, slug)' : 'subcategories(name, slug)'
   
   let query = supabase
     .from('ebooks')
-    .select(`id, slug, title, description, price, cover_url, rating_avg, rating_count, sales_count, pages, featured, bestseller, category_id, subcategory_id, categories!inner(name, slug), levels(name), ${subcategoriesJoin}`, { count: 'exact' })
+    .select(`id, slug, title, description, price, cover_url, rating_avg, rating_count, sales_count, pages, featured, bestseller, categories!inner(name, slug), levels(name), ${subcategoriesJoin}`, { count: 'exact' })
     .eq('active', true)
 
   if (params.category) {
