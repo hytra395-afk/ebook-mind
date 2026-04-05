@@ -13,7 +13,14 @@ export default function ComboHero() {
         
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
           Combo Ưu Đãi
-          <span className="block mt-2 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent whitespace-normal">
+          <span className="block mt-2" style={{
+            background: 'linear-gradient(to right, #9333ea, #ec4899)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            fontSize: 'inherit',
+            fontWeight: 'inherit'
+          }}>
             Tiết Kiệm Đến 40%
           </span>
         </h1>
