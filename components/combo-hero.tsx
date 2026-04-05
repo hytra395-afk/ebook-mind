@@ -13,27 +13,9 @@ export default function ComboHero() {
         
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
           Combo Ưu Đãi
-          <div className="block mt-2">
-            <svg viewBox="0 0 800 120" className="w-full h-auto" style={{ maxWidth: '100%' }}>
-              <defs>
-                <linearGradient id="gradientText" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#9333ea" />
-                  <stop offset="100%" stopColor="#ec4899" />
-                </linearGradient>
-              </defs>
-              <text
-                x="50%"
-                y="80"
-                textAnchor="middle"
-                fill="url(#gradientText)"
-                fontSize="90"
-                fontWeight="700"
-                fontFamily="inherit"
-              >
-                Tiết Kiệm Đến 20%
-              </text>
-            </svg>
-          </div>
+          <span className="block mt-2 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            Tiết Kiệm Đến 20%
+          </span>
         </h1>
         
         <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8">
