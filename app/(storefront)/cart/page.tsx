@@ -37,13 +37,21 @@ export default function CartPage() {
             const response = await fetch(`/api/ebooks/validate?id=${item.id}`)
             const data = await response.json()
             if (data.valid) {
-              validatedCart.push(item)
+              validatedCart.push({
+                ...item,
+                quantity: item.quantity || 1,
+                price: typeof item.price === 'number' ? item.price : 0
+              })
             }
           } else if (item.type === 'combo') {
             const response = await fetch(`/api/combos/validate?id=${item.id}`)
             const data = await response.json()
             if (data.valid) {
-              validatedCart.push(item)
+              validatedCart.push({
+                ...item,
+                quantity: item.quantity || 1,
+                price: typeof item.price === 'number' ? item.price : 0
+              })
             }
           }
         } catch (error) {
