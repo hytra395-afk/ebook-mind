@@ -21,7 +21,7 @@ export default function ComboHero() {
             fontSize: 'inherit',
             fontWeight: 'inherit'
           }}>
-            Tiết Kiệm Đến 40%
+            Tiết Kiệm Đến 20%
           </span>
         </h1>
         
@@ -35,7 +35,7 @@ export default function ComboHero() {
             <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
               <Sparkles className="w-4 h-4 text-green-600" />
             </div>
-            <span>Tiết kiệm 20-40%</span>
+            <span>Tiết kiệm 10-20%</span>
           </div>
           
           <div className="flex items-center gap-2 text-gray-700">

@@ -289,7 +289,7 @@ export default async function HomePage() {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Chi phí phù&nbsp;hợp</h3>
               <p className="text-gray-700">
-                Giá chỉ bằng một chiếc áo. Mua theo combo tiết kiệm tới 30%.
+                Giá chỉ bằng một chiếc áo. Mua theo combo tiết kiệm tới 20%.
               </p>
             </div>
 
