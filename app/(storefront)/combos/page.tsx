@@ -59,7 +59,6 @@ export default async function CombosPage() {
         {combos?.map((combo: any) => {
           const originalPrice = combo.combo_items?.reduce((sum: number, item: any) => sum + (item.ebooks?.price || 0), 0) || 0
           const discount = originalPrice > 0 ? Math.round((1 - combo.price / originalPrice) * 100) : 0
-          const savings = originalPrice - combo.price
           
           return (
             <Link key={combo.id} href={`/combos/${combo.slug}`} className="group block">
@@ -147,13 +146,6 @@ export default async function CombosPage() {
                       )}
                     </div>
 
-                    {/* Savings Highlight */}
-                    {savings > 0 && (
-                      <div className="bg-purple-50 text-purple-700 px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-1.5">
-                        <span>💰</span>
-                        <span>Tiết kiệm {new Intl.NumberFormat('vi-VN').format(savings)}đ</span>
-                      </div>
-                    )}
                   </div>
 
                   {/* CTA */}
