@@ -51,8 +51,8 @@ export default async function HomePage() {
             Kiến thức chất lượng, Chi phí phù hợp
           </div>
 
-          {/* CTAs - Gradient Aurora cho button chính */}
-          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+          {/* CTA - Gradient Aurora cho button chính */}
+          <div className="flex justify-center items-center">
             <Link
               href="/ebooks"
               className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 text-white px-7 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all text-base"
@@ -60,12 +60,6 @@ export default async function HomePage() {
               <TrendingUp className="w-4 h-4" />
               Khám phá Ebook ngay
               <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              href="/combos"
-              className="inline-flex items-center justify-center gap-2 bg-white/80 backdrop-blur-sm border border-gray-300 text-gray-900 px-7 py-3 rounded-xl font-semibold hover:bg-white transition shadow-sm text-base"
-            >
-              Xem Combo tiết kiệm
             </Link>
           </div>
         </div>
