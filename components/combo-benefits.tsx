@@ -4,7 +4,7 @@ const benefits = [
   {
     icon: DollarSign,
     title: 'Tiết kiệm chi phí',
-    description: 'Giảm 20-40% so với mua lẻ từng ebook. Đầu tư thông minh cho kiến thức.',
+    description: 'Giảm 10-20% so với mua lẻ từng ebook. Đầu tư thông minh cho kiến thức.',
     color: 'green'
   },
   {
