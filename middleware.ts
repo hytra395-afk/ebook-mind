@@ -68,25 +68,25 @@ export function middleware(request: NextRequest) {
   // Add security headers
   const response = NextResponse.next()
   
-  // Content Security Policy
-  response.headers.set(
-    'Content-Security-Policy',
-    [
-      "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://vercel.live",
-      "script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://vercel.live",
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-      "font-src 'self' https://fonts.gstatic.com",
-      "img-src 'self' data: https: http:",
-      "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://analytics.google.com https://www.google.com https://my.sepay.vn https://vercel.live",
-      "frame-src 'self' https://www.facebook.com https://vercel.live",
-      "object-src 'none'",
-      "base-uri 'self'",
-      "form-action 'self'",
-      "frame-ancestors 'none'",
-      "upgrade-insecure-requests",
-    ].join('; ')
-  )
+  // Content Security Policy - TEMPORARILY DISABLED FOR GA TESTING
+  // response.headers.set(
+  //   'Content-Security-Policy',
+  //   [
+  //     "default-src 'self'",
+  //     "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://vercel.live",
+  //     "script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://vercel.live",
+  //     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  //     "font-src 'self' https://fonts.gstatic.com",
+  //     "img-src 'self' data: https: http:",
+  //     "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://analytics.google.com https://www.google.com https://my.sepay.vn https://vercel.live",
+  //     "frame-src 'self' https://www.facebook.com https://vercel.live",
+  //     "object-src 'none'",
+  //     "base-uri 'self'",
+  //     "form-action 'self'",
+  //     "frame-ancestors 'none'",
+  //     "upgrade-insecure-requests",
+  //   ].join('; ')
+  // )
   
   // Additional security headers
   response.headers.set('X-Content-Type-Options', 'nosniff')
