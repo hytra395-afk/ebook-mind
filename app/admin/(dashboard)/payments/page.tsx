@@ -9,8 +9,11 @@ export default async function AdminPaymentsPage() {
   
   // Get current date info
   const now = new Date()
-  const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString()
-  const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay())).toISOString()
+  const today = new Date(now)
+  const startOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate()).toISOString()
+  const startOfWeek = new Date(now)
+  startOfWeek.setDate(now.getDate() - now.getDay())
+  const startOfWeekIso = startOfWeek.toISOString()
   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString()
   const startOfYear = new Date(now.getFullYear(), 0, 1).toISOString()
 
@@ -32,7 +35,7 @@ export default async function AdminPaymentsPage() {
     supabase.from('orders').select('id', { count: 'exact', head: true }).eq('is_hidden', false).eq('status', 'pending'),
     supabase.from('orders').select('amount').eq('is_hidden', false).eq('status', 'completed'),
     supabase.from('orders').select('amount').eq('is_hidden', false).eq('status', 'completed').gte('created_at', startOfDay),
-    supabase.from('orders').select('amount').eq('is_hidden', false).eq('status', 'completed').gte('created_at', startOfWeek),
+    supabase.from('orders').select('amount').eq('is_hidden', false).eq('status', 'completed').gte('created_at', startOfWeekIso),
     supabase.from('orders').select('amount').eq('is_hidden', false).eq('status', 'completed').gte('created_at', startOfMonth),
     supabase.from('orders').select('amount, provider').eq('is_hidden', false).eq('status', 'completed'),
     supabase.from('orders').select('amount, provider').eq('is_hidden', false).eq('status', 'completed'),
