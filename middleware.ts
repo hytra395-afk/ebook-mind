@@ -77,7 +77,7 @@ export function middleware(request: NextRequest) {
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: https: http:",
-      "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://my.sepay.vn",
+      "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://analytics.google.com https://www.google.com https://my.sepay.vn",
       "frame-src 'self' https://www.facebook.com",
       "object-src 'none'",
       "base-uri 'self'",
