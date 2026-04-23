@@ -74,11 +74,12 @@ export function middleware(request: NextRequest) {
     [
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://vercel.live",
+      "script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://vercel.live",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' https://fonts.gstatic.com",
       "img-src 'self' data: https: http:",
       "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://analytics.google.com https://www.google.com https://my.sepay.vn https://vercel.live",
-      "frame-src 'self' https://www.facebook.com",
+      "frame-src 'self' https://www.facebook.com https://vercel.live",
       "object-src 'none'",
       "base-uri 'self'",
       "form-action 'self'",
