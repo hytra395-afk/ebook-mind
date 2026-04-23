@@ -22,8 +22,9 @@ export default function RevenueChart({ data, currency = 'đ' }: RevenueChartProp
     return value.toString()
   }
 
-  const formatTooltip = (value: number) => {
-    return new Intl.NumberFormat('vi-VN').format(value) + currency
+  const formatTooltip = (value: any) => {
+    if (value === undefined || value === null) return ''
+    return new Intl.NumberFormat('vi-VN').format(Number(value)) + currency
   }
 
   if (!data || data.length === 0) {
