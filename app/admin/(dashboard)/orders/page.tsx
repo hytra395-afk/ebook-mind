@@ -412,7 +412,9 @@ export default function AdminOrdersPage() {
                       </span>
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-700 max-w-md">
-                      {getProductSummary(order)}
+                      <div className="line-clamp-3 leading-relaxed">
+                        {getProductSummary(order)}
+                      </div>
                     </td>
                     <td className="px-6 py-4">
                       <span className="font-semibold text-gray-900">
