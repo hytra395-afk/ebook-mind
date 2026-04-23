@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { createClient } from '@supabase/supabase-js'
-import { CalendarDays, RefreshCw, Trash2 } from 'lucide-react'
+import { CalendarDays, RefreshCw, Trash2, Download, Search, Filter } from 'lucide-react'
+import RevenueChartSimple from './revenue-chart-simple'
 
 type OrderItem = {
   id: string
@@ -68,6 +69,10 @@ export default function PaymentsTransactions() {
   const [from, setFrom] = useState(() => startOfDay(new Date()))
   const [to, setTo] = useState(() => endOfDay(new Date()))
 
+  const [filterProvider, setFilterProvider] = useState('')
+  const [filterEmail, setFilterEmail] = useState('')
+  const [filterProduct, setFilterProduct] = useState('')
+
   useEffect(() => {
     const now = new Date()
     if (mode === 'day') {
@@ -94,15 +99,86 @@ export default function PaymentsTransactions() {
 
   const selectedIds = useMemo(() => Object.keys(selected).filter((id) => selected[id]), [selected])
 
+  const filteredTxns = useMemo(() => {
+    let items = txns
+    if (filterProvider) {
+      items = items.filter(t => t.provider.toLowerCase().includes(filterProvider.toLowerCase()))
+    }
+    if (filterEmail) {
+      items = items.filter(t => t.email?.toLowerCase().includes(filterEmail.toLowerCase()))
+    }
+    if (filterProduct) {
+      items = items.filter(t => 
+        t.order_items?.some(it => 
+          it.ebooks?.title?.toLowerCase().includes(filterProduct.toLowerCase()) ||
+          it.combos?.title?.toLowerCase().includes(filterProduct.toLowerCase())
+        )
+      )
+    }
+    return items
+  }, [txns, filterProvider, filterEmail, filterProduct])
+
   const breakdownByProvider = useMemo(() => {
     const map: Record<string, number> = {}
-    for (const t of txns) {
+    for (const t of filteredTxns) {
       map[t.provider] = (map[t.provider] || 0) + Number(t.amount || 0)
     }
     return Object.entries(map).sort((a, b) => b[1] - a[1])
-  }, [txns])
+  }, [filteredTxns])
 
   const totalInRange = useMemo(() => txns.reduce((s, t) => s + Number(t.amount || 0), 0), [txns])
+
+  const breakdownByProductType = useMemo(() => {
+    const map: Record<string, { quantity: number; revenue: number }> = {}
+    for (const t of filteredTxns) {
+      for (const it of t.order_items || []) {
+        const type = it.ebook_id ? 'Ebook' : it.combo_id ? 'Combo' : null
+        if (!type) continue
+        if (!map[type]) map[type] = { quantity: 0, revenue: 0 }
+        map[type].quantity += it.quantity || 1
+        map[type].revenue += Number(it.unit_price || 0) * (it.quantity || 1)
+      }
+    }
+    return Object.entries(map).sort((a, b) => b[1].revenue - a[1].revenue)
+  }, [filteredTxns])
+
+  const dailyRevenue = useMemo(() => {
+    const map: Record<string, number> = {}
+    for (const t of filteredTxns) {
+      const date = new Date(t.created_at).toISOString().slice(0, 10)
+      map[date] = (map[date] || 0) + Number(t.amount || 0)
+    }
+    // Fill missing dates in range
+    const result: Array<{ date: string; revenue: number }> = []
+    const current = new Date(from)
+    const end = new Date(to)
+    while (current <= end) {
+      const iso = current.toISOString().slice(0, 10)
+      result.push({ date: iso, revenue: map[iso] || 0 })
+      current.setDate(current.getDate() + 1)
+    }
+    return result
+  }, [filteredTxns, from, to])
+
+  const exportCSV = () => {
+    const headers = ['Mã giao dịch', 'Sản phẩm', 'Số tiền', 'Nguồn', 'Email', 'Thời gian']
+    const rows = filteredTxns.map(t => [
+      t.payment_code,
+      (t.order_items || []).map(getItemTitle).join('; '),
+      Number(t.amount || 0).toLocaleString('vi-VN'),
+      t.provider,
+      t.email || '',
+      formatDateTime(t.created_at)
+    ])
+    const csv = [headers, ...rows].map(row => row.join(',')).join('\n')
+    const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `transactions-${from.toISOString().slice(0,10)}-to-${to.toISOString().slice(0,10)}.csv`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
 
   const fetchTxns = async () => {
     setLoading(true)
@@ -221,6 +297,15 @@ export default function PaymentsTransactions() {
             >
               <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
             </button>
+            <button
+              onClick={exportCSV}
+              disabled={txns.length === 0}
+              className="flex items-center gap-2 px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition disabled:opacity-50 disabled:cursor-not-allowed"
+              title="Xuất CSV"
+            >
+              <Download className="w-4 h-4" />
+              Export CSV
+            </button>
           </div>
         </div>
 
@@ -269,6 +354,49 @@ export default function PaymentsTransactions() {
           </label>
         </div>
 
+        {/* Advanced Filters */}
+        <div className="mt-4 flex flex-wrap items-center gap-3">
+          <div className="flex items-center gap-2">
+            <Filter className="w-4 h-4 text-gray-400" />
+            <span className="text-sm text-gray-600">Lọc:</span>
+          </div>
+          <input
+            type="text"
+            placeholder="Nguồn (provider)..."
+            value={filterProvider}
+            onChange={(e) => setFilterProvider(e.target.value)}
+            className="px-3 py-2 border border-gray-200 rounded-lg text-sm w-40"
+          />
+          <input
+            type="text"
+            placeholder="Email..."
+            value={filterEmail}
+            onChange={(e) => setFilterEmail(e.target.value)}
+            className="px-3 py-2 border border-gray-200 rounded-lg text-sm w-40"
+          />
+          <input
+            type="text"
+            placeholder="Tên sản phẩm..."
+            value={filterProduct}
+            onChange={(e) => setFilterProduct(e.target.value)}
+            className="px-3 py-2 border border-gray-200 rounded-lg text-sm w-48"
+          />
+          {(filterProvider || filterEmail || filterProduct) && (
+            <button
+              onClick={() => { setFilterProvider(''); setFilterEmail(''); setFilterProduct(''); }}
+              className="px-3 py-2 text-sm text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition"
+            >
+              Xóa bộ lọc
+            </button>
+          )}
+        </div>
+
+        {filteredTxns.length !== txns.length && (
+          <div className="mt-2 text-sm text-gray-500">
+            Hiển thị {filteredTxns.length} / {txns.length} giao dịch
+          </div>
+        )}
+
         {breakdownByProvider.length > 0 && (
           <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3">
             {breakdownByProvider.map(([provider, amount]) => (
@@ -280,6 +408,23 @@ export default function PaymentsTransactions() {
             ))}
           </div>
         )}
+
+        {breakdownByProductType.length > 0 && (
+          <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+            {breakdownByProductType.map(([type, stats]) => (
+              <div key={type} className="bg-gradient-to-br from-purple-50 to-fuchsia-50 border border-purple-100 rounded-xl p-4">
+                <p className="text-xs text-purple-600 font-medium">Loại sản phẩm</p>
+                <p className="font-bold text-purple-900 mt-1">{type}</p>
+                <p className="text-sm text-gray-700 mt-1">{stats.quantity} sản phẩm</p>
+                <p className="text-sm text-purple-600 font-bold mt-2">{formatCurrency(stats.revenue)}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="mt-6">
+        <RevenueChartSimple data={dailyRevenue} />
       </div>
 
       {selectedIds.length > 0 && (
@@ -337,20 +482,20 @@ export default function PaymentsTransactions() {
             </tr>
           </thead>
           <tbody>
-            {loading ? (
-              <tr>
-                <td colSpan={7} className="px-5 py-10 text-center text-gray-400">
-                  Đang tải...
-                </td>
-              </tr>
-            ) : txns.length === 0 ? (
-              <tr>
-                <td colSpan={7} className="px-5 py-10 text-center text-gray-400">
-                  Không có giao dịch trong khoảng thời gian này
-                </td>
-              </tr>
-            ) : (
-              txns.map((t) => (
+              {loading ? (
+                <tr>
+                  <td colSpan={7} className="px-5 py-10 text-center text-gray-400">
+                    Đang tải...
+                  </td>
+                </tr>
+              ) : filteredTxns.length === 0 ? (
+                <tr>
+                  <td colSpan={7} className="px-5 py-10 text-center text-gray-400">
+                    {txns.length === 0 ? 'Không có giao dịch trong khoảng thời gian này' : 'Không có giao dịch nào khớp bộ lọc'}
+                  </td>
+                </tr>
+              ) : (
+                filteredTxns.map((t) => (
                 <tr key={t.id} className={`border-b last:border-0 hover:bg-gray-50 transition ${t.is_hidden ? 'opacity-60' : ''}`}>
                   <td className="px-5 py-3">
                     <input
