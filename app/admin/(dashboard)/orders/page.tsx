@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { createClient } from '@supabase/supabase-js'
-import { Search, Filter, Download, Eye, Edit2, X, Check, ChevronLeft, ChevronRight, RefreshCw, Trash2 } from 'lucide-react'
+import { Search, Filter, Download, Eye, Edit2, X, Check, ChevronLeft, ChevronRight, RefreshCw, Trash2, ShoppingCart, CheckCircle, Clock } from 'lucide-react'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -39,6 +39,7 @@ export default function AdminOrdersPage() {
   const [orders, setOrders] = useState<Order[]>([])
   const [loading, setLoading] = useState(true)
   const [totalCount, setTotalCount] = useState(0)
+  const [stats, setStats] = useState({ total: 0, completed: 0, pending: 0 })
   const [page, setPage] = useState(1)
   const [statusFilter, setStatusFilter] = useState<string>('all')
   const [search, setSearch] = useState('')
@@ -138,6 +139,20 @@ export default function AdminOrdersPage() {
 
   const fetchOrders = async () => {
     setLoading(true)
+    
+    // Fetch stats in parallel
+    const [totalRes, completedRes, pendingRes] = await Promise.all([
+      supabase.from('orders').select('id', { count: 'exact', head: true }).eq('is_hidden', false),
+      supabase.from('orders').select('id', { count: 'exact', head: true }).eq('is_hidden', false).eq('status', 'completed'),
+      supabase.from('orders').select('id', { count: 'exact', head: true }).eq('is_hidden', false).eq('status', 'pending')
+    ])
+    
+    setStats({
+      total: totalRes.count || 0,
+      completed: completedRes.count || 0,
+      pending: pendingRes.count || 0
+    })
+    
     let query = supabase
       .from('orders')
       .select(
@@ -278,6 +293,43 @@ export default function AdminOrdersPage() {
             <Download className="w-4 h-4" />
             Export CSV
           </button>
+        </div>
+      </div>
+
+      {/* Stats Grid */}
+      <div className="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="bg-white rounded-xl border p-5">
+          <div className="flex items-center gap-4">
+            <div className="p-3 rounded-lg text-blue-600 bg-blue-50">
+              <ShoppingCart className="h-6 w-6" />
+            </div>
+            <div>
+              <p className="text-sm text-gray-500">Tổng đơn hàng</p>
+              <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
+            </div>
+          </div>
+        </div>
+        <div className="bg-white rounded-xl border p-5">
+          <div className="flex items-center gap-4">
+            <div className="p-3 rounded-lg text-green-600 bg-green-50">
+              <CheckCircle className="h-6 w-6" />
+            </div>
+            <div>
+              <p className="text-sm text-gray-500">Đơn hoàn thành</p>
+              <p className="text-2xl font-bold text-gray-900">{stats.completed}</p>
+            </div>
+          </div>
+        </div>
+        <div className="bg-white rounded-xl border p-5">
+          <div className="flex items-center gap-4">
+            <div className="p-3 rounded-lg text-yellow-600 bg-yellow-50">
+              <Clock className="h-6 w-6" />
+            </div>
+            <div>
+              <p className="text-sm text-gray-500">Đơn chờ TT</p>
+              <p className="text-2xl font-bold text-gray-900">{stats.pending}</p>
+            </div>
+          </div>
         </div>
       </div>
 
