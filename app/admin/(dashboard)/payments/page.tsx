@@ -1,5 +1,5 @@
 import { getSupabaseAdmin } from '@/lib/db'
-import { ShoppingCart, CheckCircle, Clock, XCircle, TrendingUp, Calendar, CalendarDays, CalendarRange, Trophy, BookOpen } from 'lucide-react'
+import { ShoppingCart, CheckCircle, Clock, TrendingUp, Calendar, CalendarDays, CalendarRange, Trophy, BookOpen, Download, Trash2 } from 'lucide-react'
 import PaymentsTransactions from '@/components/admin/payments-transactions'
 
 export const revalidate = 0
@@ -24,7 +24,8 @@ export default async function AdminPaymentsPage() {
     weekRevenueRes,
     monthRevenueRes,
     yearRevenueRes,
-    topEbooksRes
+    providerRevenueRes,
+    ebookRevenueRes
   ] = await Promise.all([
     supabase.from('orders').select('id', { count: 'exact', head: true }).eq('is_hidden', false),
     supabase.from('orders').select('id', { count: 'exact', head: true }).eq('is_hidden', false).eq('status', 'completed'),
@@ -33,7 +34,8 @@ export default async function AdminPaymentsPage() {
     supabase.from('orders').select('amount').eq('is_hidden', false).eq('status', 'completed').gte('created_at', startOfDay),
     supabase.from('orders').select('amount').eq('is_hidden', false).eq('status', 'completed').gte('created_at', startOfWeek),
     supabase.from('orders').select('amount').eq('is_hidden', false).eq('status', 'completed').gte('created_at', startOfMonth),
-    supabase.from('orders').select('amount').eq('is_hidden', false).eq('status', 'completed').gte('created_at', startOfYear),
+    supabase.from('orders').select('amount, provider').eq('is_hidden', false).eq('status', 'completed'),
+    supabase.from('orders').select('amount, provider').eq('is_hidden', false).eq('status', 'completed'),
     supabase.from('order_items')
       .select(`
         ebook_id,
@@ -58,9 +60,17 @@ export default async function AdminPaymentsPage() {
   const monthRevenue = sumAmount(monthRevenueRes.data)
   const yearRevenue = sumAmount(yearRevenueRes.data)
 
-  // Process top ebooks
+  // Revenue by provider
+  const providerRevenue: Record<string, number> = {}
+  providerRevenueRes.data?.forEach((item: any) => {
+    const provider = item.provider || 'Unknown'
+    providerRevenue[provider] = (providerRevenue[provider] || 0) + Number(item.amount)
+  })
+  const providerBreakdown = Object.entries(providerRevenue).sort((a, b) => b[1] - a[1])
+
+  // Revenue by ebook
   const ebookSales: Record<string, { ebook: any, quantity: number, revenue: number }> = {}
-  topEbooksRes.data?.forEach((item: any) => {
+  ebookRevenueRes?.data?.forEach((item: any) => {
     if (item.ebook_id && item.ebooks) {
       if (!ebookSales[item.ebook_id]) {
         ebookSales[item.ebook_id] = { ebook: item.ebooks, quantity: 0, revenue: 0 }
@@ -69,20 +79,14 @@ export default async function AdminPaymentsPage() {
       ebookSales[item.ebook_id].revenue += (item.unit_price || item.ebooks.price) * (item.quantity || 1)
     }
   })
-  const topEbooks = Object.values(ebookSales)
-    .sort((a, b) => b.quantity - a.quantity)
-    .slice(0, 10)
-  const maxSales = topEbooks[0]?.quantity || 1
+  const ebookBreakdown = Object.values(ebookSales).sort((a, b) => b.revenue - a.revenue)
 
   const formatCurrency = (amount: number) => new Intl.NumberFormat('vi-VN').format(amount) + 'đ'
 
-  const orderStats = [
+  const stats = [
     { label: 'Tổng đơn hàng', value: totalOrders, icon: ShoppingCart, color: 'text-blue-600 bg-blue-50' },
     { label: 'Đơn hoàn thành', value: completedOrders, icon: CheckCircle, color: 'text-green-600 bg-green-50' },
     { label: 'Đơn chờ TT', value: pendingOrders, icon: Clock, color: 'text-yellow-600 bg-yellow-50' },
-  ]
-
-  const revenueStats = [
     { label: 'Tổng doanh thu', value: formatCurrency(totalRevenue), icon: TrendingUp, color: 'text-purple-600 bg-purple-50', highlight: true },
     { label: 'Hôm nay', value: formatCurrency(todayRevenue), icon: Calendar, color: 'text-blue-600 bg-blue-50' },
     { label: 'Tuần này', value: formatCurrency(weekRevenue), icon: CalendarDays, color: 'text-teal-600 bg-teal-50' },
@@ -92,121 +96,84 @@ export default async function AdminPaymentsPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Thống kê Thanh toán</h1>
-
-      {/* Order Stats */}
-      <div className="mb-8">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Đơn hàng</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {orderStats.map((stat) => (
-            <div key={stat.label} className="bg-white rounded-xl border p-5">
-              <div className="flex items-center gap-4">
-                <div className={`p-3 rounded-lg ${stat.color}`}>
-                  <stat.icon className="h-6 w-6" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">{stat.label}</p>
-                  <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
-                </div>
-              </div>
-            </div>
-          ))}
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Thống kê Thanh toán</h1>
+          <p className="text-sm text-gray-500 mt-1">Xem doanh thu và giao dịch theo thời gian</p>
         </div>
-        {totalOrders > 0 && (
-          <div className="mt-4 bg-white rounded-xl border p-5">
-            <p className="text-sm text-gray-500 mb-2">Tỷ lệ hoàn thành</p>
-            <div className="flex items-center gap-4">
-              <div className="flex-1 h-3 bg-gray-100 rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-gradient-to-r from-green-500 to-emerald-500 rounded-full transition-all"
-                  style={{ width: `${(completedOrders / totalOrders) * 100}%` }}
-                />
+      </div>
+
+      {/* Stats Grid */}
+      <div className="mb-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+        {stats.map((stat) => (
+          <div key={stat.label} className={`bg-white rounded-xl border p-5 ${stat.highlight ? 'ring-2 ring-purple-200' : ''}`}>
+            <div className="flex items-center gap-3">
+              <div className={`p-2.5 rounded-lg ${stat.color}`}>
+                <stat.icon className="h-5 w-5" />
               </div>
-              <span className="text-lg font-bold text-green-600">
-                {((completedOrders / totalOrders) * 100).toFixed(1)}%
-              </span>
+              <div>
+                <p className="text-xs text-gray-500">{stat.label}</p>
+                <p className={`font-bold ${stat.highlight ? 'text-xl text-purple-600' : 'text-lg text-gray-900'}`}>
+                  {stat.value}
+                </p>
+              </div>
             </div>
           </div>
-        )}
+        ))}
       </div>
 
-      {/* Revenue Stats */}
-      <div className="mb-8">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Doanh thu</h2>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-          {revenueStats.map((stat) => (
-            <div key={stat.label} className={`bg-white rounded-xl border p-5 ${stat.highlight ? 'ring-2 ring-purple-200' : ''}`}>
-              <div className="flex items-center gap-3">
-                <div className={`p-2.5 rounded-lg ${stat.color}`}>
-                  <stat.icon className="h-5 w-5" />
-                </div>
-                <div>
-                  <p className="text-xs text-gray-500">{stat.label}</p>
-                  <p className={`font-bold ${stat.highlight ? 'text-xl text-purple-600' : 'text-lg text-gray-900'}`}>
-                    {stat.value}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="mb-8">
-        <PaymentsTransactions />
-      </div>
-
-      {/* Top Ebooks */}
-      <div>
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Top Ebook bán chạy</h2>
-        <div className="bg-white rounded-xl border overflow-hidden">
-          {topEbooks.length === 0 ? (
-            <div className="p-10 text-center text-gray-400">
-              <BookOpen className="w-12 h-12 mx-auto mb-3 text-gray-200" />
-              <p>Chưa có dữ liệu bán hàng</p>
-            </div>
-          ) : (
+      {/* Revenue by Provider */}
+      {providerBreakdown.length > 0 && (
+        <div className="mb-8">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Doanh thu theo nguồn thanh toán</h2>
+          <div className="bg-white rounded-xl border overflow-hidden">
             <div className="divide-y">
-              {topEbooks.map((item, index) => (
+              {providerBreakdown.map(([provider, amount]) => (
+                <div key={provider} className="flex items-center justify-between p-4 hover:bg-gray-50 transition">
+                  <span className="font-medium text-gray-900">{provider}</span>
+                  <span className="font-bold text-purple-600">{formatCurrency(amount)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Revenue by Ebook - MOST IMPORTANT */}
+      {ebookBreakdown.length > 0 && (
+        <div className="mb-8">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Doanh thu theo Ebook</h2>
+          <div className="bg-white rounded-xl border overflow-hidden">
+            <div className="divide-y">
+              {ebookBreakdown.map((item) => (
                 <div key={item.ebook.id} className="flex items-center gap-4 p-4 hover:bg-gray-50 transition">
-                  <span className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                    index === 0 ? 'bg-yellow-100 text-yellow-700' :
-                    index === 1 ? 'bg-gray-100 text-gray-600' :
-                    index === 2 ? 'bg-orange-100 text-orange-700' :
-                    'bg-gray-50 text-gray-500'
-                  }`}>
-                    {index + 1}
-                  </span>
                   {item.ebook.cover_url ? (
                     <img 
                       src={item.ebook.cover_url} 
                       alt={item.ebook.title}
-                      className="w-12 h-16 object-cover rounded-lg"
+                      className="w-10 h-14 object-cover rounded"
                     />
                   ) : (
-                    <div className="w-12 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
+                    <div className="w-10 h-14 bg-gray-100 rounded flex items-center justify-center">
                       <BookOpen className="w-5 h-5 text-gray-400" />
                     </div>
                   )}
                   <div className="flex-1 min-w-0">
                     <p className="font-medium text-gray-900 truncate">{item.ebook.title}</p>
-                    <p className="text-sm text-gray-500">
-                      {item.quantity} bản • {formatCurrency(item.revenue)}
-                    </p>
+                    <p className="text-sm text-gray-500">{item.quantity} bản đã bán</p>
                   </div>
-                  <div className="w-32">
-                    <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-gradient-to-r from-purple-500 to-fuchsia-500 rounded-full"
-                        style={{ width: `${(item.quantity / maxSales) * 100}%` }}
-                      />
-                    </div>
-                  </div>
+                  <span className="font-bold text-purple-600">{formatCurrency(item.revenue)}</span>
                 </div>
               ))}
             </div>
-          )}
+          </div>
         </div>
+      )}
+
+      {/* Transactions by Date Range */}
+      <div>
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">Giao dịch theo thời gian</h2>
+        <PaymentsTransactions />
       </div>
     </div>
   )
