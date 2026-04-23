@@ -1,5 +1,6 @@
 import { getSupabaseAdmin } from '@/lib/db'
 import { ShoppingCart, CheckCircle, Clock, XCircle, TrendingUp, Calendar, CalendarDays, CalendarRange, Trophy, BookOpen } from 'lucide-react'
+import PaymentsTransactions from '@/components/admin/payments-transactions'
 
 export const revalidate = 0
 
@@ -25,23 +26,24 @@ export default async function AdminPaymentsPage() {
     yearRevenueRes,
     topEbooksRes
   ] = await Promise.all([
-    supabase.from('orders').select('id', { count: 'exact', head: true }),
-    supabase.from('orders').select('id', { count: 'exact', head: true }).eq('status', 'completed'),
-    supabase.from('orders').select('id', { count: 'exact', head: true }).eq('status', 'pending'),
-    supabase.from('orders').select('amount').eq('status', 'completed'),
-    supabase.from('orders').select('amount').eq('status', 'completed').gte('created_at', startOfDay),
-    supabase.from('orders').select('amount').eq('status', 'completed').gte('created_at', startOfWeek),
-    supabase.from('orders').select('amount').eq('status', 'completed').gte('created_at', startOfMonth),
-    supabase.from('orders').select('amount').eq('status', 'completed').gte('created_at', startOfYear),
+    supabase.from('orders').select('id', { count: 'exact', head: true }).eq('is_hidden', false),
+    supabase.from('orders').select('id', { count: 'exact', head: true }).eq('is_hidden', false).eq('status', 'completed'),
+    supabase.from('orders').select('id', { count: 'exact', head: true }).eq('is_hidden', false).eq('status', 'pending'),
+    supabase.from('orders').select('amount').eq('is_hidden', false).eq('status', 'completed'),
+    supabase.from('orders').select('amount').eq('is_hidden', false).eq('status', 'completed').gte('created_at', startOfDay),
+    supabase.from('orders').select('amount').eq('is_hidden', false).eq('status', 'completed').gte('created_at', startOfWeek),
+    supabase.from('orders').select('amount').eq('is_hidden', false).eq('status', 'completed').gte('created_at', startOfMonth),
+    supabase.from('orders').select('amount').eq('is_hidden', false).eq('status', 'completed').gte('created_at', startOfYear),
     supabase.from('order_items')
       .select(`
         ebook_id,
         quantity,
         unit_price,
-        orders!inner(status),
+        orders!inner(status, is_hidden),
         ebooks(id, title, cover_url, price)
       `)
       .eq('orders.status', 'completed')
+      .eq('orders.is_hidden', false)
       .not('ebook_id', 'is', null)
   ])
 
@@ -148,6 +150,10 @@ export default async function AdminPaymentsPage() {
             </div>
           ))}
         </div>
+      </div>
+
+      <div className="mb-8">
+        <PaymentsTransactions />
       </div>
 
       {/* Top Ebooks */}

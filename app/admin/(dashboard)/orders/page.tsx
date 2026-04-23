@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { createClient } from '@supabase/supabase-js'
-import { Search, Filter, Download, Eye, Edit2, Mail, X, Check, ChevronLeft, ChevronRight, RefreshCw } from 'lucide-react'
+import { Search, Filter, Download, Eye, Edit2, X, Check, ChevronLeft, ChevronRight, RefreshCw, Trash2 } from 'lucide-react'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -21,6 +21,16 @@ interface Order {
   created_at: string
   updated_at: string
   metadata: any
+  is_hidden?: boolean
+  order_items?: Array<{
+    id: string
+    ebook_id: string | null
+    combo_id: string | null
+    quantity: number | null
+    unit_price: number | null
+    ebooks?: { title: string } | null
+    combos?: { title: string } | null
+  }>
 }
 
 const ITEMS_PER_PAGE = 20
@@ -32,17 +42,119 @@ export default function AdminOrdersPage() {
   const [page, setPage] = useState(1)
   const [statusFilter, setStatusFilter] = useState<string>('all')
   const [search, setSearch] = useState('')
+  const [includeHidden, setIncludeHidden] = useState(false)
+  const [selected, setSelected] = useState<Record<string, boolean>>({})
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
   const [editingOrder, setEditingOrder] = useState<Order | null>(null)
   const [editEmail, setEditEmail] = useState('')
   const [editStatus, setEditStatus] = useState('')
   const [saving, setSaving] = useState(false)
 
+  const selectedIds = Object.keys(selected).filter((id) => selected[id])
+
+  const bulkHide = async (hidden: boolean) => {
+    if (selectedIds.length === 0) return
+
+    const ok = window.confirm(
+      hidden
+        ? `Ẩn ${selectedIds.length} đơn hàng khỏi danh sách?`
+        : `Hiện lại ${selectedIds.length} đơn hàng đã ẩn?`
+    )
+    if (!ok) return
+
+    const { data: sessionRes } = await supabase.auth.getSession()
+    const token = sessionRes.session?.access_token
+    if (!token) {
+      alert('Bạn cần đăng nhập admin để thực hiện thao tác này')
+      return
+    }
+
+    const res = await fetch('/api/admin/orders/bulk-hide', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ ids: selectedIds, hidden }),
+    })
+
+    const json = await res.json()
+    if (!res.ok) {
+      alert(json?.error || 'Không thể cập nhật')
+      return
+    }
+
+    fetchOrders()
+  }
+
+  const bulkDelete = async () => {
+    if (selectedIds.length === 0) return
+
+    const ok = window.confirm(`XÓA VĨNH VIỄN ${selectedIds.length} đơn hàng? Thao tác này không thể hoàn tác.`)
+    if (!ok) return
+
+    const text = window.prompt('Gõ XOA để xác nhận xóa vĩnh viễn')
+    if (text !== 'XOA') return
+
+    const { data: sessionRes } = await supabase.auth.getSession()
+    const token = sessionRes.session?.access_token
+    if (!token) {
+      alert('Bạn cần đăng nhập admin để thực hiện thao tác này')
+      return
+    }
+
+    const res = await fetch('/api/admin/orders/bulk-delete', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ ids: selectedIds }),
+    })
+
+    const json = await res.json()
+    if (!res.ok) {
+      alert(json?.error || 'Không thể xóa')
+      return
+    }
+
+    fetchOrders()
+  }
+
+  const getProductSummary = (order: Order) => {
+    const items = order.order_items || []
+    if (items.length === 0) return '—'
+    const parts = items
+      .map((it) => {
+        const title = it.ebooks?.title || it.combos?.title
+        if (!title) return null
+        const q = it.quantity || 1
+        return q > 1 ? `${title} x${q}` : title
+      })
+      .filter(Boolean) as string[]
+
+    return parts.length ? parts.join(', ') : '—'
+  }
+
   const fetchOrders = async () => {
     setLoading(true)
     let query = supabase
       .from('orders')
-      .select('*', { count: 'exact' })
+      .select(
+        `
+        *,
+        order_items(
+          id,
+          ebook_id,
+          combo_id,
+          quantity,
+          unit_price,
+          ebooks(title),
+          combos(title)
+        )
+      `,
+        { count: 'exact' }
+      )
       .order('created_at', { ascending: false })
       .range((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE - 1)
 
@@ -54,18 +166,23 @@ export default function AdminOrdersPage() {
       query = query.or(`payment_code.ilike.%${search}%,email.ilike.%${search}%`)
     }
 
+    if (!includeHidden) {
+      query = query.eq('is_hidden', false)
+    }
+
     const { data, count, error } = await query
 
     if (!error && data) {
       setOrders(data)
       setTotalCount(count || 0)
+      setSelected({})
     }
     setLoading(false)
   }
 
   useEffect(() => {
     fetchOrders()
-  }, [page, statusFilter, search])
+  }, [page, statusFilter, search, includeHidden])
 
   const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE)
 
@@ -193,8 +310,48 @@ export default function AdminOrdersPage() {
               <option value="cancelled">Đã hủy</option>
             </select>
           </div>
+
+          <label className="flex items-center gap-2 text-sm text-gray-600">
+            <input
+              type="checkbox"
+              checked={includeHidden}
+              onChange={(e) => { setIncludeHidden(e.target.checked); setPage(1) }}
+              className="rounded border-gray-300"
+            />
+            Hiển thị đã ẩn
+          </label>
         </div>
       </div>
+
+      {selectedIds.length > 0 && (
+        <div className="mb-4 bg-purple-50 border border-purple-100 rounded-xl px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+          <p className="text-sm text-purple-700 font-medium">Đã chọn {selectedIds.length} đơn hàng</p>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => bulkHide(true)}
+              className="flex items-center gap-2 px-3 py-2 bg-white border border-purple-200 text-purple-700 rounded-lg text-sm font-medium hover:bg-purple-100 transition"
+            >
+              <Trash2 className="w-4 h-4" />
+              Ẩn khỏi danh sách
+            </button>
+            <button
+              onClick={bulkDelete}
+              className="px-3 py-2 bg-red-600 text-white rounded-lg text-sm font-semibold hover:bg-red-700 transition"
+              title="Xóa vĩnh viễn khỏi database"
+            >
+              Xóa vĩnh viễn
+            </button>
+            {includeHidden && (
+              <button
+                onClick={() => bulkHide(false)}
+                className="px-3 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-100 transition"
+              >
+                Hiện lại
+              </button>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Orders Table */}
       <div className="bg-white rounded-xl border overflow-hidden">
@@ -202,7 +359,20 @@ export default function AdminOrdersPage() {
           <table className="w-full">
             <thead>
               <tr className="text-left text-sm text-gray-500 border-b bg-gray-50">
+                <th className="px-6 py-4 font-medium w-10">
+                  <input
+                    type="checkbox"
+                    checked={orders.length > 0 && selectedIds.length === orders.length}
+                    onChange={(e) => {
+                      const checked = e.target.checked
+                      const next: Record<string, boolean> = {}
+                      if (checked) orders.forEach((o) => (next[o.id] = true))
+                      setSelected(next)
+                    }}
+                  />
+                </th>
                 <th className="px-6 py-4 font-medium">Mã đơn hàng</th>
+                <th className="px-6 py-4 font-medium">Ebook</th>
                 <th className="px-6 py-4 font-medium">Số tiền</th>
                 <th className="px-6 py-4 font-medium">Trạng thái</th>
                 <th className="px-6 py-4 font-medium">Email</th>
@@ -213,7 +383,7 @@ export default function AdminOrdersPage() {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-20 text-center">
+                  <td colSpan={8} className="px-6 py-20 text-center">
                     <div className="flex items-center justify-center gap-2 text-gray-400">
                       <RefreshCw className="w-5 h-5 animate-spin" />
                       Đang tải...
@@ -222,7 +392,7 @@ export default function AdminOrdersPage() {
                 </tr>
               ) : orders.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-20 text-center text-gray-400">
+                  <td colSpan={8} className="px-6 py-20 text-center text-gray-400">
                     Không tìm thấy đơn hàng nào
                   </td>
                 </tr>
@@ -230,9 +400,19 @@ export default function AdminOrdersPage() {
                 orders.map((order) => (
                   <tr key={order.id} className="border-b last:border-0 hover:bg-gray-50 transition">
                     <td className="px-6 py-4">
+                      <input
+                        type="checkbox"
+                        checked={Boolean(selected[order.id])}
+                        onChange={(e) => setSelected((s) => ({ ...s, [order.id]: e.target.checked }))}
+                      />
+                    </td>
+                    <td className="px-6 py-4">
                       <span className="font-mono text-sm font-medium text-purple-600">
                         {order.payment_code}
                       </span>
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-700">
+                      <div className="max-w-[360px] truncate">{getProductSummary(order)}</div>
                     </td>
                     <td className="px-6 py-4">
                       <span className="font-semibold text-gray-900">
@@ -322,6 +502,10 @@ export default function AdminOrdersPage() {
                 <div>
                   <p className="text-sm text-gray-500">Mã đơn hàng</p>
                   <p className="font-mono font-medium text-purple-600">{selectedOrder.payment_code}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">Ebook</p>
+                  <p className="text-gray-700">{getProductSummary(selectedOrder)}</p>
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">Public Token</p>
