@@ -414,11 +414,11 @@ export default function AdminOrdersPage() {
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-700">
                       <div 
-                        className="max-w-[360px] truncate cursor-pointer hover:text-purple-600 transition"
+                        className={`cursor-pointer hover:text-purple-600 transition ${expandedProduct[order.id] ? '' : 'max-w-[360px] truncate'}`}
                         title={getProductSummary(order)}
                         onClick={() => setExpandedProduct((prev) => ({ ...prev, [order.id]: !prev[order.id] }))}
       >
-        {expandedProduct[order.id] ? getProductSummary(order) : getProductSummary(order).length > 40 ? getProductSummary(order).slice(0, 40) + '...' : getProductSummary(order)}
+        {getProductSummary(order)}
       </div>
                     </td>
                     <td className="px-6 py-4">
