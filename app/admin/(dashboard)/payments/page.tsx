@@ -7,15 +7,22 @@ export const revalidate = 0
 export default async function AdminPaymentsPage() {
   const supabase = getSupabaseAdmin()
   
-  // Get current date info
+  // Get current date info - use local time for Vietnam (UTC+7)
   const now = new Date()
   const today = new Date(now)
-  const startOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate()).toISOString()
+  // Start of today in local time, then convert to UTC timestamp for comparison
+  const startOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0, 0)
+  const startOfDayIso = new Date(startOfDay.getTime() - startOfDay.getTimezoneOffset() * 60000).toISOString()
+  
   const startOfWeek = new Date(now)
   startOfWeek.setDate(now.getDate() - now.getDay())
-  const startOfWeekIso = startOfWeek.toISOString()
-  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString()
-  const startOfYear = new Date(now.getFullYear(), 0, 1).toISOString()
+  const startOfWeekIso = new Date(startOfWeek.getTime() - startOfWeek.getTimezoneOffset() * 60000).toISOString()
+  
+  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1, 0, 0, 0, 0)
+  const startOfMonthIso = new Date(startOfMonth.getTime() - startOfMonth.getTimezoneOffset() * 60000).toISOString()
+  
+  const startOfYear = new Date(now.getFullYear(), 0, 1, 0, 0, 0, 0)
+  const startOfYearIso = new Date(startOfYear.getTime() - startOfYear.getTimezoneOffset() * 60000).toISOString()
 
   // Fetch all stats in parallel
   const [
@@ -34,9 +41,9 @@ export default async function AdminPaymentsPage() {
     supabase.from('orders').select('id', { count: 'exact', head: true }).eq('is_hidden', false).eq('status', 'completed'),
     supabase.from('orders').select('id', { count: 'exact', head: true }).eq('is_hidden', false).eq('status', 'pending'),
     supabase.from('orders').select('amount').eq('is_hidden', false).eq('status', 'completed'),
-    supabase.from('orders').select('amount').eq('is_hidden', false).eq('status', 'completed').gte('created_at', startOfDay),
+    supabase.from('orders').select('amount').eq('is_hidden', false).eq('status', 'completed').gte('created_at', startOfDayIso),
     supabase.from('orders').select('amount').eq('is_hidden', false).eq('status', 'completed').gte('created_at', startOfWeekIso),
-    supabase.from('orders').select('amount').eq('is_hidden', false).eq('status', 'completed').gte('created_at', startOfMonth),
+    supabase.from('orders').select('amount').eq('is_hidden', false).eq('status', 'completed').gte('created_at', startOfMonthIso),
     supabase.from('orders').select('amount, provider').eq('is_hidden', false).eq('status', 'completed'),
     supabase.from('orders').select('amount, provider').eq('is_hidden', false).eq('status', 'completed'),
     supabase.from('order_items')
