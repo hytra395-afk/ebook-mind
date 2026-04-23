@@ -29,12 +29,31 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
-  // Headers for performance
+  // Headers for performance and security
   async headers() {
+    const cspHeader = `
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://vercel.live;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      img-src 'self' blob: data: https: https://www.googletagmanager.com https://www.google-analytics.com https://fonts.gstatic.com https://ssl.gstatic.com;
+      font-src 'self' https://fonts.gstatic.com https://ssl.gstatic.com;
+      connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.google.com https://my.sepay.vn https://vercel.live;
+      frame-src 'self' https://www.facebook.com https://vercel.live;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+      frame-ancestors 'none';
+      upgrade-insecure-requests;
+    `
+
     return [
       {
-        source: '/:path*',
+        source: '/(.*)',
         headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: cspHeader.replace(/\s{2,}/g, ' ').trim(),
+          },
           {
             key: 'X-DNS-Prefetch-Control',
             value: 'on'

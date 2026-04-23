@@ -68,26 +68,7 @@ export function middleware(request: NextRequest) {
   // Add security headers
   const response = NextResponse.next()
 
-  // Content Security Policy - Complete configuration for Google Analytics and Facebook Pixel
-  response.headers.set(
-    'Content-Security-Policy',
-    [
-      "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://vercel.live",
-      "script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://vercel.live",
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-      "font-src 'self' https://fonts.gstatic.com https://ssl.gstatic.com",
-      "img-src 'self' data: https: http: https://www.google-analytics.com https://www.googletagmanager.com https://fonts.gstatic.com https://ssl.gstatic.com",
-      "connect-src 'self' https://*.supabase.co https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.google.com https://my.sepay.vn https://vercel.live",
-      "frame-src 'self' https://www.facebook.com https://vercel.live",
-      "object-src 'none'",
-      "base-uri 'self'",
-      "form-action 'self'",
-      "frame-ancestors 'none'",
-      "upgrade-insecure-requests",
-    ].join('; ')
-  )
-  
+  // CSP is now configured in next.config.js (Vercel best practice)
   // Additional security headers
   response.headers.set('X-Content-Type-Options', 'nosniff')
   response.headers.set('X-Frame-Options', 'DENY')
