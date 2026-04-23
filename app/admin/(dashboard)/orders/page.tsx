@@ -45,7 +45,6 @@ export default function AdminOrdersPage() {
   const [includeHidden, setIncludeHidden] = useState(false)
   const [selected, setSelected] = useState<Record<string, boolean>>({})
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
-  const [expandedProduct, setExpandedProduct] = useState<Record<string, boolean>>({})
   const [editingOrder, setEditingOrder] = useState<Order | null>(null)
   const [editEmail, setEditEmail] = useState('')
   const [editStatus, setEditStatus] = useState('')
@@ -412,14 +411,8 @@ export default function AdminOrdersPage() {
                         {order.payment_code}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-700">
-                      <div 
-                        className={`cursor-pointer hover:text-purple-600 transition ${expandedProduct[order.id] ? '' : 'max-w-[360px] truncate'}`}
-                        title={getProductSummary(order)}
-                        onClick={() => setExpandedProduct((prev) => ({ ...prev, [order.id]: !prev[order.id] }))}
-      >
-        {getProductSummary(order)}
-      </div>
+                    <td className="px-6 py-4 text-sm text-gray-700 max-w-md">
+                      {getProductSummary(order)}
                     </td>
                     <td className="px-6 py-4">
                       <span className="font-semibold text-gray-900">
