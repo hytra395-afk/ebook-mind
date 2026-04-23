@@ -372,9 +372,7 @@ export default function PaymentsTransactions() {
                     <span className="font-mono text-sm font-medium text-purple-600">{t.payment_code}</span>
                   </td>
                   <td className="px-5 py-3 text-sm text-gray-700">
-                    <div className="max-w-[420px] truncate">
-                      {t.order_items?.length ? t.order_items.map(getItemTitle).join(', ') : '—'}
-                    </div>
+                    {t.order_items?.length ? t.order_items.map(getItemTitle).join(', ') : '—'}
                   </td>
                   <td className="px-5 py-3">
                     <span className="font-semibold text-gray-900">{formatCurrency(Number(t.amount || 0))}</span>
