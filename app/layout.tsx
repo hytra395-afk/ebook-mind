@@ -126,6 +126,23 @@ export default function RootLayout({
             });
           `}
         </Script>
+        {/* Google Ads Conversion Tracking */}
+        <Script id="google-ads-conversion" strategy="lazyOnload">
+          {`
+            // Google Ads conversion event - for purchase tracking
+            // This event will be triggered on successful purchases
+            window.trackConversion = function(transactionId, value, currency) {
+              if (typeof gtag !== 'undefined') {
+                gtag('event', 'conversion_event_purchase', {
+                  transaction_id: transactionId,
+                  value: value,
+                  currency: currency || 'VND',
+                  new_customer: true // Set to false for returning customers
+                });
+              }
+            };
+          `}
+        </Script>
       </head>
       <body className={inter.className}>
         {children}

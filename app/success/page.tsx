@@ -5,6 +5,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { convertDriveUrl } from '@/lib/utils'
 
+// Type declaration for Google Ads conversion tracking
+declare global {
+  interface Window {
+    trackConversion?: (transactionId: string, value: number, currency?: string) => void
+  }
+}
+
 export const dynamic = 'force-dynamic'
 
 export default function SuccessPage() {
@@ -46,6 +53,15 @@ export default function SuccessPage() {
           setOrder(data.order)
           if (data.order.status !== 'completed') {
             setError('Đơn hàng chưa được thanh toán')
+          } else {
+            // Trigger Google Ads conversion event for successful purchase
+            if (typeof window !== 'undefined' && window.trackConversion) {
+              window.trackConversion(
+                data.order.payment_code,
+                data.order.amount,
+                'VND'
+              )
+            }
           }
         } else {
           setError(data.error || 'Không thể tải thông tin đơn hàng')
