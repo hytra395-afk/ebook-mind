@@ -623,7 +623,7 @@ export default async function HomePage() {
               },
               {
                 q: "Hỗ trợ kỹ thuật như thế nào?",
-                a: "Gặp vấn đề? Email chúng tôi tại ebookmind0@gmail.com. Do lượng người dùng lớn, để vấn đề được giải quyết một cách cẩn thận và tốt nhất, chúng tôi sẽ phản hồi trong vòng 12 giờ và chậm nhất là 24 giờ."
+                a: "Gặp vấn đề? Liên hệ với chúng tôi qua: ebookmind0@gmail.com. \nDo lượng người dùng lớn, để vấn đề được giải quyết một cách cẩn thận và tốt nhất, chúng tôi sẽ phản hồi trong vòng 12 giờ và chậm nhất là 24 giờ."
               },
               {
                 q: "Tôi có thể yêu cầu hoàn tiền không?",
