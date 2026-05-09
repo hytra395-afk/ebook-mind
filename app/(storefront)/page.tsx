@@ -1,5 +1,5 @@
 import { getSupabase } from '@/lib/db'
-import ProductCard from '@/components/ebook-card'
+import ProductCard from '@/components/product-card'
 import Link from 'next/link'
 import { TrendingUp, Sparkles, BadgeCheck, ArrowRight, Zap } from 'lucide-react'
 

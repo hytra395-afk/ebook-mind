@@ -4,8 +4,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Star, BookOpen, ShieldCheck, Zap, Download, ChevronRight, FileText, Users } from 'lucide-react'
 import AddToCartButton from '@/components/add-to-cart-button'
-import EbookTabs from '@/components/ebook-tabs'
-import EbookImageGallery from '@/components/ebook-image-gallery'
+import EbookTabs from '@/components/product-tabs'
+import EbookImageGallery from '@/components/product-image-gallery'
 import { convertDriveUrl, convertDriveUrlForOG } from '@/lib/utils'
 
 export const revalidate = 300 // ISR: revalidate every 5 minutes
