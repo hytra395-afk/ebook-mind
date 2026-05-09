@@ -282,3 +282,36 @@ WHERE cover_url IS NOT NULL AND cover_url != '';
 
 -- Keep cover_url for backward compatibility but make it computed from gallery
 -- We'll update it via triggers or application logic
+
+-- =====================================================
+-- FIX RLS POLICIES FOR PRODUCTS TABLE
+-- The ebooks table was renamed to products, but RLS policies still reference ebooks
+-- =====================================================
+
+-- Drop old policies on ebooks table (if it exists)
+DROP POLICY IF EXISTS "Admins can insert ebooks" ON ebooks;
+DROP POLICY IF EXISTS "Admins can update ebooks" ON ebooks;
+DROP POLICY IF EXISTS "Admins can delete ebooks" ON ebooks;
+
+-- Create policies on products table
+CREATE POLICY IF NOT EXISTS "Admins can insert products"
+ON products FOR INSERT
+WITH CHECK (is_admin());
+
+CREATE POLICY IF NOT EXISTS "Admins can update products"
+ON products FOR UPDATE
+USING (is_admin());
+
+CREATE POLICY IF NOT EXISTS "Admins can delete products"
+ON products FOR DELETE
+USING (is_admin());
+
+-- Public can read active products
+CREATE POLICY IF NOT EXISTS "Public can read active products"
+ON products FOR SELECT
+USING (active = true OR is_admin());
+
+-- Admins can read all products
+CREATE POLICY IF NOT EXISTS "Admins can read all products"
+ON products FOR SELECT
+USING (is_admin());
