@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const supabase = getSupabase()
   const { data: ebook } = await supabase
-    .from('ebooks')
+    .from('products')
     .select('title, description, cover_url')
     .eq('slug', slug)
     .single()
@@ -53,7 +53,7 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
   const supabase = getSupabase()
 
   const { data: ebook } = await supabase
-    .from('ebooks')
+    .from('products')
     .select('*, content, preview_images, author_name, author_title, author_bio, author_avatar, categories(name, slug), levels(name), authors(name, bio, avatar_url)')
     .eq('slug', slug)
     .eq('active', true)
@@ -64,11 +64,11 @@ export default async function EbookDetailPage({ params }: { params: Promise<{ sl
   const { data: reviews } = await supabase
     .from('reviews')
     .select('*')
-    .eq('ebook_id', ebook.id)
+    .eq('product_id', ebook.id)
     .order('review_date', { ascending: false })
 
   const { data: related } = await supabase
-    .from('ebooks')
+    .from('products')
     .select('id, slug, title, price, cover_url, rating_avg, sales_count, featured, categories(name)')
     .eq('active', true)
     .eq('category_id', ebook.category_id)
