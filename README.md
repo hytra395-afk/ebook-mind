@@ -1,6 +1,6 @@
-# 📚 EbookMind - Ebook Store Platform
+# 🎨 Morii Vn - Handmade E-commerce Platform
 
-A modern ebook store platform built with Next.js 16, React 19, TypeScript, and Supabase. Features Sepay payment integration for Vietnamese users.
+A modern handmade products e-commerce platform built with Next.js 16, React 19, TypeScript, and Supabase. Features Sepay payment integration for Vietnamese users.
 
 ## 🚀 Features
 
