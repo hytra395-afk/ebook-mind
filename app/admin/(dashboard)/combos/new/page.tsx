@@ -62,7 +62,7 @@ export default function NewComboPage() {
   const [reviews, setReviews] = useState<any[]>([])
 
   useEffect(() => {
-    supabase.from('products').select('id, title, cover_url, price').eq('active', true).then(({ data }) => {
+    supabase.from('ebooks').select('id, title, cover_url, price').eq('active', true).then(({ data }) => {
       setEbooks(data || [])
     })
   }, [])

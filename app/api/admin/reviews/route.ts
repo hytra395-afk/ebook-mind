@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
     if (stats && stats.length > 0) {
       const avg = stats.reduce((s: number, r: any) => s + r.rating, 0) / stats.length
       await supabase
-        .from('products')
+        .from('ebooks')
         .update({ rating_avg: Math.round(avg * 100) / 100, rating_count: stats.length })
         .eq('id', ebook_id)
     }
@@ -113,7 +113,7 @@ export async function DELETE(request: NextRequest) {
         : 0
 
       await supabase
-        .from('products')
+        .from('ebooks')
         .update({ rating_avg: Math.round(avg * 100) / 100, rating_count: stats?.length || 0 })
         .eq('id', review.ebook_id)
     }

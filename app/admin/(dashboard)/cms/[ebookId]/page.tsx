@@ -35,7 +35,7 @@ export default function EditCmsPage() {
     const fetchData = async () => {
       // Fetch ebook info
       const { data: ebookData } = await supabase
-        .from('products')
+        .from('ebooks')
         .select('id, title, slug')
         .eq('id', ebookId)
         .single()

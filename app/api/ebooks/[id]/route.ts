@@ -10,7 +10,7 @@ export async function GET(
     const supabase = getSupabase()
 
     const { data: ebook, error } = await supabase
-      .from('products')
+      .from('ebooks')
       .select('id, title, price, cover_url, slug')
       .eq('id', id)
       .eq('active', true)

@@ -7,7 +7,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = config.app.url
 
   const { data: ebooks } = await supabase
-    .from('products')
+    .from('ebooks')
     .select('slug, updated_at')
     .eq('active', true)
 

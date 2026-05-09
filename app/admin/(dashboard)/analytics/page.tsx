@@ -11,7 +11,7 @@ export default async function AdminAnalyticsPage() {
   
   // Fetch ebook views from database (we'll track this)
   const { data: topEbooks } = await supabase
-    .from('products')
+    .from('ebooks')
     .select('id, title, slug, cover_url, sales_count, price')
     .order('sales_count', { ascending: false })
     .limit(10)
