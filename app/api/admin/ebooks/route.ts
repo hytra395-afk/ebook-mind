@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
   return requireAdmin(request, async () => {
     const supabase = getSupabaseAdmin()
     const { data, error } = await supabase
-      .from('products')
+      .from('ebooks')
       .select('*, categories(name), levels(name), authors(name)')
       .order('created_at', { ascending: false })
 
@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
     delete dbData.levels
 
     const { data: ebook, error } = await supabase
-      .from('products')
+      .from('ebooks')
       .insert(dbData)
       .select()
       .single()
@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
     // Insert reviews if provided
     if (reviews && reviews.length > 0 && ebook) {
       const reviewsToInsert = reviews.map((r: any) => ({
-        product_id: ebook.id,
+        ebook_id: ebook.id,
         rating: Number(r.rating) || 5,
         title: r.title || '',
         content: r.content || '',

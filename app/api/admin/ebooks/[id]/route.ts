@@ -9,7 +9,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     const supabase = getSupabaseAdmin()
 
     const { data, error } = await supabase
-      .from('products')
+      .from('ebooks')
       .select('*, categories(name), levels(name), authors(name)')
       .eq('id', id)
       .single()
@@ -57,7 +57,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     delete dbData.levels
 
     const { data, error } = await supabase
-      .from('products')
+      .from('ebooks')
       .update(dbData)
       .eq('id', id)
       .select()
@@ -68,7 +68,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     // Handle reviews - delete old and insert new
     if (reviews !== undefined) {
       // Delete existing reviews for this ebook
-      const { error: deleteError } = await supabase.from('reviews').delete().eq('product_id', id)
+      const { error: deleteError } = await supabase.from('reviews').delete().eq('ebook_id', id)
       if (deleteError) {
         console.error('Error deleting old reviews:', deleteError)
       }
@@ -76,7 +76,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       // Insert new reviews
       if (reviews.length > 0) {
         const reviewsToInsert = reviews.map((r: any) => ({
-          product_id: id,
+          ebook_id: id,
           rating: Number(r.rating) || 5,
           title: r.title || '',
           content: r.content || '',
@@ -104,7 +104,7 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
     const { id } = await params
     const supabase = getSupabaseAdmin()
 
-    const { error } = await supabase.from('products').delete().eq('id', id)
+    const { error } = await supabase.from('ebooks').delete().eq('id', id)
 
     if (error) return NextResponse.json({ error: error.message }, { status: 500 })
     return NextResponse.json({ success: true })

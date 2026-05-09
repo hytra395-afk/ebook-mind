@@ -47,7 +47,7 @@ export default async function EbooksPage({
   const subcategoriesJoin = params.subcategory ? 'subcategories!inner(name, slug)' : 'subcategories(name, slug)'
   
   let query = supabase
-    .from('products')
+    .from('ebooks')
     .select(`id, slug, title, description, price, cover_url, rating_avg, rating_count, sales_count, pages, featured, bestseller, categories!inner(name, slug), levels(name), ${subcategoriesJoin}`, { count: 'exact' })
     .eq('active', true)
 

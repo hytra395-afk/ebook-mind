@@ -293,25 +293,32 @@ DROP POLICY IF EXISTS "Admins can insert ebooks" ON ebooks;
 DROP POLICY IF EXISTS "Admins can update ebooks" ON ebooks;
 DROP POLICY IF EXISTS "Admins can delete ebooks" ON ebooks;
 
+-- Drop existing policies on products table
+DROP POLICY IF EXISTS "Admins can insert products" ON products;
+DROP POLICY IF EXISTS "Admins can update products" ON products;
+DROP POLICY IF EXISTS "Admins can delete products" ON products;
+DROP POLICY IF EXISTS "Public can read active products" ON products;
+DROP POLICY IF EXISTS "Admins can read all products" ON products;
+
 -- Create policies on products table
-CREATE POLICY IF NOT EXISTS "Admins can insert products"
+CREATE POLICY "Admins can insert products"
 ON products FOR INSERT
 WITH CHECK (is_admin());
 
-CREATE POLICY IF NOT EXISTS "Admins can update products"
+CREATE POLICY "Admins can update products"
 ON products FOR UPDATE
 USING (is_admin());
 
-CREATE POLICY IF NOT EXISTS "Admins can delete products"
+CREATE POLICY "Admins can delete products"
 ON products FOR DELETE
 USING (is_admin());
 
 -- Public can read active products
-CREATE POLICY IF NOT EXISTS "Public can read active products"
+CREATE POLICY "Public can read active products"
 ON products FOR SELECT
 USING (active = true OR is_admin());
 
 -- Admins can read all products
-CREATE POLICY IF NOT EXISTS "Admins can read all products"
+CREATE POLICY "Admins can read all products"
 ON products FOR SELECT
 USING (is_admin());

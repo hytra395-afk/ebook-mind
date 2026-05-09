@@ -8,6 +8,13 @@ DROP POLICY IF EXISTS "Admins can insert ebooks" ON ebooks;
 DROP POLICY IF EXISTS "Admins can update ebooks" ON ebooks;
 DROP POLICY IF EXISTS "Admins can delete ebooks" ON ebooks;
 
+-- Drop existing policies on products table
+DROP POLICY IF EXISTS "Admins can insert products" ON products;
+DROP POLICY IF EXISTS "Admins can update products" ON products;
+DROP POLICY IF EXISTS "Admins can delete products" ON products;
+DROP POLICY IF EXISTS "Public can read active products" ON products;
+DROP POLICY IF EXISTS "Admins can read all products" ON products;
+
 -- Create policies on products table
 CREATE POLICY "Admins can insert products"
 ON products FOR INSERT
