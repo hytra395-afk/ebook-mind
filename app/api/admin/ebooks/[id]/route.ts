@@ -41,6 +41,9 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       rating_count: ebookData.ratingCount || ebookData.rating_count || 0,
       sales_count: ebookData.salesCount || ebookData.sales_count || 0,
       bestseller: ebookData.bestseller !== undefined ? ebookData.bestseller : false,
+      // Convert empty string UUIDs to null (for optional fields only)
+      subcategory_id: ebookData.subcategory_id === '' ? null : ebookData.subcategory_id,
+      author_id: ebookData.author_id === '' ? null : ebookData.author_id,
       updated_at: new Date().toISOString()
     }
     // Remove camelCase versions
