@@ -4,10 +4,12 @@
 -- So we need to ensure RLS policies work with the actual ebooks table
 -- =====================================================
 
--- Drop old policies on ebooks table
+-- Drop ALL policies on ebooks table
 DROP POLICY IF EXISTS "Admins can insert ebooks" ON ebooks;
 DROP POLICY IF EXISTS "Admins can update ebooks" ON ebooks;
 DROP POLICY IF EXISTS "Admins can delete ebooks" ON ebooks;
+DROP POLICY IF EXISTS "Public can read active ebooks" ON ebooks;
+DROP POLICY IF EXISTS "Admins can read all ebooks" ON ebooks;
 
 -- Create policies on ebooks table
 CREATE POLICY "Admins can insert ebooks"
