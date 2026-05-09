@@ -9,7 +9,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     const supabase = getSupabaseAdmin()
 
     const { data, error } = await supabase
-      .from('ebooks')
+      .from('products')
       .select('*, categories(name), levels(name), authors(name)')
       .eq('id', id)
       .single()
@@ -54,7 +54,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     delete dbData.levels
 
     const { data, error } = await supabase
-      .from('ebooks')
+      .from('products')
       .update(dbData)
       .eq('id', id)
       .select()
@@ -101,7 +101,7 @@ export async function DELETE(request: NextRequest, { params }: { params: Promise
     const { id } = await params
     const supabase = getSupabaseAdmin()
 
-    const { error } = await supabase.from('ebooks').delete().eq('id', id)
+    const { error } = await supabase.from('products').delete().eq('id', id)
 
     if (error) return NextResponse.json({ error: error.message }, { status: 500 })
     return NextResponse.json({ success: true })

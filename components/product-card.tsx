@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { convertDriveUrl } from '@/lib/utils'
 
-interface EbookCardProps {
+interface ProductCardProps {
   id: string
   slug: string
   title: string
@@ -20,10 +20,10 @@ interface EbookCardProps {
   priority?: boolean
 }
 
-export default function EbookCard({
+export default function ProductCard({
   slug, title, description, price, cover_url,
   rating_avg, rating_count, sales_count, pages, featured, bestseller, category, level, priority = false
-}: EbookCardProps) {
+}: ProductCardProps) {
   return (
     <div className="group relative">
       {/* Gradient border wrapper */}
@@ -31,7 +31,7 @@ export default function EbookCard({
       
       <div className="relative bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
         {/* Cover */}
-        <Link href={`/ebooks/${slug}`} className="block">
+        <Link href={`/products/${slug}`} className="block">
           <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 rounded-t-2xl scale-[0.92]">
             <Image
               src={convertDriveUrl(cover_url || 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400')}
@@ -64,7 +64,7 @@ export default function EbookCard({
           )}
 
           {/* Title */}
-          <Link href={`/ebooks/${slug}`}>
+          <Link href={`/products/${slug}`}>
             <h3 className="font-bold text-gray-900 text-[1.09rem] leading-tight group-hover:text-purple-600 transition-colors mb-1.5">
               {title}
             </h3>
@@ -108,7 +108,7 @@ export default function EbookCard({
               {new Intl.NumberFormat('vi-VN').format(price)}đ
             </span>
             <Link
-              href={`/ebooks/${slug}`}
+              href={`/products/${slug}`}
               className="w-full sm:w-auto text-center text-[0.69rem] font-semibold gradient-purple text-white px-4 py-2 rounded-lg hover:opacity-90 transition whitespace-nowrap"
             >
               Mua ngay

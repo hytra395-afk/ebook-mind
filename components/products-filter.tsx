@@ -23,7 +23,7 @@ interface Subcategory {
   icon?: string
 }
 
-interface EbooksFilterProps {
+interface ProductsFilterProps {
   categories: Category[]
   levels: Level[]
   subcategories?: Subcategory[]
@@ -33,14 +33,14 @@ interface EbooksFilterProps {
   search: string
 }
 
-export default function EbooksFilter({
+export default function ProductsFilter({
   categories,
   subcategories,
   activeCategory,
   activeSubcategory,
   activeSort,
   search,
-}: EbooksFilterProps) {
+}: ProductsFilterProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
 

@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
 
     const supabase = getSupabase()
     const { data: ebook, error } = await supabase
-      .from('ebooks')
+      .from('products')
       .select('id')
       .eq('id', id)
       .eq('active', true)

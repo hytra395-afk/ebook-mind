@@ -8,7 +8,7 @@ export default async function AdminDashboardPage() {
   const supabase = getSupabaseAdmin()
   
   const [ebooksRes, combosRes, ordersCompletedRes, ordersPendingRes, revenueRes] = await Promise.all([
-    supabase.from('ebooks').select('id', { count: 'exact', head: true }),
+    supabase.from('products').select('id', { count: 'exact', head: true }),
     supabase.from('combos').select('id', { count: 'exact', head: true }),
     supabase.from('orders').select('id', { count: 'exact', head: true }).eq('status', 'completed'),
     supabase.from('orders').select('id', { count: 'exact', head: true }).eq('status', 'pending'),

@@ -46,7 +46,7 @@ export default function EditComboPage() {
     const load = async () => {
       const [comboRes, ebooksRes, comboItemsRes, reviewsRes] = await Promise.all([
         supabase.from('combos').select('*').eq('id', comboId).single(),
-        supabase.from('ebooks').select('id, title, cover_url, price').eq('active', true),
+        supabase.from('products').select('id, title, cover_url, price').eq('active', true),
         supabase.from('combo_items').select('ebook_id').eq('combo_id', comboId),
         supabase.from('combo_reviews').select('*').eq('combo_id', comboId).order('created_at', { ascending: false }),
       ])

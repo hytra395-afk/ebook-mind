@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
   return requireAdmin(request, async () => {
     const supabase = getSupabaseAdmin()
     const { data, error } = await supabase
-      .from('ebooks')
+      .from('products')
       .select('*, categories(name), levels(name), authors(name)')
       .order('created_at', { ascending: false })
 
@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
     delete dbData.levels
 
     const { data: ebook, error } = await supabase
-      .from('ebooks')
+      .from('products')
       .insert(dbData)
       .select()
       .single()

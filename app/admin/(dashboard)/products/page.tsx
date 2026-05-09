@@ -10,7 +10,7 @@ export const revalidate = 0
 export default async function AdminEbooksPage() {
   const supabase = getSupabaseAdmin()
   const { data: ebooks } = await supabase
-    .from('ebooks')
+    .from('products')
     .select('*, categories(name), subcategories(name, icon), levels(name), authors(name)')
     .order('created_at', { ascending: false })
 

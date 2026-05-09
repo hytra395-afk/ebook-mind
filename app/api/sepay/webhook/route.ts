@@ -139,7 +139,7 @@ export async function POST(request: NextRequest) {
       if (item.ebook_id) {
         // Get ebook info for email
         const { data: ebookInfo } = await supabaseAdmin
-          .from('ebooks')
+          .from('products')
           .select('title, cover_url, external_url')
           .eq('id', item.ebook_id)
           .single()
@@ -226,7 +226,7 @@ export async function POST(request: NextRequest) {
           expiresAt.setHours(expiresAt.getHours() + config.downloadToken.ttlHours)
 
           const { data: comboEbookInfo } = await supabaseAdmin
-            .from('ebooks')
+            .from('products')
             .select('title, cover_url, external_url')
             .eq('id', comboItem.ebook_id)
             .single()

@@ -5,19 +5,19 @@ import Image from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import ImageLightbox from './image-lightbox'
 
-interface EbookImageGalleryProps {
+interface ProductImageGalleryProps {
   coverUrl: string
   previewImages: string[]
   title: string
   featured?: boolean
 }
 
-export default function EbookImageGallery({ 
+export default function ProductImageGallery({ 
   coverUrl, 
   previewImages, 
   title, 
   featured 
-}: EbookImageGalleryProps) {
+}: ProductImageGalleryProps) {
   const allImages = [coverUrl, ...previewImages].filter(Boolean)
   const [activeIndex, setActiveIndex] = useState(0)
   const [lightboxOpen, setLightboxOpen] = useState(false)

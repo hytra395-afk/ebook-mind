@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
       if (item.ebook_id) {
         // Get ebook price
         const { data: ebook, error } = await supabaseAdmin
-          .from('ebooks')
+          .from('products')
           .select('id, price, title')
           .eq('id', item.ebook_id)
           .eq('active', true)

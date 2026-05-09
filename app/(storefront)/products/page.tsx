@@ -1,13 +1,13 @@
 import { getSupabase } from '@/lib/db'
-import EbookCard from '@/components/ebook-card'
-import EbooksFilter from '@/components/ebooks-filter'
+import ProductCard from '@/components/product-card'
+import ProductsFilter from '@/components/products-filter'
 import { Suspense } from 'react'
 import { BookOpen, Star, Users, NotebookPen, Search, Lightbulb, Rocket } from 'lucide-react'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Ebook Store - Kiến Thức Ngách Thay Đổi Mindset',
-  description: 'Khám phá hàng trăm ebook chất lượng về Kinh Doanh, Solo Business, Phát Triển Mindset, Công Nghệ, Sức Khỏe. Giá chỉ từ 49.000đ. Tải ngay sau khi thanh toán.',
+  title: 'Morii Vn - Handmade Products Store',
+  description: 'Khám phá các sản phẩm handmade độc đáo và chất lượng. Bookmark, Sticker, Postcard, Keychain và nhiều hơn nữa.',
   openGraph: {
     title: 'Ebook Store - Kiến Thức Ngách Thay Đổi Mindset',
     description: 'Hàng trăm ebook chất lượng. Giá chỉ từ 49.000đ',
@@ -47,7 +47,7 @@ export default async function EbooksPage({
   const subcategoriesJoin = params.subcategory ? 'subcategories!inner(name, slug)' : 'subcategories(name, slug)'
   
   let query = supabase
-    .from('ebooks')
+    .from('products')
     .select(`id, slug, title, description, price, cover_url, rating_avg, rating_count, sales_count, pages, featured, bestseller, categories!inner(name, slug), levels(name), ${subcategoriesJoin}`, { count: 'exact' })
     .eq('active', true)
 
@@ -198,7 +198,7 @@ export default async function EbooksPage({
       {/* Filter + Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <Suspense fallback={<div className="h-20 animate-pulse bg-gray-100 rounded-xl" />}>
-          <EbooksFilter
+          <ProductsFilter
             categories={categories ?? []}
             levels={levels ?? []}
             subcategories={subcategories ?? []}
@@ -223,7 +223,7 @@ export default async function EbooksPage({
         }>
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
             {ebooks?.map((ebook: any, idx: number) => (
-              <EbookCard
+              <ProductCard
                 key={ebook.id}
                 id={ebook.id}
                 slug={ebook.slug}

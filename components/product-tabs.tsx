@@ -14,12 +14,12 @@ interface Review {
   created_at: string
 }
 
-interface EbookTabsProps {
+interface ProductTabsProps {
   content: string | null
   reviews: Review[]
 }
 
-export default function EbookTabs({ content, reviews }: EbookTabsProps) {
+export default function ProductTabs({ content, reviews }: ProductTabsProps) {
   const [activeTab, setActiveTab] = useState<'description' | 'reviews'>('description')
 
   return (
