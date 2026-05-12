@@ -6,8 +6,8 @@ import { BookOpen, Star, Users, NotebookPen, Search, Lightbulb, Rocket } from 'l
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Morii Vn - Handmade Products Store',
-  description: 'Khám phá các sản phẩm handmade độc đáo và chất lượng. Bookmark, Sticker, Postcard, Keychain và nhiều hơn nữa.',
+  title: 'Ebook Store - Ebook Mind | Kiến Thức Ngách Thay Đổi Mindset',
+  description: 'Khám phá kho tàng ebook chất lượng cao về kinh doanh, phát triển bản thân, công nghệ và sức khỏe. Kiến thức thật, kinh nghiệm thực tế từ hàng trăm người.',
   openGraph: {
     title: 'Ebook Store - Kiến Thức Ngách Thay Đổi Mindset',
     description: 'Hàng trăm ebook chất lượng. Giá chỉ từ 49.000đ',
