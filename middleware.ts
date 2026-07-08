@@ -55,6 +55,19 @@ function checkRateLimit(request: NextRequest): boolean {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
   
+  // PROTECT ADMIN ROUTES - Require authentication
+  if (pathname.startsWith('/admin')) {
+    // Check for session cookie
+    const token = request.cookies.get('sb-access-token') || request.cookies.get('supabase-auth-token')
+    
+    if (!token) {
+      // Redirect to login page
+      const loginUrl = new URL('/login', request.url)
+      loginUrl.searchParams.set('redirect', pathname)
+      return NextResponse.redirect(loginUrl)
+    }
+  }
+  
   // Apply rate limiting to API routes
   if (pathname.startsWith('/api/')) {
     if (!checkRateLimit(request)) {
