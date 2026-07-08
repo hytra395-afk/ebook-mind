@@ -5,8 +5,6 @@ import { useRouter } from 'next/navigation'
 import { createBrowserClient } from '@supabase/ssr'
 import { BookOpen, User, Lock, LogIn } from 'lucide-react'
 
-const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL || 'admin@ebookmind.com'
-
 function getSupabaseClient() {
   return createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -16,7 +14,7 @@ function getSupabaseClient() {
 
 export default function AdminLoginPage() {
   const router = useRouter()
-  const [email, setEmail] = useState(ADMIN_EMAIL)
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
