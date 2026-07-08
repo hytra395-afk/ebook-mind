@@ -2,13 +2,13 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { createClient } from '@supabase/supabase-js'
+import { createBrowserClient } from '@supabase/ssr'
 import { BookOpen, User, Lock, LogIn } from 'lucide-react'
 
 const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL || 'admin@ebookmind.com'
 
 function getSupabaseClient() {
-  return createClient(
+  return createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   )
@@ -59,6 +59,7 @@ export default function AdminLoginPage() {
       }
 
       router.push('/admin/dashboard')
+      router.refresh()
     } catch (err: any) {
       setError(err.message || 'Lỗi kết nối')
       setLoading(false)

@@ -1,28 +1,24 @@
 import { redirect } from 'next/navigation'
+import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
-import { createClient } from '@supabase/supabase-js'
 import AdminSidebar from '@/components/admin/sidebar'
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
 
 async function verifyAdminAuth() {
   const cookieStore = await cookies()
-  const token = cookieStore.get('sb-access-token')?.value || cookieStore.get('supabase-auth-token')?.value
   
-  if (!token) {
-    return null
-  }
-
-  const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-    global: {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        get(name: string) {
+          return cookieStore.get(name)?.value
+        },
+      },
     }
-  })
+  )
 
-  const { data: { user }, error } = await supabase.auth.getUser(token)
+  const { data: { user }, error } = await supabase.auth.getUser()
 
   if (error || !user) {
     return null
@@ -49,7 +45,7 @@ export default async function AdminDashboardLayout({
   const user = await verifyAdminAuth()
 
   if (!user) {
-    redirect('/login')
+    redirect('/admin/login')
   }
 
   return (
