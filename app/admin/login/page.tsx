@@ -89,7 +89,7 @@ export default function AdminLoginPage() {
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@ebookmind.com"
+                placeholder="Nhập email..."
                 className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"
                 required
               />
