@@ -54,7 +54,8 @@ export default function Footer() {
             <div className="text-sm text-gray-400">
               © Ebook Mind. All rights reserved. Bản quyền thuộc về Ebook Mind, nghiêm cấm sao chép và khai thác thương mại dưới mọi hình thức.
             </div>
-            <div className="flex-shrink-0">
+            {/* Tạm ẩn badge Bộ Công Thương */}
+            <div className="hidden flex-shrink-0">
               <img 
                 src="/images/bo-cong-thuong-badge.png" 
                 alt="Badge" 
